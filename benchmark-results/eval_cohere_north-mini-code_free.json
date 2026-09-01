@@ -1,0 +1,227 @@
+{
+  "model_id": "cohere/north-mini-code:free",
+  "label": "cohere/north-mini-code:free",
+  "evaluated_at": "2026-09-01 17:03:18 UTC",
+  "rounds_per_probe": 1,
+  "probes_evaluated": [
+    "B1",
+    "B2",
+    "B4",
+    "B5",
+    "B8"
+  ],
+  "overall_score": 4.26,
+  "overall_latency": 0.44,
+  "overall_pass_rate": 0.72,
+  "total_eval_cost": 0.0,
+  "promotion_verdict": {
+    "verdict": "keep-evaluating",
+    "eligible_tiers": []
+  },
+  "probe_details": {
+    "B1": {
+      "probe_id": "B1",
+      "name": "Internal Scheduled-Status Synthesis",
+      "reliability_class": "R1",
+      "avg_latency": 0.26,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.263,
+          "prompt_tokens": 157,
+          "completion_tokens": 379,
+          "content": "**Ops Status Brief**\n\n- **Active Systems**\n  - Hermes Cron: 2 jobs running (1 pending retry)\n  - Launchd Sweeps: 7 agents active\n  - GCP VM: acmedemo instance (34.69.169.75) healthy; Cloud SQL disk at 42% utilization\n  - OpenCode spend: $548 baseline (14\u2011day)\n\n- **Operational Failures**\n  - Hermes Cron job **sync\u2011acmedemo\u2011from\u2011main** \u2013 network timeout after 180\u202fs\n  - Launchd sweep **health\u2011check\u2011sweep** on **agent\u20114** \u2013 timeout after 300\u202fs\n\n- **Immediate Remediation Actions**\n  - Restart the failed `sync-acmedemo-from-main` cron job and investigate network connectivity to the source.\n  - Reboot or re\u2011run the `health-check-sweep` on agent\u20114; verify agent network and service health.\n  - Monitor Cloud SQL disk utilization as it approaches 50% (currently 42%).\n  - Review OpenCode spend trends if costs exceed baseline.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "identifies_failing_cron",
+              "identifies_timed_out_launchd",
+              "quotes_exact_gcp_ip",
+              "quotes_cloud_sql_utilization",
+              "quotes_opencode_spend",
+              "no_hallucinated_outages",
+              "stop_discipline_check"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B2": {
+      "probe_id": "B2",
+      "name": "Morning Brief Component Extraction",
+      "reliability_class": "R1/R2",
+      "avg_latency": 0.59,
+      "avg_score": 4.45,
+      "avg_pass_rate": 0.8,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.595,
+          "prompt_tokens": 193,
+          "completion_tokens": 540,
+          "content": "- **Customer movement:** TXNM Energy and Crogl finalized the Grid Modernization Phase\u202f1 rollout architecture, locking in a target go\u2011live date of **September\u202f15,\u202f2026**.  \n\n- **New blocker:** TXNM Security flagged an **SAML SSO certificate expiry on the staging cluster for August\u202f28,\u202f2026** (ticket\u202fSEC\u2011942). The certificate must be rotated before IdP metadata can be confirmed.  \n\n- **Upcoming milestone:** **Jason (Crogl) will deliver the Airbyte connector schema by August\u202f24,\u202f2026** to support data integration.  \n\n- **Upcoming milestone:** **Sarah (TXNM) will confirm the IdP metadata URL by August\u202f29,\u202f2026** (once the cert is rotated), keeping the September\u202f15 go\u2011live on track.",
+          "scores": {
+            "correctness": 4.2,
+            "grounding": 4.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 4.0,
+            "token_efficiency": 5.0,
+            "overall_score": 4.45,
+            "cost": 0.0,
+            "assertion_pass_rate": 0.8,
+            "passed_assertions": [
+              "highlights_saml_cert_blocker",
+              "extracts_airbyte_or_grid_mod",
+              "word_count_bounded",
+              "bullet_format_compliance"
+            ],
+            "failed_assertions": [
+              "extracts_target_dates"
+            ]
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B4": {
+      "probe_id": "B4",
+      "name": "Frontdoor / Slack Triage & Classification",
+      "reliability_class": "R2",
+      "avg_latency": 0.25,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.253,
+          "prompt_tokens": 155,
+          "completion_tokens": 613,
+          "content": "{\n  \"route\": \"cs-ops\",\n  \"urgency\": \"P1\",\n  \"is_private_channel\": false,\n  \"privacy_violation\": false,\n  \"suggested_action\": \"Check the crogld service logs to investigate intermittent 502 errors on the Acmedemo REST API port 8082 during peak traffic.\"\n}",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "valid_json_schema",
+              "route_validity",
+              "urgency_classification",
+              "channel_privacy_assessment",
+              "suggested_action_present"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B5": {
+      "probe_id": "B5",
+      "name": "Artifact & Distribution Audit Synthesis",
+      "reliability_class": "R1",
+      "avg_latency": 0.22,
+      "avg_score": 4.45,
+      "avg_pass_rate": 0.8,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.219,
+          "prompt_tokens": 370,
+          "completion_tokens": 1395,
+          "content": "## Distribution Matrix Audit \u2013 Release **v2.4.0\u2011rc3**\n\n| Region | Artifact | SHA\u2011256 | Distribution URL | Status | Tag Status |\n|--------|----------|---------|------------------|--------|------------|\n| **AWS us\u2011east\u20111** | tar.gz | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | `https://s3.us-east-1.amazonaws.com/releases/v2.4.0-rc3.tar.gz` | \u2705 **200\u202fOK** (verified) | \u2705 **v2.4.0-rc3** (verified) |\n| **AWS us\u2011gov\u2011west\u20111** | tar.gz | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | `https://s3.us-gov-west-1.amazonaws.com/releases/v2.4.0-rc3.tar.gz` | \u274c **403 SignatureDoesNotMatch** (presign expired) | \u274c **MISSING** in GovCloud ECR registry |\n| **GCP us\u2011central1** | tar.gz | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | `https://storage.googleapis.com/releases/v2.4.0-rc3.tar.gz` | \u2705 **200\u202fOK** (verified) | \u2705 **v2.4.0-rc3** (verified) |\n\n---\n\n### \ud83d\udea8 Blockers Preventing Release Promotion\n\n| # | Blocker | Impact | Recommended Action |\n|---|---------|--------|--------------------|\n| 1 | **GovCloud S3 pre\u2011signed URL failure** \u2013 `403 SignatureDoesNotMatch` with an expired presign token. | The artifact cannot be downloaded from the GovCloud S3 bucket, breaking distribution to that region. | Regenerate a fresh pre\u2011signed URL (or re\u2011upload the object with correct permissions) and re\u2011test the download. |\n| 2 | **Missing ECR tag in GovCloud registry** \u2013 No `v2.4.0-rc3` image exists in the GovCloud ECR repository. | Container\u2011image distribution to GovCloud environments is incomplete. | Build/push the container image to the GovCloud ECR repository (or copy from commercial region) and tag it `v2.4.0-rc3`. |\n| 3 *(optional)* | **SHA\u2011256 consistency** \u2013 All three artifacts share the same hash (the hash of an empty file). | While not a blocker per se, it suggests the artifact may be a placeholder or empty build. | Verify that the tar.gz actually contains the intended release payload; if it\u2019s empty, a new build is required. |\n\n**Resolution Status:**  \n- \u2705 AWS us\u2011east\u20111 \u2013 Ready  \n- \u274c AWS us\u2011gov\u2011west\u20111 \u2013 Requires S3 URL regeneration **and** ECR tag creation  \n- \u2705 GCP us\u2011central1 \u2013 Ready  \n\n**Next Steps:**  \n1. Fix the GovCloud S3 pre\u2011signed URL (or re\u2011upload with proper signing).  \n2. Ensure the GovCloud ECR repository contains the `v2.4.0-rc3` tag.  \n3. Re\u2011run the verification steps for the GovCloud region.  \n4. Once both issues are resolved, the release can be promoted to production.",
+          "scores": {
+            "correctness": 4.2,
+            "grounding": 4.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 4.0,
+            "token_efficiency": 5.0,
+            "overall_score": 4.45,
+            "cost": 0.0,
+            "assertion_pass_rate": 0.8,
+            "passed_assertions": [
+              "generates_markdown_table",
+              "flags_us_gov_west_s3_blocker",
+              "flags_missing_govcloud_ecr_tag",
+              "lists_explicit_blockers"
+            ],
+            "failed_assertions": [
+              "confirms_healthy_regions"
+            ]
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B8": {
+      "probe_id": "B8",
+      "name": "Agent Tool Use & Structured Execution",
+      "reliability_class": "R1",
+      "avg_latency": 0.88,
+      "avg_score": 2.38,
+      "avg_pass_rate": 0.0,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.875,
+          "prompt_tokens": 162,
+          "completion_tokens": 338,
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 2.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 2.5,
+            "token_efficiency": 5.0,
+            "overall_score": 2.38,
+            "cost": 0.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              "names_falcon_query_tool",
+              "cites_target_sha256",
+              "names_create_investigation_tool",
+              "specifies_p2_severity",
+              "valid_tool_call_structure"
+            ]
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    }
+  }
+}

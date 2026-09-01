@@ -1,0 +1,220 @@
+{
+  "model_id": "poolside/laguna-s-2.1:free",
+  "label": "poolside/laguna-s-2.1:free",
+  "evaluated_at": "2026-09-01 17:01:50 UTC",
+  "rounds_per_probe": 1,
+  "probes_evaluated": [
+    "B1",
+    "B2",
+    "B4",
+    "B5",
+    "B8"
+  ],
+  "overall_score": 2.49,
+  "overall_latency": 0.4,
+  "overall_pass_rate": 0.36,
+  "total_eval_cost": 0.0,
+  "promotion_verdict": {
+    "verdict": "reject",
+    "eligible_tiers": []
+  },
+  "probe_details": {
+    "B1": {
+      "probe_id": "B1",
+      "name": "Internal Scheduled-Status Synthesis",
+      "reliability_class": "R1",
+      "avg_latency": 0.82,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.817,
+          "prompt_tokens": 192,
+          "completion_tokens": 172,
+          "content": "**Internal Ops Status Brief**\n\n**Active Systems:**\n- Hermes Cron: 2 jobs active\n- Launchd Sweeps: 7 agents active\n- GCP VM: acmedemo instance healthy at 34.69.169.75\n- Cloud SQL: 42% disk utilization\n- OpenCode: $548 14-day spend\n\n**Operational Failures:**\n- Hermes Cron: sync-acmedemo-from-main failed (network timeout after 180s)\n- Launchd Sweeps: health-check-sweep on agent-4 timed out (300s)\n\n**Immediate Remediation Actions:**\n- Retry sync-acmedemo-from-main job with extended timeout\n- Investigate agent-4 connectivity and restart health-check-sweep\n- Monitor Cloud SQL disk utilization trend",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "identifies_failing_cron",
+              "identifies_timed_out_launchd",
+              "quotes_exact_gcp_ip",
+              "quotes_cloud_sql_utilization",
+              "quotes_opencode_spend",
+              "no_hallucinated_outages",
+              "stop_discipline_check"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B2": {
+      "probe_id": "B2",
+      "name": "Morning Brief Component Extraction",
+      "reliability_class": "R1/R2",
+      "avg_latency": 0.27,
+      "avg_score": 1.0,
+      "avg_pass_rate": 0.0,
+      "total_cost": 0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.272,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 1.0,
+            "format_compliance": 1.0,
+            "latency_score": 1.0,
+            "cleanup_burden": 1.0,
+            "token_efficiency": 1.0,
+            "overall_score": 1.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              [
+                "execution_failure",
+                "HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"poolside/laguna-s-2.1:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Poolside\",\"is_byok\":false,\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}},\"user_id\":\"user_3H8GPlqncQzSaoIjZKqBIvgF4ur\"}"
+              ]
+            ]
+          },
+          "success": false,
+          "error": "HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"poolside/laguna-s-2.1:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Poolside\",\"is_byok\":false,\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}},\"user_id\":\"user_3H8GPlqncQzSaoIjZKqBIvgF4ur\"}"
+        }
+      ]
+    },
+    "B4": {
+      "probe_id": "B4",
+      "name": "Frontdoor / Slack Triage & Classification",
+      "reliability_class": "R2",
+      "avg_latency": 0.15,
+      "avg_score": 1.0,
+      "avg_pass_rate": 0.0,
+      "total_cost": 0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.153,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 1.0,
+            "format_compliance": 1.0,
+            "latency_score": 1.0,
+            "cleanup_burden": 1.0,
+            "token_efficiency": 1.0,
+            "overall_score": 1.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              [
+                "execution_failure",
+                "HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"poolside/laguna-s-2.1:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Poolside\",\"is_byok\":false,\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}},\"user_id\":\"user_3H8GPlqncQzSaoIjZKqBIvgF4ur\"}"
+              ]
+            ]
+          },
+          "success": false,
+          "error": "HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"poolside/laguna-s-2.1:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Poolside\",\"is_byok\":false,\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}},\"user_id\":\"user_3H8GPlqncQzSaoIjZKqBIvgF4ur\"}"
+        }
+      ]
+    },
+    "B5": {
+      "probe_id": "B5",
+      "name": "Artifact & Distribution Audit Synthesis",
+      "reliability_class": "R1",
+      "avg_latency": 0.13,
+      "avg_score": 1.0,
+      "avg_pass_rate": 0.0,
+      "total_cost": 0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.132,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 1.0,
+            "format_compliance": 1.0,
+            "latency_score": 1.0,
+            "cleanup_burden": 1.0,
+            "token_efficiency": 1.0,
+            "overall_score": 1.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              [
+                "execution_failure",
+                "HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"poolside/laguna-s-2.1:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Poolside\",\"is_byok\":false,\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}},\"user_id\":\"user_3H8GPlqncQzSaoIjZKqBIvgF4ur\"}"
+              ]
+            ]
+          },
+          "success": false,
+          "error": "HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"poolside/laguna-s-2.1:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Poolside\",\"is_byok\":false,\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}},\"user_id\":\"user_3H8GPlqncQzSaoIjZKqBIvgF4ur\"}"
+        }
+      ]
+    },
+    "B8": {
+      "probe_id": "B8",
+      "name": "Agent Tool Use & Structured Execution",
+      "reliability_class": "R1",
+      "avg_latency": 0.65,
+      "avg_score": 4.45,
+      "avg_pass_rate": 0.8,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.65,
+          "prompt_tokens": 231,
+          "completion_tokens": 518,
+          "content": "<tool_call>mcp__crogld__crowdstrike_falcon_query<arg_key>sha256</arg_key><arg_value>e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</arg_value></tool_call><tool_call>mcp__crogld__create_investigation<arg_key>title</arg_key><arg_value>CrowdStrike Falcon Investigation - SHA256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</arg_value><arg_key>severity</arg_key><arg_value>P2</arg_value><arg_key>indicators</arg_key><arg_value>[\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"]</arg_value><arg_key>description</arg_key><arg_value>Investigation opened following CrowdStrike Falcon query for SHA256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855. Review Falcon detection and behavioral data to determine if this file hash represents a security threat requiring further response actions.</arg_value></tool_call>",
+          "scores": {
+            "correctness": 4.2,
+            "grounding": 4.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 4.0,
+            "token_efficiency": 5.0,
+            "overall_score": 4.45,
+            "cost": 0.0,
+            "assertion_pass_rate": 0.8,
+            "passed_assertions": [
+              "names_falcon_query_tool",
+              "cites_target_sha256",
+              "names_create_investigation_tool",
+              "specifies_p2_severity"
+            ],
+            "failed_assertions": [
+              "valid_tool_call_structure"
+            ]
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    }
+  }
+}

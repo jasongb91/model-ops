@@ -1,0 +1,666 @@
+{
+  "generated_at": "2026-09-01 18:21:29 UTC",
+  "total_models_evaluated": 1,
+  "evaluations": [
+    {
+      "model_id": "minimax/minimax-m3:free",
+      "label": "minimax/minimax-m3:free",
+      "evaluated_at": "2026-09-01 18:21:29 UTC",
+      "rounds_per_probe": 3,
+      "probes_evaluated": [
+        "B1",
+        "B2",
+        "B3",
+        "B4",
+        "B5",
+        "B8"
+      ],
+      "overall_score": 4.91,
+      "overall_latency": 1.25,
+      "overall_pass_rate": 0.98,
+      "total_eval_cost": 0.0,
+      "promotion_verdict": {
+        "verdict": "promote to R2 (Triage / Extraction Fast-Track), R1 (Internal Ops / Synthesis / Drafting Fast-Track), R0 (Shadow-Gated Scheduled / Client-Facing with Frontier Fallbacks)",
+        "eligible_tiers": [
+          "R2 (Triage / Extraction Fast-Track)",
+          "R1 (Internal Ops / Synthesis / Drafting Fast-Track)",
+          "R0 (Shadow-Gated Scheduled / Client-Facing with Frontier Fallbacks)"
+        ]
+      },
+      "probe_details": {
+        "B1": {
+          "probe_id": "B1",
+          "name": "Internal Scheduled-Status Synthesis",
+          "reliability_class": "R1",
+          "avg_latency": 1.48,
+          "avg_score": 5.0,
+          "avg_pass_rate": 1.0,
+          "total_cost": 0.0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 2.023,
+              "prompt_tokens": 317,
+              "completion_tokens": 254,
+              "actual_model": "minimax/minimax-m3:free",
+              "actual_provider": "GMICloud",
+              "content": "# Internal Ops Status Brief\n\n## Active Systems\n- **Hermus Cron:** 2 jobs active\n- **Launchd Sweeps:** 7 agents active\n- **GCP VM (acmedemo):** Healthy @ 34.69.169.75\n- **Cloud SQL:** Disk utilization nominal @ 42%\n\n## Operational Failures\n- **Hermes Cron:** `sync-acmedemo-from-main` failed (network timeout, 180s)\n- **Launchd Sweeps:** `health-check-sweep` on agent-4 timed out (300s)\n\n## Spend Metrics\n- **OpenCode 14-day spend:** $548 (baseline)\n\n## Immediate Remediation Actions\n- **Hermes:** Retry `sync-acmedemo-from-main`; verify network path/firewall rules to source repo, confirm no DNS or VPN issues.\n- **Launchd:** Investigate agent-4 responsiveness; check host load/network egress; rerun `health-check-sweep` manually or reallocate to a healthy agent.\n- **Post-Fix:** Re-sync acmedemo instance state; confirm Cloud SQL stays below 70% disk threshold.\n- **Monitor:** Track OpenCode spend against $548 baseline for variance beyond \u00b110%.",
+              "scores": {
+                "correctness": 5.0,
+                "grounding": 5.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 5.0,
+                "token_efficiency": 5.0,
+                "overall_score": 5.0,
+                "cost": 0.0,
+                "assertion_pass_rate": 1.0,
+                "passed_assertions": [
+                  "identifies_failing_cron",
+                  "identifies_timed_out_launchd",
+                  "quotes_exact_gcp_ip",
+                  "quotes_cloud_sql_utilization",
+                  "quotes_opencode_spend",
+                  "no_hallucinated_outages",
+                  "stop_discipline_check"
+                ],
+                "failed_assertions": []
+              },
+              "success": true,
+              "error": null
+            },
+            {
+              "run": 2,
+              "latency": 0.934,
+              "prompt_tokens": 317,
+              "completion_tokens": 210,
+              "actual_model": "minimax/minimax-m3:free",
+              "actual_provider": "GMICloud",
+              "content": "**Internal Ops Status Brief**\n\n**Active Systems**\n- Hermes Cron: 2/3 jobs running normally\n- Launchd Sweeps: 7/8 agents operating within SLA\n- GCP VM \"acmedemo\": Healthy (34.69.169.75)\n- Cloud SQL: Disk utilization nominal at 42%\n\n**Operational Failures**\n- Hermes cron job `sync-acmedemo-from-main`: Network timeout after 180s\n- Launchd agent `health-check-sweep` (agent-4): Timeout after 300s\n\n**Immediate Remediation Actions**\n- Investigate `sync-acmedemo-from-main` network connectivity; retry job or extend timeout threshold\n- Diagnose `health-check-sweep` on agent-4; check agent responsiveness and restart if necessary\n- Verify downstream impact of sync failure on acmedemo instance consistency\n- No action required for GCP VM or Cloud SQL; both within healthy parameters\n\n**Spend Note**: OpenCode 14-day spend at $548 baseline \u2014 no anomaly flagged.",
+              "scores": {
+                "correctness": 5.0,
+                "grounding": 5.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 5.0,
+                "token_efficiency": 5.0,
+                "overall_score": 5.0,
+                "cost": 0.0,
+                "assertion_pass_rate": 1.0,
+                "passed_assertions": [
+                  "identifies_failing_cron",
+                  "identifies_timed_out_launchd",
+                  "quotes_exact_gcp_ip",
+                  "quotes_cloud_sql_utilization",
+                  "quotes_opencode_spend",
+                  "no_hallucinated_outages",
+                  "stop_discipline_check"
+                ],
+                "failed_assertions": []
+              },
+              "success": true,
+              "error": null
+            },
+            {
+              "run": 3,
+              "latency": 1.487,
+              "prompt_tokens": 317,
+              "completion_tokens": 274,
+              "actual_model": "minimax/minimax-m3:free",
+              "actual_provider": "GMICloud",
+              "content": "# Internal Ops Status Brief\n\n**Generated:** Live snapshot from telemetry logs\n\n## Active Systems\n- **Hermes Cron:** 2 jobs active\n- **Launchd Sweeps:** 7 agents active\n- **GCP VM `acmedemo`:** Healthy @ `34.69.169.75`\n- **Cloud SQL:** Normal (disk utilization 42%)\n\n## Operational Failures\n- **Hermes Cron:** `sync-acmedemo-from-main` \u2014 failed due to network timeout after 180s\n- **Launchd Sweeps:** `health-check-sweep` on `agent-4` \u2014 timed out after 300s\n\n## Spend\n- **OpenCode 14-day baseline:** $548 (no anomaly flagged)\n\n## Immediate Remediation Actions\n- [ ] Re-run `sync-acmedemo-from-main` Hermes cron job; investigate upstream network path for the 180s timeout\n- [ ] Restart `health-check-sweep` on `agent-4`; capture agent logs to diagnose 300s timeout root cause\n- [ ] Verify `acmedemo` VM post-sync to confirm downstream state consistency\n- [ ] Monitor Cloud SQL disk utilization trend (currently 42%, within bounds)\n- [ ] Re-validate Launchd sweep heartbeat across all 7 agents after `agent-4` recovery",
+              "scores": {
+                "correctness": 5.0,
+                "grounding": 5.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 5.0,
+                "token_efficiency": 5.0,
+                "overall_score": 5.0,
+                "cost": 0.0,
+                "assertion_pass_rate": 1.0,
+                "passed_assertions": [
+                  "identifies_failing_cron",
+                  "identifies_timed_out_launchd",
+                  "quotes_exact_gcp_ip",
+                  "quotes_cloud_sql_utilization",
+                  "quotes_opencode_spend",
+                  "no_hallucinated_outages",
+                  "stop_discipline_check"
+                ],
+                "failed_assertions": []
+              },
+              "success": true,
+              "error": null
+            }
+          ]
+        },
+        "B2": {
+          "probe_id": "B2",
+          "name": "Morning Brief Component Extraction",
+          "reliability_class": "R1/R2",
+          "avg_latency": 0.8,
+          "avg_score": 4.63,
+          "avg_pass_rate": 0.87,
+          "total_cost": 0.0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 0.871,
+              "prompt_tokens": 353,
+              "completion_tokens": 244,
+              "actual_model": "minimax/minimax-m3:free",
+              "actual_provider": "GMICloud",
+              "content": "# TXNM Energy \u2014 Morning Ops Briefing\n\n- **Grid Modernization Phase 1 go-live locked for Sept 15, 2026** \u2014 architecture agreed Aug 18 (Jason/Crogl + John/TXNM); no slippage reported but ~4 weeks out, confirm scope freeze this week.\n\n- **Active blocker: SAML SSO cert expiry Aug 28 on staging cluster** \u2014 TXNM Security opened internal ticket SEC-942; staging environment at risk if rotation slips. Sarah's IdP metadata URL confirmation (due Aug 29) is gated on this.\n\n- **Airbyte connector schema delivery due Aug 24 (Jason/Crogl)** \u2014 downstream dependency for integration testing; flag if not received by EOD Monday to avoid blocking Phase 1 validation.\n\n- **Watch item: IdP metadata handoff chain** \u2014 cert rotation (Aug 28) \u2192 Sarah confirms metadata URL (Aug 29) \u2192 Crogl integrates with connector schema; single-day buffer between cert and metadata exchange.\n\n- **No new stakeholders or scope changes since Aug 20** \u2014 engagement still scoped to Jason (Crogl), John + Sarah (TXNM Security/IdP). No escalation signals in current thread.",
+              "scores": {
+                "correctness": 4.2,
+                "grounding": 4.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 4.0,
+                "token_efficiency": 5.0,
+                "overall_score": 4.45,
+                "cost": 0.0,
+                "assertion_pass_rate": 0.8,
+                "passed_assertions": [
+                  "highlights_saml_cert_blocker",
+                  "extracts_airbyte_or_grid_mod",
+                  "word_count_bounded",
+                  "bullet_format_compliance"
+                ],
+                "failed_assertions": [
+                  "extracts_target_dates"
+                ]
+              },
+              "success": true,
+              "error": null
+            },
+            {
+              "run": 2,
+              "latency": 0.92,
+              "prompt_tokens": 353,
+              "completion_tokens": 204,
+              "actual_model": "minimax/minimax-m3:free",
+              "actual_provider": "GMICloud",
+              "content": "# TXNM Energy \u2014 Morning Ops Briefing\n\n- **Grid Modernization Phase 1 on track**: Architecture agreed with John (TXNM); go-live target **September 15, 2026** \u2014 confirm no drift in today's standup.\n- **SAML SSO staging cert expires Aug 28, 2026** (SEC-942): Unrotated cert blocks IdP metadata delivery and downstream SSO testing \u2014 escalate to security if rotation isn't underway.\n- **Jason owes Airbyte connector schema by EOD Aug 24**: Two days out \u2014 chase today to avoid slipping the Aug 29 IdP dependency.\n- **Critical path dependency chain**: Jason (schema, Aug 24) \u2192 Sarah/IdP metadata (Aug 29) \u2192 staging SSO validation \u2192 Sept 15 go-live. Any slip on the first item cascades.\n- **Open risk**: No confirmed owner or date for staging cert rotation beyond the ticket \u2014 surface in briefing to prevent a silent blocker ahead of the Aug 28 expiry.",
+              "scores": {
+                "correctness": 5.0,
+                "grounding": 5.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 5.0,
+                "token_efficiency": 5.0,
+                "overall_score": 5.0,
+                "cost": 0.0,
+                "assertion_pass_rate": 1.0,
+                "passed_assertions": [
+                  "highlights_saml_cert_blocker",
+                  "extracts_target_dates",
+                  "extracts_airbyte_or_grid_mod",
+                  "word_count_bounded",
+                  "bullet_format_compliance"
+                ],
+                "failed_assertions": []
+              },
+              "success": true,
+              "error": null
+            },
+            {
+              "run": 3,
+              "latency": 0.62,
+              "prompt_tokens": 353,
+              "completion_tokens": 213,
+              "actual_model": "minimax/minimax-m3:free",
+              "actual_provider": "GMICloud",
+              "content": "**TXNM Energy \u2014 Morning Ops Briefing**\n\n- **Phase 1 go-live locked at Sept 15, 2026** following Aug 18 architecture sign-off between Jason (Crogl) and John (TXNM) on Grid Modernization rollout \u2014 stable commitment to track against.\n- **New blocker: SAML SSO cert expiry on staging cluster (Aug 28, 2026)** flagged by TXNM Security \u2014 SEC-942 open, must clear before IdP metadata handoff.\n- **Sequential dependency risk:** Sarah (TXNM) cannot confirm IdP metadata URL until cert rotation completes; current target is Aug 29, leaving minimal buffer before go-live.\n- **Open deliverable from Crogl: Airbyte connector schema due Aug 24, 2026** \u2014 owed to TXNM; on-time delivery preserves downstream integration timeline.\n- **Key contacts:** John (TXNM, architecture owner), Sarah (TXNM, IdP/security), Jason (Crogl, delivery) \u2014 all active and responsive across the past 72 hours.",
+              "scores": {
+                "correctness": 4.2,
+                "grounding": 4.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 4.0,
+                "token_efficiency": 5.0,
+                "overall_score": 4.45,
+                "cost": 0.0,
+                "assertion_pass_rate": 0.8,
+                "passed_assertions": [
+                  "highlights_saml_cert_blocker",
+                  "extracts_airbyte_or_grid_mod",
+                  "word_count_bounded",
+                  "bullet_format_compliance"
+                ],
+                "failed_assertions": [
+                  "extracts_target_dates"
+                ]
+              },
+              "success": true,
+              "error": null
+            }
+          ]
+        },
+        "B3": {
+          "probe_id": "B3",
+          "name": "CS Account-Note Drafting & Updates",
+          "reliability_class": "R1",
+          "avg_latency": 0.94,
+          "avg_score": 5.0,
+          "avg_pass_rate": 1.0,
+          "total_cost": 0.0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 1.019,
+              "prompt_tokens": 404,
+              "completion_tokens": 237,
+              "actual_model": "minimax/minimax-m3:free",
+              "actual_provider": "GMICloud",
+              "content": "```markdown\n# TXNM Energy \u2013 Weekly Account Update\n\n## Onboarding\n\n- Grid Modernization Phase 1 architecture signoff completed.\n- Target go-live date set for September 15, 2026.\n\n## Blockers\n\n- SAML SSO certificate expiry on staging cluster scheduled for August 28, 2026.\n- TXNM internal secops ticket **SEC-942** opened to rotate cert.\n\n## Open tasks\n\n- **Owner:** Jason (Crogl) | **Action:** Provide updated Airbyte connector schema definitions | **Due:** August 24, 2026.\n- **Owner:** Sarah (TXNM) | **Action:** Confirm IdP metadata URL once SEC-942 resolves.\n\n## Recent activity\n\n- **Attendees:** Jason (Crogl), John (TXNM), Sarah (TXNM).\n- **Activity:** Direct customer meeting held with TXNM Energy stakeholders; Grid Modernization Phase 1 architecture signoff completed.\n- **Activity:** Go-live target date of September 15, 2026 agreed upon.\n- **Activity:** TXNM internal secops ticket SEC-942 opened to rotate expiring SAML SSO certificate on staging cluster.\n```",
+              "scores": {
+                "correctness": 5.0,
+                "grounding": 5.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 5.0,
+                "token_efficiency": 5.0,
+                "overall_score": 5.0,
+                "cost": 0.0,
+                "assertion_pass_rate": 1.0,
+                "passed_assertions": [
+                  "canonical_sections_present",
+                  "bold_label_syntax",
+                  "cites_saml_and_sec942",
+                  "direct_correlation_no_speculation",
+                  "preserves_task_owners"
+                ],
+                "failed_assertions": []
+              },
+              "success": true,
+              "error": null
+            },
+            {
+              "run": 2,
+              "latency": 0.887,
+              "prompt_tokens": 404,
+              "completion_tokens": 187,
+              "actual_model": "minimax/minimax-m3:free",
+              "actual_provider": "GMICloud",
+              "content": "# TXNM Energy - Weekly Account Note\n\n## Onboarding\n- **Milestone:** Grid Modernization Phase 1 architecture signoff completed\n- **Target Go-Live:** September 15, 2026\n- **Attendees:** Jason (Crogl), John (TXNM), Sarah (TXNM)\n\n## Blockers\n- **Action:** SAML SSO certificate expiry on staging cluster scheduled for August 28, 2026\n- **Action:** TXNM internal secops ticket SEC-942 opened to rotate certificate\n\n## Open tasks\n- **Action:** Jason to provide updated Airbyte connector schema definitions by August 24, 2026\n- **Action:** Sarah to confirm IdP metadata URL once SEC-942 resolves\n\n## Recent activity\n- **Action:** Grid Modernization Phase 1 architecture signoff completed\n- **Action:** Go-live target date set for September 15, 2026",
+              "scores": {
+                "correctness": 5.0,
+                "grounding": 5.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 5.0,
+                "token_efficiency": 5.0,
+                "overall_score": 5.0,
+                "cost": 0.0,
+                "assertion_pass_rate": 1.0,
+                "passed_assertions": [
+                  "canonical_sections_present",
+                  "bold_label_syntax",
+                  "cites_saml_and_sec942",
+                  "direct_correlation_no_speculation",
+                  "preserves_task_owners"
+                ],
+                "failed_assertions": []
+              },
+              "success": true,
+              "error": null
+            },
+            {
+              "run": 3,
+              "latency": 0.929,
+              "prompt_tokens": 404,
+              "completion_tokens": 160,
+              "actual_model": "minimax/minimax-m3:free",
+              "actual_provider": "GMICloud",
+              "content": "## Onboarding\n- Grid Modernization Phase 1 architecture signoff completed.\n- Target go-live date set for September 15, 2026.\n\n## Blockers\n- **Action:** SAML SSO certificate expiry on staging cluster scheduled for August 28, 2026; TXNM internal secops ticket SEC-942 opened to rotate cert.\n\n## Open tasks\n- **Action:** Jason to provide updated Airbyte connector schema definitions by August 24, 2026.\n- **Action:** Sarah to confirm IdP metadata URL once SEC-942 resolves.\n\n## Recent activity\n- **Attendees:** Jason (Crogl), John (TXNM), Sarah (TXNM).\n- Direct customer meeting held with TXNM Energy stakeholders; Grid Modernization Phase 1 architecture signoff completed.",
+              "scores": {
+                "correctness": 5.0,
+                "grounding": 5.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 5.0,
+                "token_efficiency": 5.0,
+                "overall_score": 5.0,
+                "cost": 0.0,
+                "assertion_pass_rate": 1.0,
+                "passed_assertions": [
+                  "canonical_sections_present",
+                  "bold_label_syntax",
+                  "cites_saml_and_sec942",
+                  "direct_correlation_no_speculation",
+                  "preserves_task_owners"
+                ],
+                "failed_assertions": []
+              },
+              "success": true,
+              "error": null
+            }
+          ]
+        },
+        "B4": {
+          "probe_id": "B4",
+          "name": "Frontdoor / Slack Triage & Classification",
+          "reliability_class": "R2",
+          "avg_latency": 0.91,
+          "avg_score": 5.0,
+          "avg_pass_rate": 1.0,
+          "total_cost": 0.0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 0.887,
+              "prompt_tokens": 318,
+              "completion_tokens": 76,
+              "actual_model": "minimax/minimax-m3:free",
+              "actual_provider": "GMICloud",
+              "content": "{\"route\":\"cs-ops\",\"urgency\":\"P1\",\"is_private_channel\":false,\"privacy_violation\":false,\"suggested_action\":\"Acknowledge in #ops-intake, notify on-call SRE to immediately investigate 502 errors on Acmedemo REST API (port 8082) and review crogld service logs for root cause during peak traffic.\"}",
+              "scores": {
+                "correctness": 5.0,
+                "grounding": 5.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 5.0,
+                "token_efficiency": 5.0,
+                "overall_score": 5.0,
+                "cost": 0.0,
+                "assertion_pass_rate": 1.0,
+                "passed_assertions": [
+                  "valid_json_schema",
+                  "route_validity",
+                  "urgency_classification",
+                  "channel_privacy_assessment",
+                  "suggested_action_present"
+                ],
+                "failed_assertions": []
+              },
+              "success": true,
+              "error": null
+            },
+            {
+              "run": 2,
+              "latency": 0.876,
+              "prompt_tokens": 318,
+              "completion_tokens": 75,
+              "actual_model": "minimax/minimax-m3:free",
+              "actual_provider": "GMICloud",
+              "content": "{\"route\":\"cs-ops\",\"urgency\":\"P1\",\"is_private_channel\":false,\"privacy_violation\":false,\"suggested_action\":\"Investigate intermittent 502 errors on Acmedemo REST API (port 8082) during peak traffic by reviewing crogld service logs, checking upstream/downstream service health, and assessing load balancer or capacity issues.\"}",
+              "scores": {
+                "correctness": 5.0,
+                "grounding": 5.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 5.0,
+                "token_efficiency": 5.0,
+                "overall_score": 5.0,
+                "cost": 0.0,
+                "assertion_pass_rate": 1.0,
+                "passed_assertions": [
+                  "valid_json_schema",
+                  "route_validity",
+                  "urgency_classification",
+                  "channel_privacy_assessment",
+                  "suggested_action_present"
+                ],
+                "failed_assertions": []
+              },
+              "success": true,
+              "error": null
+            },
+            {
+              "run": 3,
+              "latency": 0.975,
+              "prompt_tokens": 318,
+              "completion_tokens": 79,
+              "actual_model": "minimax/minimax-m3:free",
+              "actual_provider": "GMICloud",
+              "content": "{\"route\":\"cs-ops\",\"urgency\":\"P1\",\"is_private_channel\":false,\"privacy_violation\":false,\"suggested_action\":\"Triage 502 errors on Acmedemo REST API port 8082 during peak traffic; pull crogld service logs, check upstream/backend health, connection pools, and recent deployments; engage on-call to mitigate and post status updates.\"}",
+              "scores": {
+                "correctness": 5.0,
+                "grounding": 5.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 5.0,
+                "token_efficiency": 5.0,
+                "overall_score": 5.0,
+                "cost": 0.0,
+                "assertion_pass_rate": 1.0,
+                "passed_assertions": [
+                  "valid_json_schema",
+                  "route_validity",
+                  "urgency_classification",
+                  "channel_privacy_assessment",
+                  "suggested_action_present"
+                ],
+                "failed_assertions": []
+              },
+              "success": true,
+              "error": null
+            }
+          ]
+        },
+        "B5": {
+          "probe_id": "B5",
+          "name": "Artifact & Distribution Audit Synthesis",
+          "reliability_class": "R1",
+          "avg_latency": 2.33,
+          "avg_score": 4.8,
+          "avg_pass_rate": 1.0,
+          "total_cost": 0.0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 5.355,
+              "prompt_tokens": 539,
+              "completion_tokens": 638,
+              "actual_model": "minimax/minimax-m3:free",
+              "actual_provider": "GMICloud",
+              "content": "# Release Audit: v2.4.0-rc3\n\n## Distribution Matrix Status\n\n| Region | Artifact | SHA256 | Storage URL | Storage Status | Registry Tag | Registry Status | Overall |\n|---|---|---|---|---|---|---|---|\n| AWS us-east-1 | tar.gz | `e3b0c44...b855` | s3://releases/v2.4.0-rc3.tar.gz | \u2705 Verified (200 OK) | ECR: `v2.4.0-rc3` | \u2705 Verified | \ud83d\udfe2 PASS |\n| AWS us-gov-west-1 | tar.gz | `e3b0c44...b855` | s3://releases/v2.4.0-rc3.tar.gz | \u274c FAILED (403 SignatureDoesNotMatch \u2014 presign expired) | ECR (GovCloud) | \u274c MISSING | \ud83d\udd34 BLOCKED |\n| GCP us-central1 | tar.gz | `e3b0c44...b855` | gs://releases/v2.4.0-rc3.tar.gz | \u2705 Verified (200 OK) | Artifact Registry: `v2.4.0-rc3` | \u2705 Verified | \ud83d\udfe2 PASS |\n\n**Regional Coverage:** 2/3 healthy (66.7%) \u2014 below the 100% promotion threshold.\n\n---\n\n## \ud83d\udea8 Blockers Preventing Release Promotion\n\n1. **AWS GovCloud (us-gov-west-1) \u2014 S3 Distribution Failure**\n   - Artifact retrieval returns `403 SignatureDoesNotMatch` due to an expired presigned URL.\n   - Action: Re-sign the S3 object with a valid (non-expired) presign or convert to a permanent bucket policy / public-read ACL consistent with FedRAMP boundary requirements. Re-run the verification probe and confirm 200 OK.\n\n2. **AWS GovCloud (us-gov-west-1) \u2014 ECR Tag Missing**\n   - The `v2.4.0-rc3` tag is absent from the GovCloud ECR registry.\n   - Action: Push and tag the container image in the isolated GovCloud ECR registry, then re-verify with `aws ecr describe-images`. GovCloud requires its own isolated pipeline \u2014 confirm the image was actually built in-region and not just skipped.\n\n3. **Cross-Region Artifact Integrity Not Independently Confirmed**\n   - All three regions report the identical SHA256 (`e3b0c44...b855`). While this is consistent, the hash is the well-known SHA-256 of an empty file, which warrants sanity-checking that the published artifact is non-empty and correct. Re-validate artifact size + checksum from each regional source independently.\n\n---\n\n## Recommendation\n\n**DO NOT promote v2.4.0-rc3 to GA.** The GovCloud region is a hard compliance boundary (FedRAMP/ITAR); a missing ECR tag and failed distribution probe are not acceptable for promotion. Fix blockers #1 and #2, re-run the full matrix, and require 3/3 green before re-attempting promotion.",
+              "scores": {
+                "correctness": 5.0,
+                "grounding": 5.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 5.0,
+                "token_efficiency": 5.0,
+                "overall_score": 5.0,
+                "cost": 0.0,
+                "assertion_pass_rate": 1.0,
+                "passed_assertions": [
+                  "generates_markdown_table",
+                  "flags_us_gov_west_s3_blocker",
+                  "flags_missing_govcloud_ecr_tag",
+                  "confirms_healthy_regions",
+                  "lists_explicit_blockers"
+                ],
+                "failed_assertions": []
+              },
+              "success": true,
+              "error": null
+            },
+            {
+              "run": 2,
+              "latency": 0.687,
+              "prompt_tokens": 539,
+              "completion_tokens": 973,
+              "actual_model": "minimax/minimax-m3:free",
+              "actual_provider": "GMICloud",
+              "content": "# Distribution Matrix Audit: v2.4.0-rc3\n\n## Status Overview\n\n| Region | Cloud | Artifact | SHA256 | Storage URL | Object Status | Registry Tag | Overall |\n|---|---|---|---|---|---|---|---|\n| us-east-1 | AWS (Commercial) | tar.gz | `e3b0c44\u2026b855` \u2705 | S3 | 200 OK \u2705 | ECR `v2.4.0-rc3` \u2705 | **PASS** |\n| us-gov-west-1 | AWS GovCloud | tar.gz | `e3b0c44\u2026b855` \u26a0\ufe0f | S3 | 403 SignatureDoesNotMatch \u274c | ECR \u2014 MISSING \u274c | **FAIL** |\n| us-central1 | GCP | tar.gz | `e3b0c44\u2026b855` \u2705 | GCS | 200 OK \u2705 | Artifact Registry `v2.4.0-rc3` \u2705 | **PASS** |\n\n**Release Promotion Verdict: \ud83d\udeab BLOCKED \u2014 1 of 3 regions failing (us-gov-west-1)**\n\n---\n\n## Integrity Observations\n\n- **SHA256 consistency:** All three regions report the identical checksum `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`. Hash matches across regions, so no payload drift detected \u2014 the artifact itself is intact; the issue is purely distribution/access.\n- **Note:** The reported digest is the well-known SHA256 of an empty/zero-byte stream. This warrants verification that the upload pipeline is hashing the actual binary payload rather than an empty buffer before promotion.\n\n---\n\n## \ud83d\udea8 Blockers Preventing Promotion\n\n### Blocker #1 \u2014 us-gov-west-1: Presigned URL Signature Expired (403 SignatureDoesNotMatch)\n- **Impact:** Distribution artifact is unreachable in GovCloud; downstream agents/operators in the GovCloud partition cannot fetch the build.\n- **Probable cause:** S3 presigned URL TTL elapsed before verification, or signing key/scope mismatch between commercial and GovCloud partitions (different IAM partition `aws-us-gov` vs `aws`).\n- **Required remediation:**\n  1. Regenerate presigned URL with a fresh TTL (recommend \u2265 24h for RC distribution).\n  2. Confirm signing credentials belong to the `aws-us-gov` partition (not commercial `aws`).\n  3. Re-run the verifier to capture a fresh `200 OK` response and attach the new signed URL to release notes.\n\n### Blocker #2 \u2014 us-gov-west-1: ECR Image Tag Missing\n- **Impact:** Container image for `v2.4.0-rc3` is not present in the GovCloud ECR registry. Even if the artifact tarball were reachable, the container release surface for FedRAMP/GovCloud customers is incomplete.\n- **Probable cause:** Build pipeline did not push to GovCloud ECR, or push targeted the wrong region/registry endpoint.\n- **Required remediation:**\n  1. Push `v2.4.0-rc3` image to the GovCloud ECR repository and record the image digest.\n  2. Tag must exactly match `v2.4.0-rc3` to align with commercial ECR and GCP Artifact Registry.\n  3. Verify immutability/policy compliance for the GovCloud registry.\n\n### Blocker #3 (Advisory) \u2014 Empty-Byte SHA256 Anomaly\n- **Impact:** If the checksum is not genuinely of the release payload, downstream signature/threshold checks could pass on a corrupt artifact.\n- **Required remediation:** Re-hash the uploaded object on the storage side (S3/Cloud Storage `etag`-independent hash) and confirm the digest matches a local `sha256sum` of the build output.\n\n---\n\n## Promotion Gate Checklist\n\n- [ ] us-east-1 S3 200 OK (re-verify within SLA window)\n- [ ] us-gov-west-1 S3 presigned URL regenerated \u2192 200 OK\n- [ ] us-gov-west-1 ECR tag `v2.4.0-rc3` pushed and verified\n- [ ] us-central1 GCS 200 OK (re-verify within SLA window)\n- [ ] SHA256 cross-region integrity confirmed against authoritative build output\n- [ ] Release notes updated with validated per-region URLs (non-presigned or freshly signed)\n\n**Action:** Route this audit back to the release manager; do not tag `v2.4.0-rc3` as `stable` until GovCloud storage **and** registry both report green.",
+              "scores": {
+                "correctness": 5.0,
+                "grounding": 5.0,
+                "stop_discipline": 4.0,
+                "format_compliance": 5.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 4.0,
+                "token_efficiency": 5.0,
+                "overall_score": 4.7,
+                "cost": 0.0,
+                "assertion_pass_rate": 1.0,
+                "passed_assertions": [
+                  "generates_markdown_table",
+                  "flags_us_gov_west_s3_blocker",
+                  "flags_missing_govcloud_ecr_tag",
+                  "confirms_healthy_regions",
+                  "lists_explicit_blockers"
+                ],
+                "failed_assertions": []
+              },
+              "success": true,
+              "error": null
+            },
+            {
+              "run": 3,
+              "latency": 0.938,
+              "prompt_tokens": 539,
+              "completion_tokens": 874,
+              "actual_model": "minimax/minimax-m3:free",
+              "actual_provider": "GMICloud",
+              "content": "# Distribution Matrix Audit \u2014 Release `v2.4.0-rc3`\n\n## Status Overview\n\n| Region | Artifact | SHA256 | Object Store URL | Store Status | Registry | Registry Status | Region Result |\n|---|---|---|---|---|---|---|---|\n| AWS `us-east-1` | tar.gz | `e3b0c44\u2026b855` | https://s3.us-east-1.amazonaws.com/releases/v2.4.0-rc3.tar.gz | 200 OK \u2705 | ECR tag `v2.4.0-rc3` | Verified \u2705 | **PASS** |\n| AWS `us-gov-west-1` | tar.gz | `e3b0c44\u2026b855` | https://s3.us-gov-west-1.amazonaws.com/releases/v2.4.0-rc3.tar.gz | 403 `SignatureDoesNotMatch` \u274c | GovCloud ECR | MISSING \u274c | **FAIL** |\n| GCP `us-central1` | tar.gz | `e3b0c44\u2026b855` | https://storage.googleapis.com/releases/v2.4.0-rc3.tar.gz | 200 OK \u2705 | Artifact Registry tag `v2.4.0-rc3` | Verified \u2705 | **PASS** |\n\n## Artifact Integrity\n\nAll three regions advertise the same SHA256 digest (`e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`). The advertised digest equals the SHA-256 of an empty file, which is **not consistent with a populated release tarball**. This must be reconciled before promotion \u2014 either the digest was truncated/placeholder in the telemetry feed, or the artifact uploaded is genuinely empty. Either case is a blocker pending verification of the full-length digest against the build manifest.\n\n## \ud83d\udeab Blockers Preventing Release Promotion\n\n1. **AWS GovCloud (`us-gov-west-1`) \u2014 S3 presigned URL expired / signature mismatch (HTTP 403 `SignatureDoesNotMatch`).**\n   - The object is unreachable via the distribution URL. Re-sign or regenerate a fresh presigned URL with a non-expired signature, then re-verify reachability (expect 200 OK).\n   - Root cause is likely the IAM signing key (`signingKey` in `us-gov-west-1`) being older than the request signature validity window, or the presigner using the wrong region endpoint.\n\n2. **AWS GovCloud (`us-gov-west-1`) \u2014 ECR tag `v2.4.0-rc3` is MISSING in the GovCloud ECR registry.**\n   - No image was published to the GovCloud registry. The container artifact for this region has not been distributed. Push the image with tag `v2.4.0-rc3` to GovCloud ECR and capture the returned image digest for the audit log.\n\n3. **Artifact digest anomaly across all regions.**\n   - The reported SHA256 (`e3b0c44\u2026b855`) is the well-known empty-file digest. If the digest field in the telemetry feed is correct, the uploaded artifacts are zero-byte/empty and invalid for release. Re-compute the digest from the actual artifact in each region and confirm parity across S3, GovCloud S3, and GCS.\n\n4. **GovCloud parity not established (cumulative).**\n   - Until items 1\u20133 are resolved, `us-gov-west-1` has neither a verified object-store artifact nor a registry tag. Federal/isolated-region consumers cannot fetch this release, so the multi-region distribution SLA is unmet.\n\n## \u2705 Regions Cleared\n\n- **AWS `us-east-1`** \u2014 S3 reachable, ECR tag present and verified.\n- **GCP `us-central1`** \u2014 GCS reachable, Artifact Registry tag present and verified.\n\n## Promotion Recommendation\n\n**HOLD `v2.4.0-rc3` from promotion to GA.** Resolve blockers 1\u20133, then re-run this audit. Promotion is permitted only when all three regions show PASS, the SHA256 digests match the canonical build manifest, and GovCloud ECR is tagged.",
+              "scores": {
+                "correctness": 5.0,
+                "grounding": 5.0,
+                "stop_discipline": 4.0,
+                "format_compliance": 5.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 4.0,
+                "token_efficiency": 5.0,
+                "overall_score": 4.7,
+                "cost": 0.0,
+                "assertion_pass_rate": 1.0,
+                "passed_assertions": [
+                  "generates_markdown_table",
+                  "flags_us_gov_west_s3_blocker",
+                  "flags_missing_govcloud_ecr_tag",
+                  "confirms_healthy_regions",
+                  "lists_explicit_blockers"
+                ],
+                "failed_assertions": []
+              },
+              "success": true,
+              "error": null
+            }
+          ]
+        },
+        "B8": {
+          "probe_id": "B8",
+          "name": "Agent Tool Use & Structured Execution",
+          "reliability_class": "R1",
+          "avg_latency": 1.02,
+          "avg_score": 5.0,
+          "avg_pass_rate": 1.0,
+          "total_cost": 0.0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 0.999,
+              "prompt_tokens": 339,
+              "completion_tokens": 286,
+              "actual_model": "minimax/minimax-m3:free",
+              "actual_provider": "GMICloud",
+              "content": "```json\n[\n  {\n    \"type\": \"function\",\n    \"function\": {\n      \"name\": \"mcp__crogld__crowdstrike_falcon_query\",\n      \"arguments\": {\n        \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n      }\n    }\n  },\n  {\n    \"type\": \"function\",\n    \"function\": {\n      \"name\": \"mcp__crogld__create_investigation\",\n      \"arguments\": {\n        \"title\": \"Investigation for SHA256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\n        \"severity\": \"P2\",\n        \"indicators\": [\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"],\n        \"description\": \"Investigation opened based on CrowdStrike Falcon query results for SHA256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.\"\n      }\n    }\n  }\n]\n```",
+              "scores": {
+                "correctness": 5.0,
+                "grounding": 5.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 5.0,
+                "token_efficiency": 5.0,
+                "overall_score": 5.0,
+                "cost": 0.0,
+                "assertion_pass_rate": 1.0,
+                "passed_assertions": [
+                  "names_falcon_query_tool",
+                  "cites_target_sha256",
+                  "names_create_investigation_tool",
+                  "specifies_p2_severity",
+                  "valid_tool_call_structure"
+                ],
+                "failed_assertions": []
+              },
+              "success": true,
+              "error": null
+            },
+            {
+              "run": 2,
+              "latency": 1.041,
+              "prompt_tokens": 339,
+              "completion_tokens": 286,
+              "actual_model": "minimax/minimax-m3:free",
+              "actual_provider": "GMICloud",
+              "content": "```json\n[\n  {\n    \"type\": \"function\",\n    \"function\": {\n      \"name\": \"mcp__crogld__crowdstrike_falcon_query\",\n      \"arguments\": {\n        \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n      }\n    }\n  },\n  {\n    \"type\": \"function\",\n    \"function\": {\n      \"name\": \"mcp__crogld__create_investigation\",\n      \"arguments\": {\n        \"title\": \"Investigation for SHA256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\n        \"severity\": \"P2\",\n        \"indicators\": [\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"],\n        \"description\": \"Investigation opened for SHA256 hash queried in CrowdStrike Falcon: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n      }\n    }\n  }\n]\n```",
+              "scores": {
+                "correctness": 5.0,
+                "grounding": 5.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 5.0,
+                "token_efficiency": 5.0,
+                "overall_score": 5.0,
+                "cost": 0.0,
+                "assertion_pass_rate": 1.0,
+                "passed_assertions": [
+                  "names_falcon_query_tool",
+                  "cites_target_sha256",
+                  "names_create_investigation_tool",
+                  "specifies_p2_severity",
+                  "valid_tool_call_structure"
+                ],
+                "failed_assertions": []
+              },
+              "success": true,
+              "error": null
+            },
+            {
+              "run": 3,
+              "latency": 1.033,
+              "prompt_tokens": 339,
+              "completion_tokens": 267,
+              "actual_model": "minimax/minimax-m3:free",
+              "actual_provider": "GMICloud",
+              "content": "```json\n[\n  {\n    \"type\": \"function\",\n    \"function\": {\n      \"name\": \"mcp__crogld__crowdstrike_falcon_query\",\n      \"arguments\": {\n        \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n      }\n    }\n  },\n  {\n    \"type\": \"function\",\n    \"function\": {\n      \"name\": \"mcp__crogld__create_investigation\",\n      \"arguments\": {\n        \"title\": \"Investigation: SHA256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\n        \"severity\": \"P2\",\n        \"indicators\": \"[\\\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\\\"]\",\n        \"description\": \"Investigation opened based on CrowdStrike Falcon query results for the provided SHA256 hash. Further analysis required to determine scope and impact.\"\n      }\n    }\n  }\n]\n```",
+              "scores": {
+                "correctness": 5.0,
+                "grounding": 5.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 5.0,
+                "token_efficiency": 5.0,
+                "overall_score": 5.0,
+                "cost": 0.0,
+                "assertion_pass_rate": 1.0,
+                "passed_assertions": [
+                  "names_falcon_query_tool",
+                  "cites_target_sha256",
+                  "names_create_investigation_tool",
+                  "specifies_p2_severity",
+                  "valid_tool_call_structure"
+                ],
+                "failed_assertions": []
+              },
+              "success": true,
+              "error": null
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

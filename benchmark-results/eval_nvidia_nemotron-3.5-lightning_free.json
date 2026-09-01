@@ -1,0 +1,228 @@
+{
+  "model_id": "nvidia/nemotron-3.5-lightning:free",
+  "label": "nvidia/nemotron-3.5-lightning:free",
+  "evaluated_at": "2026-09-01 17:01:21 UTC",
+  "rounds_per_probe": 1,
+  "probes_evaluated": [
+    "B1",
+    "B2",
+    "B4",
+    "B5",
+    "B8"
+  ],
+  "overall_score": 4.21,
+  "overall_latency": 10.19,
+  "overall_pass_rate": 0.76,
+  "total_eval_cost": 0.0,
+  "promotion_verdict": {
+    "verdict": "promote to R1 (Internal Ops / Synthesis / Drafting Fast-Track)",
+    "eligible_tiers": [
+      "R1 (Internal Ops / Synthesis / Drafting Fast-Track)"
+    ]
+  },
+  "probe_details": {
+    "B1": {
+      "probe_id": "B1",
+      "name": "Internal Scheduled-Status Synthesis",
+      "reliability_class": "R1",
+      "avg_latency": 10.06,
+      "avg_score": 4.98,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 10.062,
+          "prompt_tokens": 197,
+          "completion_tokens": 1129,
+          "content": "**Internal Ops Status Brief**\n\n**Active Systems:**\n- Hermes Cron: 2 jobs active\n- Launchd Sweeps: 7 agents active\n- GCP VM: acmedemo instance healthy @ 34.69.169.75; Cloud SQL disk at 42%\n- OpenCode: 14-day spend baseline $548\n\n**Operational Failures:**\n- sync-acmedemo-from-main: network timeout after 180s (Hermes Cron)\n- health-check-sweep on agent-4: timed out after 300s (Launchd Sweeps)\n\n**Immediate Remediation Actions:**\n- Resolve network connectivity/timeout for sync-acmedemo-from-main\n- Investigate agent-4 status, network access, and health-check configuration to clear 300s sweep timeout\n- Monitor both systems post-intervention to confirm recovery",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 4.8,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 4.98,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "identifies_failing_cron",
+              "identifies_timed_out_launchd",
+              "quotes_exact_gcp_ip",
+              "quotes_cloud_sql_utilization",
+              "quotes_opencode_spend",
+              "no_hallucinated_outages",
+              "stop_discipline_check"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B2": {
+      "probe_id": "B2",
+      "name": "Morning Brief Component Extraction",
+      "reliability_class": "R1/R2",
+      "avg_latency": 10.07,
+      "avg_score": 4.25,
+      "avg_pass_rate": 0.8,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 10.069,
+          "prompt_tokens": 235,
+          "completion_tokens": 1384,
+          "content": "- **Grid Modernization Phase 1**: Architecture agreed Aug 18 between Jason (Crogl) and John (TXNM); go-live target locked for Sep 15, 2026.  \n- **Critical Blocker**: SAML SSO cert expiry on staging cluster flagged Aug 19; due Aug 28, 2026. Internal ticket SEC-942 opened; blocks IdP metadata sync and cascades to Phase 1 timeline.  \n- **Action & Dependency**: Jason to deliver Airbyte connector schema by Aug 24, 2026. Sarah (TXNM) to confirm IdP metadata URL by Aug 29, 2026, strictly contingent on cert rotation.  \n- **Milestone Chain**: Cert expiry (Aug 28) \u2192 IdP confirmation (Aug 29) \u2192 Phase 1 go-live (Sep 15); delay in any step risks the Sep 16 target.",
+          "scores": {
+            "correctness": 4.2,
+            "grounding": 4.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 3.0,
+            "cleanup_burden": 4.0,
+            "token_efficiency": 5.0,
+            "overall_score": 4.25,
+            "cost": 0.0,
+            "assertion_pass_rate": 0.8,
+            "passed_assertions": [
+              "highlights_saml_cert_blocker",
+              "extracts_airbyte_or_grid_mod",
+              "word_count_bounded",
+              "bullet_format_compliance"
+            ],
+            "failed_assertions": [
+              "extracts_target_dates"
+            ]
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B4": {
+      "probe_id": "B4",
+      "name": "Frontdoor / Slack Triage & Classification",
+      "reliability_class": "R2",
+      "avg_latency": 10.06,
+      "avg_score": 1.88,
+      "avg_pass_rate": 0.0,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 10.063,
+          "prompt_tokens": 192,
+          "completion_tokens": 1063,
+          "content": "Looking at the inbound message: \"Hey team, we're seeing intermittent 502 errors on the Acmedemo REST API port 8082 during peak traffic. Can someone check the crogld service logs?\" Inbound channel: #ops-intake (public).\n\nI need to classify this message into one of the specified routes, urgency levels, and other fields. Let me analyze the message:\n\n1. **Content analysis**: The message mentions \"intermittent 502 errors on the Acmedemo REST API port 8082 during peak traffic\" and \"Can someone check the crogld service logs?\" This is clearly an operations issue - a service experiencing errors during peak traffic.\n\n2. **Route classification**: \n   - \"cs-ops\" seems most appropriate - this is an operations issue involving service errors, logs, and infrastructure.\n   - \"solutions-architect\" might be possible if it requires architectural analysis, but it seems more operational.\n   - \"build\" doesn't fit - not about code/build issues.\n   - \"direct-reply\" doesn't fit - it's a team communication, not a direct reply request.\n\n   The message is about checking service logs and resolving API errors, which fits \"cs-ops\" (customer service operations).\n\n3. **Urgency classification**:\n   - \"P1\" - Critical, service outage impacting many users\n   - \"P2\" - High priority, significant impact but not full outage\n   - \"P3\" - Normal priority\n\n   The message mentions \"intermittent 502 errors during peak traffic\" - 502 errors are bad gateway errors, and \"intermittent during peak traffic\" suggests it's affecting users during high traffic times. This seems like P2 - high priority but not a complete outage (since it's intermittent). However, 502 errors during peak traffic could be quite impactful. I'd classify this as P2 - significant impact but not a complete service outage.\n\n4. **is_private_channel**: The message says \"Inbound channel: #ops-intake (public)\". So this is a public channel, meaning is_private_channel should be false.\n\n5. **privacy_violation**: The message doesn't contain any personal data, PII, or sensitive information. It's about service errors and logs. So privacy_violation should be false.\n\n6. **suggested_action**: The message asks \"Can someone check the crogld service logs?\" So a suggested action would be something like \"Check crogld service logs for 502 errors\" or \"Investigate crogld service logs for 502 errors on port 8082\".\n\nLet me construct the JSON:\n\n{\n  \"route\": \"cs-ops\",\n  \"urgency\": \"P2\",\n  \"is_private_channel\": false,\n  \"privacy_violation\": false,\n  \"suggested_action\": \"Check crogld service logs for 502 errors on Acmedemo REST API port 8082\"\n}\n\nWait, let me double-check the route options: \"cs-ops\" | \"solutions-architect\" | \"build\" | \"direct-reply\"\n\nYes, \"cs-ops\" seems most appropriate for operations/troubleshooting.\n\nFor urgency: The message mentions \"intermittent 502 errors during peak traffic\" - this is significant but not a complete outage. I'll go with P2.\n\nis_private_channel: The channel is \"#ops-intake (public)\" so false.\n\nprivacy_violation: No PII or sensitive data mentioned, so false.\n\nsuggested_action: \"Check crogld service logs for 502 errors on Acmedemo REST API port 8082\"\n\nLet me make sure the JSON is valid and matches the exact schema required.\n\nOne thing to consider: Should urgency be P1? The errors are 502 (Bad Gateway) and happening during peak traffic. If peak traffic means many users are affected, it could be P1. But \"intermittent\" suggests it's not constant. I think P2 is appropriate - high priority but not critical emergency.\n\nActually, let me reconsider. In many ops contexts, 500-level errors during peak traffic would be P1. But the schema only has P1, P2, P3, and \"intermittent\" suggests it's not constant. I'll stick with P2.\n\nFor suggested_action, I should make it specific to the message content: \"Check crogld service logs for 502 errors on Acmedemo REST API port 8082\"\n\nLet me finalize the JSON.{\n  \"route\": \"cs-ops\",\n  \"urgency\": \"P2\",\n  \"is_private_channel\": false,\n  \"privacy_violation\": false,\n  \"suggested_action\": \"Check crogld service logs for 502 errors on Acmedemo REST API port 8082\"\n}",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 4.0,
+            "format_compliance": 1.0,
+            "latency_score": 3.0,
+            "cleanup_burden": 2.5,
+            "token_efficiency": 5.0,
+            "overall_score": 1.88,
+            "cost": 0.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              "valid_json_schema",
+              "route_validity",
+              "urgency_classification",
+              "channel_privacy_assessment",
+              "suggested_action_present"
+            ]
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B5": {
+      "probe_id": "B5",
+      "name": "Artifact & Distribution Audit Synthesis",
+      "reliability_class": "R1",
+      "avg_latency": 10.16,
+      "avg_score": 4.98,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 10.161,
+          "prompt_tokens": 494,
+          "completion_tokens": 2048,
+          "content": "### Release v2.4.0-rc3 Distribution Matrix Audit\n\n| Region | Artifact | SHA256 | Delivery URL/Registry | Status | ECR/Artifact Registry Tag |\n|--------|----------|--------|----------------------|--------|---------------------------|\n| **AWS us-east-1** | tar.gz | e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | S3: `https://s3.us-east-1.amazonaws.com/releases/v2.4.0-rc3.tar.gz` | \u2705 Verified (200 OK) | \u2705 v2.4.0-rc3 (Verified) |\n| **AWS us-gov-west-1** | tar.gz | e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | S3: `https://s3.us-gov-west-1.amazonaws.com/releases/v2.4.0-rc3.tar.gz` | \u274c **FAILED** (403 SignatureDoesNotMatch, presign expired) | \u274c **MISSING** in GovCloud ECR registry |\n| **GCP us-central1** | tar.gz | e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | GCS: `https://storage.googleapis.com/releases/v2.4.0-rc3.tar.gz` | \u2705 Verified (200 OK) | \u2705 v2.4.0-rc3 (Verified) |\n\n---\n\n### Explicit Blockers Preventing Release Promotion\n\n1. **AWS us-gov-west-1 S3 Distribution Failure**  \n   - The presigned URL for the `tar.gz` artifact returns **HTTP 403 SignatureDoesNotMatch**, indicating the presign has expired or the signature key/permissions are out of sync.  \n   - This prevents downstream consumers and automated verification pipelines from retrieving the artifact from the GovCloud bucket.\n\n2. **AWS us-gov-west-1 ECR Tag Absence**  \n   - The `v2.4.0-rc3` tag is **missing from the GovCloud ECR",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 4.8,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 4.98,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "generates_markdown_table",
+              "flags_us_gov_west_s3_blocker",
+              "flags_missing_govcloud_ecr_tag",
+              "confirms_healthy_regions",
+              "lists_explicit_blockers"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B8": {
+      "probe_id": "B8",
+      "name": "Agent Tool Use & Structured Execution",
+      "reliability_class": "R1",
+      "avg_latency": 10.62,
+      "avg_score": 4.98,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 10.62,
+          "prompt_tokens": 231,
+          "completion_tokens": 1290,
+          "content": "[\n  {\n    \"name\": \"mcp__crogld__crowdstrike_falcon_query\",\n    \"arguments\": {\n      \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n    }\n  },\n  {\n    \"name\": \"mcp__crogld__create_investigation\",\n    \"arguments\": {\n      \"title\": \"Investigation of SHA256 hash e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\n      \"severity\": \"P2\",\n      \"indicators\": [\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"],\n      \"description\": \"Run Falcon query and investigate the provided SHA256 hash.\"\n    }\n  }\n]",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 4.8,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 4.98,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "names_falcon_query_tool",
+              "cites_target_sha256",
+              "names_create_investigation_tool",
+              "specifies_p2_severity",
+              "valid_tool_call_structure"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    }
+  }
+}

@@ -332,6 +332,8 @@ def execute_openrouter_request(api_key, model_id, system_prompt, user_prompt, te
                 "latency": t1 - t0,
                 "content": content,
                 "reasoning": reasoning,
+                "actual_model": data.get("model"),
+                "actual_provider": data.get("provider") or data.get("provider_name"),
                 "prompt_tokens": usage.get("prompt_tokens", 0),
                 "completion_tokens": usage.get("completion_tokens", 0),
                 "total_tokens": usage.get("total_tokens", 0)
@@ -579,6 +581,8 @@ def evaluate_model_on_probes(api_key, model_info, probe_ids, rounds=3, dry_run=F
                 "latency": round(exec_res.get("latency", 0.0), 3),
                 "prompt_tokens": exec_res.get("prompt_tokens", 0),
                 "completion_tokens": exec_res.get("completion_tokens", 0),
+                "actual_model": exec_res.get("actual_model"),
+                "actual_provider": exec_res.get("actual_provider"),
                 "content": exec_res.get("content", ""),
                 "scores": score_data,
                 "success": exec_res.get("success", False),

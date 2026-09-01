@@ -31,7 +31,8 @@ This report identifies **top candidate models** not yet formally evaluated in Mo
 | `stepfun/step-3.7-flash`          | StepFun         |  262,144 (256k)  |       $0.200        |      $1.150       | R1 Multi-Modal Telemetry & Tool Chains   | 196B total / 11B active MoE; native multi-modal; robust multi-step function calling; low latency.             | Output pricing higher than DeepSeek/Gemma; 256k context ceiling.           |
 | `minimax/minimax-m3`              | MiniMax         |  1,048,576 (1M)  |       $0.230        |      $0.960       | R1 Long-Context Ops Synthesis            | 1M context with 262k max output; strong multi-document reasoning; robust multi-provider backing.              | Cost-effective for 1M context, but slightly slower TTFT on dense inputs.   |
 | `meituan/longcat-2.0`             | Meituan         |  128,000 (128k)  |       $0.300        |      $1.200       | OpenCode / R1 Agentic Coding & Workflows | 1.6T total / 48B active MoE; unmasked "Owl Alpha" stealth leader; outstanding tool calling & agent execution. | 128k context limit; higher memory footprint across providers.              |
-| `kwaipilot/kat-coder-air-v2.5`    | Kwaipilot       |  262,144 (256k)  |       $0.150        |      $0.600       | OpenCode Light Coding & Script Sweeps    | Fast coding MoE tuned for automated issue resolution and git workflows; competitive pricing.                  | Focused on code/diff generation; not suitable for CS tone/narrative.       |
+| `meta/muse-glimmer-30b:deepinfra/bf16` | Meta / DeepInfra | 131,072 (128k) | $0.300 | $1.200 | R2 Triage, Extraction & Bounded Tool Drafting | Evaluated via OpenRouter with 5.0/5 on B2, B4, B5, and B8, 0.29s average latency, and 100% assertion passes on those probes. | B3 canonical account-note run produced empty output (2.58/5, 1/5 assertions); single-run evidence does not establish repeated-run stability or R1 suitability. |
+| `kwaipilot/kat-coder-air-v2.5`    | Kwaipilot       |  262,144 (256k)  |       $0.150        |      $0.600       | OpenCode Light Coding & Script Sweeps | Fast coding MoE tuned for automated issue resolution and git workflows; competitive pricing.                  | Focused on code/diff generation; not suitable for CS tone/narrative.    |
 | `moonshotai/kimi-k3`              | Moonshot AI     |  262,144 (256k)  |       $3.000        |      $15.000      | R0 Complex Ops Planning & Architecture   | Frontier-class reasoning engine; deep step-by-step verification; top-tier mathematical & logic precision.     | Premium cost tier; slower decode due to deep chain-of-thought exploration. |
 
 ---
@@ -79,3 +80,19 @@ This report identifies **top candidate models** not yet formally evaluated in Mo
 ## 4. Integration into Model Ops Governance
 
 Upon completion of empirical benchmarking via the standard evaluation protocol (`eval-protocol.md`), results should be logged directly into `experiment-log.md`. Qualifying models meeting the score thresholds (R2 ≥ 4.5, R1 ≥ 4.7) will be promoted into `routing-matrix.md` to continuously drive down cost and improve latency across Hermes and OpenCode.
+
+## 5. Muse Glimmer 30B Evaluation Result (2026-08-27)
+
+### Evidence
+- Model: `meta/muse-glimmer-30b`, OpenRouter route targeting DeepInfra `deepinfra/bf16`; verified context window 131,072 tokens.
+- Evaluation artifacts: `/tmp/muse-glimmer-30b-summary.md` and `/tmp/muse-glimmer-real/eval_meta_muse-glimmer-30b.json`.
+- Probes captured: B2, B3, B4, B5, and B8. This was a single captured run per probe, so it is qualification evidence rather than repeated-run production validation.
+- Aggregate: 4.52/5.0, 84% assertion pass rate, 0.29s average latency, and $0.00 recorded evaluation cost. The verified provider rate card is $0.30/M input and $1.20/M output; do not treat the recorded zero as a guaranteed production price.
+
+### Qualification decision
+- **Promote to R2 triage/extraction fast-track:** B2, B4, B5, and B8 each scored 5.0/5 with 100% assertion passes and sub-second latency (0.21–0.35s). This supports bounded extraction, triage JSON, audit synthesis, and structured tool-call drafting.
+- **Do not promote to R1:** B3 scored 2.58/5 and passed 1/5 assertions because the model returned empty content. It failed canonical sections, bold-label syntax, required citations, and task-owner preservation. The failure is operationally critical for vault account-note drafting.
+- **Failure boundary:** No canonical vault mutations, unattended scheduled jobs, or customer-facing final outputs. Keep a verifier and the existing fallback ladder in place; any empty output or schema/assertion failure must escalate.
+
+### Comparative interpretation
+Muse Glimmer is materially faster than the existing documented R2 alternatives in this captured run, but the comparison is not like-for-like repeated-run evidence: prior Laguna S 2.1, LongCat 2.0, and Qwen 3.7 Flash figures come from different tasks and benchmark batches. Its current advantage is therefore bounded latency and clean target-probe behavior, not a claim of overall superiority. Laguna remains the established R1/OpenCode specialist, LongCat remains the deeper architectural/tool-workflow specialist, Qwen remains a validated R2 alternative, and GPT-5.4 remains the frontier fallback.

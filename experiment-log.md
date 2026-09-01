@@ -34,6 +34,54 @@ Use one section per meaningful run or benchmark batch.
 
 ---
 
+## 2026-09-01 — OpenCode build lane cost reduction
+- surface: OpenCode
+- task family: bounded implementation-heavy OpenCode runs
+- task reliability class: R1 (R0 work remains premium/escalation gated)
+- starting model: `openrouter/openai/gpt-5.4`
+- provider: OpenRouter BYOK
+- replacement model: `openrouter/openai/gpt-5.6-luna`
+- fallback model: `openrouter/openai/gpt-5.6-sol` / `openrouter/openai/gpt-5.4`
+- evidence:
+  - `opencode stats --days 7 --models`: 171 sessions, $92.97 total recorded cost.
+  - GPT-5.4: $88.6275 (95.3% of recorded cost; 1,915 messages).
+  - GPT-5.6 Luna: $1.8230 at its existing $0.20/$1.20 per 1M input/output rate.
+  - Laguna S 2.1 and Qwen 3.7 Flash are validated low-cost alternatives, but Luna is the least disruptive OpenCode build default because it is an OpenAI-compatible route and is present in the local catalog.
+- runtime verification:
+  - three identical `opencode run --agent build --model openrouter/openai/gpt-5.6-luna --pure` probes succeeded with exact `LUNA_ROUTE_OK` output.
+  - wall-clock times: 13.09s, 10.59s, 12.28s.
+- result accepted: yes
+- escalation required: no
+- verdict:
+  - promote Luna as the OpenCode `build` default for bounded, test-backed changes.
+  - preserve Sol/GPT-5.4 for R0, high-stakes architecture/security/customer-facing work, and verification failures.
+- projected savings (not realized): every 10 percentage points of current recorded GPT-5.4 spend moved to Luna would be approximately $8.89 per 7-day period at observed volume; actual savings vary with cache/input/output mix.
+- risks: Luna is not a blanket substitute for frontier judgment; mutating or high-ambiguity work must retain explicit escalation and verification gates.
+
+## 2026-09-01 — Luna build-default effectiveness checkpoint
+- surface: OpenCode
+- task family: bounded implementation-heavy OpenCode runs
+- task reliability class: R1 (R0 work remains premium/escalation gated)
+- measurement window: default-change verification through 2026-09-01 12:57 local time
+- source artifacts:
+  - OpenCode SQLite session ledger: `~/.local/share/opencode/opencode.db`
+  - `opencode stats --days 7 --models`
+  - `opencode run --agent build --model openrouter/openai/gpt-5.6-luna --pure` probe sessions
+- measured post-change evidence:
+  - Three controlled pure-mode Luna probes completed successfully with exact `LUNA_ROUTE_OK` output.
+  - Probe wall-clock durations were 12.03s, 9.36s, and 11.05s; mean 10.81s.
+  - Each probe recorded $0.01077–$0.01078, 6 input tokens, and 46 output tokens; no files changed and no cleanup/rework was recorded.
+  - No completed implementation task is attributable to Luna after the default change in the ledger; therefore post-change task success rate, test outcomes, tool failures, cleanup burden, escalation rate, and implementation-task latency are not yet measurable.
+- comparison baseline (available ledger scope, not a like-for-like task cohort):
+  - The latest 7-day OpenCode aggregate records 1,907 GPT-5.4 messages at $88.3058 and 494 Luna messages at $1.8554. These totals include work before the default change and cannot establish savings from the switch.
+  - The ledger does not expose a completed-task outcome, test-pass, cleanup, or escalation field sufficient for a direct GPT-5.4-versus-Luna effectiveness comparison.
+- result accepted: partial (route and cost capture verified; effectiveness not yet established)
+- escalation required: no for the controlled probes
+- verdict:
+  - Keep Luna as the bounded, test-backed `build` default.
+  - Do not claim realized savings or superior implementation quality from this checkpoint.
+  - Retain GPT-5.6 Sol and GPT-5.4 as explicit escalation anchors for R0, high-stakes, customer-facing, security-sensitive, and failed-verification work.
+
 ## 2026-07-27 — baseline observations
 - surface: both
 - task family: meta / routing baseline
@@ -728,6 +776,87 @@ Use one section per meaningful run or benchmark batch.
 - verdict:
   - `openrouter/deepseek/deepseek-v4-flash-0731`: reject for R2 triage; keep-evaluating only if rerun on canonical B2 fixture and if JSON conformity can be stabilized.
   - `openrouter/google/gemma-4-26b-a4b-it`: reject for R2 triage and do not promote for production frontdoor routing without a clean 3/3 JSON pass.
+
+## 2026-08-27 — Benchmark Evaluation: Meta Muse Glimmer 30B via DeepInfra
+- surface: Hermes CLI over OpenRouter
+- task family: B2 (Extraction), B3 (Canonical CS Note), B4 (Triage), B5 (Distribution Audit), B8 (Tool Use)
+- task reliability class: R2 qualification / R1 evaluation
+- starting model: `meta/muse-glimmer-30b`
+- provider: OpenRouter targeting DeepInfra `deepinfra/bf16`
+- fallback model: `openrouter/openai/gpt-5.4`
+- latency: 0.29s average across the captured single run per probe
+- recorded cost: $0.00 in evaluation artifact; verified provider rate card is $0.30/M input and $1.20/M output
+- source artifacts:
+  - `/tmp/muse-glimmer-30b-summary.md`
+  - `/tmp/muse-glimmer-real/eval_meta_muse-glimmer-30b.json`
+- result accepted: partial
+- escalation required: no for B2/B4/B5/B8; yes for B3 canonical-note use
+- scores:
+  - correctness: 4.52 aggregate
+  - grounding: 5.0 on clean probes; B3 output was empty
+  - stop-discipline: 5.0 on captured probes
+  - format compliance: 5.0 on B2/B4/B5/B8; B3 failed canonical format assertions
+  - latency: 5.0 / sub-second captured latency
+  - cleanup burden: 5.0 on B2/B4/B5/B8; B3 requires a rewrite
+- notes:
+  - B2, B4, B5, and B8 each scored 5.0/5 with 100% assertion passes.
+  - B3 scored 2.58/5 and passed 1/5 assertions; the model returned empty content and failed canonical sections, bold-label syntax, citations, and task-owner preservation.
+  - Single-run evidence is insufficient for unattended production promotion. Free/zero-cost evaluation accounting must not be confused with the provider rate card.
+- verdict:
+  - promote to R2 triage/extraction fast-track with verification
+  - keep-evaluating for R1; do not use for canonical vault notes, vault mutations, unattended scheduled jobs, or customer-facing finalization until repeated B3 canonical-fixture runs pass
+
+## 2026-09-01 — Controlled Eval: Newly Available OpenRouter Free Routes
+- surface: Automated Evaluation Harness (`scripts/eval_promo_candidates.py`)
+- task family: B1, B2, B4, B5, B8 (one round per probe; B3/B6/B7 intentionally omitted for low-risk cost control)
+- provider: OpenRouter BYOK/free routes
+- fallback model: `openrouter/openai/gpt-5.4` retained; no route changes made
+- source artifacts:
+  - `benchmark-results/eval_master_index.json`
+  - `benchmark-results/eval_nvidia_nemotron-3.5-lightning_free.json`
+  - `benchmark-results/eval_poolside_laguna-s-2.1_free.json`
+  - `benchmark-results/eval_poolside_laguna-xs-2.1_free.json`
+  - `benchmark-results/eval_thinkingmachines_inkling-small_free.json`
+  - `benchmark-results/eval_minimax_minimax-m3_free.json`
+  - `benchmark-results/eval_cohere_north-mini-code_free.json`
+- execution: 6 models × 5 probes × 1 round; all requests completed or returned explicit provider errors; recorded evaluation cost $0.00
+- results:
+  - `nvidia/nemotron-3.5-lightning:free`: overall 4.21/5, 10.19s average, 76% assertions. B1/B5/B8 strong, but B4 emitted analysis instead of strict JSON and B2 missed the date assertion. Harness eligibility says R1, but this single run is not promotion evidence.
+  - `poolside/laguna-s-2.1:free`: overall 2.49/5, 0.40s average, 36% assertions. B1 passed; B2/B4/B5 were blocked by HTTP 429 upstream shared-pool rate limiting; B8 passed 4/5 assertions. Reject for this pass; availability is unverified under rate limiting.
+  - `poolside/laguna-xs-2.1:free`: overall 1.80/5, 0.19s average, 20% assertions. B2 passed; B1/B4/B5/B8 were blocked by HTTP 429 upstream shared-pool rate limiting. Reject for this pass; availability is unverified under rate limiting.
+  - `thinkingmachines/inkling-small:free`: overall 1.00/5, 0.12s average, 0% assertions. Every probe returned HTTP 403: route is only available on agentic harnesses. Not suitable for this chat-completions harness.
+  - `minimax/minimax-m3:free`: overall 5.00/5, 1.29s average, 100% assertions across all five probes. Harness mechanically reports R2/R1/R0 eligibility, but this is one round only; no production promotion or routing update was made.
+  - `cohere/north-mini-code:free`: overall 4.26/5, 0.44s average, 72% assertions. B1/B4 passed; B2 missed target-date assertion, B5 missed healthy-region confirmation, and B8 failed all tool-call assertions. Keep evaluating; not promotion-ready.
+- notes:
+  - Provider-reported free pricing yielded $0.00 recorded cost; this must not be interpreted as a guarantee of availability or an entitlement to production capacity.
+  - Results are single-round screening evidence, not the protocol's required repeated-run promotion evidence.
+  - No production routes, scheduled jobs, aliases, or `routing-matrix.md` entries were changed.
+- verdict:
+  - `minimax/minimax-m3:free`: strongest screening result; keep in controlled evaluation/shadow queue only.
+  - `nvidia/nemotron-3.5-lightning:free`: promising for B1/B5/B8, but strict B4 failure and latency require rerun before any lane consideration.
+  - `cohere/north-mini-code:free`: keep-evaluating for bounded non-tool work; reject for B8-dependent routing in current form.
+  - Poolside routes: blocked/failed availability screen due to upstream shared-pool HTTP 429; no quality conclusion beyond the successful probes.
+  - Inkling Small: reject for this harness because OpenRouter restricts the route to agentic harnesses.
+
+## 2026-09-01 — Repeated Eval: MiniMax M3 Free Route Stability
+- surface: Automated Evaluation Harness (`scripts/eval_promo_candidates.py`)
+- task family: Repeated B1/B2/B4/B5/B8 plus targeted B3 canonical account-note coverage
+- requested model: `minimax/minimax-m3:free`
+- actual route observed in all 18 requests: model `minimax/minimax-m3:free`, provider `GMICloud`
+- execution: 6 probes × 3 rounds; all 18 requests succeeded; recorded evaluation cost $0.00 on the free route
+- source artifacts:
+  - `benchmark-results/repeat_minimax_20260901/eval_minimax_minimax-m3_free.json`
+  - `benchmark-results/repeat_minimax_20260901/eval_master_index.json`
+- aggregate: 4.91/5.00 overall, 1.25s mean probe latency, 98% assertion pass rate, 0.00 recorded cost
+- per-probe stability:
+  - B1: 3/3 passes, 5.00/5.00 each, latency 0.934–2.023s (mean 1.48s)
+  - B2: 2/3 passes, 4.45/5.00 on the two misses because the output omitted a date assertion; one 5.00/5.00 pass, latency 0.620–0.920s (mean 0.80s)
+  - B3: 3/3 passes, 5.00/5.00 each, latency 0.887–1.019s (mean 0.94s); canonical sections, bold labels, SAML/SEC-942 citation, direct-correlation discipline, and task owners were preserved
+  - B4: 3/3 passes, 5.00/5.00 each, latency 0.876–0.975s (mean 0.91s); strict JSON/schema assertions passed
+  - B5: 3/3 assertion passes, scores 5.00/4.70/4.70, latency 0.687–5.355s (mean 2.33s); slower first run and extra cleanup/stop-discipline penalty on later verbose audit outputs
+  - B8: 3/3 passes, 5.00/5.00 each, latency 0.999–1.041s (mean 1.02s)
+- B3 limitation: the harness supports B3 directly; no limitation encountered. This was canonical-fixture assertion coverage, not a live vault mutation.
+- verdict: repeated evidence supports continued controlled/shadow evaluation. Do not promote production routing, unattended jobs, canonical vault mutations, or customer-facing finalization from this result alone; B2 date fidelity and B5 output discipline remain observed variance.
 
 
 

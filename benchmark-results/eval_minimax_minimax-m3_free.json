@@ -1,0 +1,229 @@
+{
+  "model_id": "minimax/minimax-m3:free",
+  "label": "minimax/minimax-m3:free",
+  "evaluated_at": "2026-09-01 17:02:23 UTC",
+  "rounds_per_probe": 1,
+  "probes_evaluated": [
+    "B1",
+    "B2",
+    "B4",
+    "B5",
+    "B8"
+  ],
+  "overall_score": 5.0,
+  "overall_latency": 1.29,
+  "overall_pass_rate": 1.0,
+  "total_eval_cost": 0.0,
+  "promotion_verdict": {
+    "verdict": "promote to R2 (Triage / Extraction Fast-Track), R1 (Internal Ops / Synthesis / Drafting Fast-Track), R0 (Shadow-Gated Scheduled / Client-Facing with Frontier Fallbacks)",
+    "eligible_tiers": [
+      "R2 (Triage / Extraction Fast-Track)",
+      "R1 (Internal Ops / Synthesis / Drafting Fast-Track)",
+      "R0 (Shadow-Gated Scheduled / Client-Facing with Frontier Fallbacks)"
+    ]
+  },
+  "probe_details": {
+    "B1": {
+      "probe_id": "B1",
+      "name": "Internal Scheduled-Status Synthesis",
+      "reliability_class": "R1",
+      "avg_latency": 0.91,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.91,
+          "prompt_tokens": 317,
+          "completion_tokens": 194,
+          "content": "**Internal Ops Status Brief**\n\n**Active Systems**\n- Hermes cron: 2 jobs running\n- Launchd sweeps: 7 agents active\n- GCP: acmedemo VM healthy (34.69.169.75); Cloud SQL at 42% disk utilization\n- OpenCode 14-day spend: $548 baseline\n\n**Operational Failures**\n- Hermes cron job `sync-acmedemo-from-main` failed \u2014 network timeout @ 180s\n- Launchd agent-4 `health-check-sweep` timed out @ 300s\n\n**Immediate Remediation**\n- Restart/retry `sync-acmedemo-from-main` cron; verify network egress to source repo and increase timeout if transient\n- Investigate agent-4 health-check hang; review recent config changes and restart the sweep process\n- Monitor Cloud SQL disk trend (currently 42% \u2014 confirm growth rate to plan capacity)\n- Validate OpenCode spend against baseline for any anomalous drift",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "identifies_failing_cron",
+              "identifies_timed_out_launchd",
+              "quotes_exact_gcp_ip",
+              "quotes_cloud_sql_utilization",
+              "quotes_opencode_spend",
+              "no_hallucinated_outages",
+              "stop_discipline_check"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B2": {
+      "probe_id": "B2",
+      "name": "Morning Brief Component Extraction",
+      "reliability_class": "R1/R2",
+      "avg_latency": 0.73,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.735,
+          "prompt_tokens": 353,
+          "completion_tokens": 223,
+          "content": "- **Go-live target locked:** Grid Modernization Phase 1 rollout go-live date confirmed for September 15, 2026 per Aug 18 architecture alignment with John (TXNM).\n- **Active blocker - staging SSO cert expiring Aug 28:** TXNM Security flagged SAML SSO certificate expiry on staging cluster (ticket SEC-942); resolution depends on IdP metadata URL from Sarah.\n- **Open commitment - Airbyte schema by Aug 24:** Jason (Crogl) owes TXNM the Airbyte connector schema in 4 days; this is on the critical path for integration testing against the rotated cert.\n- **Upcoming dependency - IdP metadata by Aug 29:** Sarah (TXNM) will deliver IdP metadata URL post-cert rotation, gating SSO reconfiguration on staging ahead of the Sep 15 go-live.\n- **Risk window Aug 24\u2013Sep 15:** Three sequential dependencies (schema delivery \u2192 cert rotation \u2192 IdP metadata \u2192 go-live) compress into ~3 weeks with no buffer; any slip in Airbyte schema or cert rotation directly threatens the Sep 15 milestone.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "highlights_saml_cert_blocker",
+              "extracts_target_dates",
+              "extracts_airbyte_or_grid_mod",
+              "word_count_bounded",
+              "bullet_format_compliance"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B4": {
+      "probe_id": "B4",
+      "name": "Frontdoor / Slack Triage & Classification",
+      "reliability_class": "R2",
+      "avg_latency": 1.11,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 1.112,
+          "prompt_tokens": 318,
+          "completion_tokens": 70,
+          "content": "{\"route\":\"cs-ops\",\"urgency\":\"P1\",\"is_private_channel\":false,\"privacy_violation\":false,\"suggested_action\":\"Escalate to on-call SRE to investigate 502 errors on Acmedemo REST API port 8082, review crogld service logs, and assess load capacity during peak traffic.\"}",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "valid_json_schema",
+              "route_validity",
+              "urgency_classification",
+              "channel_privacy_assessment",
+              "suggested_action_present"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B5": {
+      "probe_id": "B5",
+      "name": "Artifact & Distribution Audit Synthesis",
+      "reliability_class": "R1",
+      "avg_latency": 2.71,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 2.714,
+          "prompt_tokens": 539,
+          "completion_tokens": 650,
+          "content": "# Release Audit: v2.4.0-rc3\n\n## Distribution Matrix Status\n\n| Region | Cloud | Artifact URL Status | SHA256 Match | Container Registry | Overall |\n|---|---|---|---|---|---|\n| us-east-1 | AWS | \u2705 200 OK (Verified) | \u2705 Match | \u2705 ECR Tagged | \ud83d\udfe2 PASS |\n| us-gov-west-1 | AWS GovCloud | \u274c 403 SignatureDoesNotMatch | \u26a0\ufe0f Unverifiable | \u274c ECR MISSING | \ud83d\udd34 FAIL |\n| us-central1 | GCP | \u2705 200 OK (Verified) | \u2705 Match | \u2705 Artifact Registry Tagged | \ud83d\udfe2 PASS |\n\n**Aggregate Status:** \ud83d\udd34 **NOT PROMOTABLE** (1 of 3 regions failing)\n\n---\n\n## Blockers Preventing Release Promotion\n\n### \ud83d\udeab Blocker #1 \u2014 us-gov-west-1 Presigned URL Expired (Critical)\n- **Symptom:** S3 returns `403 SignatureDoesNotMatch` indicating the presigned URL has expired (default AWS presign TTL is typically 15 minutes).\n- **Impact:** Artifact cannot be retrieved or integrity-verified by downstream consumers in GovCloud.\n- **Remediation:**\n  1. Regenerate a presigned URL with an extended TTL (or move to public-read / bucket policy for release artifacts).\n  2. Re-run distribution job for us-gov-west-1.\n  3. Re-verify artifact download returns `200 OK`.\n\n### \ud83d\udeab Blocker #2 \u2014 us-gov-west-1 ECR Tag Missing (Critical)\n- **Symptom:** `v2.4.0-rc3` tag is absent from the GovCloud ECR registry.\n- **Impact:** GovCloud consumers cannot pull the container image; SHA256 verification against the published artifact is impossible.\n- **Remediation:**\n  1. Confirm GovCloud ECR repository exists and IAM/Cross-Partition role is functional.\n  2. Push `v2.4.0-rc3` image to GovCloud ECR (verify multi-region promotion pipeline executed for GovCloud partition).\n  3. Confirm digest matches the artifact SHA256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`.\n\n---\n\n## Additional Observations\n\n- \u26a0\ufe0f All three regions report the **identical SHA256** (`e3b0...855`). This is the canonical empty-file hash and likely a placeholder/template artifact. Confirm this matches the *actual* v2.4.0-rc3 build digest before promotion \u2014 otherwise this audit reflects seed data, not real telemetry.\n- \u2705 Non-GovCloud regions (us-east-1, us-central1) are fully consistent across object storage and container registry.\n\n## Promotion Recommendation\n\n**HOLD promotion of v2.4.0-rc3** until both us-gov-west-1 blockers are resolved and re-verified. After remediation, re-run the multi-region audit and require 3/3 regions \ud83d\udfe2 PASS before tagging as `stable`.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "generates_markdown_table",
+              "flags_us_gov_west_s3_blocker",
+              "flags_missing_govcloud_ecr_tag",
+              "confirms_healthy_regions",
+              "lists_explicit_blockers"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B8": {
+      "probe_id": "B8",
+      "name": "Agent Tool Use & Structured Execution",
+      "reliability_class": "R1",
+      "avg_latency": 1.0,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.999,
+          "prompt_tokens": 339,
+          "completion_tokens": 327,
+          "content": "I'll execute these two tool calls in sequence - first querying CrowdStrike Falcon, then creating the investigation ticket based on the results.\n\n```json\n[\n  {\n    \"type\": \"function\",\n    \"function\": {\n      \"name\": \"mcp__crogld__crowdstrike_falcon_query\",\n      \"arguments\": {\n        \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n      }\n    }\n  },\n  {\n    \"type\": \"function\",\n    \"function\": {\n      \"name\": \"mcp__crogld__create_investigation\",\n      \"arguments\": {\n        \"title\": \"Investigation: SHA256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\n        \"severity\": \"P2\",\n        \"indicators\": [\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"],\n        \"description\": \"Investigation opened based on CrowdStrike Falcon query results for SHA256 hash e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855. Awaiting Falcon telemetry analysis to determine scope of impact and required response actions.\"\n      }\n    }\n  }\n]\n```",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "names_falcon_query_tool",
+              "cites_target_sha256",
+              "names_create_investigation_tool",
+              "specifies_p2_severity",
+              "valid_tool_call_structure"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    }
+  }
+}

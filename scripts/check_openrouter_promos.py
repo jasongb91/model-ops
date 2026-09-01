@@ -13,10 +13,70 @@ import re
 import sys
 import urllib.request
 import urllib.error
+from datetime import datetime, timezone
 
 OPENROUTER_MODELS_URL = "https://openrouter.ai/api/v1/models"
 ROUTING_MATRIX_PATH = os.path.expanduser("/Users/jason/model-ops/routing-matrix.md")
 OUTPUT_PATH = os.path.expanduser("~/.hermes/telemetry/openrouter-model-deltas.json")
+STALE_AFTER_HOURS = 24
+
+
+def load_previous_snapshot():
+    """Load the prior artifact, if present, before replacing it."""
+    try:
+        with open(OUTPUT_PATH, "r") as f:
+            snapshot = json.load(f)
+        return snapshot if isinstance(snapshot, dict) else None
+    except (OSError, ValueError):
+        return None
+
+
+def compare_snapshots(previous, current):
+    """Compare the capped route lists retained in adjacent artifacts."""
+    if not previous or not previous.get("generated_at"):
+        return {
+            "comparison_available": False,
+            "reason": "No prior snapshot was available.",
+            "added_free_routes": [],
+            "removed_free_routes": [],
+            "added_low_cost_routes": [],
+            "removed_low_cost_routes": [],
+            "pricing_changes": [],
+        }
+
+    def route_ids(snapshot, ids_key, routes_key):
+        ids = snapshot.get(ids_key)
+        if isinstance(ids, list):
+            return set(ids)
+        return {route.get("id") for route in snapshot.get(routes_key, []) if route.get("id")}
+
+    old_free = route_ids(previous, "free_route_ids", "free_routes")
+    new_free = route_ids(current, "free_route_ids", "free_routes")
+    old_low = route_ids(previous, "low_cost_candidate_ids", "low_cost_candidates")
+    new_low = route_ids(current, "low_cost_candidate_ids", "low_cost_candidates")
+    old_low_routes = {route.get("id"): route for route in previous.get("low_cost_candidates", []) if route.get("id")}
+    new_low_routes = {route.get("id"): route for route in current.get("low_cost_candidates", []) if route.get("id")}
+    pricing_changes = []
+    for model_id in sorted(old_low & new_low):
+        old_price = old_low_routes.get(model_id, {}).get("pricing", {})
+        new_price = new_low_routes.get(model_id, {}).get("pricing", {})
+        if old_price != new_price:
+            pricing_changes.append({
+                "id": model_id,
+                "name": new_low_routes.get(model_id, {}).get("name", old_low_routes.get(model_id, {}).get("name", "")),
+                "previous_pricing": old_price,
+                "current_pricing": new_price,
+            })
+
+    return {
+        "comparison_available": True,
+        "previous_generated_at": previous.get("generated_at"),
+        "added_free_routes": sorted(new_free - old_free),
+        "removed_free_routes": sorted(old_free - new_free),
+        "added_low_cost_routes": sorted(new_low - old_low),
+        "removed_low_cost_routes": sorted(old_low - new_low),
+        "pricing_changes": pricing_changes,
+    }
 
 def fetch_openrouter_models():
     req = urllib.request.Request(
@@ -159,12 +219,15 @@ def analyze_models(models):
         "low_cost_candidates_count": len(candidates),
         "significant_cost_drops_count": len(cost_drops),
         "cost_drops_and_promos": cost_drops,
+        "free_route_ids": [route["id"] for route in free_models],
+        "low_cost_candidate_ids": [route["id"] for route in candidates],
         "free_routes": free_models[:15],
         "low_cost_candidates": candidates[:30]
     }
 
 def main():
     print("Fetching OpenRouter catalog...")
+    previous_snapshot = load_previous_snapshot()
     models = fetch_openrouter_models()
     if not models:
         print("Failed to retrieve model registry.", file=sys.stderr)
@@ -172,6 +235,15 @@ def main():
 
     print(f"Retrieved {len(models)} models from OpenRouter. Analyzing pricing and deltas...")
     analysis = analyze_models(models)
+    generated_at = datetime.now(timezone.utc).isoformat()
+    analysis["generated_at"] = generated_at
+    analysis["source"] = OPENROUTER_MODELS_URL
+    analysis["staleness"] = {
+        "stale_after_hours": STALE_AFTER_HOURS,
+        "is_stale": False,
+        "age_seconds": 0,
+    }
+    analysis["snapshot_comparison"] = compare_snapshots(previous_snapshot, analysis)
 
     os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
     with open(OUTPUT_PATH, "w") as f:

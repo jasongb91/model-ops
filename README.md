@@ -19,11 +19,11 @@ Purpose: continuously improve Hermes + OpenCode model selection for **ops** and 
 - **Aliases:** `gemini-fast`, `gemini-pro`, `gemini-lite`, `gpt-5.4`, `sonnet`
 - **Max Output Tokens:** `16384`
 
-### OpenCode Agent Alignment (`opencode.json`)
+### OpenCode Agent Alignment (`opencode.json`, verified 2026-09-01)
 - **`cs-ops`:** `openrouter/google/gemini-3.6-flash`
 - **`plan`:** `openrouter/google/gemini-3.6-flash`
 - **`solutions-architect`:** `openrouter/google/gemini-3.6-flash`
-- **`build`:** `openrouter/openai/gpt-5.4`
+- **`build`:** `openrouter/openai/gpt-5.6-luna` (bounded implementation default; escalate high-stakes work to GPT-5.6 Sol/GPT-5.4)
 - **`crogl-assistant`:** `openrouter/anthropic/claude-sonnet-4-6`
 - **MCP Compatibility:** MCP server keys sanitized (`onepassword`, `google_calendar`, `aws_pricing`) to fix Google Gemini protobuf function-name validation.
 

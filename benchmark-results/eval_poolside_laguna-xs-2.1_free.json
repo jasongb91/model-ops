@@ -1,0 +1,215 @@
+{
+  "model_id": "poolside/laguna-xs-2.1:free",
+  "label": "poolside/laguna-xs-2.1:free",
+  "evaluated_at": "2026-09-01 17:01:57 UTC",
+  "rounds_per_probe": 1,
+  "probes_evaluated": [
+    "B1",
+    "B2",
+    "B4",
+    "B5",
+    "B8"
+  ],
+  "overall_score": 1.8,
+  "overall_latency": 0.19,
+  "overall_pass_rate": 0.2,
+  "total_eval_cost": 0.0,
+  "promotion_verdict": {
+    "verdict": "reject",
+    "eligible_tiers": []
+  },
+  "probe_details": {
+    "B1": {
+      "probe_id": "B1",
+      "name": "Internal Scheduled-Status Synthesis",
+      "reliability_class": "R1",
+      "avg_latency": 0.2,
+      "avg_score": 1.0,
+      "avg_pass_rate": 0.0,
+      "total_cost": 0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.198,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 1.0,
+            "format_compliance": 1.0,
+            "latency_score": 1.0,
+            "cleanup_burden": 1.0,
+            "token_efficiency": 1.0,
+            "overall_score": 1.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              [
+                "execution_failure",
+                "HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"poolside/laguna-xs-2.1:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Poolside\",\"is_byok\":false,\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}},\"user_id\":\"user_3H8GPlqncQzSaoIjZKqBIvgF4ur\"}"
+              ]
+            ]
+          },
+          "success": false,
+          "error": "HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"poolside/laguna-xs-2.1:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Poolside\",\"is_byok\":false,\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}},\"user_id\":\"user_3H8GPlqncQzSaoIjZKqBIvgF4ur\"}"
+        }
+      ]
+    },
+    "B2": {
+      "probe_id": "B2",
+      "name": "Morning Brief Component Extraction",
+      "reliability_class": "R1/R2",
+      "avg_latency": 0.35,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.349,
+          "prompt_tokens": 232,
+          "completion_tokens": 115,
+          "content": "- **Grid Modernization Phase 1** go-live remains on track for **September 15, 2026** after architecture alignment confirmed in Aug 18 meeting.  \n- **SAML SSO certificate** on staging cluster expires **August 28, 2026**\u2014security ticket SEC-942 opened; IdP metadata URL confirmation pending cert rotation.  \n- **Airbyte connector schema** due from Jason by **August 24, 2026** to unblock integration testing ahead of September milestone.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "highlights_saml_cert_blocker",
+              "extracts_target_dates",
+              "extracts_airbyte_or_grid_mod",
+              "word_count_bounded",
+              "bullet_format_compliance"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B4": {
+      "probe_id": "B4",
+      "name": "Frontdoor / Slack Triage & Classification",
+      "reliability_class": "R2",
+      "avg_latency": 0.12,
+      "avg_score": 1.0,
+      "avg_pass_rate": 0.0,
+      "total_cost": 0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.119,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 1.0,
+            "format_compliance": 1.0,
+            "latency_score": 1.0,
+            "cleanup_burden": 1.0,
+            "token_efficiency": 1.0,
+            "overall_score": 1.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              [
+                "execution_failure",
+                "HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"poolside/laguna-xs-2.1:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Poolside\",\"is_byok\":false,\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}},\"user_id\":\"user_3H8GPlqncQzSaoIjZKqBIvgF4ur\"}"
+              ]
+            ]
+          },
+          "success": false,
+          "error": "HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"poolside/laguna-xs-2.1:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Poolside\",\"is_byok\":false,\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}},\"user_id\":\"user_3H8GPlqncQzSaoIjZKqBIvgF4ur\"}"
+        }
+      ]
+    },
+    "B5": {
+      "probe_id": "B5",
+      "name": "Artifact & Distribution Audit Synthesis",
+      "reliability_class": "R1",
+      "avg_latency": 0.15,
+      "avg_score": 1.0,
+      "avg_pass_rate": 0.0,
+      "total_cost": 0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.155,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 1.0,
+            "format_compliance": 1.0,
+            "latency_score": 1.0,
+            "cleanup_burden": 1.0,
+            "token_efficiency": 1.0,
+            "overall_score": 1.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              [
+                "execution_failure",
+                "HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"poolside/laguna-xs-2.1:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Poolside\",\"is_byok\":false,\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}},\"user_id\":\"user_3H8GPlqncQzSaoIjZKqBIvgF4ur\"}"
+              ]
+            ]
+          },
+          "success": false,
+          "error": "HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"poolside/laguna-xs-2.1:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Poolside\",\"is_byok\":false,\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}},\"user_id\":\"user_3H8GPlqncQzSaoIjZKqBIvgF4ur\"}"
+        }
+      ]
+    },
+    "B8": {
+      "probe_id": "B8",
+      "name": "Agent Tool Use & Structured Execution",
+      "reliability_class": "R1",
+      "avg_latency": 0.14,
+      "avg_score": 1.0,
+      "avg_pass_rate": 0.0,
+      "total_cost": 0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.139,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 1.0,
+            "format_compliance": 1.0,
+            "latency_score": 1.0,
+            "cleanup_burden": 1.0,
+            "token_efficiency": 1.0,
+            "overall_score": 1.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              [
+                "execution_failure",
+                "HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"poolside/laguna-xs-2.1:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Poolside\",\"is_byok\":false,\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}},\"user_id\":\"user_3H8GPlqncQzSaoIjZKqBIvgF4ur\"}"
+              ]
+            ]
+          },
+          "success": false,
+          "error": "HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"poolside/laguna-xs-2.1:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Poolside\",\"is_byok\":false,\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}},\"user_id\":\"user_3H8GPlqncQzSaoIjZKqBIvgF4ur\"}"
+        }
+      ]
+    }
+  }
+}

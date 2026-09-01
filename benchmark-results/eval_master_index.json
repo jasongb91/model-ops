@@ -1,0 +1,1338 @@
+{
+  "generated_at": "2026-09-01 17:03:18 UTC",
+  "total_models_evaluated": 6,
+  "evaluations": [
+    {
+      "model_id": "nvidia/nemotron-3.5-lightning:free",
+      "label": "nvidia/nemotron-3.5-lightning:free",
+      "evaluated_at": "2026-09-01 17:01:21 UTC",
+      "rounds_per_probe": 1,
+      "probes_evaluated": [
+        "B1",
+        "B2",
+        "B4",
+        "B5",
+        "B8"
+      ],
+      "overall_score": 4.21,
+      "overall_latency": 10.19,
+      "overall_pass_rate": 0.76,
+      "total_eval_cost": 0.0,
+      "promotion_verdict": {
+        "verdict": "promote to R1 (Internal Ops / Synthesis / Drafting Fast-Track)",
+        "eligible_tiers": [
+          "R1 (Internal Ops / Synthesis / Drafting Fast-Track)"
+        ]
+      },
+      "probe_details": {
+        "B1": {
+          "probe_id": "B1",
+          "name": "Internal Scheduled-Status Synthesis",
+          "reliability_class": "R1",
+          "avg_latency": 10.06,
+          "avg_score": 4.98,
+          "avg_pass_rate": 1.0,
+          "total_cost": 0.0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 10.062,
+              "prompt_tokens": 197,
+              "completion_tokens": 1129,
+              "content": "**Internal Ops Status Brief**\n\n**Active Systems:**\n- Hermes Cron: 2 jobs active\n- Launchd Sweeps: 7 agents active\n- GCP VM: acmedemo instance healthy @ 34.69.169.75; Cloud SQL disk at 42%\n- OpenCode: 14-day spend baseline $548\n\n**Operational Failures:**\n- sync-acmedemo-from-main: network timeout after 180s (Hermes Cron)\n- health-check-sweep on agent-4: timed out after 300s (Launchd Sweeps)\n\n**Immediate Remediation Actions:**\n- Resolve network connectivity/timeout for sync-acmedemo-from-main\n- Investigate agent-4 status, network access, and health-check configuration to clear 300s sweep timeout\n- Monitor both systems post-intervention to confirm recovery",
+              "scores": {
+                "correctness": 5.0,
+                "grounding": 5.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 4.8,
+                "cleanup_burden": 5.0,
+                "token_efficiency": 5.0,
+                "overall_score": 4.98,
+                "cost": 0.0,
+                "assertion_pass_rate": 1.0,
+                "passed_assertions": [
+                  "identifies_failing_cron",
+                  "identifies_timed_out_launchd",
+                  "quotes_exact_gcp_ip",
+                  "quotes_cloud_sql_utilization",
+                  "quotes_opencode_spend",
+                  "no_hallucinated_outages",
+                  "stop_discipline_check"
+                ],
+                "failed_assertions": []
+              },
+              "success": true,
+              "error": null
+            }
+          ]
+        },
+        "B2": {
+          "probe_id": "B2",
+          "name": "Morning Brief Component Extraction",
+          "reliability_class": "R1/R2",
+          "avg_latency": 10.07,
+          "avg_score": 4.25,
+          "avg_pass_rate": 0.8,
+          "total_cost": 0.0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 10.069,
+              "prompt_tokens": 235,
+              "completion_tokens": 1384,
+              "content": "- **Grid Modernization Phase 1**: Architecture agreed Aug 18 between Jason (Crogl) and John (TXNM); go-live target locked for Sep 15, 2026.  \n- **Critical Blocker**: SAML SSO cert expiry on staging cluster flagged Aug 19; due Aug 28, 2026. Internal ticket SEC-942 opened; blocks IdP metadata sync and cascades to Phase 1 timeline.  \n- **Action & Dependency**: Jason to deliver Airbyte connector schema by Aug 24, 2026. Sarah (TXNM) to confirm IdP metadata URL by Aug 29, 2026, strictly contingent on cert rotation.  \n- **Milestone Chain**: Cert expiry (Aug 28) \u2192 IdP confirmation (Aug 29) \u2192 Phase 1 go-live (Sep 15); delay in any step risks the Sep 16 target.",
+              "scores": {
+                "correctness": 4.2,
+                "grounding": 4.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 3.0,
+                "cleanup_burden": 4.0,
+                "token_efficiency": 5.0,
+                "overall_score": 4.25,
+                "cost": 0.0,
+                "assertion_pass_rate": 0.8,
+                "passed_assertions": [
+                  "highlights_saml_cert_blocker",
+                  "extracts_airbyte_or_grid_mod",
+                  "word_count_bounded",
+                  "bullet_format_compliance"
+                ],
+                "failed_assertions": [
+                  "extracts_target_dates"
+                ]
+              },
+              "success": true,
+              "error": null
+            }
+          ]
+        },
+        "B4": {
+          "probe_id": "B4",
+          "name": "Frontdoor / Slack Triage & Classification",
+          "reliability_class": "R2",
+          "avg_latency": 10.06,
+          "avg_score": 1.88,
+          "avg_pass_rate": 0.0,
+          "total_cost": 0.0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 10.063,
+              "prompt_tokens": 192,
+              "completion_tokens": 1063,
+              "content": "Looking at the inbound message: \"Hey team, we're seeing intermittent 502 errors on the Acmedemo REST API port 8082 during peak traffic. Can someone check the crogld service logs?\" Inbound channel: #ops-intake (public).\n\nI need to classify this message into one of the specified routes, urgency levels, and other fields. Let me analyze the message:\n\n1. **Content analysis**: The message mentions \"intermittent 502 errors on the Acmedemo REST API port 8082 during peak traffic\" and \"Can someone check the crogld service logs?\" This is clearly an operations issue - a service experiencing errors during peak traffic.\n\n2. **Route classification**: \n   - \"cs-ops\" seems most appropriate - this is an operations issue involving service errors, logs, and infrastructure.\n   - \"solutions-architect\" might be possible if it requires architectural analysis, but it seems more operational.\n   - \"build\" doesn't fit - not about code/build issues.\n   - \"direct-reply\" doesn't fit - it's a team communication, not a direct reply request.\n\n   The message is about checking service logs and resolving API errors, which fits \"cs-ops\" (customer service operations).\n\n3. **Urgency classification**:\n   - \"P1\" - Critical, service outage impacting many users\n   - \"P2\" - High priority, significant impact but not full outage\n   - \"P3\" - Normal priority\n\n   The message mentions \"intermittent 502 errors during peak traffic\" - 502 errors are bad gateway errors, and \"intermittent during peak traffic\" suggests it's affecting users during high traffic times. This seems like P2 - high priority but not a complete outage (since it's intermittent). However, 502 errors during peak traffic could be quite impactful. I'd classify this as P2 - significant impact but not a complete service outage.\n\n4. **is_private_channel**: The message says \"Inbound channel: #ops-intake (public)\". So this is a public channel, meaning is_private_channel should be false.\n\n5. **privacy_violation**: The message doesn't contain any personal data, PII, or sensitive information. It's about service errors and logs. So privacy_violation should be false.\n\n6. **suggested_action**: The message asks \"Can someone check the crogld service logs?\" So a suggested action would be something like \"Check crogld service logs for 502 errors\" or \"Investigate crogld service logs for 502 errors on port 8082\".\n\nLet me construct the JSON:\n\n{\n  \"route\": \"cs-ops\",\n  \"urgency\": \"P2\",\n  \"is_private_channel\": false,\n  \"privacy_violation\": false,\n  \"suggested_action\": \"Check crogld service logs for 502 errors on Acmedemo REST API port 8082\"\n}\n\nWait, let me double-check the route options: \"cs-ops\" | \"solutions-architect\" | \"build\" | \"direct-reply\"\n\nYes, \"cs-ops\" seems most appropriate for operations/troubleshooting.\n\nFor urgency: The message mentions \"intermittent 502 errors during peak traffic\" - this is significant but not a complete outage. I'll go with P2.\n\nis_private_channel: The channel is \"#ops-intake (public)\" so false.\n\nprivacy_violation: No PII or sensitive data mentioned, so false.\n\nsuggested_action: \"Check crogld service logs for 502 errors on Acmedemo REST API port 8082\"\n\nLet me make sure the JSON is valid and matches the exact schema required.\n\nOne thing to consider: Should urgency be P1? The errors are 502 (Bad Gateway) and happening during peak traffic. If peak traffic means many users are affected, it could be P1. But \"intermittent\" suggests it's not constant. I think P2 is appropriate - high priority but not critical emergency.\n\nActually, let me reconsider. In many ops contexts, 500-level errors during peak traffic would be P1. But the schema only has P1, P2, P3, and \"intermittent\" suggests it's not constant. I'll stick with P2.\n\nFor suggested_action, I should make it specific to the message content: \"Check crogld service logs for 502 errors on Acmedemo REST API port 8082\"\n\nLet me finalize the JSON.{\n  \"route\": \"cs-ops\",\n  \"urgency\": \"P2\",\n  \"is_private_channel\": false,\n  \"privacy_violation\": false,\n  \"suggested_action\": \"Check crogld service logs for 502 errors on Acmedemo REST API port 8082\"\n}",
+              "scores": {
+                "correctness": 1.0,
+                "grounding": 1.0,
+                "stop_discipline": 4.0,
+                "format_compliance": 1.0,
+                "latency_score": 3.0,
+                "cleanup_burden": 2.5,
+                "token_efficiency": 5.0,
+                "overall_score": 1.88,
+                "cost": 0.0,
+                "assertion_pass_rate": 0.0,
+                "passed_assertions": [],
+                "failed_assertions": [
+                  "valid_json_schema",
+                  "route_validity",
+                  "urgency_classification",
+                  "channel_privacy_assessment",
+                  "suggested_action_present"
+                ]
+              },
+              "success": true,
+              "error": null
+            }
+          ]
+        },
+        "B5": {
+          "probe_id": "B5",
+          "name": "Artifact & Distribution Audit Synthesis",
+          "reliability_class": "R1",
+          "avg_latency": 10.16,
+          "avg_score": 4.98,
+          "avg_pass_rate": 1.0,
+          "total_cost": 0.0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 10.161,
+              "prompt_tokens": 494,
+              "completion_tokens": 2048,
+              "content": "### Release v2.4.0-rc3 Distribution Matrix Audit\n\n| Region | Artifact | SHA256 | Delivery URL/Registry | Status | ECR/Artifact Registry Tag |\n|--------|----------|--------|----------------------|--------|---------------------------|\n| **AWS us-east-1** | tar.gz | e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | S3: `https://s3.us-east-1.amazonaws.com/releases/v2.4.0-rc3.tar.gz` | \u2705 Verified (200 OK) | \u2705 v2.4.0-rc3 (Verified) |\n| **AWS us-gov-west-1** | tar.gz | e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | S3: `https://s3.us-gov-west-1.amazonaws.com/releases/v2.4.0-rc3.tar.gz` | \u274c **FAILED** (403 SignatureDoesNotMatch, presign expired) | \u274c **MISSING** in GovCloud ECR registry |\n| **GCP us-central1** | tar.gz | e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | GCS: `https://storage.googleapis.com/releases/v2.4.0-rc3.tar.gz` | \u2705 Verified (200 OK) | \u2705 v2.4.0-rc3 (Verified) |\n\n---\n\n### Explicit Blockers Preventing Release Promotion\n\n1. **AWS us-gov-west-1 S3 Distribution Failure**  \n   - The presigned URL for the `tar.gz` artifact returns **HTTP 403 SignatureDoesNotMatch**, indicating the presign has expired or the signature key/permissions are out of sync.  \n   - This prevents downstream consumers and automated verification pipelines from retrieving the artifact from the GovCloud bucket.\n\n2. **AWS us-gov-west-1 ECR Tag Absence**  \n   - The `v2.4.0-rc3` tag is **missing from the GovCloud ECR",
+              "scores": {
+                "correctness": 5.0,
+                "grounding": 5.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 4.8,
+                "cleanup_burden": 5.0,
+                "token_efficiency": 5.0,
+                "overall_score": 4.98,
+                "cost": 0.0,
+                "assertion_pass_rate": 1.0,
+                "passed_assertions": [
+                  "generates_markdown_table",
+                  "flags_us_gov_west_s3_blocker",
+                  "flags_missing_govcloud_ecr_tag",
+                  "confirms_healthy_regions",
+                  "lists_explicit_blockers"
+                ],
+                "failed_assertions": []
+              },
+              "success": true,
+              "error": null
+            }
+          ]
+        },
+        "B8": {
+          "probe_id": "B8",
+          "name": "Agent Tool Use & Structured Execution",
+          "reliability_class": "R1",
+          "avg_latency": 10.62,
+          "avg_score": 4.98,
+          "avg_pass_rate": 1.0,
+          "total_cost": 0.0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 10.62,
+              "prompt_tokens": 231,
+              "completion_tokens": 1290,
+              "content": "[\n  {\n    \"name\": \"mcp__crogld__crowdstrike_falcon_query\",\n    \"arguments\": {\n      \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n    }\n  },\n  {\n    \"name\": \"mcp__crogld__create_investigation\",\n    \"arguments\": {\n      \"title\": \"Investigation of SHA256 hash e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\n      \"severity\": \"P2\",\n      \"indicators\": [\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"],\n      \"description\": \"Run Falcon query and investigate the provided SHA256 hash.\"\n    }\n  }\n]",
+              "scores": {
+                "correctness": 5.0,
+                "grounding": 5.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 4.8,
+                "cleanup_burden": 5.0,
+                "token_efficiency": 5.0,
+                "overall_score": 4.98,
+                "cost": 0.0,
+                "assertion_pass_rate": 1.0,
+                "passed_assertions": [
+                  "names_falcon_query_tool",
+                  "cites_target_sha256",
+                  "names_create_investigation_tool",
+                  "specifies_p2_severity",
+                  "valid_tool_call_structure"
+                ],
+                "failed_assertions": []
+              },
+              "success": true,
+              "error": null
+            }
+          ]
+        }
+      }
+    },
+    {
+      "model_id": "poolside/laguna-s-2.1:free",
+      "label": "poolside/laguna-s-2.1:free",
+      "evaluated_at": "2026-09-01 17:01:50 UTC",
+      "rounds_per_probe": 1,
+      "probes_evaluated": [
+        "B1",
+        "B2",
+        "B4",
+        "B5",
+        "B8"
+      ],
+      "overall_score": 2.49,
+      "overall_latency": 0.4,
+      "overall_pass_rate": 0.36,
+      "total_eval_cost": 0.0,
+      "promotion_verdict": {
+        "verdict": "reject",
+        "eligible_tiers": []
+      },
+      "probe_details": {
+        "B1": {
+          "probe_id": "B1",
+          "name": "Internal Scheduled-Status Synthesis",
+          "reliability_class": "R1",
+          "avg_latency": 0.82,
+          "avg_score": 5.0,
+          "avg_pass_rate": 1.0,
+          "total_cost": 0.0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 0.817,
+              "prompt_tokens": 192,
+              "completion_tokens": 172,
+              "content": "**Internal Ops Status Brief**\n\n**Active Systems:**\n- Hermes Cron: 2 jobs active\n- Launchd Sweeps: 7 agents active\n- GCP VM: acmedemo instance healthy at 34.69.169.75\n- Cloud SQL: 42% disk utilization\n- OpenCode: $548 14-day spend\n\n**Operational Failures:**\n- Hermes Cron: sync-acmedemo-from-main failed (network timeout after 180s)\n- Launchd Sweeps: health-check-sweep on agent-4 timed out (300s)\n\n**Immediate Remediation Actions:**\n- Retry sync-acmedemo-from-main job with extended timeout\n- Investigate agent-4 connectivity and restart health-check-sweep\n- Monitor Cloud SQL disk utilization trend",
+              "scores": {
+                "correctness": 5.0,
+                "grounding": 5.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 5.0,
+                "token_efficiency": 5.0,
+                "overall_score": 5.0,
+                "cost": 0.0,
+                "assertion_pass_rate": 1.0,
+                "passed_assertions": [
+                  "identifies_failing_cron",
+                  "identifies_timed_out_launchd",
+                  "quotes_exact_gcp_ip",
+                  "quotes_cloud_sql_utilization",
+                  "quotes_opencode_spend",
+                  "no_hallucinated_outages",
+                  "stop_discipline_check"
+                ],
+                "failed_assertions": []
+              },
+              "success": true,
+              "error": null
+            }
+          ]
+        },
+        "B2": {
+          "probe_id": "B2",
+          "name": "Morning Brief Component Extraction",
+          "reliability_class": "R1/R2",
+          "avg_latency": 0.27,
+          "avg_score": 1.0,
+          "avg_pass_rate": 0.0,
+          "total_cost": 0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 0.272,
+              "prompt_tokens": 0,
+              "completion_tokens": 0,
+              "content": "",
+              "scores": {
+                "correctness": 1.0,
+                "grounding": 1.0,
+                "stop_discipline": 1.0,
+                "format_compliance": 1.0,
+                "latency_score": 1.0,
+                "cleanup_burden": 1.0,
+                "token_efficiency": 1.0,
+                "overall_score": 1.0,
+                "assertion_pass_rate": 0.0,
+                "passed_assertions": [],
+                "failed_assertions": [
+                  [
+                    "execution_failure",
+                    "HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"poolside/laguna-s-2.1:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Poolside\",\"is_byok\":false,\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}},\"user_id\":\"user_3H8GPlqncQzSaoIjZKqBIvgF4ur\"}"
+                  ]
+                ]
+              },
+              "success": false,
+              "error": "HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"poolside/laguna-s-2.1:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Poolside\",\"is_byok\":false,\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}},\"user_id\":\"user_3H8GPlqncQzSaoIjZKqBIvgF4ur\"}"
+            }
+          ]
+        },
+        "B4": {
+          "probe_id": "B4",
+          "name": "Frontdoor / Slack Triage & Classification",
+          "reliability_class": "R2",
+          "avg_latency": 0.15,
+          "avg_score": 1.0,
+          "avg_pass_rate": 0.0,
+          "total_cost": 0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 0.153,
+              "prompt_tokens": 0,
+              "completion_tokens": 0,
+              "content": "",
+              "scores": {
+                "correctness": 1.0,
+                "grounding": 1.0,
+                "stop_discipline": 1.0,
+                "format_compliance": 1.0,
+                "latency_score": 1.0,
+                "cleanup_burden": 1.0,
+                "token_efficiency": 1.0,
+                "overall_score": 1.0,
+                "assertion_pass_rate": 0.0,
+                "passed_assertions": [],
+                "failed_assertions": [
+                  [
+                    "execution_failure",
+                    "HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"poolside/laguna-s-2.1:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Poolside\",\"is_byok\":false,\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}},\"user_id\":\"user_3H8GPlqncQzSaoIjZKqBIvgF4ur\"}"
+                  ]
+                ]
+              },
+              "success": false,
+              "error": "HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"poolside/laguna-s-2.1:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Poolside\",\"is_byok\":false,\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}},\"user_id\":\"user_3H8GPlqncQzSaoIjZKqBIvgF4ur\"}"
+            }
+          ]
+        },
+        "B5": {
+          "probe_id": "B5",
+          "name": "Artifact & Distribution Audit Synthesis",
+          "reliability_class": "R1",
+          "avg_latency": 0.13,
+          "avg_score": 1.0,
+          "avg_pass_rate": 0.0,
+          "total_cost": 0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 0.132,
+              "prompt_tokens": 0,
+              "completion_tokens": 0,
+              "content": "",
+              "scores": {
+                "correctness": 1.0,
+                "grounding": 1.0,
+                "stop_discipline": 1.0,
+                "format_compliance": 1.0,
+                "latency_score": 1.0,
+                "cleanup_burden": 1.0,
+                "token_efficiency": 1.0,
+                "overall_score": 1.0,
+                "assertion_pass_rate": 0.0,
+                "passed_assertions": [],
+                "failed_assertions": [
+                  [
+                    "execution_failure",
+                    "HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"poolside/laguna-s-2.1:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Poolside\",\"is_byok\":false,\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}},\"user_id\":\"user_3H8GPlqncQzSaoIjZKqBIvgF4ur\"}"
+                  ]
+                ]
+              },
+              "success": false,
+              "error": "HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"poolside/laguna-s-2.1:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Poolside\",\"is_byok\":false,\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}},\"user_id\":\"user_3H8GPlqncQzSaoIjZKqBIvgF4ur\"}"
+            }
+          ]
+        },
+        "B8": {
+          "probe_id": "B8",
+          "name": "Agent Tool Use & Structured Execution",
+          "reliability_class": "R1",
+          "avg_latency": 0.65,
+          "avg_score": 4.45,
+          "avg_pass_rate": 0.8,
+          "total_cost": 0.0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 0.65,
+              "prompt_tokens": 231,
+              "completion_tokens": 518,
+              "content": "<tool_call>mcp__crogld__crowdstrike_falcon_query<arg_key>sha256</arg_key><arg_value>e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</arg_value></tool_call><tool_call>mcp__crogld__create_investigation<arg_key>title</arg_key><arg_value>CrowdStrike Falcon Investigation - SHA256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</arg_value><arg_key>severity</arg_key><arg_value>P2</arg_value><arg_key>indicators</arg_key><arg_value>[\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"]</arg_value><arg_key>description</arg_key><arg_value>Investigation opened following CrowdStrike Falcon query for SHA256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855. Review Falcon detection and behavioral data to determine if this file hash represents a security threat requiring further response actions.</arg_value></tool_call>",
+              "scores": {
+                "correctness": 4.2,
+                "grounding": 4.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 4.0,
+                "token_efficiency": 5.0,
+                "overall_score": 4.45,
+                "cost": 0.0,
+                "assertion_pass_rate": 0.8,
+                "passed_assertions": [
+                  "names_falcon_query_tool",
+                  "cites_target_sha256",
+                  "names_create_investigation_tool",
+                  "specifies_p2_severity"
+                ],
+                "failed_assertions": [
+                  "valid_tool_call_structure"
+                ]
+              },
+              "success": true,
+              "error": null
+            }
+          ]
+        }
+      }
+    },
+    {
+      "model_id": "poolside/laguna-xs-2.1:free",
+      "label": "poolside/laguna-xs-2.1:free",
+      "evaluated_at": "2026-09-01 17:01:57 UTC",
+      "rounds_per_probe": 1,
+      "probes_evaluated": [
+        "B1",
+        "B2",
+        "B4",
+        "B5",
+        "B8"
+      ],
+      "overall_score": 1.8,
+      "overall_latency": 0.19,
+      "overall_pass_rate": 0.2,
+      "total_eval_cost": 0.0,
+      "promotion_verdict": {
+        "verdict": "reject",
+        "eligible_tiers": []
+      },
+      "probe_details": {
+        "B1": {
+          "probe_id": "B1",
+          "name": "Internal Scheduled-Status Synthesis",
+          "reliability_class": "R1",
+          "avg_latency": 0.2,
+          "avg_score": 1.0,
+          "avg_pass_rate": 0.0,
+          "total_cost": 0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 0.198,
+              "prompt_tokens": 0,
+              "completion_tokens": 0,
+              "content": "",
+              "scores": {
+                "correctness": 1.0,
+                "grounding": 1.0,
+                "stop_discipline": 1.0,
+                "format_compliance": 1.0,
+                "latency_score": 1.0,
+                "cleanup_burden": 1.0,
+                "token_efficiency": 1.0,
+                "overall_score": 1.0,
+                "assertion_pass_rate": 0.0,
+                "passed_assertions": [],
+                "failed_assertions": [
+                  [
+                    "execution_failure",
+                    "HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"poolside/laguna-xs-2.1:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Poolside\",\"is_byok\":false,\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}},\"user_id\":\"user_3H8GPlqncQzSaoIjZKqBIvgF4ur\"}"
+                  ]
+                ]
+              },
+              "success": false,
+              "error": "HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"poolside/laguna-xs-2.1:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Poolside\",\"is_byok\":false,\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}},\"user_id\":\"user_3H8GPlqncQzSaoIjZKqBIvgF4ur\"}"
+            }
+          ]
+        },
+        "B2": {
+          "probe_id": "B2",
+          "name": "Morning Brief Component Extraction",
+          "reliability_class": "R1/R2",
+          "avg_latency": 0.35,
+          "avg_score": 5.0,
+          "avg_pass_rate": 1.0,
+          "total_cost": 0.0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 0.349,
+              "prompt_tokens": 232,
+              "completion_tokens": 115,
+              "content": "- **Grid Modernization Phase 1** go-live remains on track for **September 15, 2026** after architecture alignment confirmed in Aug 18 meeting.  \n- **SAML SSO certificate** on staging cluster expires **August 28, 2026**\u2014security ticket SEC-942 opened; IdP metadata URL confirmation pending cert rotation.  \n- **Airbyte connector schema** due from Jason by **August 24, 2026** to unblock integration testing ahead of September milestone.",
+              "scores": {
+                "correctness": 5.0,
+                "grounding": 5.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 5.0,
+                "token_efficiency": 5.0,
+                "overall_score": 5.0,
+                "cost": 0.0,
+                "assertion_pass_rate": 1.0,
+                "passed_assertions": [
+                  "highlights_saml_cert_blocker",
+                  "extracts_target_dates",
+                  "extracts_airbyte_or_grid_mod",
+                  "word_count_bounded",
+                  "bullet_format_compliance"
+                ],
+                "failed_assertions": []
+              },
+              "success": true,
+              "error": null
+            }
+          ]
+        },
+        "B4": {
+          "probe_id": "B4",
+          "name": "Frontdoor / Slack Triage & Classification",
+          "reliability_class": "R2",
+          "avg_latency": 0.12,
+          "avg_score": 1.0,
+          "avg_pass_rate": 0.0,
+          "total_cost": 0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 0.119,
+              "prompt_tokens": 0,
+              "completion_tokens": 0,
+              "content": "",
+              "scores": {
+                "correctness": 1.0,
+                "grounding": 1.0,
+                "stop_discipline": 1.0,
+                "format_compliance": 1.0,
+                "latency_score": 1.0,
+                "cleanup_burden": 1.0,
+                "token_efficiency": 1.0,
+                "overall_score": 1.0,
+                "assertion_pass_rate": 0.0,
+                "passed_assertions": [],
+                "failed_assertions": [
+                  [
+                    "execution_failure",
+                    "HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"poolside/laguna-xs-2.1:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Poolside\",\"is_byok\":false,\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}},\"user_id\":\"user_3H8GPlqncQzSaoIjZKqBIvgF4ur\"}"
+                  ]
+                ]
+              },
+              "success": false,
+              "error": "HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"poolside/laguna-xs-2.1:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Poolside\",\"is_byok\":false,\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}},\"user_id\":\"user_3H8GPlqncQzSaoIjZKqBIvgF4ur\"}"
+            }
+          ]
+        },
+        "B5": {
+          "probe_id": "B5",
+          "name": "Artifact & Distribution Audit Synthesis",
+          "reliability_class": "R1",
+          "avg_latency": 0.15,
+          "avg_score": 1.0,
+          "avg_pass_rate": 0.0,
+          "total_cost": 0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 0.155,
+              "prompt_tokens": 0,
+              "completion_tokens": 0,
+              "content": "",
+              "scores": {
+                "correctness": 1.0,
+                "grounding": 1.0,
+                "stop_discipline": 1.0,
+                "format_compliance": 1.0,
+                "latency_score": 1.0,
+                "cleanup_burden": 1.0,
+                "token_efficiency": 1.0,
+                "overall_score": 1.0,
+                "assertion_pass_rate": 0.0,
+                "passed_assertions": [],
+                "failed_assertions": [
+                  [
+                    "execution_failure",
+                    "HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"poolside/laguna-xs-2.1:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Poolside\",\"is_byok\":false,\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}},\"user_id\":\"user_3H8GPlqncQzSaoIjZKqBIvgF4ur\"}"
+                  ]
+                ]
+              },
+              "success": false,
+              "error": "HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"poolside/laguna-xs-2.1:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Poolside\",\"is_byok\":false,\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}},\"user_id\":\"user_3H8GPlqncQzSaoIjZKqBIvgF4ur\"}"
+            }
+          ]
+        },
+        "B8": {
+          "probe_id": "B8",
+          "name": "Agent Tool Use & Structured Execution",
+          "reliability_class": "R1",
+          "avg_latency": 0.14,
+          "avg_score": 1.0,
+          "avg_pass_rate": 0.0,
+          "total_cost": 0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 0.139,
+              "prompt_tokens": 0,
+              "completion_tokens": 0,
+              "content": "",
+              "scores": {
+                "correctness": 1.0,
+                "grounding": 1.0,
+                "stop_discipline": 1.0,
+                "format_compliance": 1.0,
+                "latency_score": 1.0,
+                "cleanup_burden": 1.0,
+                "token_efficiency": 1.0,
+                "overall_score": 1.0,
+                "assertion_pass_rate": 0.0,
+                "passed_assertions": [],
+                "failed_assertions": [
+                  [
+                    "execution_failure",
+                    "HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"poolside/laguna-xs-2.1:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Poolside\",\"is_byok\":false,\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}},\"user_id\":\"user_3H8GPlqncQzSaoIjZKqBIvgF4ur\"}"
+                  ]
+                ]
+              },
+              "success": false,
+              "error": "HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"poolside/laguna-xs-2.1:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Poolside\",\"is_byok\":false,\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}},\"user_id\":\"user_3H8GPlqncQzSaoIjZKqBIvgF4ur\"}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "model_id": "thinkingmachines/inkling-small:free",
+      "label": "thinkingmachines/inkling-small:free",
+      "evaluated_at": "2026-09-01 17:02:03 UTC",
+      "rounds_per_probe": 1,
+      "probes_evaluated": [
+        "B1",
+        "B2",
+        "B4",
+        "B5",
+        "B8"
+      ],
+      "overall_score": 1.0,
+      "overall_latency": 0.12,
+      "overall_pass_rate": 0.0,
+      "total_eval_cost": 0,
+      "promotion_verdict": {
+        "verdict": "reject",
+        "eligible_tiers": []
+      },
+      "probe_details": {
+        "B1": {
+          "probe_id": "B1",
+          "name": "Internal Scheduled-Status Synthesis",
+          "reliability_class": "R1",
+          "avg_latency": 0.12,
+          "avg_score": 1.0,
+          "avg_pass_rate": 0.0,
+          "total_cost": 0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 0.122,
+              "prompt_tokens": 0,
+              "completion_tokens": 0,
+              "content": "",
+              "scores": {
+                "correctness": 1.0,
+                "grounding": 1.0,
+                "stop_discipline": 1.0,
+                "format_compliance": 1.0,
+                "latency_score": 1.0,
+                "cleanup_burden": 1.0,
+                "token_efficiency": 1.0,
+                "overall_score": 1.0,
+                "assertion_pass_rate": 0.0,
+                "passed_assertions": [],
+                "failed_assertions": [
+                  [
+                    "execution_failure",
+                    "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403}}"
+                  ]
+                ]
+              },
+              "success": false,
+              "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403}}"
+            }
+          ]
+        },
+        "B2": {
+          "probe_id": "B2",
+          "name": "Morning Brief Component Extraction",
+          "reliability_class": "R1/R2",
+          "avg_latency": 0.11,
+          "avg_score": 1.0,
+          "avg_pass_rate": 0.0,
+          "total_cost": 0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 0.112,
+              "prompt_tokens": 0,
+              "completion_tokens": 0,
+              "content": "",
+              "scores": {
+                "correctness": 1.0,
+                "grounding": 1.0,
+                "stop_discipline": 1.0,
+                "format_compliance": 1.0,
+                "latency_score": 1.0,
+                "cleanup_burden": 1.0,
+                "token_efficiency": 1.0,
+                "overall_score": 1.0,
+                "assertion_pass_rate": 0.0,
+                "passed_assertions": [],
+                "failed_assertions": [
+                  [
+                    "execution_failure",
+                    "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403}}"
+                  ]
+                ]
+              },
+              "success": false,
+              "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403}}"
+            }
+          ]
+        },
+        "B4": {
+          "probe_id": "B4",
+          "name": "Frontdoor / Slack Triage & Classification",
+          "reliability_class": "R2",
+          "avg_latency": 0.09,
+          "avg_score": 1.0,
+          "avg_pass_rate": 0.0,
+          "total_cost": 0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 0.087,
+              "prompt_tokens": 0,
+              "completion_tokens": 0,
+              "content": "",
+              "scores": {
+                "correctness": 1.0,
+                "grounding": 1.0,
+                "stop_discipline": 1.0,
+                "format_compliance": 1.0,
+                "latency_score": 1.0,
+                "cleanup_burden": 1.0,
+                "token_efficiency": 1.0,
+                "overall_score": 1.0,
+                "assertion_pass_rate": 0.0,
+                "passed_assertions": [],
+                "failed_assertions": [
+                  [
+                    "execution_failure",
+                    "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403}}"
+                  ]
+                ]
+              },
+              "success": false,
+              "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403}}"
+            }
+          ]
+        },
+        "B5": {
+          "probe_id": "B5",
+          "name": "Artifact & Distribution Audit Synthesis",
+          "reliability_class": "R1",
+          "avg_latency": 0.15,
+          "avg_score": 1.0,
+          "avg_pass_rate": 0.0,
+          "total_cost": 0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 0.148,
+              "prompt_tokens": 0,
+              "completion_tokens": 0,
+              "content": "",
+              "scores": {
+                "correctness": 1.0,
+                "grounding": 1.0,
+                "stop_discipline": 1.0,
+                "format_compliance": 1.0,
+                "latency_score": 1.0,
+                "cleanup_burden": 1.0,
+                "token_efficiency": 1.0,
+                "overall_score": 1.0,
+                "assertion_pass_rate": 0.0,
+                "passed_assertions": [],
+                "failed_assertions": [
+                  [
+                    "execution_failure",
+                    "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403}}"
+                  ]
+                ]
+              },
+              "success": false,
+              "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403}}"
+            }
+          ]
+        },
+        "B8": {
+          "probe_id": "B8",
+          "name": "Agent Tool Use & Structured Execution",
+          "reliability_class": "R1",
+          "avg_latency": 0.11,
+          "avg_score": 1.0,
+          "avg_pass_rate": 0.0,
+          "total_cost": 0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 0.113,
+              "prompt_tokens": 0,
+              "completion_tokens": 0,
+              "content": "",
+              "scores": {
+                "correctness": 1.0,
+                "grounding": 1.0,
+                "stop_discipline": 1.0,
+                "format_compliance": 1.0,
+                "latency_score": 1.0,
+                "cleanup_burden": 1.0,
+                "token_efficiency": 1.0,
+                "overall_score": 1.0,
+                "assertion_pass_rate": 0.0,
+                "passed_assertions": [],
+                "failed_assertions": [
+                  [
+                    "execution_failure",
+                    "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403}}"
+                  ]
+                ]
+              },
+              "success": false,
+              "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403}}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "model_id": "minimax/minimax-m3:free",
+      "label": "minimax/minimax-m3:free",
+      "evaluated_at": "2026-09-01 17:02:23 UTC",
+      "rounds_per_probe": 1,
+      "probes_evaluated": [
+        "B1",
+        "B2",
+        "B4",
+        "B5",
+        "B8"
+      ],
+      "overall_score": 5.0,
+      "overall_latency": 1.29,
+      "overall_pass_rate": 1.0,
+      "total_eval_cost": 0.0,
+      "promotion_verdict": {
+        "verdict": "promote to R2 (Triage / Extraction Fast-Track), R1 (Internal Ops / Synthesis / Drafting Fast-Track), R0 (Shadow-Gated Scheduled / Client-Facing with Frontier Fallbacks)",
+        "eligible_tiers": [
+          "R2 (Triage / Extraction Fast-Track)",
+          "R1 (Internal Ops / Synthesis / Drafting Fast-Track)",
+          "R0 (Shadow-Gated Scheduled / Client-Facing with Frontier Fallbacks)"
+        ]
+      },
+      "probe_details": {
+        "B1": {
+          "probe_id": "B1",
+          "name": "Internal Scheduled-Status Synthesis",
+          "reliability_class": "R1",
+          "avg_latency": 0.91,
+          "avg_score": 5.0,
+          "avg_pass_rate": 1.0,
+          "total_cost": 0.0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 0.91,
+              "prompt_tokens": 317,
+              "completion_tokens": 194,
+              "content": "**Internal Ops Status Brief**\n\n**Active Systems**\n- Hermes cron: 2 jobs running\n- Launchd sweeps: 7 agents active\n- GCP: acmedemo VM healthy (34.69.169.75); Cloud SQL at 42% disk utilization\n- OpenCode 14-day spend: $548 baseline\n\n**Operational Failures**\n- Hermes cron job `sync-acmedemo-from-main` failed \u2014 network timeout @ 180s\n- Launchd agent-4 `health-check-sweep` timed out @ 300s\n\n**Immediate Remediation**\n- Restart/retry `sync-acmedemo-from-main` cron; verify network egress to source repo and increase timeout if transient\n- Investigate agent-4 health-check hang; review recent config changes and restart the sweep process\n- Monitor Cloud SQL disk trend (currently 42% \u2014 confirm growth rate to plan capacity)\n- Validate OpenCode spend against baseline for any anomalous drift",
+              "scores": {
+                "correctness": 5.0,
+                "grounding": 5.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 5.0,
+                "token_efficiency": 5.0,
+                "overall_score": 5.0,
+                "cost": 0.0,
+                "assertion_pass_rate": 1.0,
+                "passed_assertions": [
+                  "identifies_failing_cron",
+                  "identifies_timed_out_launchd",
+                  "quotes_exact_gcp_ip",
+                  "quotes_cloud_sql_utilization",
+                  "quotes_opencode_spend",
+                  "no_hallucinated_outages",
+                  "stop_discipline_check"
+                ],
+                "failed_assertions": []
+              },
+              "success": true,
+              "error": null
+            }
+          ]
+        },
+        "B2": {
+          "probe_id": "B2",
+          "name": "Morning Brief Component Extraction",
+          "reliability_class": "R1/R2",
+          "avg_latency": 0.73,
+          "avg_score": 5.0,
+          "avg_pass_rate": 1.0,
+          "total_cost": 0.0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 0.735,
+              "prompt_tokens": 353,
+              "completion_tokens": 223,
+              "content": "- **Go-live target locked:** Grid Modernization Phase 1 rollout go-live date confirmed for September 15, 2026 per Aug 18 architecture alignment with John (TXNM).\n- **Active blocker - staging SSO cert expiring Aug 28:** TXNM Security flagged SAML SSO certificate expiry on staging cluster (ticket SEC-942); resolution depends on IdP metadata URL from Sarah.\n- **Open commitment - Airbyte schema by Aug 24:** Jason (Crogl) owes TXNM the Airbyte connector schema in 4 days; this is on the critical path for integration testing against the rotated cert.\n- **Upcoming dependency - IdP metadata by Aug 29:** Sarah (TXNM) will deliver IdP metadata URL post-cert rotation, gating SSO reconfiguration on staging ahead of the Sep 15 go-live.\n- **Risk window Aug 24\u2013Sep 15:** Three sequential dependencies (schema delivery \u2192 cert rotation \u2192 IdP metadata \u2192 go-live) compress into ~3 weeks with no buffer; any slip in Airbyte schema or cert rotation directly threatens the Sep 15 milestone.",
+              "scores": {
+                "correctness": 5.0,
+                "grounding": 5.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 5.0,
+                "token_efficiency": 5.0,
+                "overall_score": 5.0,
+                "cost": 0.0,
+                "assertion_pass_rate": 1.0,
+                "passed_assertions": [
+                  "highlights_saml_cert_blocker",
+                  "extracts_target_dates",
+                  "extracts_airbyte_or_grid_mod",
+                  "word_count_bounded",
+                  "bullet_format_compliance"
+                ],
+                "failed_assertions": []
+              },
+              "success": true,
+              "error": null
+            }
+          ]
+        },
+        "B4": {
+          "probe_id": "B4",
+          "name": "Frontdoor / Slack Triage & Classification",
+          "reliability_class": "R2",
+          "avg_latency": 1.11,
+          "avg_score": 5.0,
+          "avg_pass_rate": 1.0,
+          "total_cost": 0.0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 1.112,
+              "prompt_tokens": 318,
+              "completion_tokens": 70,
+              "content": "{\"route\":\"cs-ops\",\"urgency\":\"P1\",\"is_private_channel\":false,\"privacy_violation\":false,\"suggested_action\":\"Escalate to on-call SRE to investigate 502 errors on Acmedemo REST API port 8082, review crogld service logs, and assess load capacity during peak traffic.\"}",
+              "scores": {
+                "correctness": 5.0,
+                "grounding": 5.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 5.0,
+                "token_efficiency": 5.0,
+                "overall_score": 5.0,
+                "cost": 0.0,
+                "assertion_pass_rate": 1.0,
+                "passed_assertions": [
+                  "valid_json_schema",
+                  "route_validity",
+                  "urgency_classification",
+                  "channel_privacy_assessment",
+                  "suggested_action_present"
+                ],
+                "failed_assertions": []
+              },
+              "success": true,
+              "error": null
+            }
+          ]
+        },
+        "B5": {
+          "probe_id": "B5",
+          "name": "Artifact & Distribution Audit Synthesis",
+          "reliability_class": "R1",
+          "avg_latency": 2.71,
+          "avg_score": 5.0,
+          "avg_pass_rate": 1.0,
+          "total_cost": 0.0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 2.714,
+              "prompt_tokens": 539,
+              "completion_tokens": 650,
+              "content": "# Release Audit: v2.4.0-rc3\n\n## Distribution Matrix Status\n\n| Region | Cloud | Artifact URL Status | SHA256 Match | Container Registry | Overall |\n|---|---|---|---|---|---|\n| us-east-1 | AWS | \u2705 200 OK (Verified) | \u2705 Match | \u2705 ECR Tagged | \ud83d\udfe2 PASS |\n| us-gov-west-1 | AWS GovCloud | \u274c 403 SignatureDoesNotMatch | \u26a0\ufe0f Unverifiable | \u274c ECR MISSING | \ud83d\udd34 FAIL |\n| us-central1 | GCP | \u2705 200 OK (Verified) | \u2705 Match | \u2705 Artifact Registry Tagged | \ud83d\udfe2 PASS |\n\n**Aggregate Status:** \ud83d\udd34 **NOT PROMOTABLE** (1 of 3 regions failing)\n\n---\n\n## Blockers Preventing Release Promotion\n\n### \ud83d\udeab Blocker #1 \u2014 us-gov-west-1 Presigned URL Expired (Critical)\n- **Symptom:** S3 returns `403 SignatureDoesNotMatch` indicating the presigned URL has expired (default AWS presign TTL is typically 15 minutes).\n- **Impact:** Artifact cannot be retrieved or integrity-verified by downstream consumers in GovCloud.\n- **Remediation:**\n  1. Regenerate a presigned URL with an extended TTL (or move to public-read / bucket policy for release artifacts).\n  2. Re-run distribution job for us-gov-west-1.\n  3. Re-verify artifact download returns `200 OK`.\n\n### \ud83d\udeab Blocker #2 \u2014 us-gov-west-1 ECR Tag Missing (Critical)\n- **Symptom:** `v2.4.0-rc3` tag is absent from the GovCloud ECR registry.\n- **Impact:** GovCloud consumers cannot pull the container image; SHA256 verification against the published artifact is impossible.\n- **Remediation:**\n  1. Confirm GovCloud ECR repository exists and IAM/Cross-Partition role is functional.\n  2. Push `v2.4.0-rc3` image to GovCloud ECR (verify multi-region promotion pipeline executed for GovCloud partition).\n  3. Confirm digest matches the artifact SHA256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`.\n\n---\n\n## Additional Observations\n\n- \u26a0\ufe0f All three regions report the **identical SHA256** (`e3b0...855`). This is the canonical empty-file hash and likely a placeholder/template artifact. Confirm this matches the *actual* v2.4.0-rc3 build digest before promotion \u2014 otherwise this audit reflects seed data, not real telemetry.\n- \u2705 Non-GovCloud regions (us-east-1, us-central1) are fully consistent across object storage and container registry.\n\n## Promotion Recommendation\n\n**HOLD promotion of v2.4.0-rc3** until both us-gov-west-1 blockers are resolved and re-verified. After remediation, re-run the multi-region audit and require 3/3 regions \ud83d\udfe2 PASS before tagging as `stable`.",
+              "scores": {
+                "correctness": 5.0,
+                "grounding": 5.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 5.0,
+                "token_efficiency": 5.0,
+                "overall_score": 5.0,
+                "cost": 0.0,
+                "assertion_pass_rate": 1.0,
+                "passed_assertions": [
+                  "generates_markdown_table",
+                  "flags_us_gov_west_s3_blocker",
+                  "flags_missing_govcloud_ecr_tag",
+                  "confirms_healthy_regions",
+                  "lists_explicit_blockers"
+                ],
+                "failed_assertions": []
+              },
+              "success": true,
+              "error": null
+            }
+          ]
+        },
+        "B8": {
+          "probe_id": "B8",
+          "name": "Agent Tool Use & Structured Execution",
+          "reliability_class": "R1",
+          "avg_latency": 1.0,
+          "avg_score": 5.0,
+          "avg_pass_rate": 1.0,
+          "total_cost": 0.0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 0.999,
+              "prompt_tokens": 339,
+              "completion_tokens": 327,
+              "content": "I'll execute these two tool calls in sequence - first querying CrowdStrike Falcon, then creating the investigation ticket based on the results.\n\n```json\n[\n  {\n    \"type\": \"function\",\n    \"function\": {\n      \"name\": \"mcp__crogld__crowdstrike_falcon_query\",\n      \"arguments\": {\n        \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n      }\n    }\n  },\n  {\n    \"type\": \"function\",\n    \"function\": {\n      \"name\": \"mcp__crogld__create_investigation\",\n      \"arguments\": {\n        \"title\": \"Investigation: SHA256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\n        \"severity\": \"P2\",\n        \"indicators\": [\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"],\n        \"description\": \"Investigation opened based on CrowdStrike Falcon query results for SHA256 hash e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855. Awaiting Falcon telemetry analysis to determine scope of impact and required response actions.\"\n      }\n    }\n  }\n]\n```",
+              "scores": {
+                "correctness": 5.0,
+                "grounding": 5.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 5.0,
+                "token_efficiency": 5.0,
+                "overall_score": 5.0,
+                "cost": 0.0,
+                "assertion_pass_rate": 1.0,
+                "passed_assertions": [
+                  "names_falcon_query_tool",
+                  "cites_target_sha256",
+                  "names_create_investigation_tool",
+                  "specifies_p2_severity",
+                  "valid_tool_call_structure"
+                ],
+                "failed_assertions": []
+              },
+              "success": true,
+              "error": null
+            }
+          ]
+        }
+      }
+    },
+    {
+      "model_id": "cohere/north-mini-code:free",
+      "label": "cohere/north-mini-code:free",
+      "evaluated_at": "2026-09-01 17:03:18 UTC",
+      "rounds_per_probe": 1,
+      "probes_evaluated": [
+        "B1",
+        "B2",
+        "B4",
+        "B5",
+        "B8"
+      ],
+      "overall_score": 4.26,
+      "overall_latency": 0.44,
+      "overall_pass_rate": 0.72,
+      "total_eval_cost": 0.0,
+      "promotion_verdict": {
+        "verdict": "keep-evaluating",
+        "eligible_tiers": []
+      },
+      "probe_details": {
+        "B1": {
+          "probe_id": "B1",
+          "name": "Internal Scheduled-Status Synthesis",
+          "reliability_class": "R1",
+          "avg_latency": 0.26,
+          "avg_score": 5.0,
+          "avg_pass_rate": 1.0,
+          "total_cost": 0.0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 0.263,
+              "prompt_tokens": 157,
+              "completion_tokens": 379,
+              "content": "**Ops Status Brief**\n\n- **Active Systems**\n  - Hermes Cron: 2 jobs running (1 pending retry)\n  - Launchd Sweeps: 7 agents active\n  - GCP VM: acmedemo instance (34.69.169.75) healthy; Cloud SQL disk at 42% utilization\n  - OpenCode spend: $548 baseline (14\u2011day)\n\n- **Operational Failures**\n  - Hermes Cron job **sync\u2011acmedemo\u2011from\u2011main** \u2013 network timeout after 180\u202fs\n  - Launchd sweep **health\u2011check\u2011sweep** on **agent\u20114** \u2013 timeout after 300\u202fs\n\n- **Immediate Remediation Actions**\n  - Restart the failed `sync-acmedemo-from-main` cron job and investigate network connectivity to the source.\n  - Reboot or re\u2011run the `health-check-sweep` on agent\u20114; verify agent network and service health.\n  - Monitor Cloud SQL disk utilization as it approaches 50% (currently 42%).\n  - Review OpenCode spend trends if costs exceed baseline.",
+              "scores": {
+                "correctness": 5.0,
+                "grounding": 5.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 5.0,
+                "token_efficiency": 5.0,
+                "overall_score": 5.0,
+                "cost": 0.0,
+                "assertion_pass_rate": 1.0,
+                "passed_assertions": [
+                  "identifies_failing_cron",
+                  "identifies_timed_out_launchd",
+                  "quotes_exact_gcp_ip",
+                  "quotes_cloud_sql_utilization",
+                  "quotes_opencode_spend",
+                  "no_hallucinated_outages",
+                  "stop_discipline_check"
+                ],
+                "failed_assertions": []
+              },
+              "success": true,
+              "error": null
+            }
+          ]
+        },
+        "B2": {
+          "probe_id": "B2",
+          "name": "Morning Brief Component Extraction",
+          "reliability_class": "R1/R2",
+          "avg_latency": 0.59,
+          "avg_score": 4.45,
+          "avg_pass_rate": 0.8,
+          "total_cost": 0.0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 0.595,
+              "prompt_tokens": 193,
+              "completion_tokens": 540,
+              "content": "- **Customer movement:** TXNM Energy and Crogl finalized the Grid Modernization Phase\u202f1 rollout architecture, locking in a target go\u2011live date of **September\u202f15,\u202f2026**.  \n\n- **New blocker:** TXNM Security flagged an **SAML SSO certificate expiry on the staging cluster for August\u202f28,\u202f2026** (ticket\u202fSEC\u2011942). The certificate must be rotated before IdP metadata can be confirmed.  \n\n- **Upcoming milestone:** **Jason (Crogl) will deliver the Airbyte connector schema by August\u202f24,\u202f2026** to support data integration.  \n\n- **Upcoming milestone:** **Sarah (TXNM) will confirm the IdP metadata URL by August\u202f29,\u202f2026** (once the cert is rotated), keeping the September\u202f15 go\u2011live on track.",
+              "scores": {
+                "correctness": 4.2,
+                "grounding": 4.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 4.0,
+                "token_efficiency": 5.0,
+                "overall_score": 4.45,
+                "cost": 0.0,
+                "assertion_pass_rate": 0.8,
+                "passed_assertions": [
+                  "highlights_saml_cert_blocker",
+                  "extracts_airbyte_or_grid_mod",
+                  "word_count_bounded",
+                  "bullet_format_compliance"
+                ],
+                "failed_assertions": [
+                  "extracts_target_dates"
+                ]
+              },
+              "success": true,
+              "error": null
+            }
+          ]
+        },
+        "B4": {
+          "probe_id": "B4",
+          "name": "Frontdoor / Slack Triage & Classification",
+          "reliability_class": "R2",
+          "avg_latency": 0.25,
+          "avg_score": 5.0,
+          "avg_pass_rate": 1.0,
+          "total_cost": 0.0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 0.253,
+              "prompt_tokens": 155,
+              "completion_tokens": 613,
+              "content": "{\n  \"route\": \"cs-ops\",\n  \"urgency\": \"P1\",\n  \"is_private_channel\": false,\n  \"privacy_violation\": false,\n  \"suggested_action\": \"Check the crogld service logs to investigate intermittent 502 errors on the Acmedemo REST API port 8082 during peak traffic.\"\n}",
+              "scores": {
+                "correctness": 5.0,
+                "grounding": 5.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 5.0,
+                "token_efficiency": 5.0,
+                "overall_score": 5.0,
+                "cost": 0.0,
+                "assertion_pass_rate": 1.0,
+                "passed_assertions": [
+                  "valid_json_schema",
+                  "route_validity",
+                  "urgency_classification",
+                  "channel_privacy_assessment",
+                  "suggested_action_present"
+                ],
+                "failed_assertions": []
+              },
+              "success": true,
+              "error": null
+            }
+          ]
+        },
+        "B5": {
+          "probe_id": "B5",
+          "name": "Artifact & Distribution Audit Synthesis",
+          "reliability_class": "R1",
+          "avg_latency": 0.22,
+          "avg_score": 4.45,
+          "avg_pass_rate": 0.8,
+          "total_cost": 0.0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 0.219,
+              "prompt_tokens": 370,
+              "completion_tokens": 1395,
+              "content": "## Distribution Matrix Audit \u2013 Release **v2.4.0\u2011rc3**\n\n| Region | Artifact | SHA\u2011256 | Distribution URL | Status | Tag Status |\n|--------|----------|---------|------------------|--------|------------|\n| **AWS us\u2011east\u20111** | tar.gz | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | `https://s3.us-east-1.amazonaws.com/releases/v2.4.0-rc3.tar.gz` | \u2705 **200\u202fOK** (verified) | \u2705 **v2.4.0-rc3** (verified) |\n| **AWS us\u2011gov\u2011west\u20111** | tar.gz | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | `https://s3.us-gov-west-1.amazonaws.com/releases/v2.4.0-rc3.tar.gz` | \u274c **403 SignatureDoesNotMatch** (presign expired) | \u274c **MISSING** in GovCloud ECR registry |\n| **GCP us\u2011central1** | tar.gz | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | `https://storage.googleapis.com/releases/v2.4.0-rc3.tar.gz` | \u2705 **200\u202fOK** (verified) | \u2705 **v2.4.0-rc3** (verified) |\n\n---\n\n### \ud83d\udea8 Blockers Preventing Release Promotion\n\n| # | Blocker | Impact | Recommended Action |\n|---|---------|--------|--------------------|\n| 1 | **GovCloud S3 pre\u2011signed URL failure** \u2013 `403 SignatureDoesNotMatch` with an expired presign token. | The artifact cannot be downloaded from the GovCloud S3 bucket, breaking distribution to that region. | Regenerate a fresh pre\u2011signed URL (or re\u2011upload the object with correct permissions) and re\u2011test the download. |\n| 2 | **Missing ECR tag in GovCloud registry** \u2013 No `v2.4.0-rc3` image exists in the GovCloud ECR repository. | Container\u2011image distribution to GovCloud environments is incomplete. | Build/push the container image to the GovCloud ECR repository (or copy from commercial region) and tag it `v2.4.0-rc3`. |\n| 3 *(optional)* | **SHA\u2011256 consistency** \u2013 All three artifacts share the same hash (the hash of an empty file). | While not a blocker per se, it suggests the artifact may be a placeholder or empty build. | Verify that the tar.gz actually contains the intended release payload; if it\u2019s empty, a new build is required. |\n\n**Resolution Status:**  \n- \u2705 AWS us\u2011east\u20111 \u2013 Ready  \n- \u274c AWS us\u2011gov\u2011west\u20111 \u2013 Requires S3 URL regeneration **and** ECR tag creation  \n- \u2705 GCP us\u2011central1 \u2013 Ready  \n\n**Next Steps:**  \n1. Fix the GovCloud S3 pre\u2011signed URL (or re\u2011upload with proper signing).  \n2. Ensure the GovCloud ECR repository contains the `v2.4.0-rc3` tag.  \n3. Re\u2011run the verification steps for the GovCloud region.  \n4. Once both issues are resolved, the release can be promoted to production.",
+              "scores": {
+                "correctness": 4.2,
+                "grounding": 4.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 5.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 4.0,
+                "token_efficiency": 5.0,
+                "overall_score": 4.45,
+                "cost": 0.0,
+                "assertion_pass_rate": 0.8,
+                "passed_assertions": [
+                  "generates_markdown_table",
+                  "flags_us_gov_west_s3_blocker",
+                  "flags_missing_govcloud_ecr_tag",
+                  "lists_explicit_blockers"
+                ],
+                "failed_assertions": [
+                  "confirms_healthy_regions"
+                ]
+              },
+              "success": true,
+              "error": null
+            }
+          ]
+        },
+        "B8": {
+          "probe_id": "B8",
+          "name": "Agent Tool Use & Structured Execution",
+          "reliability_class": "R1",
+          "avg_latency": 0.88,
+          "avg_score": 2.38,
+          "avg_pass_rate": 0.0,
+          "total_cost": 0.0,
+          "runs": [
+            {
+              "run": 1,
+              "latency": 0.875,
+              "prompt_tokens": 162,
+              "completion_tokens": 338,
+              "content": "",
+              "scores": {
+                "correctness": 1.0,
+                "grounding": 1.0,
+                "stop_discipline": 5.0,
+                "format_compliance": 2.0,
+                "latency_score": 5.0,
+                "cleanup_burden": 2.5,
+                "token_efficiency": 5.0,
+                "overall_score": 2.38,
+                "cost": 0.0,
+                "assertion_pass_rate": 0.0,
+                "passed_assertions": [],
+                "failed_assertions": [
+                  "names_falcon_query_tool",
+                  "cites_target_sha256",
+                  "names_create_investigation_tool",
+                  "specifies_p2_severity",
+                  "valid_tool_call_structure"
+                ]
+              },
+              "success": true,
+              "error": null
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
