@@ -15,21 +15,21 @@ Purpose: continuously improve Hermes + OpenCode model selection for **ops** and 
 - **Direct credentials removed:** All direct API keys (`openai-api`, `anthropic`, `deepinfra`, `gemini`) removed from `.env` files.
 
 ### Hermes Default Config (`ops` & `ops-light`)
-- **Primary Intake Model:** `openrouter/google/gemini-3.6-flash`
-- **Aliases:** `gemini-fast`, `gemini-pro`, `gemini-lite`, `gpt-5.4`, `sonnet`
+- **Primary Intake Model:** `openrouter/google/gemini-3.7-flash`
+- **Aliases:** `gemini-fast`, `gemini-pro`, `gemini-lite`, `gpt-5.4`, `sonnet`, `luna`
 - **Max Output Tokens:** `16384`
 
 ### OpenCode Agent Alignment (`opencode.json`, verified 2026-09-01)
-- **`cs-ops`:** `openrouter/google/gemini-3.6-flash`
-- **`plan`:** `openrouter/google/gemini-3.6-flash`
-- **`solutions-architect`:** `openrouter/google/gemini-3.6-flash`
+- **`cs-ops`:** `openrouter/google/gemini-3.7-flash`
+- **`plan`:** `openrouter/google/gemini-3.7-flash`
+- **`solutions-architect`:** `openrouter/google/gemini-3.7-flash`
 - **`build`:** `openrouter/openai/gpt-5.6-luna` (bounded implementation default; escalate high-stakes work to GPT-5.6 Sol/GPT-5.4)
 - **`crogl-assistant`:** `openrouter/anthropic/claude-sonnet-4-6`
 - **MCP Compatibility:** MCP server keys sanitized (`onepassword`, `google_calendar`, `aws_pricing`) to fix Google Gemini protobuf function-name validation.
 
 ### Automation & Background Jobs
-- **Hermes Cron Jobs:** `ops-morning-briefing` (`openrouter/openai/gpt-5.4`), `ops-scheduled-status` (`openrouter/google/gemini-3.6-flash`).
-- **Launchd Background Sweeps:** 7 scripts in `vault/scripts/` updated to route through OpenRouter (`openrouter/qwen/qwen3.7-flash`, `openrouter/google/gemini-3.6-flash`, `openrouter/openai/gpt-5.4`).
+- **Hermes Cron Jobs:** `ops-morning-briefing` (`openrouter/nvidia/nemotron-3-ultra-550b-a55b:free`), `ops-scheduled-status` (`openrouter/nvidia/nemotron-3-super-120b-a12b:free`).
+- **Launchd Background Sweeps:** 7 scripts in `vault/scripts/` updated to route through OpenRouter (`openrouter/qwen/qwen3.7-flash`, `openrouter/google/gemini-3.7-flash`, `openrouter/openai/gpt-5.6-luna`, `openrouter/openai/gpt-5.6-sol`).
 
 ## Main files
 - `routing-matrix.md` — current task-family routing policy
