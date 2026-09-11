@@ -1,0 +1,15 @@
+{
+  "active_candidates": [
+    {
+      "model_id": "google/gemini-3.8-flash",
+      "display_name": "Google Gemini 3.8 Flash",
+      "target_lane": "Fast Intake & Reasoning Default",
+      "current_stage": 2,
+      "staged_date": "2026-09-10",
+      "thresholds": {
+        "min_turns": 10,
+        "max_error_rate_pct": 0.0
+      }
+    }
+  ]
+}

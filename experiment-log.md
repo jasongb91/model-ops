@@ -858,6 +858,22 @@ Use one section per meaningful run or benchmark batch.
 - B3 limitation: the harness supports B3 directly; no limitation encountered. This was canonical-fixture assertion coverage, not a live vault mutation.
 - verdict: repeated evidence supports continued controlled/shadow evaluation. Do not promote production routing, unattended jobs, canonical vault mutations, or customer-facing finalization from this result alone; B2 date fidelity and B5 output discipline remain observed variance.
 
+## 2026-09-11 — Automated Eval: google/gemma-4-31b-it:free via OpenRouter
+- surface: Automated Evaluation Harness (`eval_promo_candidates.py`)
+- task family: Benchmark Probes (B1, B2, B3, B4, B5, B6, B7, B8)
+- model evaluated: `google/gemma-4-31b-it:free`
+- evaluated at: 2026-09-11 13:16:14 UTC
+- source artifact: `~/.hermes/telemetry/eval_results/eval_google_gemma-4-31b-it_free.json`
+- execution: 8 probes × 3 rounds (24 total attempts); recorded evaluation cost $0.00
+- aggregate: overall 1.00 / 5.0, 0.24s average latency, 0.0% pass rate (0% assertion pass rate)
+- failure mode: 100% execution failure (24/24 requests failed with HTTP 429 `RESOURCE_EXHAUSTED` from upstream provider `Google AI Studio`: "Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing.")
+- promotion verdict: **reject** (eligible tiers: none)
+- notes:
+  - Route is served via OpenRouter BYOK backed by Google AI Studio without active quota/prepayment credits.
+  - Consistent with the model routing ops pitfall: free `:free` routes on OpenRouter served exclusively by an upstream provider require available upstream quota; exhausted credits prevent evaluation and yield immediate HTTP 429.
+  - Model failed all gates across R2, R1, and R0. Zero tier promotions and no configuration changes applied.
+
+
 
 
 
