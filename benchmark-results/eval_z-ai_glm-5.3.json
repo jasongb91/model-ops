@@ -1,0 +1,554 @@
+{
+  "model_id": "z-ai/glm-5.3",
+  "label": "z-ai/glm-5.3",
+  "evaluated_at": "2026-09-11 14:27:57 UTC",
+  "rounds_per_probe": 3,
+  "probes_evaluated": [
+    "B1",
+    "B2",
+    "B4",
+    "B5",
+    "B8"
+  ],
+  "overall_score": 4.54,
+  "overall_latency": 0.3,
+  "overall_pass_rate": 0.83,
+  "total_eval_cost": 0.0,
+  "promotion_verdict": {
+    "verdict": "promote to R2 (Triage / Extraction Fast-Track)",
+    "eligible_tiers": [
+      "R2 (Triage / Extraction Fast-Track)"
+    ]
+  },
+  "probe_details": {
+    "B1": {
+      "probe_id": "B1",
+      "name": "Internal Scheduled-Status Synthesis",
+      "reliability_class": "R1",
+      "avg_latency": 0.27,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.335,
+          "prompt_tokens": 179,
+          "completion_tokens": 475,
+          "actual_model": "z-ai/glm-5.3",
+          "actual_provider": "DeepInfra",
+          "content": "# Internal Ops Status Brief\n\n## Active Systems\n- **Hermes Cron:** 2 jobs active and running.\n- **Launchd Sweeps:** 7 agents active.\n- **GCP VM:** `acmedemo` instance healthy @ `34.69.169.75`; Cloud SQL disk utilization at 42% (within normal range).\n- **OpenCode Spend:** $548 over 14 days (baseline).\n\n## Operational Failures\n- **Hermes Cron:** `sync-acmedemo-from-main` failed \u2014 network timeout after 180s.\n- **Launchd Sweeps:** `health-check-sweep` on agent-4 timed out after 300s.\n\n## Immediate Remediation Actions\n- Retry `sync-acmedemo-from-main` and verify network connectivity to the sync target; investigate whether the 180s timeout threshold needs adjustment.\n- Inspect agent-4 for resource contention or hung processes; rerun `health-check-sweep` and review the 300s timeout configuration.\n- Monitor Cloud SQL disk utilization (currently 42%) for continued growth.\n- Confirm no downstream impact from the failed sync on the healthy `acmedemo` instance.\n\n**Overall status:** Systems largely nominal; two isolated timeout failures requiring investigation.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "identifies_failing_cron",
+              "identifies_timed_out_launchd",
+              "quotes_exact_gcp_ip",
+              "quotes_cloud_sql_utilization",
+              "quotes_opencode_spend",
+              "no_hallucinated_outages",
+              "stop_discipline_check"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.242,
+          "prompt_tokens": 179,
+          "completion_tokens": 759,
+          "actual_model": "z-ai/glm-5.3",
+          "actual_provider": "DeepInfra",
+          "content": "# Ops Status Brief\n\n## Active Systems\n- **Hermes Cron:** 2 jobs active\n- **Launchd Sweeps:** 7 agents active\n- **GCP VM:** acmedemo instance healthy @ 34.69.169.75\n- **Cloud SQL:** Disk utilization at 42% (nominal)\n- **OpenCode Spend:** $548 baseline over 14 days\n\n## Operational Failures\n- **Hermes Cron:** `sync-acmedemo-from-main` failed \u2014 network timeout after 180s\n- **Launchd:** `health-check-sweep` timed out on agent-4 after 300s\n\n## Immediate Remediation Actions\n- Retry `sync-acmedemo-from-main` and verify network connectivity to the source\n- Investigate agent-4 for the `health-check-sweep` timeout; check agent responsiveness and resource usage\n- Determine whether the cron network timeout and agent-4 timeout share a common network path\n- Continue monitoring Cloud SQL disk utilization; no action required at 42%\n\n**Overall:** Infrastructure largely healthy; two isolated timeout failures require triage.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "identifies_failing_cron",
+              "identifies_timed_out_launchd",
+              "quotes_exact_gcp_ip",
+              "quotes_cloud_sql_utilization",
+              "quotes_opencode_spend",
+              "no_hallucinated_outages",
+              "stop_discipline_check"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.232,
+          "prompt_tokens": 179,
+          "completion_tokens": 801,
+          "actual_model": "z-ai/glm-5.3",
+          "actual_provider": "DeepInfra",
+          "content": "# Ops Status Brief\n\n## Active Systems\n- **Hermes Cron:** 2 jobs running\n- **Launchd Sweeps:** 7 agents active\n- **GCP VM:** acmedemo instance healthy @ 34.69.169.75\n- **Cloud SQL:** Disk utilization at 42% (nominal)\n- **OpenCode Spend:** $548 baseline over 14 days\n\n## Operational Failures\n- **Hermes Cron:** `sync-acmedemo-from-main` failed \u2014 network timeout after 180s\n- **Launchd:** `health-check-sweep` timed out on agent-4 after 300s\n\n## Immediate Remediation Actions\n- Retry `sync-acmedemo-from-main`; if failure recurs, investigate network path and evaluate raising the 180s timeout threshold\n- Re-run `health-check-sweep` on agent-4; if timeout repeats, inspect agent-4 responsiveness and connectivity\n- Verify acmedemo data sync state following the failed sync job (VM itself reports healthy)\n- Continue monitoring Cloud SQL disk utilization \u2014 no action required at 42%\n\n**Overall posture:** Infrastructure largely healthy; two isolated timeout failures requiring retry and root-cause checks. No cost anomalies.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "identifies_failing_cron",
+              "identifies_timed_out_launchd",
+              "quotes_exact_gcp_ip",
+              "quotes_cloud_sql_utilization",
+              "quotes_opencode_spend",
+              "no_hallucinated_outages",
+              "stop_discipline_check"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B2": {
+      "probe_id": "B2",
+      "name": "Morning Brief Component Extraction",
+      "reliability_class": "R1/R2",
+      "avg_latency": 0.32,
+      "avg_score": 4.63,
+      "avg_pass_rate": 0.87,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.229,
+          "prompt_tokens": 212,
+          "completion_tokens": 1438,
+          "actual_model": "z-ai/glm-5.3",
+          "actual_provider": "DeepInfra",
+          "content": "**TXNM Energy \u2014 Ops Briefing (Aug 20)**\n\n- **Movement:** Grid Modernization Phase 1 rollout architecture signed off with John (TXNM) on Aug 18; go-live target locked for **Sept 15, 2026**.\n\n- **New blocker:** SAML SSO certificate on TXNM staging cluster expires **Aug 28** (ticket SEC-942, raised by TXNM Security Aug 19) \u2014 cert rotation is now a gating dependency for SSO integration work.\n\n- **Our deliverable:** Jason to deliver Airbyte connector schema to TXNM by **Aug 24** \u2014 first near-term commitment on the critical path.\n\n- **Their deliverable / risk watch:** Sarah (TXNM) to confirm IdP metadata URL by **Aug 29**, contingent on cert rotation completing \u2014 only a 1-day buffer after the Aug 28 expiry; escalate immediately if SEC-942 slips, as it compresses the runway to the Sept 15 go-live.",
+          "scores": {
+            "correctness": 4.2,
+            "grounding": 4.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 4.0,
+            "token_efficiency": 5.0,
+            "overall_score": 4.45,
+            "cost": 0.0,
+            "assertion_pass_rate": 0.8,
+            "passed_assertions": [
+              "highlights_saml_cert_blocker",
+              "extracts_airbyte_or_grid_mod",
+              "word_count_bounded",
+              "bullet_format_compliance"
+            ],
+            "failed_assertions": [
+              "extracts_target_dates"
+            ]
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.387,
+          "prompt_tokens": 212,
+          "completion_tokens": 828,
+          "actual_model": "z-ai/glm-5.3",
+          "actual_provider": "DeepInfra",
+          "content": "**TXNM Energy \u2014 Ops Briefing (as of Aug 20)**\n\n- **Architecture locked, go-live set:** Crogl (Jason) and TXNM (John) agreed on Grid Modernization Phase 1 rollout architecture (Aug 18); target go-live is **September 15, 2026**.\n- **New blocker \u2014 SSO cert expiry:** TXNM Security flagged SAML SSO certificate expiring on the staging cluster **Aug 28, 2026** (ticket SEC-942). Cert rotation must complete before expiry or SSO integration work stalls.\n- **Deliverable due this week:** Jason (Crogl) committed to delivering the **Airbyte connector schema by Aug 24, 2026** \u2014 confirm on track.\n- **Dependency chain to watch:** Sarah (TXNM) will confirm the IdP metadata URL by **Aug 29**, but only *after* cert rotation completes. Any slip in the Aug 28 rotation cascades into SSO setup and puts the **Sept 15 go-live at risk**.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "highlights_saml_cert_blocker",
+              "extracts_target_dates",
+              "extracts_airbyte_or_grid_mod",
+              "word_count_bounded",
+              "bullet_format_compliance"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.355,
+          "prompt_tokens": 212,
+          "completion_tokens": 1031,
+          "actual_model": "z-ai/glm-5.3",
+          "actual_provider": "DeepInfra",
+          "content": "**TXNM Energy \u2014 Ops Briefing (Aug 20)**\n\n- **Go-live locked:** Grid Modernization Phase 1 rollout architecture agreed with John (TXNM) on Aug 18; target go-live set for **Sept 15, 2026** \u2014 all downstream workstreams should plan against this date.\n\n- **New blocker \u2014 SSO cert expiry:** TXNM Security flagged SAML SSO certificate expiring on the staging cluster **Aug 28, 2026** (ticket **SEC-942**). Rotation must complete on time or SSO setup slips.\n\n- **Our deliverable due in 4 days:** Jason committed to delivering the **Airbyte connector schema by Aug 24, 2026** \u2014 confirm it's on track today.\n\n- **Customer action with tight dependency:** Sarah (TXNM) to confirm **IdP metadata URL by Aug 29**, but only *after* cert rotation completes Aug 28 \u2014 a one-day buffer. If SEC-942 slips, this cascades.\n\n- **Watch item:** The cert expiry \u2192 IdP confirmation chain (Aug 28\u201329) leaves minimal margin ahead of the Sept 15 go-live; recommend monitoring SEC-942 daily and flagging TXNM Security early if rotation stalls.",
+          "scores": {
+            "correctness": 4.2,
+            "grounding": 4.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 4.0,
+            "token_efficiency": 5.0,
+            "overall_score": 4.45,
+            "cost": 0.0,
+            "assertion_pass_rate": 0.8,
+            "passed_assertions": [
+              "highlights_saml_cert_blocker",
+              "extracts_airbyte_or_grid_mod",
+              "word_count_bounded",
+              "bullet_format_compliance"
+            ],
+            "failed_assertions": [
+              "extracts_target_dates"
+            ]
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B4": {
+      "probe_id": "B4",
+      "name": "Frontdoor / Slack Triage & Classification",
+      "reliability_class": "R2",
+      "avg_latency": 0.3,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.293,
+          "prompt_tokens": 183,
+          "completion_tokens": 951,
+          "actual_model": "z-ai/glm-5.3",
+          "actual_provider": "DeepInfra",
+          "content": "{\n  \"route\": \"cs-ops\",\n  \"urgency\": \"P2\",\n  \"is_private_channel\": false,\n  \"privacy_violation\": false,\n  \"suggested_action\": \"Route to cs-ops to investigate crogld service logs for intermittent 502 errors on the Acmedemo REST API (port 8082) during peak traffic; check upstream health, capacity limits, and connection pool saturation. No sensitive data present in the public #ops-intake channel, so no privacy remediation needed.\"\n}",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "valid_json_schema",
+              "route_validity",
+              "urgency_classification",
+              "channel_privacy_assessment",
+              "suggested_action_present"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.335,
+          "prompt_tokens": 183,
+          "completion_tokens": 1441,
+          "actual_model": "z-ai/glm-5.3",
+          "actual_provider": "DeepInfra",
+          "content": "{\n  \"route\": \"cs-ops\",\n  \"urgency\": \"P2\",\n  \"is_private_channel\": false,\n  \"privacy_violation\": false,\n  \"suggested_action\": \"Route to cs-ops to investigate intermittent 502 errors on the Acmedemo REST API (port 8082) during peak traffic. Pull crogld service logs to identify error patterns and check for capacity/scaling bottlenecks (connection pool exhaustion, upstream timeouts, or resource limits). Monitor error rate; escalate to P1 if errors become persistent or the endpoint becomes fully unavailable. No sensitive data was exposed in the public channel.\"\n}",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "valid_json_schema",
+              "route_validity",
+              "urgency_classification",
+              "channel_privacy_assessment",
+              "suggested_action_present"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.259,
+          "prompt_tokens": 183,
+          "completion_tokens": 864,
+          "actual_model": "z-ai/glm-5.3",
+          "actual_provider": "DeepInfra",
+          "content": "{\n  \"route\": \"cs-ops\",\n  \"urgency\": \"P2\",\n  \"is_private_channel\": false,\n  \"privacy_violation\": false,\n  \"suggested_action\": \"Route to cs-ops for investigation of intermittent 502 errors on the Acmedemo REST API (port 8082). Acknowledge the report in #ops-intake, pull crogld service logs to correlate 502s with peak traffic windows, and check upstream/gateway health and capacity metrics. Escalate to P1 if error rate worsens or the API becomes fully unavailable.\"\n}",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "valid_json_schema",
+              "route_validity",
+              "urgency_classification",
+              "channel_privacy_assessment",
+              "suggested_action_present"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B5": {
+      "probe_id": "B5",
+      "name": "Artifact & Distribution Audit Synthesis",
+      "reliability_class": "R1",
+      "avg_latency": 0.33,
+      "avg_score": 4.13,
+      "avg_pass_rate": 0.67,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.281,
+          "prompt_tokens": 423,
+          "completion_tokens": 2048,
+          "actual_model": "z-ai/glm-5.3",
+          "actual_provider": "DeepInfra",
+          "content": "# Distribution Matrix Audit \u2014 v2.4.0-rc3\n\n**Verdict: \ud83d\udd34 NO-GO \u2014 Release promotion blocked (3 blockers, 1 global/critical)**\n\n## Status Table\n\n| Region | Artifact | SHA256 | Object Storage | Container Registry | Regional Status |\n|---|---|---|---|---|---|\n| AWS us-east-1 | tar.gz | `e3b0c442\u2026b855` | S3: 200 OK (Verified) | ECR: `v2.4.0-rc3` (Verified) | \ud83d\udd34 FAIL \u2014 hash anomaly |\n| AWS us-gov-west-1 | tar.gz | `e3b0c442\u2026b855` | S3: **403 SignatureDoesNotMatch** (presign expired) | ECR: **MISSING** | \ud83d\udd34 FAIL \u2014 distribution incomplete |\n| GCP us-central1 | tar.gz | `e3b0c442\u2026b855` | GCS: 200 OK (Verified) | Artifact Registry: `v2.4.0-rc3` (Verified) | \ud83d\udd34 FAIL \u2014 hash anomaly |\n\n## Blockers\n\n**B1 \u2014 CRITICAL (global): All artifacts hash to the empty-input digest.**\n`e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` is the well-known SHA256 of a **zero-byte input**. All three regions report this exact hash, which means one of two things \u2014 both release-blocking:\n- The published tarballs are **empty files** (build produced no content), or\n- The hash-computation step in the pipeline is broken (hashing an empty stream/variable).\n\nThe \"Verified / 200 OK\" results in us-east-1 and us-central1 confirm only **HTTP reachability, not content integrity**. No region currently has a verifiably non-empty artifact. Because the identical hash appears across all regions, the root cause is almost certainly **upstream at build time**, not per-region replication.\n\n**B2 \u2014 HIGH (us-gov-west-1): S3 artifact unretrievable.**\n`403 SignatureDoesNotMatch` /",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "generates_markdown_table",
+              "flags_us_gov_west_s3_blocker",
+              "flags_missing_govcloud_ecr_tag",
+              "confirms_healthy_regions",
+              "lists_explicit_blockers"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.451,
+          "prompt_tokens": 423,
+          "completion_tokens": 2048,
+          "actual_model": "z-ai/glm-5.3",
+          "actual_provider": "DeepInfra",
+          "content": "# Distribution Matrix Audit \u2014 v2.4.0-rc3\n\n## Verdict: \ud83d\udd34 **NO-GO \u2014 0/3 regions pass. Promotion blocked.**\n\n## Status Table\n\n| Region | Artifact | SHA256 | Object Storage | Container Registry | Region Status |\n|---|---|---|---|---|---|\n| AWS us-east-1 | tar.gz | `e3b0c442\u2026b855` \u26a0\ufe0f | S3: 200 OK (Verified) | ECR: `v2.4.0-rc3` (Verified) | \ud83d\udd34 BLOCKED \u2014 empty-content digest |\n| AWS us-gov-west-1 | tar.gz | `e3b0c442\u2026b855` \u26a0\ufe0f | S3: **403 SignatureDoesNotMatch** (presign expired) | ECR: **MISSING** | \ud83d\udd34 BLOCKED \u2014 unverified artifact + missing image |\n| GCP us-central1 | tar.gz | `e3b0c442\u2026b855` \u26a0\ufe0f | GCS: 200 OK (Verified) | Artifact Registry: `v2.4.0-rc3` (Verified) | \ud83d\udd34 BLOCKED \u2014 empty-content digest |\n\n---\n\n## Blockers\n\n**B1 \u2014 CRITICAL: All artifacts hash to the empty-file digest.**\n`e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` is the canonical SHA256 of a **zero-byte input**. It is identical across all three regions, which means one of two failure modes:\n- (a) The build emitted empty tarballs and replication faithfully copied empty objects everywhere, or\n- (b) The digest",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "generates_markdown_table",
+              "flags_us_gov_west_s3_blocker",
+              "flags_missing_govcloud_ecr_tag",
+              "confirms_healthy_regions",
+              "lists_explicit_blockers"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.257,
+          "prompt_tokens": 423,
+          "completion_tokens": 2048,
+          "actual_model": "z-ai/glm-5.3",
+          "actual_provider": "DeepInfra",
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 2.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 2.5,
+            "token_efficiency": 5.0,
+            "overall_score": 2.38,
+            "cost": 0.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              "generates_markdown_table",
+              "flags_us_gov_west_s3_blocker",
+              "flags_missing_govcloud_ecr_tag",
+              "confirms_healthy_regions",
+              "lists_explicit_blockers"
+            ]
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B8": {
+      "probe_id": "B8",
+      "name": "Agent Tool Use & Structured Execution",
+      "reliability_class": "R1",
+      "avg_latency": 0.28,
+      "avg_score": 3.94,
+      "avg_pass_rate": 0.6,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.223,
+          "prompt_tokens": 205,
+          "completion_tokens": 1731,
+          "actual_model": "z-ai/glm-5.3",
+          "actual_provider": "DeepInfra",
+          "content": "```json\n[\n  {\n    \"name\": \"mcp__crogld__crowdstrike_falcon_query\",\n    \"arguments\": {\n      \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n    }\n  },\n  {\n    \"name\": \"mcp__crogld__create_investigation\",\n    \"arguments\": {\n      \"title\": \"Suspicious SHA256 Hash Investigation - e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\n      \"severity\": \"P2\",\n      \"indicators\": [\n        \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n      ],\n      \"description\": \"P2 investigation opened for SHA256 hash e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855. A CrowdStrike Falcon query was run against this hash to retrieve detection and telemetry data. Review query results, determine scope of exposure, identify affected hosts, and assess whether containment or remediation actions are required.\"\n    }\n  }\n]\n```",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "names_falcon_query_tool",
+              "cites_target_sha256",
+              "names_create_investigation_tool",
+              "specifies_p2_severity",
+              "valid_tool_call_structure"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.256,
+          "prompt_tokens": 205,
+          "completion_tokens": 2048,
+          "actual_model": "z-ai/glm-5.3",
+          "actual_provider": "DeepInfra",
+          "content": "Here are the tool calls in OpenAI/JSON format:\n\n```json\n{\n  \"role\": \"assistant\",\n  \"content\": null,\n  \"tool_calls\": [\n    {\n      \"id\": \"call_falcon_query_001\",\n      \"type\": \"function\",\n      \"function\": {\n        \"name\": \"mcp__crogld__crowdstrike_falcon_query\",\n        \"arguments\": \"{\\\"sha256\\\": \\\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\\\"}\"\n      }\n    },\n    {\n      \"id\": \"call_create_investigation_002\",\n     ",
+          "scores": {
+            "correctness": 4.2,
+            "grounding": 4.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 4.0,
+            "token_efficiency": 5.0,
+            "overall_score": 4.45,
+            "cost": 0.0,
+            "assertion_pass_rate": 0.8,
+            "passed_assertions": [
+              "names_falcon_query_tool",
+              "cites_target_sha256",
+              "names_create_investigation_tool",
+              "valid_tool_call_structure"
+            ],
+            "failed_assertions": [
+              "specifies_p2_severity"
+            ]
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.354,
+          "prompt_tokens": 205,
+          "completion_tokens": 2048,
+          "actual_model": "z-ai/glm-5.3",
+          "actual_provider": "DeepInfra",
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 2.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 2.5,
+            "token_efficiency": 5.0,
+            "overall_score": 2.38,
+            "cost": 0.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              "names_falcon_query_tool",
+              "cites_target_sha256",
+              "names_create_investigation_tool",
+              "specifies_p2_severity",
+              "valid_tool_call_structure"
+            ]
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    }
+  }
+}

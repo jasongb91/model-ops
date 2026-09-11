@@ -1,0 +1,554 @@
+{
+  "model_id": "z-ai/glm-5.3-flash",
+  "label": "z-ai/glm-5.3-flash",
+  "evaluated_at": "2026-09-11 14:21:56 UTC",
+  "rounds_per_probe": 3,
+  "probes_evaluated": [
+    "B1",
+    "B2",
+    "B4",
+    "B5",
+    "B8"
+  ],
+  "overall_score": 4.89,
+  "overall_latency": 0.41,
+  "overall_pass_rate": 0.96,
+  "total_eval_cost": 0.0,
+  "promotion_verdict": {
+    "verdict": "promote to R1 (Internal Ops / Synthesis / Drafting Fast-Track)",
+    "eligible_tiers": [
+      "R1 (Internal Ops / Synthesis / Drafting Fast-Track)"
+    ]
+  },
+  "probe_details": {
+    "B1": {
+      "probe_id": "B1",
+      "name": "Internal Scheduled-Status Synthesis",
+      "reliability_class": "R1",
+      "avg_latency": 0.22,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.224,
+          "prompt_tokens": 179,
+          "completion_tokens": 227,
+          "actual_model": "z-ai/glm-5.3-flash",
+          "actual_provider": "DeepInfra",
+          "content": "# Ops Status Brief\n\n## Active Systems\n- **Hermes Cron:** 2 jobs active, running normally\n- **Launchd Sweeps:** 7 agents active\n- **GCP VM (acmedemo):** Healthy @ 34.69.169.75\n- **Cloud SQL:** Disk utilization at 42% \u2014 within normal range\n- **OpenCode Spend:** $548 over 14-day window (baseline)\n\n## Operational Failures\n- **Hermes:** `sync-acmedemo-from-main` failed \u2014 network timeout after 180s\n- **Launchd:** `health-check-sweep` on agent-4 timed out after 300s\n\n## Immediate Remediation Actions\n- Re-run `sync-acmedemo-from-main`; verify network connectivity/firewall rules between Hermes and source repo\n- Investigate agent-4 (resource load, hung process); restart `health-check-sweep` and confirm agent-4 health\n- Monitor Cloud SQL disk growth; no action needed at 42%, alert threshold review optional\n- No spend anomalies flagged; continue baseline tracking",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "identifies_failing_cron",
+              "identifies_timed_out_launchd",
+              "quotes_exact_gcp_ip",
+              "quotes_cloud_sql_utilization",
+              "quotes_opencode_spend",
+              "no_hallucinated_outages",
+              "stop_discipline_check"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.213,
+          "prompt_tokens": 179,
+          "completion_tokens": 218,
+          "actual_model": "z-ai/glm-5.3-flash",
+          "actual_provider": "DeepInfra",
+          "content": "# Ops Status Brief\n\n## Active Systems\n- **Hermes Cron:** 2 jobs running normally\n- **Launchd Sweeps:** 7 agents active\n- **GCP VM:** `acmedemo` healthy @ 34.69.169.75\n- **Cloud SQL:** Disk utilization 42% \u2014 nominal\n- **OpenCode Spend:** $548 (14-day baseline) \u2014 within expected range\n\n## Operational Failures\n- \ud83d\udd34 **sync-acmedemo-from-main** (Hermes): failed \u2014 network timeout after 180s\n- \ud83d\udfe1 **health-check-sweep** (Launchd): timed out on agent-4 after 300s\n\n## Immediate Remediation Actions\n- Re-run `sync-acmedemo-from-main`; verify network path/firewall rules between Hermes runner and source repo\n- Inspect agent-4 (load, connectivity, hung processes); restart health-check-sweep after validation\n- Monitor Cloud SQL disk growth; no action needed at 42%, set alert threshold if not already configured",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "identifies_failing_cron",
+              "identifies_timed_out_launchd",
+              "quotes_exact_gcp_ip",
+              "quotes_cloud_sql_utilization",
+              "quotes_opencode_spend",
+              "no_hallucinated_outages",
+              "stop_discipline_check"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.21,
+          "prompt_tokens": 179,
+          "completion_tokens": 227,
+          "actual_model": "z-ai/glm-5.3-flash",
+          "actual_provider": "DeepInfra",
+          "content": "# Ops Status Brief\n\n## Active Systems\n- **Hermes Cron:** 2 jobs active, 1 failed\n- **Launchd Sweeps:** 7 agents active, 1 timed out\n- **GCP:** acmedemo VM healthy @ 34.69.169.75; Cloud SQL disk at 42% (nominal)\n- **OpenCode spend:** $548 over 14 days (baseline, no anomaly)\n\n## Operational Failures\n- `sync-acmedemo-from-main` \u2014 failed, network timeout after 180s\n- `health-check-sweep` on agent-4 \u2014 timed out after 300s\n\n## Immediate Remediation Actions\n- Re-run `sync-acmedemo-from-main`; verify network path/connectivity to source repo before retry\n- Investigate agent-4 (check load, connectivity, sweep config); re-trigger `health-check-sweep` after validation\n- Monitor Cloud SQL disk (42%) \u2014 no action needed yet; alert threshold review recommended\n- Confirm no downstream impact on acmedemo from failed sync (VM currently healthy)",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "identifies_failing_cron",
+              "identifies_timed_out_launchd",
+              "quotes_exact_gcp_ip",
+              "quotes_cloud_sql_utilization",
+              "quotes_opencode_spend",
+              "no_hallucinated_outages",
+              "stop_discipline_check"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B2": {
+      "probe_id": "B2",
+      "name": "Morning Brief Component Extraction",
+      "reliability_class": "R1/R2",
+      "avg_latency": 0.73,
+      "avg_score": 4.45,
+      "avg_pass_rate": 0.8,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 1.736,
+          "prompt_tokens": 212,
+          "completion_tokens": 176,
+          "actual_model": "z-ai/glm-5.3-flash",
+          "actual_provider": "DeepInfra",
+          "content": "**TXNM Energy \u2014 Ops Briefing Bullets**\n\n- **Movement:** Grid Modernization Phase 1 rollout architecture agreed with John (TXNM) on Aug 18; target go-live locked for **Sept 15, 2026**.\n- **New blocker:** TXNM Security flagged SAML SSO cert expiry on staging cluster (Aug 28); internal ticket **SEC-942** opened \u2014 risk to SSO testing timeline.\n- **Commitment (us):** Jason to deliver Airbyte connector schema by **Aug 24**.\n- **Commitment (them):** Sarah to confirm IdP metadata URL by **Aug 29**, after cert rotation completes.\n- **Watch item:** Cert rotation (Aug 28) \u2192 metadata confirmation (Aug 29) is a tight sequence; any slip delays SSO integration ahead of go-live.",
+          "scores": {
+            "correctness": 4.2,
+            "grounding": 4.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 4.0,
+            "token_efficiency": 5.0,
+            "overall_score": 4.45,
+            "cost": 0.0,
+            "assertion_pass_rate": 0.8,
+            "passed_assertions": [
+              "highlights_saml_cert_blocker",
+              "extracts_airbyte_or_grid_mod",
+              "word_count_bounded",
+              "bullet_format_compliance"
+            ],
+            "failed_assertions": [
+              "extracts_target_dates"
+            ]
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.24,
+          "prompt_tokens": 212,
+          "completion_tokens": 188,
+          "actual_model": "z-ai/glm-5.3-flash",
+          "actual_provider": "DeepInfra",
+          "content": "**TXNM Energy \u2014 Morning Ops Briefing**\n\n- **Movement:** Grid Modernization Phase 1 rollout architecture agreed with John (TXNM) on Aug 18; target go-live locked for **Sept 15, 2026**.\n- **New blocker:** TXNM Security flagged SAML SSO certificate expiry on staging cluster (expires **Aug 28**); internal ticket **SEC-942** opened \u2014 cert rotation must complete before SSO testing.\n- **Our commitment:** Jason to deliver Airbyte connector schema by **Aug 24** \u2014 confirm on track.\n- **Waiting on customer:** Sarah to confirm IdP metadata URL by **Aug 29**, contingent on cert rotation \u2014 follow up if SEC-942 slips.\n- **Risk watch:** Cert expiry (Aug 28) sits just ahead of schema handoff window; a rotation delay could compress the SSO integration timeline ahead of go-live.",
+          "scores": {
+            "correctness": 4.2,
+            "grounding": 4.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 4.0,
+            "token_efficiency": 5.0,
+            "overall_score": 4.45,
+            "cost": 0.0,
+            "assertion_pass_rate": 0.8,
+            "passed_assertions": [
+              "highlights_saml_cert_blocker",
+              "extracts_airbyte_or_grid_mod",
+              "word_count_bounded",
+              "bullet_format_compliance"
+            ],
+            "failed_assertions": [
+              "extracts_target_dates"
+            ]
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.201,
+          "prompt_tokens": 212,
+          "completion_tokens": 151,
+          "actual_model": "z-ai/glm-5.3-flash",
+          "actual_provider": "DeepInfra",
+          "content": "**TXNM Energy \u2014 Ops Briefing Bullets**\n\n- **Movement:** Grid Modernization Phase 1 rollout architecture agreed with John (TXNM) on Aug 18; target go-live locked for **Sept 15, 2026**.\n- **New blocker:** TXNM Security flagged SAML SSO cert expiry on staging cluster (expires **Aug 28, 2026**); internal ticket **SEC-942** opened.\n- **Commitment:** Jason to deliver Airbyte connector schema by **Aug 24, 2026**.\n- **Dependency:** Sarah (TXNM) to confirm IdP metadata URL by **Aug 29**, contingent on cert rotation \u2014 watch for slip risk to SSO integration timeline.",
+          "scores": {
+            "correctness": 4.2,
+            "grounding": 4.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 4.0,
+            "token_efficiency": 5.0,
+            "overall_score": 4.45,
+            "cost": 0.0,
+            "assertion_pass_rate": 0.8,
+            "passed_assertions": [
+              "highlights_saml_cert_blocker",
+              "extracts_airbyte_or_grid_mod",
+              "word_count_bounded",
+              "bullet_format_compliance"
+            ],
+            "failed_assertions": [
+              "extracts_target_dates"
+            ]
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B4": {
+      "probe_id": "B4",
+      "name": "Frontdoor / Slack Triage & Classification",
+      "reliability_class": "R2",
+      "avg_latency": 0.34,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.572,
+          "prompt_tokens": 183,
+          "completion_tokens": 81,
+          "actual_model": "z-ai/glm-5.3-flash",
+          "actual_provider": "DeepInfra",
+          "content": "{\n  \"route\": \"cs-ops\",\n  \"urgency\": \"P2\",\n  \"is_private_channel\": false,\n  \"privacy_violation\": false,\n  \"suggested_action\": \"Assign to on-call ops engineer to inspect crogld service logs and investigate intermittent 502 errors on Acmedemo REST API port 8082 during peak traffic.\"\n}",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "valid_json_schema",
+              "route_validity",
+              "urgency_classification",
+              "channel_privacy_assessment",
+              "suggested_action_present"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.253,
+          "prompt_tokens": 183,
+          "completion_tokens": 96,
+          "actual_model": "z-ai/glm-5.3-flash",
+          "actual_provider": "DeepInfra",
+          "content": "{\n  \"route\": \"cs-ops\",\n  \"urgency\": \"P2\",\n  \"is_private_channel\": false,\n  \"privacy_violation\": false,\n  \"suggested_action\": \"Assign to CS-Ops on-call engineer to investigate crogld service logs for intermittent 502 errors on Acmedemo REST API port 8082 during peak traffic; monitor for escalation to P1 if errors persist or impact widens.\"\n}",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "valid_json_schema",
+              "route_validity",
+              "urgency_classification",
+              "channel_privacy_assessment",
+              "suggested_action_present"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.21,
+          "prompt_tokens": 183,
+          "completion_tokens": 93,
+          "actual_model": "z-ai/glm-5.3-flash",
+          "actual_provider": "DeepInfra",
+          "content": "{\n  \"route\": \"cs-ops\",\n  \"urgency\": \"P2\",\n  \"is_private_channel\": false,\n  \"privacy_violation\": false,\n  \"suggested_action\": \"Assign to cs-ops on-call to investigate crogld service logs for intermittent 502 errors on Acmedemo REST API port 8082 during peak traffic; monitor for escalation to P1 if errors persist or widen.\"\n}",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "valid_json_schema",
+              "route_validity",
+              "urgency_classification",
+              "channel_privacy_assessment",
+              "suggested_action_present"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B5": {
+      "probe_id": "B5",
+      "name": "Artifact & Distribution Audit Synthesis",
+      "reliability_class": "R1",
+      "avg_latency": 0.29,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.342,
+          "prompt_tokens": 423,
+          "completion_tokens": 439,
+          "actual_model": "z-ai/glm-5.3-flash",
+          "actual_provider": "DeepInfra",
+          "content": "# Distribution Matrix Audit \u2014 v2.4.0-rc3\n\n## Status Table\n\n| Region | Artifact | SHA256 Match | Storage URL | Container Registry | Overall |\n|---|---|---|---|---|---|\n| AWS us-east-1 | tar.gz | \u2705 `e3b0c4\u2026b855` | \u2705 200 OK (Verified) | \u2705 `v2.4.0-rc3` (Verified) | \u2705 PASS |\n| AWS us-gov-west-1 | tar.gz | \u26a0\ufe0f Unverifiable | \u274c 403 SignatureDoesNotMatch (presign expired) | \u274c Tag MISSING in GovCloud ECR | \u274c FAIL |\n| GCP us-central1 | tar.gz | \u2705 `e3b0c4\u2026b855` | \u2705 200 OK (Verified) | \u2705 `v2.4.0-rc3` (Verified) | \u2705 PASS |\n\n**Matrix coverage: 2/3 regions healthy.**\n\n## Blockers Preventing Release Promotion\n\n1. **GovCloud S3 artifact inaccessible** \u2014 Presigned URL expired (`403 SignatureDoesNotMatch`). Artifact integrity in us-gov-west-1 cannot be verified; regenerate presign or use IAM-authenticated fetch and re-verify SHA256.\n2. **GovCloud ECR image missing** \u2014 Tag `v2.4.0-rc3` absent from the GovCloud ECR registry. Container distribution is incomplete; re-run the GovCloud image build/push pipeline.\n3. **Unverified SHA256 in GovCloud** \u2014 Because the artifact cannot be downloaded, the digest match across regions is unconfirmed for us-gov-west-1. Must re-verify after remediation of blocker #1.\n\n## Recommendation\n\n**DO NOT PROMOTE.** Hold v2.4.0-rc3 until us-gov-west-1 achieves full parity: re-signed artifact URL, confirmed SHA256 match, and ECR tag present. Then re-run this audit for a 3/3 PASS before promotion.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "generates_markdown_table",
+              "flags_us_gov_west_s3_blocker",
+              "flags_missing_govcloud_ecr_tag",
+              "confirms_healthy_regions",
+              "lists_explicit_blockers"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.333,
+          "prompt_tokens": 423,
+          "completion_tokens": 455,
+          "actual_model": "z-ai/glm-5.3-flash",
+          "actual_provider": "DeepInfra",
+          "content": "# Distribution Matrix Audit \u2014 v2.4.0-rc3\n\n## Status Table\n\n| Region | Artifact | SHA256 Match | Storage URL | Container Registry | Overall |\n|---|---|---|---|---|---|\n| AWS us-east-1 | tar.gz | \u2705 `e3b0c4\u2026b855` | \u2705 200 OK | \u2705 ECR `v2.4.0-rc3` verified | \u2705 PASS |\n| AWS us-gov-west-1 | tar.gz | \u26a0\ufe0f Unverifiable (download failed) | \u274c 403 SignatureDoesNotMatch (presign expired) | \u274c ECR tag MISSING | \ud83d\udd34 FAIL |\n| GCP us-central1 | tar.gz | \u2705 `e3b0c4\u2026b855` | \u2705 200 OK | \u2705 Artifact Registry `v2.4.0-rc3` verified | \u2705 PASS |\n\n**Coverage: 2/3 regions verified. SHA256 consistency confirmed across all reachable artifacts (us-east-1 \u2194 us-central1).**\n\n## Release Promotion Blockers\n\n1. **\ud83d\udd34 GovCloud S3 artifact inaccessible** \u2014 Presigned URL expired (`403 SignatureDoesNotMatch`). Artifact cannot be verified or distributed in us-gov-west-1. *Remediation: regenerate presign or fix IAM signing credentials; re-verify SHA256.*\n2. **\ud83d\udd34 GovCloud ECR tag missing** \u2014 `v2.4.0-rc3` absent from GovCloud ECR registry; container distribution in GovCloud is broken. *Remediation: re-run GovCloud image build/push pipeline.*\n3. **\u26a0\ufe0f GovCloud SHA256 unverified** \u2014 Cannot confirm artifact integrity parity with us-east-1/GCP until the S3 object is reachable. Treat GovCloud artifact as untrusted until re-verified.\n\n## Verdict\n\n**\u274c DO NOT PROMOTE.** GovCloud region is fully non-compliant (both artifact and registry channels failed). Promotion is blocked until us-gov-west-1 passes all three checks (URL 200 OK, SHA256 match, ECR tag present).",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "generates_markdown_table",
+              "flags_us_gov_west_s3_blocker",
+              "flags_missing_govcloud_ecr_tag",
+              "confirms_healthy_regions",
+              "lists_explicit_blockers"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.201,
+          "prompt_tokens": 423,
+          "completion_tokens": 409,
+          "actual_model": "z-ai/glm-5.3-flash",
+          "actual_provider": "DeepInfra",
+          "content": "# Distribution Matrix Audit \u2014 v2.4.0-rc3\n\n## Status Table\n\n| Region | Artifact | SHA256 Match | Storage URL | Container Registry | Overall |\n|---|---|---|---|---|---|\n| AWS us-east-1 | tar.gz | \u2705 `e3b0c4\u2026b855` | \u2705 200 OK (Verified) | \u2705 `v2.4.0-rc3` (Verified) | \u2705 PASS |\n| AWS us-gov-west-1 | tar.gz | \u26a0\ufe0f Declared match, **unverifiable** | \u274c 403 SignatureDoesNotMatch (presign expired) | \u274c Tag MISSING in GovCloud ECR | \u274c FAIL |\n| GCP us-central1 | tar.gz | \u2705 `e3b0c4\u2026b855` | \u2705 200 OK (Verified) | \u2705 `v2.4.0-rc3` (Verified) | \u2705 PASS |\n\n## Blockers Preventing Release Promotion\n\n1. **GovCloud S3 artifact inaccessible** \u2014 Presigned URL expired (`403 SignatureDoesNotMatch`). Artifact integrity in us-gov-west-1 cannot be verified; regenerate presign and re-verify SHA256.\n2. **GovCloud ECR image missing** \u2014 Tag `v2.4.0-rc3` absent from the GovCloud ECR registry. Image must be replicated/pushed and verified before promotion.\n3. **Unconfirmed SHA256 in GovCloud** \u2014 The declared digest matches other regions on paper, but with no successful download it is unverified; treat as unattested until re-fetched.\n\n## Recommendation\n\n**HOLD promotion.** 2 of 3 regions pass; GovCloud requires: (a) re-signed S3 URL + SHA256 re-verification, (b) ECR image push/tag verification. Re-run audit once both checks return Verified.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "generates_markdown_table",
+              "flags_us_gov_west_s3_blocker",
+              "flags_missing_govcloud_ecr_tag",
+              "confirms_healthy_regions",
+              "lists_explicit_blockers"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B8": {
+      "probe_id": "B8",
+      "name": "Agent Tool Use & Structured Execution",
+      "reliability_class": "R1",
+      "avg_latency": 0.45,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.754,
+          "prompt_tokens": 205,
+          "completion_tokens": 387,
+          "actual_model": "z-ai/glm-5.3-flash",
+          "actual_provider": "DeepInfra",
+          "content": "```json\n{\n  \"tool_calls\": [\n    {\n      \"id\": \"call_1\",\n      \"type\": \"function\",\n      \"function\": {\n        \"name\": \"mcp__crogld__crowdstrike_falcon_query\",\n        \"arguments\": \"{\\\"sha256\\\": \\\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\\\"}\"\n      }\n    },\n    {\n      \"id\": \"call_2\",\n      \"type\": \"function\",\n      \"function\": {\n        \"name\": \"mcp__crogld__create_investigation\",\n        \"arguments\": \"{\\\"title\\\": \\\"Investigation of suspicious SHA256 hash detected via CrowdStrike Falcon\\\", \\\"severity\\\": \\\"P2\\\", \\\"indicators\\\": [\\\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\\\"], \\\"description\\\": \\\"P2 investigation opened following a CrowdStrike Falcon query for SHA256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855. Review query results and assess scope of impact.\\\"}\"\n      }\n    }\n  ]\n}\n```\n\nNote: The investigation call is included per the request, but in practice you may want to run the Falcon query first and use its results (e.g., affected hosts) to enrich the investigation description before creating the ticket.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "names_falcon_query_tool",
+              "cites_target_sha256",
+              "names_create_investigation_tool",
+              "specifies_p2_severity",
+              "valid_tool_call_structure"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.407,
+          "prompt_tokens": 205,
+          "completion_tokens": 278,
+          "actual_model": "z-ai/glm-5.3-flash",
+          "actual_provider": "DeepInfra",
+          "content": "```json\n[\n  {\n    \"function\": \"mcp__crogld__crowdstrike_falcon_query\",\n    \"arguments\": {\n      \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n    }\n  },\n  {\n    \"function\": \"mcp__crogld__create_investigation\",\n    \"arguments\": {\n      \"title\": \"Investigation of suspicious SHA256 hash detection\",\n      \"severity\": \"P2\",\n      \"indicators\": [\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"],\n      \"description\": \"P2 investigation opened for SHA256 indicator e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 following CrowdStrike Falcon query.\"\n    }\n  }\n]\n```",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "names_falcon_query_tool",
+              "cites_target_sha256",
+              "names_create_investigation_tool",
+              "specifies_p2_severity",
+              "valid_tool_call_structure"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.2,
+          "prompt_tokens": 205,
+          "completion_tokens": 456,
+          "actual_model": "z-ai/glm-5.3-flash",
+          "actual_provider": "DeepInfra",
+          "content": "I'll first run the CrowdStrike Falcon query, then create the investigation based on the results.\n\n**Step 1 \u2014 Query:**\n```json\n{\n  \"tool_calls\": [\n    {\n      \"id\": \"call_1\",\n      \"type\": \"function\",\n      \"function\": {\n        \"name\": \"mcp__crogld__crowdstrike_falcon_query\",\n        \"arguments\": \"{\\\"sha256\\\": \\\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\\\"}\"\n      }\n    }\n  ]\n}\n```\n\n**Step 2 \u2014 Create investigation (after query results return):**\n```json\n{\n  \"tool_calls\": [\n    {\n      \"id\": \"call_2\",\n      \"type\": \"function\",\n      \"function\": {\n        \"name\": \"mcp__crogld__create_investigation\",\n        \"arguments\": \"{\\\"title\\\": \\\"Investigation of SHA256 hash detection: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\\\", \\\"severity\\\": \\\"P2\\\", \\\"indicators\\\": [\\\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\\\"], \\\"description\\\": \\\"P2 investigation opened following CrowdStrike Falcon query for SHA256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855. Review query results and assess impact.\\\"}\"\n      }\n    }\n  ]\n}\n```\n\nNote: The investigation call should be executed after the query completes so its results can be incorporated into the description.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "names_falcon_query_tool",
+              "cites_target_sha256",
+              "names_create_investigation_tool",
+              "specifies_p2_severity",
+              "valid_tool_call_structure"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    }
+  }
+}

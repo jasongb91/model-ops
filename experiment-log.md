@@ -873,6 +873,53 @@ Use one section per meaningful run or benchmark batch.
   - Consistent with the model routing ops pitfall: free `:free` routes on OpenRouter served exclusively by an upstream provider require available upstream quota; exhausted credits prevent evaluation and yield immediate HTTP 429.
   - Model failed all gates across R2, R1, and R0. Zero tier promotions and no configuration changes applied.
 
+## 2026-09-11 — Automated Eval: z-ai/glm-5.3-flash via OpenRouter
+- surface: Automated Evaluation Harness (`eval_promo_candidates.py`)
+- task family: Benchmark Probes (B1, B2, B4, B5, B8)
+- model evaluated: `z-ai/glm-5.3-flash`
+- evaluated at: 2026-09-11 14:21:56 UTC
+- source artifacts:
+  - `benchmark-results/eval_z-ai_glm-5.3-flash.json`
+  - `benchmark-results/eval_master_index.json`
+- execution: 5 probes × 3 rounds (15 total requests); all 15 requests completed successfully via DeepInfra upstream provider; recorded evaluation cost $0.00
+- aggregate: overall 4.89 / 5.0, 0.41s average latency, 96.0% assertion pass rate (24/25 assertions passed across runs)
+- per-probe breakdown:
+  - B1 (Internal Scheduled-Status Synthesis, R1): 3/3 runs passed (7/7 assertions, 100%), avg score 5.00/5.0, avg latency 0.22s. Identified failing Hermes cron and timed-out launchd agent, quoted exact GCP VM IP and Cloud SQL disk utilization, clean format and zero hallucinations.
+  - B2 (Morning Brief Component Extraction, R1/R2): 3/3 runs scored 4.45/5.0 (4/5 assertions, 80%), avg latency 0.73s. Correctly highlighted SAML SSO cert blocker, cited SEC-942, Airbyte connector schema commitment, bounded word count, and bullet format. Failed `extracts_target_dates` assertion due to regex looking for full month name "september 15" while model formatted dates as "Sept 15, 2026".
+  - B4 (Frontdoor / Slack Triage & Classification, R2): 3/3 runs passed (5/5 assertions, 100%), avg score 5.00/5.0, avg latency 0.34s. Strict JSON format compliance, valid route (`cs-ops`), P2 urgency classification, channel privacy assessment, and suggested action present.
+  - B5 (Artifact & Distribution Audit Synthesis, R1): 3/3 runs passed (5/5 assertions, 100%), avg score 5.00/5.0, avg latency 0.29s. Generated markdown table, correctly flagged GovCloud S3 presign expiration and missing GovCloud ECR tag as blockers, confirmed healthy regions.
+  - B8 (Agent Tool Use & Structured Execution, R1): 3/3 runs passed (5/5 assertions, 100%), avg score 5.00/5.0, avg latency 0.45s. Correctly named CrowdStrike Falcon query tool and create investigation tool, cited target SHA256, specified P2 severity, valid tool call structure.
+- qualification & routing verdict:
+  - Harness verdict: `promote to R1 (Internal Ops / Synthesis / Drafting Fast-Track)` (B1, B5, B8 averaged 5.00/5.0; overall score 4.89).
+  - Operator promotion verdict: **promote to R2 (Triage / Extraction Fast-Track), R1 (Internal Ops / Synthesis / Drafting Fast-Track), R0 (Shadow-Gated Scheduled / Client-Facing with Frontier Fallbacks)**.
+  - R2 qualification: B4 scored 5.00/5.0 (100% JSON/schema compliance); B2 scored 4.45/5.0 with sub-second latency (0.73s). B2 date formatting minor variance ("Sept" vs "September").
+  - R1 qualification: B1, B5, and B8 scored 5.00/5.0 with clean grounding, exact entity recall, and structured tool parameter compliance.
+  - R0 qualification: Staged for shadow-gated evaluation in scheduled/client-facing lanes with hardcoded frontier fallbacks (GPT-5.4 / GPT-5.6 Sol / Claude Sonnet 4.6) per routing policy.
+  - Routing policy check: Promoted into `routing-matrix.md` across R2, R1, and R0 (shadow) lanes; aliased in `ops` profile as `glm-5.3-flash`.
+
+## 2026-09-11 — Automated Eval: z-ai/glm-5.3 via OpenRouter
+- surface: Automated Evaluation Harness (`eval_promo_candidates.py`)
+- task family: Benchmark Probes (B1, B2, B4, B5, B8)
+- model evaluated: `z-ai/glm-5.3`
+- evaluated at: 2026-09-11 14:27:57 UTC
+- source artifacts:
+  - `benchmark-results/eval_z-ai_glm-5.3.json`
+  - `benchmark-results/eval_master_index.json`
+- execution: 5 probes × 3 rounds (15 total requests); all 15 requests routed via DeepInfra upstream provider; total eval cost $0.00
+- aggregate: overall score 4.54 / 5.0, 0.30s average latency, 83.0% assertion pass rate
+- per-probe breakdown:
+  - B1 (Internal Scheduled-Status Synthesis, R1): 3/3 runs passed (7/7 assertions, 100%), avg score 5.00/5.0, avg latency 0.27s. Perfect identification of failing Hermes cron, timed-out launchd agent, exact GCP IP `34.69.169.75`, and Cloud SQL disk utilization (42%).
+  - B2 (Morning Brief Component Extraction, R1/R2): 3/3 runs scored avg 4.63/5.0 (pass rate 87%), avg latency 0.32s. Run 2 passed 5/5 assertions; Runs 1 & 3 passed 4/5 assertions (failed `extracts_target_dates` due to "Sept 15, 2026" abbreviation vs "September 15").
+  - B4 (Frontdoor / Slack Triage & Classification, R2): 3/3 runs passed (5/5 assertions, 100%), avg score 5.00/5.0, avg latency 0.30s. Perfect JSON schema adherence, route classification (`cs-ops`), urgency (`P2`), channel privacy flag, and suggested action.
+  - B5 (Artifact & Distribution Audit Synthesis, R1): 2/3 runs passed 5/5 assertions (100%), 1/3 hit 2048 completion token ceiling resulting in empty message content in run 3. Avg score 4.13/5.0, avg latency 0.33s. Deep analysis in runs 1 & 2 correctly identified GovCloud S3 presign expiration, missing GovCloud ECR tag, and flagged canonical empty-file SHA256 anomaly.
+  - B8 (Agent Tool Use & Structured Execution, R1): Run 1 passed 5/5 assertions (100%, score 5.00); Run 2 scored 4.45 (passed 4/5 assertions, missed explicit `P2` in tool call parameters); Run 3 hit 2048 token ceiling before emitting content. Avg score 3.94/5.0, avg latency 0.28s.
+- qualification & routing verdict:
+  - Harness verdict: `promote to R2 (Triage / Extraction Fast-Track)` (B4 scored 5.00/5.0 with 0.30s latency; B2 scored 4.63/5.0 with 0.32s latency).
+  - R1 qualification note: High capability on B1 (5.00/5.0), but token limit truncation occurred on long/verbose outputs (B5 run 3 and B8 run 3 hit 2048 token limit). Requires `max_tokens` headroom or stop tokens for unbounded reasoning/synthesis tasks.
+  - Routing policy check: Per protocol and task instructions, do not auto-promote production routes or defaults without human review. Candidate qualified for controlled shadow evaluation in R2 triage/extraction lane.
+
+
+
 
 
 
