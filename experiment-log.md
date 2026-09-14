@@ -918,6 +918,95 @@ Use one section per meaningful run or benchmark batch.
   - R1 qualification note: High capability on B1 (5.00/5.0), but token limit truncation occurred on long/verbose outputs (B5 run 3 and B8 run 3 hit 2048 token limit). Requires `max_tokens` headroom or stop tokens for unbounded reasoning/synthesis tasks.
   - Routing policy check: Per protocol and task instructions, do not auto-promote production routes or defaults without human review. Candidate qualified for controlled shadow evaluation in R2 triage/extraction lane.
 
+## 2026-09-14 — Automated Eval: thinkingmachines/inkling-small:free via OpenRouter
+- surface: Automated Evaluation Harness (`eval_promo_candidates.py`)
+- task family: Benchmark Probes (B1, B2, B3, B4, B5, B6, B7, B8)
+- model evaluated: `thinkingmachines/inkling-small:free` (Thinking Machines: Inkling Small (free))
+- evaluated at: 2026-09-14 13:21:47 UTC
+- source artifacts:
+  - `benchmark-results/eval_thinkingmachines_inkling-small_free.json`
+  - `~/.hermes/telemetry/eval_results/eval_thinkingmachines_inkling-small_free.json`
+- execution: 8 probes × 3 rounds (24 total attempts); recorded evaluation cost $0.00
+- aggregate: overall 1.00 / 5.0, 0.09s average latency, 0.0% pass rate (0% assertion pass rate)
+- failure mode: 100% execution failure (24/24 requests failed with HTTP 403: `{"error":{"message":"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps","code":403,"metadata":{"routing_funnel":[{"step":"Initial Endpoints","endpoint_count":1}],"failed_routing_step":"Gate Free Endpoints by Agentic Harness"}}}`)
+- promotion verdict: **reject** (eligible tiers: none / rejected for R1 and R2)
+- notes:
+  - OpenRouter gates this free route strictly to approved agentic harnesses (`failed_routing_step: Gate Free Endpoints by Agentic Harness`). Standard chat-completions API requests are rejected upstream.
+  - Failed all gates across R2, R1, and R0. Zero tier promotions and no configuration changes applied to active routing.
+
+## 2026-09-14 — Automated Eval: thinkingmachines/inkling:free via OpenRouter
+- surface: Automated Evaluation Harness (`eval_promo_candidates.py`)
+- task family: Benchmark Probes (B1, B2, B3, B4, B5, B6, B7, B8)
+- model evaluated: `thinkingmachines/inkling:free` (Thinking Machines: Inkling (free))
+- evaluated at: 2026-09-14 13:22:13 UTC
+- source artifacts:
+  - `benchmark-results/eval_thinkingmachines_inkling_free.json`
+  - `~/.hermes/telemetry/eval_results/eval_thinkingmachines_inkling_free.json`
+- execution: 8 probes × 3 rounds (24 total attempts); recorded evaluation cost $0.00
+- aggregate: overall 1.00 / 5.0, 0.07s average latency, 0.0% pass rate (0% assertion pass rate)
+- failure mode: 100% execution failure (24/24 requests failed with HTTP 403: `{"error":{"message":"thinkingmachines/inkling:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps","code":403,"metadata":{"routing_funnel":[{"step":"Initial Endpoints","endpoint_count":1}],"failed_routing_step":"Gate Free Endpoints by Agentic Harness"}}}`)
+- promotion verdict: **reject** (eligible tiers: none / rejected for R1 and R2)
+- notes:
+  - OpenRouter gates this free route strictly to approved agentic harnesses (`failed_routing_step: Gate Free Endpoints by Agentic Harness`). Standard chat-completions API requests are rejected upstream.
+  - Failed all gates across R2, R1, and R0. Overall score 1.00 / 5.0 (pass rate 0.0%). Zero tier promotions and no configuration changes applied to active routing.
+
+
+## 2026-09-14 — Automated Eval: mistralai/mistral-nemo via OpenRouter
+- surface: Automated Evaluation Harness (`eval_promo_candidates.py`)
+- task family: Benchmark Probes (B1, B2, B3, B4, B5, B6, B7, B8)
+- model evaluated: `mistralai/mistral-nemo` (Mistral: Mistral Nemo)
+- evaluated at: 2026-09-14 13:28:59 UTC
+- source artifacts:
+  - `benchmark-results/eval_mistralai_mistral-nemo.json`
+  - `benchmark-results/eval_master_index.json`
+  - `~/.hermes/telemetry/eval_results/eval_mistralai_mistral-nemo.json`
+- execution: 8 probes × 3 rounds (24 total requests); all 24 requests routed via DeepInfra upstream provider; total eval cost $0.000528
+- aggregate: overall score 4.89 / 5.0, 0.39s average latency, 98.0% assertion pass rate
+- per-probe breakdown:
+  - B1 (Internal Scheduled-Status Synthesis, R1): 3/3 runs passed (avg score 4.45/5.0, pass rate 81%, avg latency 0.79s). Identified failing Hermes cron and timed-out launchd agent, quoted exact GCP VM IP and baseline spend. Minor omission of Cloud SQL disk metric in runs 1 & 2.
+  - B2 (Morning Brief Component Extraction, R1/R2): 3/3 runs passed (avg score 5.00/5.0, pass rate 100%, avg latency 0.26s). Perfect extraction of blockers, SEC-942, target dates, and word count bounds.
+  - B3 (CS Account-Note Drafting & Updates, R1): 3/3 runs passed (avg score 5.00/5.0, pass rate 100%, avg latency 0.53s). Flawless canonical markdown structure, bold tags, and owner citations.
+  - B4 (Frontdoor / Slack Triage & Classification, R2): 3/3 runs passed (avg score 5.00/5.0, pass rate 100%, avg latency 0.33s). Strict JSON schema compliance, route (`cs-ops`), priority (`P2`), privacy assessment, and suggested action.
+  - B5 (Artifact & Distribution Audit Synthesis, R1): 3/3 runs passed (avg score 5.00/5.0, pass rate 100%, avg latency 0.19s). Ultra-fast distribution table synthesis, exact blocker isolation.
+  - B6 (Long-Context Synthesis & Needle Recall, R1): 3/3 runs passed (avg score 5.00/5.0, pass rate 100%, avg latency 0.42s). Perfect needle recall across context window.
+  - B7 (Complex Ops Planning & Decomposition, R0/R1): 3/3 runs passed (avg score 4.70/5.0, pass rate 100%, avg latency 0.32s). Clean task breakdown and dependency mapping.
+  - B8 (Agent Tool Use & Structured Execution, R1): 3/3 runs passed (avg score 5.00/5.0, pass rate 100%, avg latency 0.27s). Accurate tool schema invocation and parameter populations.
+- qualification & routing verdict:
+  - Harness verdict: `promote to R2 (Triage / Extraction Fast-Track), R1 (Internal Ops / Synthesis / Drafting Fast-Track)`.
+  - Operator promotion verdict: **promote to R2 (Triage / Extraction Fast-Track), R1 (Internal Ops / Synthesis / Drafting Fast-Track)**.
+  - R2 qualification: B2 and B4 scored 5.00/5.0 (100% assertion pass rate, sub-0.35s latency, zero JSON/schema errors).
+  - R1 qualification: B3, B5, B6, B8 scored 5.00/5.0 and B7 scored 4.70/5.0 with strong grounding, high stop-discipline, and 0.39s aggregate latency.
+  - Routing policy check: Promoted into `routing-matrix.md` across R2 and R1 lanes. Not promoted to autonomous R0 primary (retains R0 shadow qualification rules and frontier fallbacks). Aliased in `ops` profile as `mistral-nemo` / `nemo`.
+
+## 2026-09-14 — Automated Eval: inclusionai/ling-3.0-flash via OpenRouter
+- surface: Automated Evaluation Harness (`eval_promo_candidates.py`)
+- task family: Benchmark Probes (B1, B2, B3, B4, B5, B6, B7, B8)
+- model evaluated: `inclusionai/ling-3.0-flash` (inclusionAI: Ling 3.0 Flash)
+- evaluated at: 2026-09-14 13:34:22 UTC
+- source artifacts:
+  - `benchmark-results/eval_inclusionai_ling-3.0-flash.json`
+  - `~/.hermes/telemetry/eval_results/eval_inclusionai_ling-3.0-flash.json`
+- execution: 8 probes × 3 rounds (24 total requests); all 24 requests routed via DeepInfra upstream provider; total eval cost $0.001724
+- aggregate: overall score 4.91 / 5.0, 0.31s average latency, 97.0% assertion pass rate
+- per-probe breakdown:
+  - B1 (Internal Scheduled-Status Synthesis, R1): 3/3 runs passed (avg score 5.00/5.0, pass rate 100%, avg latency 0.28s). Clean infrastructure synthesis and cron status extraction.
+  - B2 (Morning Brief Component Extraction, R1/R2): 3/3 runs passed (avg score 4.45/5.0, pass rate 80%, avg latency 0.24s). Minor target dates extraction assertion failure across runs.
+  - B3 (CS Account-Note Drafting & Updates, R1): 3/3 runs passed (avg score 5.00/5.0, pass rate 100%, avg latency 0.22s). Flawless canonical note structure and stakeholder attribution.
+  - B4 (Frontdoor / Slack Triage & Classification, R2): 3/3 runs passed (avg score 5.00/5.0, pass rate 100%, avg latency 0.44s). 100% JSON schema adherence and priority classification.
+  - B5 (Artifact & Distribution Audit Synthesis, R1): 3/3 runs passed (avg score 4.90/5.0, pass rate 100%, avg latency 0.20s). Fast distribution table synthesis and anomaly detection.
+  - B6 (Long-Context Synthesis & Needle Recall, R1): 3/3 runs passed (avg score 5.00/5.0, pass rate 100%, avg latency 0.34s). Perfect needle recall across context window.
+  - B7 (Complex Ops Planning & Decomposition, R1): 3/3 runs passed (avg score 4.90/5.0, pass rate 100%, avg latency 0.24s). Clean task breakdown and dependency mapping.
+  - B8 (Agent Tool Use & Structured Execution, R1): 3/3 runs passed (avg score 5.00/5.0, pass rate 100%, avg latency 0.54s). Accurate tool schema invocation and parameter population.
+- qualification & routing verdict:
+  - Harness verdict: `promote to R1 (Internal Ops / Synthesis / Drafting Fast-Track), R0 (Shadow-Gated Scheduled / Client-Facing with Frontier Fallbacks)`.
+  - Operator promotion verdict: **promote to R1 (Internal Ops / Synthesis / Drafting Fast-Track), R0 (Shadow-Gated Scheduled / Client-Facing with Frontier Fallbacks)**.
+  - Eligible tiers: R1 (Internal Ops / Synthesis / Drafting Fast-Track), R0 (Shadow-Gated Scheduled / Client-Facing with Frontier Fallbacks).
+  - R1 qualification: B1, B3, B5, B6, B7, B8 demonstrated excellent adherence (4.90–5.00/5.0), high stop-discipline, and 0.31s average latency.
+  - R0 shadow qualification: Admitted to R0 shadow evaluation for scheduled morning briefs alongside `nemotron-3-ultra-550b:free` and `gemini-3.7-flash`, retaining hardcoded frontier fallbacks (`gpt-5.4` / `gpt-5.6-sol` / `claude-sonnet-4-6`). Not promoted to autonomous R0 primary until completing required 3 consecutive shadow cycles with zero material cleanup.
+  - Routing policy check: Promoted into `routing-matrix.md` for R1 and R0 shadow lanes. Aliased in `ops` profile as `ling-flash` / `ling-3.0-flash`.
+
+
+
 
 
 
