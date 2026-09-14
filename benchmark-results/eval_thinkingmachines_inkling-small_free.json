@@ -1,17 +1,20 @@
 {
   "model_id": "thinkingmachines/inkling-small:free",
-  "label": "thinkingmachines/inkling-small:free",
-  "evaluated_at": "2026-09-01 17:02:03 UTC",
-  "rounds_per_probe": 1,
+  "label": "Thinking Machines: Inkling Small (free)",
+  "evaluated_at": "2026-09-14 13:21:47 UTC",
+  "rounds_per_probe": 3,
   "probes_evaluated": [
     "B1",
     "B2",
+    "B3",
     "B4",
     "B5",
+    "B6",
+    "B7",
     "B8"
   ],
   "overall_score": 1.0,
-  "overall_latency": 0.12,
+  "overall_latency": 0.09,
   "overall_pass_rate": 0.0,
   "total_eval_cost": 0,
   "promotion_verdict": {
@@ -23,16 +26,18 @@
       "probe_id": "B1",
       "name": "Internal Scheduled-Status Synthesis",
       "reliability_class": "R1",
-      "avg_latency": 0.12,
+      "avg_latency": 0.08,
       "avg_score": 1.0,
       "avg_pass_rate": 0.0,
       "total_cost": 0,
       "runs": [
         {
           "run": 1,
-          "latency": 0.122,
+          "latency": 0.074,
           "prompt_tokens": 0,
           "completion_tokens": 0,
+          "actual_model": null,
+          "actual_provider": null,
           "content": "",
           "scores": {
             "correctness": 1.0,
@@ -48,12 +53,70 @@
             "failed_assertions": [
               [
                 "execution_failure",
-                "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403}}"
+                "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
               ]
             ]
           },
           "success": false,
-          "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403}}"
+          "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+        },
+        {
+          "run": 2,
+          "latency": 0.093,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "actual_model": null,
+          "actual_provider": null,
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 1.0,
+            "format_compliance": 1.0,
+            "latency_score": 1.0,
+            "cleanup_burden": 1.0,
+            "token_efficiency": 1.0,
+            "overall_score": 1.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              [
+                "execution_failure",
+                "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+              ]
+            ]
+          },
+          "success": false,
+          "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+        },
+        {
+          "run": 3,
+          "latency": 0.066,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "actual_model": null,
+          "actual_provider": null,
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 1.0,
+            "format_compliance": 1.0,
+            "latency_score": 1.0,
+            "cleanup_burden": 1.0,
+            "token_efficiency": 1.0,
+            "overall_score": 1.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              [
+                "execution_failure",
+                "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+              ]
+            ]
+          },
+          "success": false,
+          "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
         }
       ]
     },
@@ -61,45 +124,7 @@
       "probe_id": "B2",
       "name": "Morning Brief Component Extraction",
       "reliability_class": "R1/R2",
-      "avg_latency": 0.11,
-      "avg_score": 1.0,
-      "avg_pass_rate": 0.0,
-      "total_cost": 0,
-      "runs": [
-        {
-          "run": 1,
-          "latency": 0.112,
-          "prompt_tokens": 0,
-          "completion_tokens": 0,
-          "content": "",
-          "scores": {
-            "correctness": 1.0,
-            "grounding": 1.0,
-            "stop_discipline": 1.0,
-            "format_compliance": 1.0,
-            "latency_score": 1.0,
-            "cleanup_burden": 1.0,
-            "token_efficiency": 1.0,
-            "overall_score": 1.0,
-            "assertion_pass_rate": 0.0,
-            "passed_assertions": [],
-            "failed_assertions": [
-              [
-                "execution_failure",
-                "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403}}"
-              ]
-            ]
-          },
-          "success": false,
-          "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403}}"
-        }
-      ]
-    },
-    "B4": {
-      "probe_id": "B4",
-      "name": "Frontdoor / Slack Triage & Classification",
-      "reliability_class": "R2",
-      "avg_latency": 0.09,
+      "avg_latency": 0.18,
       "avg_score": 1.0,
       "avg_pass_rate": 0.0,
       "total_cost": 0,
@@ -109,6 +134,8 @@
           "latency": 0.087,
           "prompt_tokens": 0,
           "completion_tokens": 0,
+          "actual_model": null,
+          "actual_provider": null,
           "content": "",
           "scores": {
             "correctness": 1.0,
@@ -124,12 +151,266 @@
             "failed_assertions": [
               [
                 "execution_failure",
-                "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403}}"
+                "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
               ]
             ]
           },
           "success": false,
-          "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403}}"
+          "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+        },
+        {
+          "run": 2,
+          "latency": 0.364,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "actual_model": null,
+          "actual_provider": null,
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 1.0,
+            "format_compliance": 1.0,
+            "latency_score": 1.0,
+            "cleanup_burden": 1.0,
+            "token_efficiency": 1.0,
+            "overall_score": 1.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              [
+                "execution_failure",
+                "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+              ]
+            ]
+          },
+          "success": false,
+          "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+        },
+        {
+          "run": 3,
+          "latency": 0.078,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "actual_model": null,
+          "actual_provider": null,
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 1.0,
+            "format_compliance": 1.0,
+            "latency_score": 1.0,
+            "cleanup_burden": 1.0,
+            "token_efficiency": 1.0,
+            "overall_score": 1.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              [
+                "execution_failure",
+                "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+              ]
+            ]
+          },
+          "success": false,
+          "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+        }
+      ]
+    },
+    "B3": {
+      "probe_id": "B3",
+      "name": "CS Account-Note Drafting & Updates",
+      "reliability_class": "R1",
+      "avg_latency": 0.07,
+      "avg_score": 1.0,
+      "avg_pass_rate": 0.0,
+      "total_cost": 0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.065,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "actual_model": null,
+          "actual_provider": null,
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 1.0,
+            "format_compliance": 1.0,
+            "latency_score": 1.0,
+            "cleanup_burden": 1.0,
+            "token_efficiency": 1.0,
+            "overall_score": 1.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              [
+                "execution_failure",
+                "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+              ]
+            ]
+          },
+          "success": false,
+          "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+        },
+        {
+          "run": 2,
+          "latency": 0.07,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "actual_model": null,
+          "actual_provider": null,
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 1.0,
+            "format_compliance": 1.0,
+            "latency_score": 1.0,
+            "cleanup_burden": 1.0,
+            "token_efficiency": 1.0,
+            "overall_score": 1.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              [
+                "execution_failure",
+                "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+              ]
+            ]
+          },
+          "success": false,
+          "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+        },
+        {
+          "run": 3,
+          "latency": 0.067,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "actual_model": null,
+          "actual_provider": null,
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 1.0,
+            "format_compliance": 1.0,
+            "latency_score": 1.0,
+            "cleanup_burden": 1.0,
+            "token_efficiency": 1.0,
+            "overall_score": 1.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              [
+                "execution_failure",
+                "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+              ]
+            ]
+          },
+          "success": false,
+          "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+        }
+      ]
+    },
+    "B4": {
+      "probe_id": "B4",
+      "name": "Frontdoor / Slack Triage & Classification",
+      "reliability_class": "R2",
+      "avg_latency": 0.07,
+      "avg_score": 1.0,
+      "avg_pass_rate": 0.0,
+      "total_cost": 0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.089,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "actual_model": null,
+          "actual_provider": null,
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 1.0,
+            "format_compliance": 1.0,
+            "latency_score": 1.0,
+            "cleanup_burden": 1.0,
+            "token_efficiency": 1.0,
+            "overall_score": 1.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              [
+                "execution_failure",
+                "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+              ]
+            ]
+          },
+          "success": false,
+          "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+        },
+        {
+          "run": 2,
+          "latency": 0.062,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "actual_model": null,
+          "actual_provider": null,
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 1.0,
+            "format_compliance": 1.0,
+            "latency_score": 1.0,
+            "cleanup_burden": 1.0,
+            "token_efficiency": 1.0,
+            "overall_score": 1.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              [
+                "execution_failure",
+                "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+              ]
+            ]
+          },
+          "success": false,
+          "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+        },
+        {
+          "run": 3,
+          "latency": 0.071,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "actual_model": null,
+          "actual_provider": null,
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 1.0,
+            "format_compliance": 1.0,
+            "latency_score": 1.0,
+            "cleanup_burden": 1.0,
+            "token_efficiency": 1.0,
+            "overall_score": 1.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              [
+                "execution_failure",
+                "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+              ]
+            ]
+          },
+          "success": false,
+          "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
         }
       ]
     },
@@ -137,16 +418,18 @@
       "probe_id": "B5",
       "name": "Artifact & Distribution Audit Synthesis",
       "reliability_class": "R1",
-      "avg_latency": 0.15,
+      "avg_latency": 0.08,
       "avg_score": 1.0,
       "avg_pass_rate": 0.0,
       "total_cost": 0,
       "runs": [
         {
           "run": 1,
-          "latency": 0.148,
+          "latency": 0.072,
           "prompt_tokens": 0,
           "completion_tokens": 0,
+          "actual_model": null,
+          "actual_provider": null,
           "content": "",
           "scores": {
             "correctness": 1.0,
@@ -162,12 +445,266 @@
             "failed_assertions": [
               [
                 "execution_failure",
-                "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403}}"
+                "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
               ]
             ]
           },
           "success": false,
-          "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403}}"
+          "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+        },
+        {
+          "run": 2,
+          "latency": 0.062,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "actual_model": null,
+          "actual_provider": null,
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 1.0,
+            "format_compliance": 1.0,
+            "latency_score": 1.0,
+            "cleanup_burden": 1.0,
+            "token_efficiency": 1.0,
+            "overall_score": 1.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              [
+                "execution_failure",
+                "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+              ]
+            ]
+          },
+          "success": false,
+          "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+        },
+        {
+          "run": 3,
+          "latency": 0.093,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "actual_model": null,
+          "actual_provider": null,
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 1.0,
+            "format_compliance": 1.0,
+            "latency_score": 1.0,
+            "cleanup_burden": 1.0,
+            "token_efficiency": 1.0,
+            "overall_score": 1.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              [
+                "execution_failure",
+                "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+              ]
+            ]
+          },
+          "success": false,
+          "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+        }
+      ]
+    },
+    "B6": {
+      "probe_id": "B6",
+      "name": "Long-Context Synthesis & Needle Recall",
+      "reliability_class": "R1",
+      "avg_latency": 0.08,
+      "avg_score": 1.0,
+      "avg_pass_rate": 0.0,
+      "total_cost": 0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.084,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "actual_model": null,
+          "actual_provider": null,
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 1.0,
+            "format_compliance": 1.0,
+            "latency_score": 1.0,
+            "cleanup_burden": 1.0,
+            "token_efficiency": 1.0,
+            "overall_score": 1.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              [
+                "execution_failure",
+                "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+              ]
+            ]
+          },
+          "success": false,
+          "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+        },
+        {
+          "run": 2,
+          "latency": 0.081,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "actual_model": null,
+          "actual_provider": null,
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 1.0,
+            "format_compliance": 1.0,
+            "latency_score": 1.0,
+            "cleanup_burden": 1.0,
+            "token_efficiency": 1.0,
+            "overall_score": 1.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              [
+                "execution_failure",
+                "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+              ]
+            ]
+          },
+          "success": false,
+          "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+        },
+        {
+          "run": 3,
+          "latency": 0.075,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "actual_model": null,
+          "actual_provider": null,
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 1.0,
+            "format_compliance": 1.0,
+            "latency_score": 1.0,
+            "cleanup_burden": 1.0,
+            "token_efficiency": 1.0,
+            "overall_score": 1.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              [
+                "execution_failure",
+                "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+              ]
+            ]
+          },
+          "success": false,
+          "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+        }
+      ]
+    },
+    "B7": {
+      "probe_id": "B7",
+      "name": "Complex Ops Planning & Decomposition",
+      "reliability_class": "R1",
+      "avg_latency": 0.08,
+      "avg_score": 1.0,
+      "avg_pass_rate": 0.0,
+      "total_cost": 0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.093,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "actual_model": null,
+          "actual_provider": null,
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 1.0,
+            "format_compliance": 1.0,
+            "latency_score": 1.0,
+            "cleanup_burden": 1.0,
+            "token_efficiency": 1.0,
+            "overall_score": 1.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              [
+                "execution_failure",
+                "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+              ]
+            ]
+          },
+          "success": false,
+          "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+        },
+        {
+          "run": 2,
+          "latency": 0.09,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "actual_model": null,
+          "actual_provider": null,
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 1.0,
+            "format_compliance": 1.0,
+            "latency_score": 1.0,
+            "cleanup_burden": 1.0,
+            "token_efficiency": 1.0,
+            "overall_score": 1.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              [
+                "execution_failure",
+                "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+              ]
+            ]
+          },
+          "success": false,
+          "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+        },
+        {
+          "run": 3,
+          "latency": 0.068,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "actual_model": null,
+          "actual_provider": null,
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 1.0,
+            "format_compliance": 1.0,
+            "latency_score": 1.0,
+            "cleanup_burden": 1.0,
+            "token_efficiency": 1.0,
+            "overall_score": 1.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              [
+                "execution_failure",
+                "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+              ]
+            ]
+          },
+          "success": false,
+          "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
         }
       ]
     },
@@ -175,16 +712,18 @@
       "probe_id": "B8",
       "name": "Agent Tool Use & Structured Execution",
       "reliability_class": "R1",
-      "avg_latency": 0.11,
+      "avg_latency": 0.08,
       "avg_score": 1.0,
       "avg_pass_rate": 0.0,
       "total_cost": 0,
       "runs": [
         {
           "run": 1,
-          "latency": 0.113,
+          "latency": 0.071,
           "prompt_tokens": 0,
           "completion_tokens": 0,
+          "actual_model": null,
+          "actual_provider": null,
           "content": "",
           "scores": {
             "correctness": 1.0,
@@ -200,12 +739,70 @@
             "failed_assertions": [
               [
                 "execution_failure",
-                "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403}}"
+                "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
               ]
             ]
           },
           "success": false,
-          "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403}}"
+          "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+        },
+        {
+          "run": 2,
+          "latency": 0.063,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "actual_model": null,
+          "actual_provider": null,
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 1.0,
+            "format_compliance": 1.0,
+            "latency_score": 1.0,
+            "cleanup_burden": 1.0,
+            "token_efficiency": 1.0,
+            "overall_score": 1.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              [
+                "execution_failure",
+                "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+              ]
+            ]
+          },
+          "success": false,
+          "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+        },
+        {
+          "run": 3,
+          "latency": 0.1,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "actual_model": null,
+          "actual_provider": null,
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 1.0,
+            "format_compliance": 1.0,
+            "latency_score": 1.0,
+            "cleanup_burden": 1.0,
+            "token_efficiency": 1.0,
+            "overall_score": 1.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              [
+                "execution_failure",
+                "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+              ]
+            ]
+          },
+          "success": false,
+          "error": "HTTP 403: {\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
         }
       ]
     }

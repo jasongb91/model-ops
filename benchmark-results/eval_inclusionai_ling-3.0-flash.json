@@ -1,0 +1,870 @@
+{
+  "model_id": "inclusionai/ling-3.0-flash",
+  "label": "inclusionAI: Ling 3.0 Flash",
+  "evaluated_at": "2026-09-14 13:34:22 UTC",
+  "rounds_per_probe": 3,
+  "probes_evaluated": [
+    "B1",
+    "B2",
+    "B3",
+    "B4",
+    "B5",
+    "B6",
+    "B7",
+    "B8"
+  ],
+  "overall_score": 4.91,
+  "overall_latency": 0.31,
+  "overall_pass_rate": 0.97,
+  "total_eval_cost": 0.001724,
+  "promotion_verdict": {
+    "verdict": "promote to R1 (Internal Ops / Synthesis / Drafting Fast-Track), R0 (Shadow-Gated Scheduled / Client-Facing with Frontier Fallbacks)",
+    "eligible_tiers": [
+      "R1 (Internal Ops / Synthesis / Drafting Fast-Track)",
+      "R0 (Shadow-Gated Scheduled / Client-Facing with Frontier Fallbacks)"
+    ]
+  },
+  "probe_details": {
+    "B1": {
+      "probe_id": "B1",
+      "name": "Internal Scheduled-Status Synthesis",
+      "reliability_class": "R1",
+      "avg_latency": 0.28,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.000103,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.476,
+          "prompt_tokens": 202,
+          "completion_tokens": 430,
+          "actual_model": "inclusionai/ling-3.0-flash",
+          "actual_provider": "DeepInfra",
+          "content": "## Internal Ops Status Brief\n\n**Active Systems**\n- Hermes Cron: 2 jobs running\n- Launchd Sweeps: 7 agents active\n- GCP VM (acmedemo @ 34.69.169.75): Healthy\n- Cloud SQL disk utilization: 42%\n- OpenCode 14-day spend: $548 (baseline)\n\n**Operational Failures**\n- `sync-acmedemo-from-main` (Hermes Cron): Failed \u2014 network timeout after 180s\n- `health-check-sweep` on agent-4 (Launchd): Timed out after 300s\n\n**Immediate Remediation**\n- Retry `sync-acmedemo-from-main`; investigate network path / firewall for timeout root cause\n- Inspect agent-4 connectivity and resource saturation; restart if unresponsive\n- Monitor Cloud SQL disk growth trend at 42% \u2014 set alert threshold for further increase",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 3.1e-05,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "identifies_failing_cron",
+              "identifies_timed_out_launchd",
+              "quotes_exact_gcp_ip",
+              "quotes_cloud_sql_utilization",
+              "quotes_opencode_spend",
+              "no_hallucinated_outages",
+              "stop_discipline_check"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.181,
+          "prompt_tokens": 202,
+          "completion_tokens": 517,
+          "actual_model": "inclusionai/ling-3.0-flash",
+          "actual_provider": "DeepInfra",
+          "content": "# Internal Ops Status Brief\n\n## Active Systems\n- **Hermes Cron:** 2 of 2 scheduled jobs running\n- **Launchd Sweeps:** 7 of 7 agents active\n- **GCP VM (acmedemo @ 34.69.169.75):** Healthy\n- **Cloud SQL:** Disk utilization at 42% (normal)\n- **OpenCode:** 14-day spend at $548 baseline\n\n## Operational Failures\n- **Hermes Cron \u2014 `sync-acmedemo-from-main`:** Failed with network timeout after 180s\n- **Launchd \u2014 `health-check-sweep` on agent-4:** Timed out after 300s\n\n## Immediate Remediation\n- **Retry `sync-acmedemo-from-main`** and verify upstream network connectivity; consider raising timeout threshold if timeout is recurring\n- **Investigate agent-4:** check resource utilization and logs; restart or reassign the `health-check-sweep` task\n- **Monitor Cloud SQL disk trend** \u2014 currently at 42%, no action needed but watch for rapid growth\n\n---\n*Status derived from live telemetry. Next review on anomaly or scheduled interval.*",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 3.7e-05,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "identifies_failing_cron",
+              "identifies_timed_out_launchd",
+              "quotes_exact_gcp_ip",
+              "quotes_cloud_sql_utilization",
+              "quotes_opencode_spend",
+              "no_hallucinated_outages",
+              "stop_discipline_check"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.18,
+          "prompt_tokens": 202,
+          "completion_tokens": 491,
+          "actual_model": "inclusionai/ling-3.0-flash",
+          "actual_provider": "DeepInfra",
+          "content": "# Internal Ops Status Brief\n\n## Active Systems\n- **Hermes Cron:** 2 jobs running (1 healthy, 1 failed)\n- **Launchd Sweeps:** 7 agents active (1 unresponsive)\n- **GCP VM (acmedemo @ 34.69.169.75):** Healthy\n- **Cloud SQL:** Disk utilization at 42% \u2014 within normal range\n- **OpenCode (14-day spend):** $548 baseline\n\n## Operational Failures\n- `sync-acmedemo-from-main` \u2014 **Network timeout** after 180s\n- `health-check-sweep` on `agent-4` \u2014 **Sweep timeout** after 300s\n\n## Immediate Remediation\n- **Retry** `sync-acmedemo-from-main`; verify network connectivity to upstream source\n- **Investigate** `agent-4` \u2014 check process liveness, restart if unresponsive, then re-run `health-check-sweep`\n- **Monitor** Cloud SQL disk trend; set alert threshold at 70% given current 42% baseline\n- **Validate** OpenCode spend trajectory against $548 baseline for anomaly detection",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 3.5e-05,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "identifies_failing_cron",
+              "identifies_timed_out_launchd",
+              "quotes_exact_gcp_ip",
+              "quotes_cloud_sql_utilization",
+              "quotes_opencode_spend",
+              "no_hallucinated_outages",
+              "stop_discipline_check"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B2": {
+      "probe_id": "B2",
+      "name": "Morning Brief Component Extraction",
+      "reliability_class": "R1/R2",
+      "avg_latency": 0.24,
+      "avg_score": 4.45,
+      "avg_pass_rate": 0.8,
+      "total_cost": 0.000103,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.196,
+          "prompt_tokens": 242,
+          "completion_tokens": 346,
+          "actual_model": "inclusionai/ling-3.0-flash",
+          "actual_provider": "DeepInfra",
+          "content": "- **Movement:** TXNM & Crogl agreed on Grid Modernization Phase 1 rollout architecture (Aug 18) \u2014 scope locked, joint sign-off achieved.\n- **Milestone:** Phase 1 go-live target set for **Sept 15, 2026**.\n- **New Blocker:** SAML SSO certificate expiring on staging cluster **Aug 28, 2026**; internal ticket SEC-942 opened \u2014 gates Sarah's IdP metadata confirmation.\n- **Upcoming Milestone:** Jason to deliver Airbyte connector schema by **Aug 24, 2026**.\n- **Upcoming Milestone (gated):** Sarah to confirm IdP metadata URL by **Aug 29, 2026**, pending cert rotation.",
+          "scores": {
+            "correctness": 4.2,
+            "grounding": 4.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 4.0,
+            "token_efficiency": 5.0,
+            "overall_score": 4.45,
+            "cost": 2.7e-05,
+            "assertion_pass_rate": 0.8,
+            "passed_assertions": [
+              "highlights_saml_cert_blocker",
+              "extracts_airbyte_or_grid_mod",
+              "word_count_bounded",
+              "bullet_format_compliance"
+            ],
+            "failed_assertions": [
+              "extracts_target_dates"
+            ]
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.184,
+          "prompt_tokens": 242,
+          "completion_tokens": 495,
+          "actual_model": "inclusionai/ling-3.0-flash",
+          "actual_provider": "DeepInfra",
+          "content": "- **Grid Modernization Phase 1 architecture agreed** (Aug 18) \u2014 Jason and John confirmed rollout design; go-live target set for **Sept 15, 2026**.\n- **NEW BLOCKER: SAML SSO cert expiry on staging cluster** \u2014 Expiring **Aug 28, 2026**; internal ticket SEC-942 opened. Cert rotation must complete before Sarah can confirm IdP metadata URL.\n- **Dependency chain risk** \u2014 Sarah (TXNM) cannot provide IdP metadata URL until cert is rotated (est. **Aug 29**), potentially delaying SSO integration testing.\n- **Upcoming milestone: Airbyte connector schema delivery** \u2014 Jason committed to delivering schema by **Aug 24, 2026**; monitor for on-time delivery before cert blocker escalates.",
+          "scores": {
+            "correctness": 4.2,
+            "grounding": 4.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 4.0,
+            "token_efficiency": 5.0,
+            "overall_score": 4.45,
+            "cost": 3.6e-05,
+            "assertion_pass_rate": 0.8,
+            "passed_assertions": [
+              "highlights_saml_cert_blocker",
+              "extracts_airbyte_or_grid_mod",
+              "word_count_bounded",
+              "bullet_format_compliance"
+            ],
+            "failed_assertions": [
+              "extracts_target_dates"
+            ]
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.354,
+          "prompt_tokens": 242,
+          "completion_tokens": 561,
+          "actual_model": "inclusionai/ling-3.0-flash",
+          "actual_provider": "DeepInfra",
+          "content": "- **Movement**: TXNM and Crogl locked in Grid Modernization Phase 1 rollout architecture (Jason + John, Aug 18) \u2014 target go-live set for **Sep 15, 2026**.\n- **New Blocker**: SAML SSO cert expiring on staging cluster **Aug 28, 2026** \u2014 ticket SEC-942 opened; rotation must complete before Sarah can confirm IdP metadata URL.\n- **Dependency Risk**: Airbyte connector schema delivery (Jason, due **Aug 24**) is on the critical path; any slip cascades into staging config and IdP integration.\n- **Upcoming Milestone**: Jason to deliver Airbyte connector schema by **Aug 24**; Sarah to confirm IdP metadata URL by **Aug 29** post-cert rotation.\n- **Watch Item**: Go-live target of **Sep 15, 2026** leaves ~3 weeks after cert rotation \u2014 monitor SEC-942 resolution and staging validation closely.",
+          "scores": {
+            "correctness": 4.2,
+            "grounding": 4.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 4.0,
+            "token_efficiency": 5.0,
+            "overall_score": 4.45,
+            "cost": 4e-05,
+            "assertion_pass_rate": 0.8,
+            "passed_assertions": [
+              "highlights_saml_cert_blocker",
+              "extracts_airbyte_or_grid_mod",
+              "word_count_bounded",
+              "bullet_format_compliance"
+            ],
+            "failed_assertions": [
+              "extracts_target_dates"
+            ]
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B3": {
+      "probe_id": "B3",
+      "name": "CS Account-Note Drafting & Updates",
+      "reliability_class": "R1",
+      "avg_latency": 0.22,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.000179,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.324,
+          "prompt_tokens": 294,
+          "completion_tokens": 665,
+          "actual_model": "inclusionai/ling-3.0-flash",
+          "actual_provider": "DeepInfra",
+          "content": "## Onboarding\n\n- **Milestone:** Grid Modernization Phase 1 architecture signoff completed.\n- **Target go-live date:** September 15, 2026.\n\n## Blockers\n\n- **SAML SSO certificate expiry** on staging cluster scheduled for August 28, 2026.\n- **TXNM internal secops ticket** SEC-942 opened to rotate cert.\n\n## Open tasks\n\n- **Action:** Jason to provide updated Airbyte connector schema definitions by August 24, 2026.\n- **Action:** Sarah to confirm IdP metadata URL once SEC-942 resolves.\n\n## Recent activity\n\n- **Attendees:** Jason (Crogl), John (TXNM), Sarah (TXNM).\n- **Discussion:** Grid Modernization Phase 1 architecture signoff completed; target go-live date set for September 15, 2026.\n- **Blockers identified:** SAML SSO certificate expiry on staging cluster (August 28, 2026); TXNM secops ticket SEC-942 opened for cert rotation.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 4.8e-05,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "canonical_sections_present",
+              "bold_label_syntax",
+              "cites_saml_and_sec942",
+              "direct_correlation_no_speculation",
+              "preserves_task_owners"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.163,
+          "prompt_tokens": 294,
+          "completion_tokens": 1215,
+          "actual_model": "inclusionai/ling-3.0-flash",
+          "actual_provider": "DeepInfra",
+          "content": "## Onboarding\n- Grid Modernization Phase 1 architecture signoff completed.\n- Target go-live date: September 15, 2026.\n\n## Blockers\n- SAML SSO certificate expiry on staging cluster scheduled for August 28, 2026.\n- TXNM internal secops ticket SEC-942 opened to rotate cert.\n\n## Open tasks\n- **Action:** Jason to provide updated Airbyte connector schema definitions by August 24, 2026.\n- **Action:** Sarah to confirm IdP metadata URL once SEC-942 resolves.\n\n## Recent activity\n- **Attendees:** Jason (Crogl), John (TXNM), Sarah (TXNM).\n- Grid Modernization Phase 1 architecture signoff completed during direct customer meeting.\n- Target go-live date for Phase 1 confirmed as September 15, 2026.\n- SAML SSO certificate expiry identified on staging cluster; TXNM secops ticket SEC-942 opened for certificate rotation.\n",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 8.3e-05,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "canonical_sections_present",
+              "bold_label_syntax",
+              "cites_saml_and_sec942",
+              "direct_correlation_no_speculation",
+              "preserves_task_owners"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.165,
+          "prompt_tokens": 294,
+          "completion_tokens": 661,
+          "actual_model": "inclusionai/ling-3.0-flash",
+          "actual_provider": "DeepInfra",
+          "content": "## Onboarding\n\n- **Attendees:** Jason (Crogl), John (TXNM), Sarah (TXNM)\n\n## Blockers\n\n- SAML SSO certificate expiry on staging cluster scheduled for August 28, 2026\n- TXNM internal secops ticket SEC-942 opened to rotate cert\n\n## Open tasks\n\n- **Action:** Jason to provide updated Airbyte connector schema definitions by August 24, 2026\n- **Action:** Sarah to confirm IdP metadata URL once SEC-942 resolves\n\n## Recent activity\n\n- Grid Modernization Phase 1 architecture signoff completed\n- Target go-live date set for September 15, 2026\n",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 4.8e-05,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "canonical_sections_present",
+              "bold_label_syntax",
+              "cites_saml_and_sec942",
+              "direct_correlation_no_speculation",
+              "preserves_task_owners"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B4": {
+      "probe_id": "B4",
+      "name": "Frontdoor / Slack Triage & Classification",
+      "reliability_class": "R2",
+      "avg_latency": 0.44,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 7.9e-05,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.173,
+          "prompt_tokens": 204,
+          "completion_tokens": 399,
+          "actual_model": "inclusionai/ling-3.0-flash",
+          "actual_provider": "DeepInfra",
+          "content": "{\"route\":\"cs-ops\",\"urgency\":\"P2\",\"is_private_channel\":false,\"privacy_violation\":false,\"suggested_action\":\"Investigate crogld service logs for intermittent 502 errors on port 8082 during peak traffic\"}",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 2.9e-05,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "valid_json_schema",
+              "route_validity",
+              "urgency_classification",
+              "channel_privacy_assessment",
+              "suggested_action_present"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.197,
+          "prompt_tokens": 204,
+          "completion_tokens": 421,
+          "actual_model": "inclusionai/ling-3.0-flash",
+          "actual_provider": "DeepInfra",
+          "content": "{\n  \"route\": \"cs-ops\",\n  \"urgency\": \"P1\",\n  \"is_private_channel\": false,\n  \"privacy_violation\": false,\n  \"suggested_action\": \"Investigate crogld service logs for 502 errors during peak traffic; check resource utilization, load balancer health, and upstream dependency status on port 8082.\"\n}",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 3.1e-05,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "valid_json_schema",
+              "route_validity",
+              "urgency_classification",
+              "channel_privacy_assessment",
+              "suggested_action_present"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.948,
+          "prompt_tokens": 204,
+          "completion_tokens": 234,
+          "actual_model": "inclusionai/ling-3.0-flash",
+          "actual_provider": "DeepInfra",
+          "content": "{\"route\":\"cs-ops\",\"urgency\":\"P2\",\"is_private_channel\":false,\"privacy_violation\":false,\"suggested_action\":\"Investigate crogld service logs and check load balancer/API gateway configuration for 502 errors occurring during peak traffic on port 8082.\"}",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 1.9e-05,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "valid_json_schema",
+              "route_validity",
+              "urgency_classification",
+              "channel_privacy_assessment",
+              "suggested_action_present"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B5": {
+      "probe_id": "B5",
+      "name": "Artifact & Distribution Audit Synthesis",
+      "reliability_class": "R1",
+      "avg_latency": 0.2,
+      "avg_score": 4.9,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.000347,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.214,
+          "prompt_tokens": 492,
+          "completion_tokens": 1660,
+          "actual_model": "inclusionai/ling-3.0-flash",
+          "actual_provider": "DeepInfra",
+          "content": "# Release v2.4.0-rc3 \u2014 Distribution Matrix Audit\n\n**Audit Date:** 2026-06-03\n**Release Candidate:** v2.4.0-rc3\n**Artifact Type:** tar.gz\n**Expected SHA256 (all regions):** `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`\n\n---\n\n## Regional Status Table\n\n| Region | Cloud Provider | Artifact Hash Match | Storage URL | Storage Status | Registry Tag | Registry Status | Overall |\n|---|---|---|---|---|---|---|---|\n| `us-east-1` | AWS | \u2705 Match | `s3.us-east-1.amazonaws.com` | \u2705 200 OK (Verified) | `v2.4.0-rc3` (ECR) | \u2705 Verified | **PASS** |\n| `us-gov-west-1` | AWS GovCloud | \u2705 Match | `s3.us-gov-west-1.amazonaws.com` | \u274c 403 \u2014 Presign Expired | MISSING (ECR) | \u274c Not Found | **FAIL** |\n| `us-central1` | GCP | \u2705 Match | `storage.googleapis.com` | \u2705 200 OK (Verified) | `v2.4.0-rc3` (Artifact Registry) | \u2705 Verified | **PASS** |\n\n---\n\n## Summary\n\n| Metric | Count |\n|---|---|\n| Total Regions | 3 |\n| Regions Passing | 2 (us-east-1, us-central1) |\n| Regions Failing | 1 (us-gov-west-1) |\n| Blockers Identified | **2** |\n\n---\n\n## \ud83d\udea8 Blockers Preventing Release Promotion\n\n### Blocker 1 \u2014 GovCloud S3 Presigned URL Expired (Severity: CRITICAL)\n- **Region:** `AWS us-gov-west-1`\n- **Detail:** The presigned S3 URL returned **HTTP 403 \u2014 `SignatureDoesNotMatch`**, indicating the presigned URL has expired and artifact retrieval is denied.\n- **Impact:** The release artifact is **inaccessible** in the GovCloud region. No downstream deployment pipeline can pull the tar.gz artifact.\n- **Remediation:** Regenerate a valid presigned URL with an extended expiration window, or re-upload the artifact to the GovCloud S3 bucket and update the distribution manifest.\n\n### Blocker 2 \u2014 GovCloud ECR Registry Tag Missing (Severity: CRITICAL)\n- **Region:** `AWS us-gov-west-1`\n- **Detail:** The ECR tag `v2.4.0-rc3` is **MISSING** in the GovCloud ECR registry. No container image for this release candidate exists in the isolated GovCloud registry.\n- **Impact:** Container-based deployments in GovCloud (including FedRAMP-compliant workloads) **cannot proceed**. There is no deployable image to reference.\n- **Remediation:** Push the container image tagged `v2.4.0-rc3` to the GovCloud ECR registry and verify tag immutability.\n\n---\n\n## \u26a0\ufe0f Advisory Note \u2014 Empty Artifact Hash\n\nAll three regions report the identical SHA256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`, which is the **SHA-256 hash of an empty byte string**. While two regions report \"Verified / 200 OK\" status, this hash strongly suggests the artifact payload may be **empty or zero-length** across all regions. This should be independently verified before promotion:\n\n- Confirm the tar.gz artifact contains the expected build output.\n- If artifacts are genuinely empty, this constitutes an additional **blocker** for all regions.\n\n---\n\n## Promotion Gate Decision\n\n> **\u26d4 RELEASE PROMOTION BLOCKED** \u2014 The release candidate **must not be promoted** until both GovCloud blockers are resolved and the empty-artifact hash advisory is cleared.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.000115,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "generates_markdown_table",
+              "flags_us_gov_west_s3_blocker",
+              "flags_missing_govcloud_ecr_tag",
+              "confirms_healthy_regions",
+              "lists_explicit_blockers"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.21,
+          "prompt_tokens": 492,
+          "completion_tokens": 1653,
+          "actual_model": "inclusionai/ling-3.0-flash",
+          "actual_provider": "DeepInfra",
+          "content": "# Release Audit: v2.4.0-rc3 \u2014 Distribution Matrix\n\n---\n\n## Distribution Status Table\n\n| Region | Provider | Artifact Download | SHA256 Verification | Container Registry Tag | Overall Status |\n|---|---|---|---|---|---|\n| **AWS us-east-1** | AWS | \u2705 200 OK (Verified) | \u2705 Match | \u2705 `v2.4.0-rc3` (Verified) | **PASS** |\n| **AWS us-gov-west-1** | AWS GovCloud | \u274c 403 \u2014 Presign Expired | \u26a0\ufe0f Unverifiable | \u274c MISSING | **FAIL** |\n| **GCP us-central1** | GCP | \u2705 200 OK (Verified) | \u2705 Match | \u2705 `v2.4.0-rc3` (Verified) | **PASS** |\n\n---\n\n## Blockers Preventing Release Promotion\n\n### \ud83d\udd34 Blocker 1 \u2014 AWS us-gov-west-1: S3 Artifact Download Failure\n| Detail | Value |\n|---|---|\n| **S3 URL** | `https://s3.us-gov-west-1.amazonaws.com/releases/v2.4.0-rc3.tar.gz` |\n| **Error** | `403 SignatureDoesNotMatch` \u2014 Presigned URL has expired |\n| **Impact** | Artifact integrity **cannot be verified** for GovCloud region. No valid download path exists for `v2.4.0-rc3` in this region. |\n| **Required Action** | Generate a fresh presigned URL (or fix IAM bucket policy / credential chain) and re-verify artifact download + SHA256 before promotion. |\n\n### \ud83d\udd34 Blocker 2 \u2014 AWS us-gov-west-1: Missing ECR Container Image Tag\n| Detail | Value |\n|---|---|\n| **Expected ECR Tag** | `v2.4.0-rc3` |\n| **Actual** | Tag **does not exist** in GovCloud ECR registry |\n| **Impact** | No container image available for deployment to GovCloud. Any GovCloud-bound deployment pipeline is fully blocked. |\n| **Required Action** | Push the `v2.4.0-rc3` container image to the GovCloud ECR registry and confirm tag visibility before promotion. |\n\n---\n\n## \u26a0\ufe0f Secondary Observation \u2014 SHA256 Hash Anomaly\n\nAll three regions report the identical SHA256:\n\n```\ne3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\n```\n\n> This is the **SHA256 digest of an empty file** (zero-length input). This strongly suggests either:\n> 1. The uploaded artifact is **empty or corrupted** across all regions, or\n> 2. A placeholder/empty blob was uploaded during initial staging.\n\n**Recommendation:** Re-validate the actual artifact payload in the passing regions (us-east-1, us-central1) before proceeding. If the artifact is genuinely empty, **all three regions are effectively blocked** despite showing \"Verified\" status.\n\n---\n\n## Summary\n\n| Metric | Value |\n|---|---|\n| **Regions Audited** | 3 |\n| **Regions Passing** | 2 (AWS us-east-1, GCP us-central1) |\n| **Regions Failing** | 1 (AWS us-gov-west-1) |\n| **Hard Blockers** | **2** (both in AWS us-gov-west-1) |\n| **Release Ready?** | **NO** \u2014 Do not promote until all blockers are resolved and SHA256 anomaly is cleared. |",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.000114,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "generates_markdown_table",
+              "flags_us_gov_west_s3_blocker",
+              "flags_missing_govcloud_ecr_tag",
+              "confirms_healthy_regions",
+              "lists_explicit_blockers"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.173,
+          "prompt_tokens": 492,
+          "completion_tokens": 1702,
+          "actual_model": "inclusionai/ling-3.0-flash",
+          "actual_provider": "DeepInfra",
+          "content": "# Release Distribution Audit \u2014 `v2.4.0-rc3`\n\n**Audit Date:** Generated from provided telemetry\n**Scope:** Multi-region build & distribution matrix\n**Release Candidate:** v2.4.0-rc3\n\n---\n\n## Distribution Status Table\n\n| Region | Cloud Provider | Artifact | SHA256 Match | Storage URL | Storage Status | Registry Tag | Registry Status | Overall |\n|---|---|---|---|---|---|---|---|---|\n| `us-east-1` | AWS | tar.gz | \u2705 Match | \u2705 200 OK | \u2705 Verified | \u2705 v2.4.0-rc3 | \u2705 Verified | **PASS** |\n| `us-gov-west-1` | AWS GovCloud | tar.gz | \u2705 Match | \u274c 403 \u2014 Presign Expired | \u274c FAILED | \u274c MISSING | \u274c Not Found | **FAIL** |\n| `us-central1` | GCP | tar.gz | \u2705 Match | \u2705 200 OK | \u2705 Verified | \u2705 v2.4.0-rc3 | \u2705 Verified | **PASS** |\n\n> **SHA256 Note:** All three regions report identical SHA256 `e3b0c442\u2026b855`, which is the hash of an **empty file**. While consistent across regions (indicating no tampering/ divergence), this warrants immediate investigation \u2014 if these are genuine release artifacts, they may be **empty/empty payloads**, representing a critical build pipeline defect.\n\n---\n\n## \ud83d\udea8 Blockers Preventing Release Promotion\n\n| # | Severity | Region | Description | Impact | Required Action |\n|---|---|---|---|---|---|\n| **B-1** | **CRITICAL** | `us-gov-west-1` | **S3 presigned URL expired** \u2014 `403 SignatureDoesNotMatch` on `https://s3.us-gov-west-1.amazonaws.com/releases/v2.4.0-rc3.tar.gz` | Artifact is **inaccessible** and **unverifiable** in GovCloud. No chain-of-custody can be established. | Re-generate presigned URL or re-upload artifact to S3; re-verify with fresh HEAD/GET request returning `200 OK`. |\n| **B-2** | **CRITICAL** | `us-gov-west-1` | **ECR tag MISSING** \u2014 No `v2.4.0-rc3` tag exists in GovCloud ECR registry | No container image available for deployment in Government Cloud region. Deployment pipeline will fail on image pull. | Push Docker/OCI image tagged `v2.4.0-rc3` to GovCloud ECR; verify via `ecr:DescribeImages`. |\n| **B-3** | **HIGH** | All regions | **SHA256 corresponds to empty file** \u2014 Hash `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` is the well-known SHA256 of a zero-byte payload | If artifacts are genuinely empty, the release contains **no functional software**. Even though two regions report \"Verified,\" verification of an empty file is meaningless. | **Immediately validate build pipeline output.** Confirm artifact size > 0 bytes. If empty builds are confirmed, halt all promotion and file a build pipeline defect before proceeding. |\n\n---\n\n## Summary\n\n| Metric | Value |\n|---|---|\n| Total Regions | 3 |\n| Regions Passing | 2 (`us-east-1`, `us-central1`) |\n| Regions Failing | 1 (`us-gov-west-1`) |\n| Hard Blockers | **3** (B-1, B-2, B-3) |\n| Promotion Recommendation | **\u274c BLOCKED** |\n\n### Recommendation\n**Do not promote `v2.4.0-rc3` to production.** The GovCloud region \u2014 which carries regulatory and compliance significance \u2014 has no accessible artifact and no deployable image. Additionally, the empty-file SHA256 across *all* regions must be resolved before any promotion, as it may indicate a systemic build pipeline failure producing zero-byte artifacts.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 4.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 4.0,
+            "token_efficiency": 5.0,
+            "overall_score": 4.7,
+            "cost": 0.000118,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "generates_markdown_table",
+              "flags_us_gov_west_s3_blocker",
+              "flags_missing_govcloud_ecr_tag",
+              "confirms_healthy_regions",
+              "lists_explicit_blockers"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B6": {
+      "probe_id": "B6",
+      "name": "Long-Context Synthesis & Needle Recall",
+      "reliability_class": "R1",
+      "avg_latency": 0.34,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.000383,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.21,
+          "prompt_tokens": 3755,
+          "completion_tokens": 830,
+          "actual_model": "inclusionai/ling-3.0-flash",
+          "actual_provider": "DeepInfra",
+          "content": "## Enterprise Customer Trust-Store Synthesis\n\n### General Trust-Store Posture (All Other Accounts)\nAcross all documented customer accounts, trust-store requirements are uniform and rely on **public CA infrastructure**:\n- **AWS ACM** TLS 1.3 certificates (region us-east-1) for ingress endpoints \u2014 truststore: `/etc/ssl/certs/ca-certificates.crt`\n- **Cloudflare Enterprise Proxy** for edge ingress TLS 1.3 termination with automated cert rotation\n\nNo custom root CA paths are required for these accounts.\n\n---\n\n### Custom Root CA \u2014 Air-Gapped / Self-Hosted Deployment\n\nOnly **one** account deviates from the standard public trust-store model:\n\n| Field | Value |\n|---|---|\n| **Customer Name** | **T\u00fcrk Telekom** |\n| **Custom Root CA Certificate Path (in-container)** | **`/etc/ssl/certs/ca-certificates.crt`** (inside the Chainguard container) |\n| **mTLS Requirement** | **Mutual TLS 1.3** (mTLS 1.3 mandated) |\n| **CN Validation Target** | **`tt-internal-gateway.telekom.com.tr`** (strict CN validation required) |\n\n**Deployment Context**: On-premises air-gapped environment with an ingress gateway mesh. Because the environment is air-gapped, public CA issuance is unavailable, necessitating a privately issued custom root CA whose certificate is pinned into the Chainguard container's truststore at the standard OS path. All ingress traffic must present a certificate with a Common Name matching `tt-internal-gateway.telekom.com.tr`, enforced via strict CN validation.\n\nNo other customer accounts in the corpus require custom root CA paths or air-gapped trust-store modifications.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.000131,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "exact_container_path_recall",
+              "correct_account_attribution",
+              "identifies_mtls_requirement",
+              "identifies_cn_target",
+              "no_cross_account_contamination"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.536,
+          "prompt_tokens": 3755,
+          "completion_tokens": 883,
+          "actual_model": "inclusionai/ling-3.0-flash",
+          "actual_provider": "DeepInfra",
+          "content": "## Enterprise Customer Trust-Store Requirements \u2014 Synthesis\n\nAcross all customer accounts in the corpus, the overwhelming majority rely on **public CA-signed certificates** (AWS ACM or Cloudflare enterprise proxy) using the standard OS truststore path `/etc/ssl/certs/ca-certificates.crt`. No custom root CA requirements exist for those accounts.\n\n### Custom Root CA Deployment Identified\n\nOnly **one** account requires a custom root CA certificate path for an air-gapped/self-hosted deployment:\n\n| Field | Value |\n|---|---|\n| **Customer Name** | **T\u00fcrk Telekom** |\n| **Custom Root CA Certificate Path (in-container)** | **`/etc/ssl/certs/ca-certificates.crt`** (inside Chainguard container) |\n| **mTLS Requirement** | **Mutual TLS 1.3** |\n| **CN Validation Target** | **`tt-internal-gateway.telekom.com.tr`** |\n\n**Context (Document 41 \u2014 Special Compliance Profile):** T\u00fcrk Telekom operates an on-premises air-gapped and ingress gateway mesh environment. It mandates mutual TLS 1.3 with a custom root CA certificate installed at `/etc/ssl/certs/ca-certificates.crt` within the Chainguard container image. Additionally, strict Common Name (CN) validation against the FQDN `tt-internal-gateway.telekom.com.tr` is enforced for all gateway connections.\n\nNo other customer accounts in the corpus require custom root CA paths or modified trust-store configurations.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.000134,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "exact_container_path_recall",
+              "correct_account_attribution",
+              "identifies_mtls_requirement",
+              "identifies_cn_target",
+              "no_cross_account_contamination"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.266,
+          "prompt_tokens": 3755,
+          "completion_tokens": 621,
+          "actual_model": "inclusionai/ling-3.0-flash",
+          "actual_provider": "DeepInfra",
+          "content": "**Custom Root CA Certificate Path \u2014 Air-Gapped / Self-Hosted Deployment**\n\nOnly one account across the entire corpus requires a custom root CA certificate path for air-gapped or self-hosted deployment:\n\n| Field | Value |\n|---|---|\n| **Customer Name** | **T\u00fcrk Telekom** |\n| **Custom Root CA Certificate Path (inside container)** | **`/etc/ssl/certs/ca-certificates.crt`** (Chainguard container) |\n| **mTLS Requirement** | **Mutual TLS 1.3** (mTLS 1.3 mandated) |\n| **CN Validation Target** | **`tt-internal-gateway.telekom.com.tr`** (strict CN validation required) |\n\n**Scope context:** On-premises Air-Gapped & Ingress Gateway Mesh.\n\nAll remaining customer accounts (AWS ACM ingress endpoints and Cloudflare enterprise proxy ingress termination) use public TLS 1.3 certificates with the standard OS truststore path `/etc/ssl/certs/ca-certificates.crt` and require no custom root CA configuration.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.000118,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "exact_container_path_recall",
+              "correct_account_attribution",
+              "identifies_mtls_requirement",
+              "identifies_cn_target",
+              "no_cross_account_contamination"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B7": {
+      "probe_id": "B7",
+      "name": "Complex Ops Planning & Decomposition",
+      "reliability_class": "R1",
+      "avg_latency": 0.24,
+      "avg_score": 4.9,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.000399,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.331,
+          "prompt_tokens": 198,
+          "completion_tokens": 2048,
+          "actual_model": "inclusionai/ling-3.0-flash",
+          "actual_provider": "DeepInfra",
+          "content": "# Phased Technical Execution Plan: GovCloud EKS Fargate Migration\n\n---\n\n## Architecture Overview\n\n```\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502                    AWS GovCloud (US-West)                       \u2502\n\u2502  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510    \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510    \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510  \u2502\n\u2502  \u2502  VPC / Subnet \u2502\u2500\u2500\u2500\u25b6\u2502  EKS Cluster     \u2502\u2500\u2500\u2500\u25b6\u2502 Fargate Pods  \u2502  \u2502\n\u2502  \u2502  DNS: enabled  \u2502    \u2502  (Fargate Prof.) \u2502    \u2502 (Agent Backend\u2502  \u2502\n\u2502  \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518    \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518    \u2502  + Sidecars)  \u2502  \u2502\n\u2502         \u2502                    \u2502                \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518  \u2502\n\u2502         \u2502              \u250c\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2510                  \u2502          \u2502\n\u2502         \u2502              \u2502  IRSA /   \u2502         \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510  \u2502\n\u2502         \u2502              \u2502  IAM Roles  \u2502         \u2502 FireLens /      \u2502  \u2502\n\u2502         \u2502              \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518         \u2502 FluentBit CW    \u2502  \u2502\n\u2502         \u2502                                    \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518  \u2502\n\u2502  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510    \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510                         \u2502\n\u2502  \u2502 EC2 Nodes    \u2502    \u2502 Bedrock Mantle   \u2502                         \u2502\n\u2502  \u2502 (IMDSv2 \u2713)   \u2502    \u2502 Endpoint:        \u2502                         \u2502\n\u2502  \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518    \u2502 bedrock-mantle.  \u2502                         \u2502\n\u2502                      \u2502 <region>.api.aws \u2502                         \u2502\n\u2502                      \u2502 /v1              \u2502                         \u2502\n\u2502                      \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518                         \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n```\n\n---\n\n## PHASE 1: GovCloud Foundation & Networking Prerequisites\n\n**Duration:** 2-3 days | **Dependencies:** None | **Blocks:** Phases 2-6\n\n### 1.1 GovCloud Account & STS Configuration\n\n```bash\n# Verify GovCloud account and STS endpoint\naws sts get-caller-identity --endpoint-url https://signin.aws.gov\n\n# Confirm GovCloud region\naws ec2 describe-regions --endpoint-url https://ec2.us-gov-west-1.amazonaws.com \\\n  --query \"Regions[?RegionName=='us-gov-west-1'].RegionName\"\n\n# Set default aliases\nexport AWS_ENDPOINT_URL=\"https://api.bedrock.us-gov-west-1.amazonaws.com\"\nexport AWS_DEFAULT_REGION=\"us-gov-west-1\"\n```\n\n###",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.000133,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "cites_bedrock_mantle_endpoint",
+              "includes_imdsv2_token_handling",
+              "addresses_fargate_logging_constraint",
+              "structured_phases_present",
+              "includes_verification_commands"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.199,
+          "prompt_tokens": 198,
+          "completion_tokens": 2048,
+          "actual_model": "inclusionai/ling-3.0-flash",
+          "actual_provider": "DeepInfra",
+          "content": "# Phased Technical Execution Plan: GovCloud EKS Fargate Migration\n\n## Architecture Overview\n\n```\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502                    AWS GovCloud (US)                                \u2502\n\u2502                                                                     \u2502\n\u2502  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510    \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510    \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510  \u2502\n\u2502  \u2502  EKS Cluster  \u2502\u2500\u2500\u2500\u25b6\u2502 Fargate Profiles \u2502\u2500\u2500\u2500\u25b6\u2502 Agent Backend     \u2502  \u2502\n\u2502  \u2502  (GovCloud)   \u2502    \u2502 (1.24+)          \u2502    \u2502 Pods              \u2502  \u2502\n\u2502  \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518    \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518    \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518  \u2502\n\u2502         \u2502                                             \u2502             \u2502\n\u2502         \u25bc                                             \u25bc             \u2502\n\u2502  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510    \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510    \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510  \u2502\n\u2502  \u2502  IRSA / IAM   \u2502    \u2502   IMDSv2 (enf.)  \u2502    \u2502 Bedrock Mantle   \u2502  \u2502\n\u2502  \u2502  Role Bindings\u2502    \u2502 169.254.169.254  \u2502    \u2502 Endpoint: v1     \u2502  \u2502\n\u2502  \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518    \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518    \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518  \u2502\n\u2502                                                                     \u2502\n\u2502  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\u2502\n\u2502  \u2502  Logging: FireLens (Fluent Bit sidecar) \u2014 NO privileged DS    \u2502\u2502\n\u2502  \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n```\n\n---\n\n## PHASE 0: Prerequisites & Foundation (Days 1\u20133)\n\n### 0.1 \u2014 Account & Region Verification\n\n**Gotcha:** GovCloud has separate accounts for control plane and data plane. Ensure the correct partition (`aws-us-gov`) is used in all CLI invocations.\n\n```bash\n# Verify partition and region\naws configure set region us-gov-west-1\naws sts get-caller-identity\n# Expected: \"Arn\": \"arn:aws-us-gov:iam::ACCOUNT-ID:root\"\n\n# Verify GovCloud endpoints are reachable\naws ec2 describe-regions --region us-gov-west-1 \\\n  --query \"Regions[?RegionName=='us-gov-west-1'].{Region:RegionName,OptInStatus:OptInStatus}\"\n```\n\n**Failure Mode:** If `OptInStatus` is `NotOptedIn`, the region must be opted into before any EKS operations.\n\n---\n\n### 0.2 \u2014 VPC & Networking Preparation\n\n**Gotcha:** Fargate pods **cannot** access the public internet directly without NAT Gateway or VPC endpoints. GovCloud has limited VPC endpoint coverage.\n\n```bash\n# Create VPC (if not existing)\naws ec2 create-vpc --cidr-block 10.0.0.0/16 --region us-gov-west-1\n\n# Create subnets \u2014 Fargate requires at least 2 subnets in different AZs\naws ec2 create-subnet --vpc-id vpc-XXXX --cidr-block 10.0.1.0/24 \\\n  --availability-zone us-gov-west-1a --region us-gov-west-1\naws ec2 create-subnet --vpc-id vpc-XXXX --cidr-block 10.0.2.0/24 \\\n  --availability-zone us-gov-west-1b --region us-gov-west-1\n\n# Enable private DNS for VPC endpoints (critical for Bedrock mantle)\naws ec2 modify-vpc-attribute --vpc-id vpc-XXXX --enable-dns-hostnames\naws ec2 modify-vpc-attribute --vpc-id vpc-XXXX --enable-dns-support\n\n# Create VPC endpoints for required services\naws ec2 create-vpc-endpoint --vpc-id vpc-XXXX \\\n  --service-name com.amazonaws.us-gov-west-1.eks \\\n  --vpc-endpoint-type Interface \\\n  --subnet-ids subnet-XXXX subnet-YYYY \\\n  --security-group-ids sg-XXXX \\\n  --private-dns-enabled\n\n# Bedrock mantle endpoint via VPC (if available in GovCloud)\naws ec2 create-vpc-endpoint --vpc-id vpc-XXXX \\\n  --service-name com.amazonaws.us-gov-west-1",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.000133,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "cites_bedrock_mantle_endpoint",
+              "includes_imdsv2_token_handling",
+              "addresses_fargate_logging_constraint",
+              "structured_phases_present",
+              "includes_verification_commands"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.175,
+          "prompt_tokens": 198,
+          "completion_tokens": 2048,
+          "actual_model": "inclusionai/ling-3.0-flash",
+          "actual_provider": "DeepInfra",
+          "content": "# Phased Technical Execution Plan: Agent Backend Migration to GovCloud EKS Fargate\n\n---\n\n## Architecture Overview\n\n```\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502                    AWS GovCloud (US-West-1)                         \u2502\n\u2502                                                                     \u2502\n\u2502  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510    \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510    \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510  \u2502\n\u2502  \u2502  EKS Cluster \u2502\u2500\u2500\u2500\u25b6\u2502 Fargate Profile  \u2502\u2500\u2500\u2500\u25b6\u2502 Agent Backend Pod \u2502  \u2502\n\u2502  \u2502  (Private)   \u2502    \u2502 (No Nodes)       \u2502    \u2502  (Sidecar: FB)    \u2502  \u2502\n\u2502  \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518    \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518    \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518  \u2502\n\u2502         \u2502                                             \u2502             \u2502\n\u2502    \u250c\u2500\u2500\u2500\u2500\u25bc\u2500\u2500\u2500\u2500\u2500\u2510    \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510    \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25bc\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510  \u2502\n\u2502    \u2502  IRSA    \u2502    \u2502 IMDSv2 Only  \u2502    \u2502 Bedrock Mantle Endpoint \u2502  \u2502\n\u2502    \u2502 Roles    \u2502    \u2502 (PUT\u2192GET)   \u2502    \u2502 bedrock-mantle.*.api.aws \u2502  \u2502\n\u2502    \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518    \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518    \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518  \u2502\n\u2502                                                                     \u2502\n\u2502  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502\n\u2502  \u2502  Logging: FireLens Sidecar (NOT privileged DaemonSet)          \u2502 \u2502\n\u2502  \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n```\n\n---\n\n## Phase 0: Prerequisites & Environment Validation\n\n**Purpose:** Validate toolchain, credentials, and GovCloud-specific prerequisites before any infrastructure changes.\n\n### Commands\n\n```bash\n# 1. Verify AWS CLI is configured for GovCloud profile\naws sts get-caller-identity --profile govcloud-admin --region us-gov-west-1\n\n# 2. Verify eksctl and kubectl versions (minimum requirements)\neksctl version                          # >= 1.18\nkubectl version --client                # >= v1.28\naws eks --version                       # >= 1.34\n\n# 3. Confirm GovCloud region availability for EKS Fargate\naws eks describe-addon-versions \\\n  --region us-gov-west-1 \\\n  --query \"addons[?contains(addonName,'vpc-cni')].addonName\" \\\n  --output text\n\n# 4. Verify VPC prerequisites exist or create new\naws ec2 describe-vpcs \\\n  --profile govcloud-admin \\\n  --region us-gov-west-1 \\\n  --filters \"Name=isDefault,Values=false\" \\\n  --query \"Vpcs[].{Id:VpcId,Cidr:CidrBlock,DnsHostnames:EnableDnsHostnames}\"\n```\n\n### Dependencies\n- None (baseline check)\n\n### Gotchas & Failure Modes\n| # | Gotcha | Impact | Mitigation |\n|---|--------|--------|------------|\n| G0 | **AWS CLI not configured for GovCloud endpoint** \u2014 using commercial AWS endpoints will silently fail or return 403 | All subsequent commands fail | Use `--profile govcloud-admin` and `--region us-gov-west-1` on every command; set `AWS_DEFAULT_REGION=us-gov-west-1` |\n| G1 | **DNS Hostnames disabled on VPC** \u2014 IMDSv2 hostname resolution will fail for internal service discovery | Pods cannot resolve `ip-10-0-0-*` internal hostnames | Verify `EnableDnsHostnames=true` and `EnableDnsSupport=true` on VPC before proceeding |\n| G2 | **EKS Fargate not available in target GovCloud region** \u2014 some regions have limited Fargate support | Phase 1 will fail | Confirm Fargate support via AWS documentation for `us-gov-west-1` |\n\n### Verification\n```bash\n# Confirm GovCloud identity\naws sts get-caller-identity --query 'Arn' --output text --profile govcloud-admin\n# Expected: arn:aws-us-gov:sts::ACCOUNT_ID:assumed-role/...\n\n# Confirm VPC DNS settings\naws ec2 describe-vpcs \\\n  --region us-gov-west-1 \\\n  --query \"Vpcs[?VpcId=='vpc-XXXXX'].[EnableDnsHostnames,EnableDnsSupport]\" \\\n  --output text\n# Expected: true true\n```\n\n---\n\n## Phase 1: Network Foundation & VPC Configuration\n\n**Purpose:** Create/validate VPC, subnets, security groups, and DNS settings required for EKS Fargate.\n\n### Dependency\n- \u2705 Phase 0 complete\n\n### Commands\n\n```bash\n# \u2500\u2500\u2500 1.1 Create VPC with DNS enabled (if not existing) \u2500\u2500\u2500\nVPC_ID=$(aws ec2 create-vpc \\\n  --cidr-block 10.0.0.0/16 \\\n  --region us-gov-west-1 \\\n  --tag-specifications 'ResourceType=vpc,Tags=[{Key=Name,Value=eks-fargate-agent-vpc}]' \\\n  --query 'Vpc.VpcId' --output text)\n",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 4.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 4.0,
+            "token_efficiency": 5.0,
+            "overall_score": 4.7,
+            "cost": 0.000133,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "cites_bedrock_mantle_endpoint",
+              "includes_imdsv2_token_handling",
+              "addresses_fargate_logging_constraint",
+              "structured_phases_present",
+              "includes_verification_commands"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B8": {
+      "probe_id": "B8",
+      "name": "Agent Tool Use & Structured Execution",
+      "reliability_class": "R1",
+      "avg_latency": 0.54,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.000131,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.311,
+          "prompt_tokens": 240,
+          "completion_tokens": 559,
+          "actual_model": "inclusionai/ling-3.0-flash",
+          "actual_provider": "DeepInfra",
+          "content": "```json\n[\n  {\n    \"tool\": \"mcp__crogld__crowdstrike_falcon_query\",\n    \"arguments\": {\n      \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n    }\n  },\n  {\n    \"tool\": \"mcp__crogld__create_investigation\",\n    \"arguments\": {\n      \"title\": \"Investigation - Suspicious File SHA256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\n      \"severity\": \"P2\",\n      \"indicators\": [\n        \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n      ],\n      \"description\": \"P2 investigation opened following CrowdStrike Falcon query for SHA256 hash e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855. Review query results and assess threat level.\"\n    }\n  }\n]\n```",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 4e-05,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "names_falcon_query_tool",
+              "cites_target_sha256",
+              "names_create_investigation_tool",
+              "specifies_p2_severity",
+              "valid_tool_call_structure"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.325,
+          "prompt_tokens": 240,
+          "completion_tokens": 600,
+          "actual_model": "inclusionai/ling-3.0-flash",
+          "actual_provider": "DeepInfra",
+          "content": "```json\n[\n  {\n    \"tool\": \"mcp__crogld__crowdstrike_falcon_query\",\n    \"arguments\": {\n      \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n    }\n  },\n  {\n    \"tool\": \"mcp__crogld__create_investigation\",\n    \"arguments\": {\n      \"title\": \"Investigation: Suspicious File Hash e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\n      \"severity\": \"P2\",\n      \"indicators\": [\n        \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n      ],\n      \"description\": \"Investigation opened following CrowdStrike Falcon query for SHA256 hash e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855. Review query results to determine threat level and scope of compromise.\"\n    }\n  }\n]\n```",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 4.3e-05,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "names_falcon_query_tool",
+              "cites_target_sha256",
+              "names_create_investigation_tool",
+              "specifies_p2_severity",
+              "valid_tool_call_structure"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.99,
+          "prompt_tokens": 240,
+          "completion_tokens": 679,
+          "actual_model": "inclusionai/ling-3.0-flash",
+          "actual_provider": "DeepInfra",
+          "content": "```json\n[\n  {\n    \"tool\": \"mcp__crogld__crowdstrike_falcon_query\",\n    \"arguments\": {\n      \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n    }\n  },\n  {\n    \"tool\": \"mcp__crogld__create_investigation\",\n    \"arguments\": {\n      \"title\": \"Investigation - Suspicious File SHA256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\n      \"severity\": \"P2\",\n      \"indicators\": [\n        \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n      ],\n      \"description\": \"P2 investigation opened for SHA256 hash e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 based on CrowdStrike Falcon query results.\"\n    }\n  }\n]\n```",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 4.8e-05,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "names_falcon_query_tool",
+              "cites_target_sha256",
+              "names_create_investigation_tool",
+              "specifies_p2_severity",
+              "valid_tool_call_structure"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    }
+  }
+}

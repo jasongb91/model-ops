@@ -556,5 +556,17 @@
         }
       }
     }
-  ]
+  ],
+  "mistralai/mistral-nemo": {
+    "label": "Mistral: Mistral Nemo",
+    "evaluated_at": "2026-09-14 13:28:59 UTC",
+    "overall_score": 4.89,
+    "overall_latency": 0.39,
+    "overall_pass_rate": 0.98,
+    "verdict": "promote to R2 (Triage / Extraction Fast-Track), R1 (Internal Ops / Synthesis / Drafting Fast-Track)",
+    "eligible_tiers": [
+      "R2 (Triage / Extraction Fast-Track)",
+      "R1 (Internal Ops / Synthesis / Drafting Fast-Track)"
+    ]
+  }
 }
