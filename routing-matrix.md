@@ -199,5 +199,15 @@ Routing boundary:
 - Promoted into R1 internal ops synthesis and audit drafting lanes.
 - Admitted to R0 shadow evaluation for scheduled morning briefs alongside `nemotron-3-ultra-550b:free` and `gemini-3.7-flash`, retaining hardcoded frontier fallbacks (`gpt-5.4` / `gpt-5.6-sol` / `claude-sonnet-4-6`).
 
+## InclusionAI Ling 3.0 Flash qualification (2026-09-14)
+
+`inclusionai/ling-3.0-flash` evaluated via OpenRouter scored 4.91/5.0 overall with 0.31s average latency and 97% assertion pass rate across the B1-B8 benchmark suite.
+
+Routing boundary:
+- Qualified for the R1 fast-track as a low-cost internal synthesis and drafting candidate.
+- Admitted to R0 shadow evaluation only; do not use as the autonomous primary for mutating or operator-facing scheduled workflows until it completes the required three consecutive shadow cycles with zero material cleanup.
+- Retain explicit frontier fallbacks (`gpt-5.4` / `gpt-5.6-sol` / `claude-sonnet-4-6`) throughout shadow evaluation.
+- Treat the 2026-09-14 benchmark as live provider evidence. The contemporaneous `thinkingmachines/inkling-small:free` and `thinkingmachines/inkling:free` probes were rejected because OpenRouter returned HTTP 403 outside an approved agentic harness.
+
 ## Planned expansion candidates
 See `provider-expansion.md` before changing defaults.
