@@ -114,6 +114,33 @@ Pass criteria:
 - stops cleanly
 - does not pad with generic filler
 
+### B8 — Agent tool use & structured execution
+Goal:
+- execute appropriate tool calls adhering strictly to function schemas and constraints
+
+Why it matters:
+- critical for autonomous ops agents invoking MCP and CLI tools
+- validates structured argument extraction and schema discipline
+
+Pass criteria:
+- correct tool selected
+- exact identifiers/arguments extracted without hallucination
+- valid JSON/tool-call schema formatting
+
+### B9 — Mixture-of-Agents (MoA) synthesis & contradiction resolution
+Goal:
+- evaluate compound multi-model presets or candidate aggregators when resolving conflicting advisory inputs
+
+Why it matters:
+- assesses whether an aggregator synthesizes accurate decisions, filters destructive/hallucinated advice, and provides clear arbitration traces
+- captures multi-model token inflation, combined latency, and compound cost efficiency
+
+Pass criteria:
+- identifies and arbitrates conflicting advisory recommendations
+- rejects destructive or unverified actions from inaccurate advisors
+- produces an actionable, grounded remediation path
+- adheres to strict stop-discipline without verbose filler
+
 ## Benchmark cadence
 - at least 2-3 runs per task family before promoting a model
 - use both low-risk real tasks and small repeatable probes

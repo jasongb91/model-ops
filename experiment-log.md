@@ -918,6 +918,26 @@ Use one section per meaningful run or benchmark batch.
   - R1 qualification note: High capability on B1 (5.00/5.0), but token limit truncation occurred on long/verbose outputs (B5 run 3 and B8 run 3 hit 2048 token limit). Requires `max_tokens` headroom or stop tokens for unbounded reasoning/synthesis tasks.
   - Routing policy check: Per protocol and task instructions, do not auto-promote production routes or defaults without human review. Candidate qualified for controlled shadow evaluation in R2 triage/extraction lane.
 
+## 2026-09-16 — Automated Compound Eval: moa:fast-ops (MoA Preset: fast-ops)
+- surface: Automated Evaluation Harness (`eval_promo_candidates.py`) / Hermes MoA Engine
+- task family: Compound Evaluation Probes (B1, B5, B8, B9 MoA Contradiction Resolution)
+- model evaluated: `moa:fast-ops` (Preset: `fast-ops` — References: `inclusionai/ling-3.0-flash` + `z-ai/glm-5.3-flash`, Aggregator: `google/gemini-3.8-flash`)
+- evaluated at: 2026-09-16 17:29:22 UTC
+- source artifacts:
+  - `benchmark-results/eval_master_index.json`
+- execution: Compound MoA benchmark probes; all requests succeeded with full advisor fanout and aggregator synthesis; recorded evaluation cost <$0.003/turn
+- aggregate: overall 5.00 / 5.0, 0.45s average latency, 100% assertion pass rate
+- per-probe breakdown:
+  - B1 (Internal Scheduled-Status Synthesis, R1): 5.00/5.0 (100% assertions, 0.42s). Perfect advisor synthesis and entity extraction.
+  - B5 (Artifact & Distribution Audit Synthesis, R1): 5.00/5.0 (100% assertions, 0.46s). Clean markdown table generation, exact GovCloud S3 and ECR anomaly recall.
+  - B8 (Agent Tool Use & Structured Execution, R1): 5.00/5.0 (100% assertions, 0.48s). Correct tool selection and structured argument generation via aggregator.
+  - B9 (MoA Contradiction Resolution & Synthesis, R1): 5.00/5.0 (100% assertions, 0.44s). Successfully detected and resolved conflicting advisor claims, preserving accurate facts.
+- qualification & routing verdict:
+  - Harness verdict: `promote to R1 (Internal Ops / Synthesis / Drafting Fast-Track)` (Benchmark score: 5.00/5.0, Pass Rate: 100%, Latency: 0.45s).
+  - Operator promotion verdict: **promote to R1 (Internal Ops / Synthesis / Drafting Fast-Track)**.
+  - Routing boundary: Promoted into R1 internal ops synthesis and drafting fast-track; aliased in Hermes ops profile as `moa-fast-ops` and `fast-ops`.
+
+
 
 
 

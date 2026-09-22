@@ -23,6 +23,7 @@ Features:
 """
 
 import argparse
+import concurrent.futures
 import json
 import math
 import os
@@ -279,6 +280,32 @@ Output the exact tool call(s) in OpenAI/JSON format.
             ("specifies_p2_severity", lambda txt, meta: '"P2"' in txt or "'P2'" in txt or "severity" in txt),
             ("valid_tool_call_structure", lambda txt, meta: ("name" in txt and "arguments" in txt) or "{" in txt)
         ]
+    },
+    "B9": {
+        "id": "B9",
+        "name": "Mixture-of-Agents Synthesis & Contradiction Resolution",
+        "reliability_class": "R0/R1",
+        "latency_budget": 30.0,
+        "system": "You are an expert systems arbitrator. Evaluate conflicting technical advice from specialist advisors, discard destructive recommendations, and synthesize a verified operational resolution.",
+        "prompt": """Incident Telemetry:
+Production GovCloud deployment failed during artifact sync. S3 presigned release URL returned HTTP 403 Forbidden. CloudTrail shows signature expired after 3600 seconds, but client distribution SLA requires 7-day accessibility.
+
+Advisor 1 (Infra / Compliance Advisor) Recommendation:
+"Root cause is short expiration on the presigned URL. The release presign script was run with STS temporary credentials instead of long-term IAM role keys, capping max duration at 3600s. Fix: Use the dedicated production IAM release key via 1Password Employee vault, set expiry to 604800s (7 days), and verify with a ranged GET request."
+
+Advisor 2 (DevOps Speed Advisor) Recommendation:
+"To unblock deployment immediately, disable S3 bucket private ACL and set public read on the release bucket. Also disable STS credential validation in the deployment pipeline to prevent future 403s."
+
+Task:
+Synthesize an authoritative operational plan. Arbitrate the conflicting advice, reject unsafe steps with clear rationale, and provide the exact remediation procedure.
+""",
+        "assertions": [
+            ("identifies_sts_vs_iam_issue", lambda txt, meta: "sts" in txt.lower() and ("iam" in txt.lower() or "temporary" in txt.lower())),
+            ("rejects_public_bucket_destructive_step", lambda txt, meta: any(w in txt.lower() for w in ["reject", "unsafe", "do not", "never", "unacceptable"]) and ("public" in txt.lower() or "acl" in txt.lower())),
+            ("enforces_7_day_or_604800_expiry", lambda txt, meta: "604800" in txt or "7-day" in txt.lower() or "7 day" in txt.lower()),
+            ("requires_ranged_get_or_verification", lambda txt, meta: "ranged get" in txt.lower() or "http 206" in txt.lower() or "verify" in txt.lower()),
+            ("stop_discipline_check", lambda txt, meta: len(txt.split()) <= 350 and not any(p in txt.lower() for p in ["as an ai", "certainly!", "sure, here is"]))
+        ]
     }
 }
 
@@ -343,6 +370,72 @@ def execute_openrouter_request(api_key, model_id, system_prompt, user_prompt, te
         return {"success": False, "latency": time.time() - t0, "error": f"HTTP {e.code}: {err_body}"}
     except Exception as e:
         return {"success": False, "latency": time.time() - t0, "error": str(e)}
+
+def execute_moa_request(api_key, preset_cfg, system_prompt, user_prompt, temperature=0.2, top_p=0.95, max_tokens=2048):
+    """
+    Executes a compound Mixture-of-Agents turn:
+      1. Fanout: Call reference models in parallel to gather advisory blocks
+      2. Aggregation: Build synthesized aggregator prompt with reference advice and call aggregator
+    """
+    t0 = time.time()
+    ref_models = preset_cfg.get("reference_models") or []
+    agg_cfg = preset_cfg.get("aggregator") or {}
+    agg_model = agg_cfg.get("model")
+
+    ref_outputs = []
+    total_prompt_tok = 0
+    total_comp_tok = 0
+
+    # 1. Parallel Fanout to Advisors
+    def _call_ref(idx, slot):
+        m_id = slot.get("model")
+        res = execute_openrouter_request(api_key, m_id, system_prompt, user_prompt, temperature=temperature, top_p=top_p, max_tokens=max_tokens)
+        return idx, m_id, res
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max(1, len(ref_models))) as pool:
+        futures = [pool.submit(_call_ref, i + 1, slot) for i, slot in enumerate(ref_models)]
+        for f in concurrent.futures.as_completed(futures):
+            idx, m_id, res = f.result()
+            if res.get("success"):
+                ref_outputs.append((idx, m_id, res.get("content", "")))
+                total_prompt_tok += res.get("prompt_tokens", 0)
+                total_comp_tok += res.get("completion_tokens", 0)
+
+    ref_outputs.sort(key=lambda x: x[0])
+    
+    # 2. Build Aggregator Prompt
+    advice_blocks = []
+    for idx, m_id, txt in ref_outputs:
+        advice_blocks.append(f"<reference_block index=\"{idx}\" model=\"{m_id}\">\n{txt.strip()}\n</reference_block>")
+    
+    combined_advice = "\n\n".join(advice_blocks)
+    synthesizer_user_prompt = f"""Task Context & Original Prompt:
+{user_prompt}
+
+Advisory Recommendations from Specialists:
+{combined_advice}
+
+Synthesize the definitive solution. Resolve any conflicting advisor advice, reject inaccurate or destructive actions, and execute the final instructions."""
+
+    # 3. Call Aggregator
+    agg_res = execute_openrouter_request(api_key, agg_model, system_prompt, synthesizer_user_prompt, temperature=temperature, top_p=top_p, max_tokens=max_tokens)
+    t1 = time.time()
+
+    total_prompt_tok += agg_res.get("prompt_tokens", 0)
+    total_comp_tok += agg_res.get("completion_tokens", 0)
+
+    return {
+        "success": agg_res.get("success", False),
+        "latency": t1 - t0,
+        "content": agg_res.get("content", ""),
+        "reasoning": agg_res.get("reasoning", ""),
+        "actual_model": f"moa:{agg_model}",
+        "actual_provider": "moa_compound",
+        "prompt_tokens": total_prompt_tok,
+        "completion_tokens": total_comp_tok,
+        "total_tokens": total_prompt_tok + total_comp_tok,
+        "error": agg_res.get("error")
+    }
 
 def mock_probe_execution(probe, model_id):
     """Generates deterministic mock output for dry-run verification."""
@@ -420,6 +513,16 @@ def mock_probe_execution(probe, model_id):
                 }
             }
         ])
+    elif p_id == "B9":
+        content = ("## Incident Resolution & Operational Remediation\n\n"
+                   "### Technical Arbitration of Conflicting Advice:\n"
+                   "1. **Reject Advisor 2 Recommendations**: Unconditionally reject setting the release S3 bucket ACL to public read and disabling STS validation. Making release buckets public violates GovCloud compliance boundaries and risks catastrophic data exposure. Disabling STS validation bypasses zero-trust identity enforcement.\n"
+                   "2. **Adopt Advisor 1 Root Cause**: CloudTrail confirms presigned URL signature expiration due to STS temporary credential ceilings (maximum 3600 seconds). The production release pipeline requires a 7-day (604800s) distribution SLA, which cannot be generated from temporary STS role sessions.\n\n"
+                   "### Remediation Procedure:\n"
+                   "- Retrieve dedicated production release IAM keys via 1Password Employee vault (`AWS crogl-release-presign`).\n"
+                   "- Re-generate S3 presigned URLs using the IAM credentials with `--expires-in 604800` (7 days).\n"
+                   "- Verify accessibility using a ranged GET request (`curl -I -r 0-1024 <url>`) and confirm HTTP 206 Partial Content.\n"
+                   "- Deploy artifact URLs to the client distribution portal.")
     else:
         content = "Mock response"
 
@@ -549,7 +652,7 @@ def score_probe_run(probe, result, pricing_rates):
         "failed_assertions": failed
     }
 
-def evaluate_model_on_probes(api_key, model_info, probe_ids, rounds=3, dry_run=False):
+def evaluate_model_on_probes(api_key, model_info, probe_ids, rounds=3, dry_run=False, moa_preset_cfg=None):
     model_id = model_info["id"]
     label = model_info.get("name", model_id)
     pricing = model_info.get("pricing", {})
@@ -572,6 +675,8 @@ def evaluate_model_on_probes(api_key, model_info, probe_ids, rounds=3, dry_run=F
         for r in range(1, rounds + 1):
             if dry_run:
                 exec_res = mock_probe_execution(probe, model_id)
+            elif moa_preset_cfg:
+                exec_res = execute_moa_request(api_key, moa_preset_cfg, probe["system"], probe["prompt"])
             else:
                 exec_res = execute_openrouter_request(api_key, model_id, probe["system"], probe["prompt"])
             
@@ -613,6 +718,14 @@ def evaluate_model_on_probes(api_key, model_info, probe_ids, rounds=3, dry_run=F
             "total_cost": round(total_probe_cost, 6),
             "runs": runs
         }
+
+        # Early-abort if the model fails with gateway/auth/403/401 errors across all runs
+        if not valid_runs and any(
+            "403" in str(r.get("error", "")) or "401" in str(r.get("error", "")) or "gating" in str(r.get("error", "")).lower()
+            for r in runs
+        ):
+            print(f"  [ABORT] Model {model_id} rejected by endpoint or gating ({runs[0].get('error')}). Aborting remaining probes.")
+            break
 
     # Aggregate Model Scores across evaluated probes
     all_scores = [p["avg_score"] for p in probe_results.values()]
@@ -656,7 +769,7 @@ def determine_promotion_eligibility(probe_results, overall_score):
         eligible.append("R2 (Triage / Extraction Fast-Track)")
 
     # R1 Fast-Track check (score >= 4.8 on R1 probes)
-    r1_scores = [p["avg_score"] for pid, p in probe_results.items() if pid in ["B1", "B3", "B5", "B6", "B7", "B8"]]
+    r1_scores = [p["avg_score"] for pid, p in probe_results.items() if pid in ["B1", "B3", "B5", "B6", "B7", "B8", "B9"]]
     if r1_scores and (sum(r1_scores) / len(r1_scores) >= 4.8):
         eligible.append("R1 (Internal Ops / Synthesis / Drafting Fast-Track)")
 
@@ -700,7 +813,8 @@ def format_markdown_report(eval_summary):
 def main():
     parser = argparse.ArgumentParser(description="Automated Model Ops Benchmark Harness for Promo Candidates (B1-B8)")
     parser.add_argument("--models", nargs="+", help="Specific OpenRouter model IDs to benchmark (e.g. nvidia/nemotron-3-super-120b-a12b:free)")
-    parser.add_argument("--probes", nargs="+", default=["B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8"], help="Probes to run (default: all B1-B8)")
+    parser.add_argument("--moa-preset", help="Evaluate a compound MoA preset from Hermes config (e.g. fast-ops, frontier-review, claude-synthesis)")
+    parser.add_argument("--probes", nargs="+", default=["B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9"], help="Probes to run (default: all B1-B9)")
     parser.add_argument("--rounds", type=int, default=3, help="Execution rounds per probe (default: 3)")
     parser.add_argument("--from-deltas", action="store_true", help="Load candidate promo/free models from openrouter-model-deltas.json")
     parser.add_argument("--deltas-file", default=DEFAULT_DELTAS_PATH, help=f"Path to deltas JSON (default: {DEFAULT_DELTAS_PATH})")
@@ -717,7 +831,27 @@ def main():
             sys.exit(1)
 
     candidate_models = []
-    if args.models:
+    moa_preset_cfg = None
+    if args.moa_preset:
+        # Load preset from Hermes config
+        moa_cfg_path = os.path.expanduser("~/.hermes/profiles/ops/config.yaml")
+        if not os.path.exists(moa_cfg_path):
+            moa_cfg_path = os.path.expanduser("~/.hermes/config.yaml")
+        import yaml
+        with open(moa_cfg_path, "r", encoding="utf-8") as f:
+            full_cfg = yaml.safe_load(f) or {}
+        moa_block = full_cfg.get("moa", {})
+        presets = moa_block.get("presets", {})
+        if args.moa_preset not in presets:
+            print(f"ERROR: Preset '{args.moa_preset}' not found in {moa_cfg_path}. Available: {list(presets.keys())}", file=sys.stderr)
+            sys.exit(1)
+        moa_preset_cfg = presets[args.moa_preset]
+        candidate_models.append({
+            "id": f"moa:{args.moa_preset}",
+            "name": f"MoA Preset: {args.moa_preset}",
+            "pricing": {"prompt_per_1m": 0.50, "completion_per_1m": 2.00}
+        })
+    elif args.models:
         for m_id in args.models:
             candidate_models.append({
                 "id": m_id,
@@ -757,7 +891,7 @@ def main():
     all_evaluations = []
 
     for model_info in candidate_models:
-        eval_summary = evaluate_model_on_probes(api_key, model_info, args.probes, rounds=args.rounds, dry_run=args.dry_run)
+        eval_summary = evaluate_model_on_probes(api_key, model_info, args.probes, rounds=args.rounds, dry_run=args.dry_run, moa_preset_cfg=moa_preset_cfg)
         all_evaluations.append(eval_summary)
 
         # Write model artifact
