@@ -652,6 +652,15 @@ def score_probe_run(probe, result, pricing_rates):
         "failed_assertions": failed
     }
 
+def is_fatal_endpoint_error(error_msg):
+    if not error_msg:
+        return False
+    msg = str(error_msg).lower()
+    return any(k in msg for k in [
+        "403", "401", "404", "forbidden", "unauthorized", "not found",
+        "only available on agentic harnesses", "gated", "access denied", "permission denied"
+    ])
+
 def evaluate_model_on_probes(api_key, model_info, probe_ids, rounds=3, dry_run=False, moa_preset_cfg=None):
     model_id = model_info["id"]
     label = model_info.get("name", model_id)
@@ -666,6 +675,8 @@ def evaluate_model_on_probes(api_key, model_info, probe_ids, rounds=3, dry_run=F
     print(f"================================================================================")
 
     probe_results = {}
+    fatal_error_abort = None
+
     for p_id in probe_ids:
         if p_id not in PROBES:
             continue
@@ -698,6 +709,13 @@ def evaluate_model_on_probes(api_key, model_info, probe_ids, rounds=3, dry_run=F
             print(f"  Run {r}/{rounds}: Latency={run_entry['latency']:.2f}s | Score={score_data['overall_score']:.2f}/5.0 | {status_str}")
             if score_data["failed_assertions"]:
                 print(f"    Failed assertions: {score_data['failed_assertions']}")
+
+            # Fast-fail immediately if fatal endpoint/auth/gating error occurs
+            if not exec_res.get("success") and is_fatal_endpoint_error(exec_res.get("error")):
+                fatal_error_abort = exec_res.get("error")
+                print(f"  [FAST-FAIL] Model {model_id} encountered fatal endpoint/access error ({fatal_error_abort}). Aborting remaining runs and probes.")
+                break
+
             if not dry_run:
                 time.sleep(1.0)
         
@@ -719,12 +737,7 @@ def evaluate_model_on_probes(api_key, model_info, probe_ids, rounds=3, dry_run=F
             "runs": runs
         }
 
-        # Early-abort if the model fails with gateway/auth/403/401 errors across all runs
-        if not valid_runs and any(
-            "403" in str(r.get("error", "")) or "401" in str(r.get("error", "")) or "gating" in str(r.get("error", "")).lower()
-            for r in runs
-        ):
-            print(f"  [ABORT] Model {model_id} rejected by endpoint or gating ({runs[0].get('error')}). Aborting remaining probes.")
+        if fatal_error_abort:
             break
 
     # Aggregate Model Scores across evaluated probes
@@ -737,7 +750,13 @@ def evaluate_model_on_probes(api_key, model_info, probe_ids, rounds=3, dry_run=F
     total_eval_cost = round(sum(p["total_cost"] for p in probe_results.values()), 6)
 
     # Determine Promotion Eligibility (R0 / R1 / R2) based on eval-protocol.md
-    eligibility = determine_promotion_eligibility(probe_results, overall_avg_score)
+    if fatal_error_abort:
+        eligibility = {
+            "verdict": f"reject (Fatal endpoint/access rejection: {fatal_error_abort[:80]})",
+            "eligible_tiers": []
+        }
+    else:
+        eligibility = determine_promotion_eligibility(probe_results, overall_avg_score)
 
     summary = {
         "model_id": model_id,
@@ -881,7 +900,7 @@ def main():
         # Default test candidates
         candidate_models = [
             {"id": "nvidia/nemotron-3-super-120b-a12b:free", "name": "NVIDIA Nemotron 3 Super", "pricing": {"prompt_per_1m": 0.0, "completion_per_1m": 0.0}},
-            {"id": "google/gemini-3.7-flash", "name": "Google Gemini 3.7 Flash", "pricing": {"prompt_per_1m": 0.075, "completion_per_1m": 0.30}}
+            {"id": "google/gemini-3.8-flash", "name": "Google Gemini 3.8 Flash", "pricing": {"prompt_per_1m": 0.075, "completion_per_1m": 0.30}}
         ]
 
     print(f"Starting Automated Benchmark Run on {len(candidate_models)} model(s)...")

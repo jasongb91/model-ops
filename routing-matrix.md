@@ -19,14 +19,14 @@ Examples:
 
 Default Primary Models (by task family):
 - Scheduled Morning Brief / Status Synthesis: `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free`
-- Planning / Architecture Decomposition (B7): `openrouter/google/gemini-3.7-flash` (Primary fast/low-cost) / `openrouter/openai/gpt-5.6-sol` (High-Judgment Frontier Specialist)
+- Planning / Architecture Decomposition (B7): `openrouter/google/gemini-3.8-flash` (Primary fast/low-cost) / `openrouter/openai/gpt-5.6-sol` (High-Judgment Frontier Specialist)
 - Build / Orchestration Sweeps (`sync-acmedemo`): `openrouter/meituan/longcat-2.0`
 - Account Reconciliation / Auditor: `openrouter/xiaomi/mimo-v2.5`
 - Critical DevOps Integrity & Distribution Audits: `openrouter/openai/gpt-5.6-sol`
 
 Fallbacks / Escalation Anchors:
 - `openrouter/openai/gpt-5.6-sol` (Frontier quality upgrade for deep reasoning, architectural gotcha resolution, and empty checksum detection)
-- `openrouter/google/gemini-3.7-flash` (Fast, high-context fallback lane)
+- `openrouter/google/gemini-3.8-flash` (Fast, high-context fallback lane)
 - `openrouter/anthropic/claude-sonnet-4-6`
 
 ### R1 — important internal work
@@ -43,7 +43,7 @@ Default low-cost / zero-cost lane:
 - `openrouter/z-ai/glm-5.3-flash` ($0.075/$0.250 per 1M tokens — ultra-low-cost 1.31M context lane)
 - `openrouter/inclusionai/ling-3.0-flash` ($0.021/$0.084 per 1M tokens — fast-track synthesis & drafting)
 - `openrouter/openai/gpt-5.6-luna` ($0.20/$1.20 per 1M tokens — low-cost OpenAI primary)
-- `openrouter/google/gemini-3.7-flash` / `openrouter/google/gemini-3.8-flash`
+- `openrouter/google/gemini-3.8-flash`
 - `openrouter/xiaomi/mimo-v2.5`
 - `deepinfra/openai/gpt-oss-120b`
 - `deepinfra/Qwen/Qwen3-Next-80B-A3B-Instruct`
@@ -51,7 +51,7 @@ Default low-cost / zero-cost lane:
 
 Escalate to:
 - `openrouter/openai/gpt-5.6-sol`
-- `openrouter/google/gemini-3.7-flash`
+- `openrouter/google/gemini-3.8-flash`
 - `anthropic/claude-sonnet-4-6`
 
 ### R2 — low-risk exploratory / bounded internal work
@@ -73,21 +73,21 @@ Default:
 
 | Task family | Reliability class | First model | Alternate open-weight / low-cost | Premium fallback | Notes |
 |---|---:|---|---|---|---|
-| Scheduled status / morning brief final output | R0 | `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free` | `openrouter/z-ai/glm-5.3-flash` (shadow-gated) / `openrouter/google/gemini-3.7-flash` | `openrouter/openai/gpt-5.6-sol` | Nemotron 3 Ultra 550B ($0 cost) is primary for morning brief; GLM 5.3 Flash ($0.075/1M, 5.0/5 on B1) admitted for 3-day shadow evaluation; Gemini 3.7 Flash ($0.075/1M) is alternate fast synthesis. GPT-5.6 Sol retained as premium fallback. |
-| Granola transcript to meeting note processing | R1 | `openrouter/minimax/minimax-m3` | `openrouter/openai/gpt-5.6-luna` / `openrouter/google/gemini-3.7-flash` | `openrouter/openai/gpt-5.6-sol` | MiniMax M3 achieved 4.95/5 with 100% attendee attribution at 16.8s. GPT-5.6 Luna ($0.20/$1.20) and Gemini 3.7 Flash provide secondary long-context support. |
-| Scheduled account decay & archive sweep | R1 | `openrouter/poolside/laguna-s-2.1` | `openrouter/xiaomi/mimo-v2.5` / `deepinfra/deepseek-ai/DeepSeek-V3.2` | `openrouter/google/gemini-3.7-flash` | Laguna S 2.1 demonstrated 4.96/5 with 100% bullet immutability and precise 180-day contact aging at 14.1s ($0.090/$0.200/1M). |
-| Scheduled end-of-day (EOD) progress sweep | R1 | `openrouter/poolside/laguna-s-2.1` | `openrouter/xiaomi/mimo-v2.5` / `openrouter/qwen/qwen3.7-flash` | `openrouter/google/gemini-3.7-flash` | Laguna S 2.1 scored 4.97/5 with 100% bullet immutability, in-place canonical updates, and clean canvas sync integration. |
-| Customer account auditor & reconciliation | R0/R1 | `openrouter/xiaomi/mimo-v2.5` | `openrouter/google/gemini-3.7-flash` | `openrouter/openai/gpt-5.6-sol` | MiMo-V2.5 validated for fast note triage and canonical vault mutations. Gemini 3.7 Flash as low-cost secondary. |
-| Internal ops status synthesis (B1) | R1 | `openrouter/nvidia/nemotron-3-super-120b-a12b:free` | `moa:fast-ops` / `openrouter/z-ai/glm-5.3-flash` / `openrouter/openai/gpt-5.6-luna` / `openrouter/google/gemini-3.7-flash` | `openrouter/openai/gpt-5.6-sol` | Nemotron 3 Super 120B provides zero API cost; MoA Fast-Ops (5.0/5, 0.45s compound latency) and GLM 5.3 Flash (5.0/5, 0.22s) provide high-accuracy low-cost lanes. GPT-5.6 Sol is frontier escalation. |
-| CS note drafting / account update first pass (B3) | R1 | `openrouter/google/gemini-3.7-flash` | `moa:fast-ops` / `openrouter/z-ai/glm-5.3-flash` / `openrouter/openai/gpt-5.6-luna` / `openrouter/xiaomi/mimo-v2.5` | `openrouter/openai/gpt-5.6-sol` | Gemini 3.7 Flash, MoA Fast-Ops, GLM 5.3 Flash, and GPT-5.6 Luna match frontier quality at ~90% cost savings. |
-| DevOps / distribution audits (B5) | R1/R0 | `openrouter/nvidia/nemotron-3-super-120b-a12b:free` (R1) / `openrouter/openai/gpt-5.6-sol` (R0) | `moa:fast-ops` / `openrouter/z-ai/glm-5.3-flash` / `openrouter/google/gemini-3.7-flash` / `openrouter/xiaomi/mimo-v2.5` | `openrouter/openai/gpt-5.6-sol` | Nemotron 3 Super is zero-cost R1 default. MoA Fast-Ops (5.0/5 on B5) and GLM 5.3 Flash provide ultra-fast audit synthesis. GPT-5.6 Sol is R0 frontier specialist for detecting empty sha256 checksums and deep integrity audits. |
-| Slack triage / categorization / extraction (B2/B4) | R2 | `openrouter/nvidia/nemotron-3-super-120b-a12b:free` or `openrouter/z-ai/glm-5.3-flash` | `openrouter/openai/gpt-5.6-luna` / `openrouter/xiaomi/mimo-v2.5` / `openrouter/qwen/qwen3.7-flash` | `openrouter/google/gemini-3.7-flash` | Nemotron 3 Super (3.6s, $0), GLM 5.3 Flash (0.34s, 5.0/5 JSON, $0.075/1M), and GPT-5.6 Luna (0.49s, $0.20/$1.20) deliver rapid extraction and schema-compliant triage. |
-| Muse Glimmer triage / extraction / bounded ops chat (B2/B4) | R2 | `openrouter/meta/muse-glimmer-30b:deepinfra/bf16` | `openrouter/nvidia/nemotron-3-super-120b-a12b:free` / `openrouter/qwen/qwen3.7-flash` | `openrouter/google/gemini-3.7-flash` | Muse Glimmer scored 5.0/5 on B2 and B4 with 100% assertion passes and 0.21–0.29s latency in a single-run evaluation; provider pricing is listed as $0.30/$1.20 per 1M, while this evaluation recorded $0.00. Keep bounded until repeated-run stability is established. |
+| Scheduled status / morning brief final output | R0 | `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free` | `openrouter/z-ai/glm-5.3-flash` (shadow-gated) / `openrouter/google/gemini-3.8-flash` | `openrouter/openai/gpt-5.6-sol` | Nemotron 3 Ultra 550B ($0 cost) is primary for morning brief; GLM 5.3 Flash ($0.075/1M, 5.0/5 on B1) admitted for 3-day shadow evaluation; Gemini 3.8 Flash ($0.075/1M) is alternate fast synthesis. GPT-5.6 Sol retained as premium fallback. |
+| Granola transcript to meeting note processing | R1 | `openrouter/minimax/minimax-m3` | `openrouter/openai/gpt-5.6-luna` / `openrouter/google/gemini-3.8-flash` | `openrouter/openai/gpt-5.6-sol` | MiniMax M3 achieved 4.95/5 with 100% attendee attribution at 16.8s. GPT-5.6 Luna ($0.20/$1.20) and Gemini 3.8 Flash provide secondary long-context support. |
+| Scheduled account decay & archive sweep | R1 | `openrouter/poolside/laguna-s-2.1` | `openrouter/xiaomi/mimo-v2.5` / `deepinfra/deepseek-ai/DeepSeek-V3.2` | `openrouter/google/gemini-3.8-flash` | Laguna S 2.1 demonstrated 4.96/5 with 100% bullet immutability and precise 180-day contact aging at 14.1s ($0.090/$0.200/1M). |
+| Scheduled end-of-day (EOD) progress sweep | R1 | `openrouter/poolside/laguna-s-2.1` | `openrouter/xiaomi/mimo-v2.5` / `openrouter/qwen/qwen3.7-flash` | `openrouter/google/gemini-3.8-flash` | Laguna S 2.1 scored 4.97/5 with 100% bullet immutability, in-place canonical updates, and clean canvas sync integration. |
+| Customer account auditor & reconciliation | R0/R1 | `openrouter/xiaomi/mimo-v2.5` | `openrouter/google/gemini-3.8-flash` | `openrouter/openai/gpt-5.6-sol` | MiMo-V2.5 validated for fast note triage and canonical vault mutations. Gemini 3.8 Flash as low-cost secondary. |
+| Internal ops status synthesis (B1) | R1 | `openrouter/nvidia/nemotron-3-super-120b-a12b:free` | `moa:fast-ops` / `openrouter/z-ai/glm-5.3-flash` / `openrouter/openai/gpt-5.6-luna` / `openrouter/google/gemini-3.8-flash` | `openrouter/openai/gpt-5.6-sol` | Nemotron 3 Super 120B provides zero API cost; MoA Fast-Ops (5.0/5, 0.45s compound latency) and GLM 5.3 Flash (5.0/5, 0.22s) provide high-accuracy low-cost lanes. GPT-5.6 Sol is frontier escalation. |
+| CS note drafting / account update first pass (B3) | R1 | `openrouter/google/gemini-3.8-flash` | `moa:fast-ops` / `openrouter/z-ai/glm-5.3-flash` / `openrouter/openai/gpt-5.6-luna` / `openrouter/xiaomi/mimo-v2.5` | `openrouter/openai/gpt-5.6-sol` | Gemini 3.8 Flash, MoA Fast-Ops, GLM 5.3 Flash, and GPT-5.6 Luna match frontier quality at ~90% cost savings. |
+| DevOps / distribution audits (B5) | R1/R0 | `openrouter/nvidia/nemotron-3-super-120b-a12b:free` (R1) / `openrouter/openai/gpt-5.6-sol` (R0) | `moa:fast-ops` / `openrouter/z-ai/glm-5.3-flash` / `openrouter/google/gemini-3.8-flash` / `openrouter/xiaomi/mimo-v2.5` | `openrouter/openai/gpt-5.6-sol` | Nemotron 3 Super is zero-cost R1 default. MoA Fast-Ops (5.0/5 on B5) and GLM 5.3 Flash provide ultra-fast audit synthesis. GPT-5.6 Sol is R0 frontier specialist for detecting empty sha256 checksums and deep integrity audits. |
+| Slack triage / categorization / extraction (B2/B4) | R2 | `openrouter/nvidia/nemotron-3-super-120b-a12b:free` or `openrouter/z-ai/glm-5.3-flash` | `openrouter/openai/gpt-5.6-luna` / `openrouter/xiaomi/mimo-v2.5` / `openrouter/qwen/qwen3.7-flash` | `openrouter/google/gemini-3.8-flash` | Nemotron 3 Super (3.6s, $0), GLM 5.3 Flash (0.34s, 5.0/5 JSON, $0.075/1M), and GPT-5.6 Luna (0.49s, $0.20/$1.20) deliver rapid extraction and schema-compliant triage. |
+| Muse Glimmer triage / extraction / bounded ops chat (B2/B4) | R2 | `openrouter/meta/muse-glimmer-30b:deepinfra/bf16` | `openrouter/nvidia/nemotron-3-super-120b-a12b:free` / `openrouter/qwen/qwen3.7-flash` | `openrouter/google/gemini-3.8-flash` | Muse Glimmer scored 5.0/5 on B2 and B4 with 100% assertion passes and 0.21–0.29s latency in a single-run evaluation; provider pricing is listed as $0.30/$1.20 per 1M, while this evaluation recorded $0.00. Keep bounded until repeated-run stability is established. |
 | Build / implementation-heavy OpenCode run | R0/R1 | `openrouter/openai/gpt-5.6-luna` (bounded default) | `openrouter/poolside/laguna-s-2.1` / `openrouter/meituan/longcat-2.0` | `openrouter/openai/gpt-5.6-sol` | GPT-5.6 Luna is the verified lower-cost OpenCode build default ($0.20/$1.20 per 1M tokens). Use only for bounded, test-backed changes; escalate to Sol for high-stakes architecture, security, customer-facing, or repeated verification failure. |
-| Planning / architecture decomposition (B7) | R0 | `openrouter/google/gemini-3.7-flash` | `openrouter/openai/gpt-5.6-sol` / `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free` | `openrouter/openai/gpt-5.6-sol` / `anthropic/claude-sonnet-4-6` | Gemini 3.7 Flash is fast standard. GPT-5.6 Sol is frontier reasoning specialist resolving Fargate/EC2 IMDS boundaries and complex IAM constraints. |
-| Architecture / infra tradeoff work | R0 | `openrouter/openai/gpt-5.6-sol` or `anthropic/claude-sonnet-4-6` | `openrouter/google/gemini-3.7-flash` | `openai/o3` class if added later | GPT-5.6 Sol and Claude Sonnet 4.6 serve as frontier anchors for high-ambiguity architectural trade-offs. |
-| Long-context vault / multi-document synthesis (B6) | R1 | `openrouter/google/gemini-3.7-flash` | `openrouter/openai/gpt-5.6-luna` / `openrouter/minimax/minimax-m3` | `openrouter/openai/gpt-5.6-sol` | Gemini 3.7 Flash (1M+ window) and GPT-5.6 Luna (100% needle recall @ 1.05M window, $0.20/$1.20) provide fast, low-cost long-context synthesis. |
-| Crogl/debug/provider-compatibility analysis | R1 | `openrouter/google/gemini-3.7-flash` | `openrouter/meituan/longcat-2.0` / `deepinfra/openai/gpt-oss-120b` | `openrouter/openai/gpt-5.6-sol` | Fast diagnostic triage with low token cost. |
+| Planning / architecture decomposition (B7) | R0 | `openrouter/google/gemini-3.8-flash` | `openrouter/openai/gpt-5.6-sol` / `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free` | `openrouter/openai/gpt-5.6-sol` / `anthropic/claude-sonnet-4-6` | Gemini 3.8 Flash is fast standard. GPT-5.6 Sol is frontier reasoning specialist resolving Fargate/EC2 IMDS boundaries and complex IAM constraints. |
+| Architecture / infra tradeoff work | R0 | `openrouter/openai/gpt-5.6-sol` or `anthropic/claude-sonnet-4-6` | `openrouter/google/gemini-3.8-flash` | `openai/o3` class if added later | GPT-5.6 Sol and Claude Sonnet 4.6 serve as frontier anchors for high-ambiguity architectural trade-offs. |
+| Long-context vault / multi-document synthesis (B6) | R1 | `openrouter/google/gemini-3.8-flash` | `openrouter/openai/gpt-5.6-luna` / `openrouter/minimax/minimax-m3` | `openrouter/openai/gpt-5.6-sol` | Gemini 3.8 Flash (1M+ window) and GPT-5.6 Luna (100% needle recall @ 1.05M window, $0.20/$1.20) provide fast, low-cost long-context synthesis. |
+| Crogl/debug/provider-compatibility analysis | R1 | `openrouter/google/gemini-3.8-flash` | `openrouter/meituan/longcat-2.0` / `deepinfra/openai/gpt-oss-120b` | `openrouter/openai/gpt-5.6-sol` | Fast diagnostic triage with low token cost. |
 
 ## Promotion Criteria & Staged Rollout Policy
 
@@ -154,7 +154,7 @@ R0 tasks represent high-judgment, mutating, or executive-facing workflows where 
 
 - **Permanent Frontier Fallback Anchors:**
   - All R0 and scheduled mutating workflows MUST retain explicit, hardcoded fallback ladders to frontier models:
-    - Primary Escalation Anchor: `openrouter/openai/gpt-5.6-sol` (R0 Frontier) or `openrouter/google/gemini-3.7-flash` (R1 High-Context)
+    - Primary Escalation Anchor: `openrouter/openai/gpt-5.6-sol` (R0 Frontier) or `openrouter/google/gemini-3.8-flash` (R1 High-Context)
     - Secondary Escalation Anchor: `openrouter/anthropic/claude-sonnet-4-6`
   - Automatic fallback triggers on:
     1. HTTP 400, 429, 500, 502, or 503 provider errors from OpenRouter.
@@ -199,7 +199,7 @@ Routing boundary:
 Routing boundary:
 - Promoted into R2 fast-track extraction/triage co-default.
 - Promoted into R1 internal ops synthesis and audit drafting lanes.
-- Admitted to R0 shadow evaluation for scheduled morning briefs alongside `nemotron-3-ultra-550b:free` and `gemini-3.7-flash`, retaining hardcoded frontier fallbacks (`gpt-5.4` / `gpt-5.6-sol` / `claude-sonnet-4-6`).
+- Admitted to R0 shadow evaluation for scheduled morning briefs alongside `nemotron-3-ultra-550b:free` and `gemini-3.8-flash`, retaining hardcoded frontier fallbacks (`gpt-5.4` / `gpt-5.6-sol` / `claude-sonnet-4-6`).
 
 ## InclusionAI Ling 3.0 Flash qualification (2026-09-14)
 

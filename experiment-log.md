@@ -387,6 +387,46 @@ Use one section per meaningful run or benchmark batch.
   - **`nvidia/nemotron-3-nano-30b-a3b:free`**: **Promote to R2 (evaluation / shadow)** for ultra-low latency inbound Slack triage.
   - **`nvidia/nemotron-3-ultra-550b-a55b:free`**: **Promote to R1 (specialized)** for deep architecture tradeoff and complex planning tasks where cost is zero and latency is secondary.
 
+## 2026-09-25 — Automated Eval: Qwen 3.8 Flash Variants (qwen3.8-flash & qwen3.8-omni-flash)
+- surface: Automated Evaluation Harness (`scripts/eval_promo_candidates.py`) via OpenRouter BYOK
+- task family: Benchmark Probes B2 (Morning Brief Extraction), B4 (Frontdoor/Slack Triage), B6 (Long-Context Needle Recall), B7 (Complex Ops Planning) — 3 rounds each
+- task reliability class: R1/R2 candidates
+- models evaluated:
+  1. `openrouter/qwen/qwen3.8-flash` ($0.15 / $0.47 per 1M in/out, 1M context)
+  2. `openrouter/qwen/qwen3.8-omni-flash` ($0.15 / $0.47 per 1M in/out, 1M context)
+- recorded cost: $0.00 (promotional / free pricing at eval time)
+- source artifacts: `benchmark-results/eval_qwen_qwen3.8-flash.json`, `benchmark-results/eval_qwen_qwen3.8-omni-flash.json`, `benchmark-results/eval_master_index.json`
+
+### Results:
+
+#### 1. `qwen/qwen3.8-flash` — Overall 2.29/5, avg latency 4.58s, pass rate 32% → **REJECT**
+| Probe | Avg Latency | Pass Rate | Score |
+|:---|:---:|:---:|:---:|
+| B2 Extraction | 3.40s | 60% | 3.48 |
+| B4 Triage | 4.43s | 33% | 2.33 |
+| B6 Needle Recall | 4.60s | 33% | 2.33 |
+| B7 Planning | 5.87s | 0% | 1.00 |
+
+- findings: materially degraded vs `qwen3.7-flash` (5.0/5 on B2/B4/B7 historically). Failed long-context needle recall and returned empty content on structured planning runs.
+
+#### 2. `qwen/qwen3.8-omni-flash` — Overall 4.45/5, avg latency 1.13s, pass rate 80% → **PROMOTE to R2 (Triage / Extraction Fast-Track)**
+| Probe | Avg Latency | Pass Rate | Score |
+|:---|:---:|:---:|:---:|
+| B2 Extraction | 1.33s | 87% | 4.63 |
+| B4 Triage | 0.77s | 100% | 5.00 |
+| B6 Needle Recall | 1.52s | 100% | 5.00 |
+| B7 Planning | 0.89s | 33% | 3.15 |
+
+- findings: excellent on extraction/triage/long-context at sub-2s latencies. B7 caveat: 2 of 3 runs hit the 2048 `max_tokens` harness cap mid-plan and returned empty content (35,890 completion tokens requested in run 2) — the B7 score is a harness truncation artifact, not confirmed model failure. Needs re-run with higher max_tokens before any R1 planning promotion.
+- comparison note: `qwen3.8-omni-flash` matches `qwen3.7-flash` quality on B2/B4/B6 while being ~25% cheaper on input and ~1 order faster on latency, but evidence is from a different eval batch; treat as bounded, not like-for-like.
+
+### Verdict (final, after post-eval cost comparison against live catalog 2026-09-25):
+- **`qwen/qwen3.8-flash`**: reject — do not promote to any tier. Failed B4/B6/B7 outright; no comparison needed.
+- **`qwen/qwen3.8-omni-flash`**: eval signal was promote-to-R2 (4.45/5, 80% pass), but **held as fallback only — no routing change**. Rationale: live OpenRouter catalog pricing shows `qwen3.7-flash` at $0.030/$0.130 per 1M (down from $0.20–0.30 at time of earlier evals), ~5x cheaper than omni-flash's $0.150/$0.470 on both input and output, with a longer multi-batch track record of equal-or-higher scores (5.0/5 B2/B4/B7, 100% needle recall). `z-ai/glm-5.3-flash` ($0.045/$0.140, 1.3M ctx, sub-second) and the free `nemotron-3-super-120b:free` lane (4.85/5, zero cost, 262k ctx) further crowd the R2 space. omni-flash's residual advantages — ~0.7–1.5s latency and omni/multimodal capability — do not justify 5x cost against incumbents.
+- Re-evaluation triggers: `qwen3.7-flash` pricing regression, sustained Nemotron free-lane rate limiting, or an omni/multimodal R2 workload requirement.
+- routing-matrix.md: intentionally unchanged.
+
+
 ## 2026-08-21 — Benchmark Evaluation: Phase 2 Candidate Models on OpenCode Coding & Tool Use (Poolside Laguna S 2.1 & Meituan LongCat 2.0)
 - surface: OpenCode / Hermes Model Ops (Benchmark Probes B8 & B7)
 - task family: Probe B8 (Agent Tool Use & Structured Execution / OpenCode Tool Calling) & Probe B7 (Planning, Decomposition & Patch Clean-Rate)

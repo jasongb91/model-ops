@@ -17,7 +17,7 @@ Purpose: continuously improve Hermes + OpenCode model selection for **ops** and 
 ### Hermes Default Config (`ops` & `ops-light`)
 - **Primary Intake Model:** `openrouter/google/gemini-3.8-flash`
 - **Aliases:** `gemini-fast` (`gemini-3.8-flash`), `gemini-pro` (`gemini-2.5-pro`), `gemini-lite` (`gemini-2.5-flash-lite`), `gpt-5.4`, `gpt-5.6-luna`, `nemotron-super`, `luna`, `gemini-3.8-flash`, `glm-5.3-flash`, `ling-flash`, `ling-3-flash`, `mistral-nemo`
-- **Fallback Chain:** `openrouter/z-ai/glm-5.3-flash` → `google/gemini-3.7-flash` → `openai/gpt-5.6-luna` → `openai/gpt-5.6-sol`
+- **Fallback Chain:** `openrouter/z-ai/glm-5.3-flash` → `google/gemini-3.8-flash` → `openai/gpt-5.6-luna` → `openai/gpt-5.6-sol`
 - **Mixture-of-Agents (MoA) Presets:**
   - `fast-ops` (Default): References `inclusionai/ling-3.0-flash` & `z-ai/glm-5.3-flash` → Aggregator `google/gemini-3.8-flash`
   - `frontier-review`: References `google/gemini-3.8-flash` & `z-ai/glm-5.3-flash` → Aggregator `openai/gpt-5.6-sol`
@@ -41,7 +41,7 @@ Purpose: continuously improve Hermes + OpenCode model selection for **ops** and 
   - `openrouter-model-auditor`: `openrouter/nvidia/nemotron-3-super-120b-a12b:free`
   - `ops-account-auditor`: `openrouter/xiaomi/mimo-v2.5`
   - `sync-acmedemo-from-main`: `openrouter/openai/gpt-5.6-luna`
-- **Launchd Background Sweeps:** 7 scripts in `vault/scripts/` updated to route through OpenRouter (`openrouter/qwen/qwen3.7-flash`, `openrouter/google/gemini-3.7-flash`, `openrouter/openai/gpt-5.6-luna`, `openrouter/openai/gpt-5.6-sol`).
+- **Launchd Background Sweeps:** 7 scripts in `vault/scripts/` updated to route through OpenRouter (`openrouter/qwen/qwen3.7-flash`, `openrouter/google/gemini-3.8-flash`, `openrouter/openai/gpt-5.6-luna`, `openrouter/openai/gpt-5.6-sol`).
 
 ## Main files
 - `routing-matrix.md` — current task-family routing policy and MoA topology
