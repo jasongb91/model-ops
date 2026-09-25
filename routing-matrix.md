@@ -40,6 +40,7 @@ Examples:
 Default low-cost / zero-cost lane:
 - `moa:fast-ops` (MoA compound preset: Ling 3.0 Flash + GLM 5.3 Flash advisors -> Gemini 3.8 Flash aggregator; 5.0/5 on R1, 0.45s latency)
 - `openrouter/nvidia/nemotron-3-super-120b-a12b:free` (zero-cost primary)
+- `openrouter/mistralai/mistral-nemo` (fast-track R1 synthesis, note drafting, audit table generation)
 - `openrouter/z-ai/glm-5.3-flash` ($0.075/$0.250 per 1M tokens — ultra-low-cost 1.31M context lane)
 - `openrouter/inclusionai/ling-3.0-flash` ($0.021/$0.084 per 1M tokens — fast-track synthesis & drafting)
 - `openrouter/openai/gpt-5.6-luna` ($0.20/$1.20 per 1M tokens — low-cost OpenAI primary)
@@ -64,6 +65,7 @@ Examples:
 
 Default:
 - `openrouter/nvidia/nemotron-3-super-120b-a12b:free` (zero-cost primary)
+- `openrouter/mistralai/mistral-nemo` (fast-track extraction & triage co-default, 0.39s latency, 100% B2/B4 pass)
 - `openrouter/z-ai/glm-5.3-flash` ($0.075/$0.250 per 1M tokens — fast sub-second extraction & schema-compliant triage)
 - `openrouter/openai/gpt-5.6-luna` ($0.20/$1.20 per 1M tokens — fast, 100% extraction accuracy)
 - `openrouter/xiaomi/mimo-v2.5` / `openrouter/qwen/qwen3.7-flash` (low-cost sub-$0.25/1M)
@@ -250,6 +252,24 @@ MoA presets execute a compound workflow: parallel reference models generate advi
   - References: `openai/gpt-5.6-sol`, `google/gemini-3.8-flash`
   - Aggregator: `anthropic/claude-sonnet-4-6`
   - Scope: Executive communication, delicate partner correspondence, and customer-facing drafts.
+
+## Mistral Nemo qualification (2026-09-14)
+
+`mistralai/mistral-nemo` (Mistral: Mistral Nemo) evaluated via OpenRouter (DeepInfra upstream provider) scored 4.89/5.0 overall with 0.39s average latency and 98.0% assertion pass rate across the B1–B8 benchmark suite (24 total requests across 3 rounds; recorded eval cost $0.000528).
+- B1 (Internal Scheduled-Status Synthesis, R1): 4.45/5.0 (81% assertions, 0.79s). Clean status brief, identified failing cron and timed-out launchd sweep, exact GCP VM IP.
+- B2 (Morning Brief Component Extraction, R2): 5.00/5.0 (100% assertions, 0.26s). Flawless extraction of blockers, SEC-942, target dates, word bounds.
+- B3 (CS Account-Note Drafting & Updates, R1): 5.00/5.0 (100% assertions, 0.53s). Exact canonical note structure and stakeholder attribution.
+- B4 (Frontdoor / Slack Triage & Classification, R2): 5.00/5.0 (100% assertions, 0.33s). 100% JSON schema adherence, accurate route (`cs-ops`) and priority (`P2`).
+- B5 (Artifact & Distribution Audit Synthesis, R1): 5.00/5.0 (100% assertions, 0.19s). Fast distribution table compilation and blocker detection.
+- B6 (Long-Context Synthesis & Needle Recall, R1): 5.00/5.0 (100% assertions, 0.42s). Perfect needle recall across context.
+- B7 (Complex Ops Planning & Decomposition, R1): 4.70/5.0 (100% assertions, 0.32s). Clean dependency breakdown.
+- B8 (Agent Tool Use & Structured Execution, R1): 5.00/5.0 (100% assertions, 0.27s). Precise tool parameter populating.
+
+Routing boundary:
+- Promoted into R2 fast-track extraction and triage co-default (B2 and B4 scored 5.00/5.0 with sub-0.35s latency and zero schema deviations).
+- Promoted into R1 fast-track internal ops synthesis, CS note drafting, and audit table generation lanes.
+- Not promoted to autonomous R0 primary (retains R0 shadow qualification rules and frontier fallbacks).
+- Aliased in `ops` profile as `mistral-nemo` / `nemo`.
 
 ## Planned expansion candidates
 See `provider-expansion.md` before changing defaults.

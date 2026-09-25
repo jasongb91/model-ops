@@ -1,0 +1,870 @@
+{
+  "model_id": "mistralai/mistral-nemo",
+  "label": "Mistral: Mistral Nemo",
+  "evaluated_at": "2026-09-14 13:28:59 UTC",
+  "rounds_per_probe": 3,
+  "probes_evaluated": [
+    "B1",
+    "B2",
+    "B3",
+    "B4",
+    "B5",
+    "B6",
+    "B7",
+    "B8"
+  ],
+  "overall_score": 4.89,
+  "overall_latency": 0.39,
+  "overall_pass_rate": 0.98,
+  "total_eval_cost": 0.000528,
+  "promotion_verdict": {
+    "verdict": "promote to R2 (Triage / Extraction Fast-Track), R1 (Internal Ops / Synthesis / Drafting Fast-Track)",
+    "eligible_tiers": [
+      "R2 (Triage / Extraction Fast-Track)",
+      "R1 (Internal Ops / Synthesis / Drafting Fast-Track)"
+    ]
+  },
+  "probe_details": {
+    "B1": {
+      "probe_id": "B1",
+      "name": "Internal Scheduled-Status Synthesis",
+      "reliability_class": "R1",
+      "avg_latency": 0.79,
+      "avg_score": 4.45,
+      "avg_pass_rate": 0.81,
+      "total_cost": 2.4e-05,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 1.993,
+          "prompt_tokens": 185,
+          "completion_tokens": 165,
+          "actual_model": "mistralai/mistral-nemo",
+          "actual_provider": "DeepInfra",
+          "content": "**Internal Ops Status Brief**\n\n- **Active Systems:**\n  - Hermes Cron: 2 jobs active\n  - Launchd Sweeps: 7 agents active\n  - GCP VM: acmedemo instance healthy @ 34.69.169.75\n  - OpenCode Spend: $548 baseline\n\n- **Operational Failures:**\n  - Hermes Cron: sync-acmedemo-from-main job failed with network timeout\n  - Launchd Sweeps: health-check-sweep on agent-4 timed out\n\n- **Immediate Remediation Actions:**\n  - Investigate and resolve network timeout issue for Hermes Cron job: sync-acmedemo-from-main\n  - Restart or troubleshoot agent-4 for Launchd Sweeps to prevent future timeouts",
+          "scores": {
+            "correctness": 4.43,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 4.0,
+            "token_efficiency": 5.0,
+            "overall_score": 4.71,
+            "cost": 8e-06,
+            "assertion_pass_rate": 0.86,
+            "passed_assertions": [
+              "identifies_failing_cron",
+              "identifies_timed_out_launchd",
+              "quotes_exact_gcp_ip",
+              "quotes_opencode_spend",
+              "no_hallucinated_outages",
+              "stop_discipline_check"
+            ],
+            "failed_assertions": [
+              "quotes_cloud_sql_utilization"
+            ]
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.183,
+          "prompt_tokens": 185,
+          "completion_tokens": 152,
+          "actual_model": "mistralai/mistral-nemo",
+          "actual_provider": "DeepInfra",
+          "content": "**Internal Ops Status Brief**\n\n- **Active Systems:**\n  - Hermes Cron: 2 jobs active\n  - Launchd Sweeps: 7 agents active\n  - GCP VM: acmedemo instance healthy\n  - OpenCode Spend: $548 baseline\n\n- **Operational Failures:**\n  - Hermes Cron: sync-acmedemo-from-main job failed due to network timeout\n  - Launchd Sweeps: health-check-sweep on agent-4 timed out\n\n- **Immediate Remediation Actions:**\n  - Investigate and resolve network timeout issue for Hermes Cron job sync-acmedemo-from-main\n  - Restart or troubleshoot agent-4 for Launchd Sweeps health-check-sweep job",
+          "scores": {
+            "correctness": 3.86,
+            "grounding": 4.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 3.5,
+            "latency_score": 5.0,
+            "cleanup_burden": 2.5,
+            "token_efficiency": 5.0,
+            "overall_score": 3.92,
+            "cost": 8e-06,
+            "assertion_pass_rate": 0.71,
+            "passed_assertions": [
+              "identifies_failing_cron",
+              "identifies_timed_out_launchd",
+              "quotes_opencode_spend",
+              "no_hallucinated_outages",
+              "stop_discipline_check"
+            ],
+            "failed_assertions": [
+              "quotes_exact_gcp_ip",
+              "quotes_cloud_sql_utilization"
+            ]
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.187,
+          "prompt_tokens": 185,
+          "completion_tokens": 165,
+          "actual_model": "mistralai/mistral-nemo",
+          "actual_provider": "DeepInfra",
+          "content": "**Internal Ops Status Brief**\n\n- **Active Systems:**\n  - Hermes Cron: 2 jobs active\n  - Launchd Sweeps: 7 agents active\n  - GCP VM: acmedemo instance healthy (34.69.169.75)\n  - OpenCode Spend: $548 baseline\n\n- **Operational Failures:**\n  - Hermes Cron: sync-acmedemo-from-main job failed due to network timeout\n  - Launchd Sweeps: health-check-sweep on agent-4 timed out\n\n- **Immediate Remediation Actions:**\n  - Investigate and resolve network timeout issue for Hermes Cron job sync-acmedemo-from-main\n  - Troubleshoot and restart health-check-sweep on agent-4 for Launchd Sweeps",
+          "scores": {
+            "correctness": 4.43,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 4.0,
+            "token_efficiency": 5.0,
+            "overall_score": 4.71,
+            "cost": 8e-06,
+            "assertion_pass_rate": 0.86,
+            "passed_assertions": [
+              "identifies_failing_cron",
+              "identifies_timed_out_launchd",
+              "quotes_exact_gcp_ip",
+              "quotes_opencode_spend",
+              "no_hallucinated_outages",
+              "stop_discipline_check"
+            ],
+            "failed_assertions": [
+              "quotes_cloud_sql_utilization"
+            ]
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B2": {
+      "probe_id": "B2",
+      "name": "Morning Brief Component Extraction",
+      "reliability_class": "R1/R2",
+      "avg_latency": 0.26,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 2.7e-05,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.293,
+          "prompt_tokens": 223,
+          "completion_tokens": 154,
+          "actual_model": "mistralai/mistral-nemo",
+          "actual_provider": "DeepInfra",
+          "content": "**High-Signal Bullets for TXNM Energy:**\n\n- **Upcoming Milestone:** Grid Modernization Phase 1 rollout architecture agreed upon with a target go-live date set for **September 15, 2026**.\n- **New Blocker:** SAML SSO certificate expiry on staging cluster scheduled for **August 28, 2026**, requiring immediate attention with internal ticket SEC-942 opened.\n- **Upcoming Deliverables:**\n  - Jason to provide Airbyte connector schema by **August 24, 2026**.\n  - Sarah to confirm IdP metadata URL by **August 29, 2026**, following the SAML SSO certificate rotation.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 9e-06,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "highlights_saml_cert_blocker",
+              "extracts_target_dates",
+              "extracts_airbyte_or_grid_mod",
+              "word_count_bounded",
+              "bullet_format_compliance"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.176,
+          "prompt_tokens": 223,
+          "completion_tokens": 169,
+          "actual_model": "mistralai/mistral-nemo",
+          "actual_provider": "DeepInfra",
+          "content": "**High-Signal Bullets for TXNM Energy:**\n\n1. **Upcoming Milestone:** Grid Modernization Phase 1 rollout architecture agreed upon with a target go-live date set for **September 15, 2026**.\n2. **New Blocker:** **SAML SSO certificate expiry** on staging cluster scheduled for **August 28, 2026** has been flagged by TXNM's security team. Internal ticket **SEC-942** opened to address this.\n3. **Upcoming Deliverables:**\n   - Jason to provide Airbyte connector schema by **August 24, 2026**.\n   - Sarah to confirm IdP metadata URL by **August 29, 2026**, following the SAML certificate rotation.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 9e-06,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "highlights_saml_cert_blocker",
+              "extracts_target_dates",
+              "extracts_airbyte_or_grid_mod",
+              "word_count_bounded",
+              "bullet_format_compliance"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.309,
+          "prompt_tokens": 223,
+          "completion_tokens": 167,
+          "actual_model": "mistralai/mistral-nemo",
+          "actual_provider": "DeepInfra",
+          "content": "**High-Signal Bullets for TXNM Energy:**\n\n- **Upcoming Milestone:** Grid Modernization Phase 1 rollout architecture agreed upon with a target go-live date set for **September 15, 2026**.\n- **New Blocker:** SAML SSO certificate expiry on staging cluster scheduled for **August 28, 2026** has been flagged by TXNM's security team, with an internal ticket (SEC-942) opened to address this.\n- **Pending Deliverables:**\n  - Jason to provide Airbyte connector schema by **August 24, 2026**.\n  - Sarah to confirm IdP metadata URL by **August 29, 2026**, following the SAML SSO certificate rotation.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 9e-06,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "highlights_saml_cert_blocker",
+              "extracts_target_dates",
+              "extracts_airbyte_or_grid_mod",
+              "word_count_bounded",
+              "bullet_format_compliance"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B3": {
+      "probe_id": "B3",
+      "name": "CS Account-Note Drafting & Updates",
+      "reliability_class": "R1",
+      "avg_latency": 0.53,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 3.5e-05,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.182,
+          "prompt_tokens": 271,
+          "completion_tokens": 208,
+          "actual_model": "mistralai/mistral-nemo",
+          "actual_provider": "DeepInfra",
+          "content": "# customer-accounts/txnm-energy.md\n\n## Onboarding\n- **Milestone:** Grid Modernization Phase 1 architecture signoff completed.\n- **Target Go-Live Date:** September 15, 2026.\n\n## Blockers\n- **SAML SSO Certificate Expiry:** Scheduled for August 28, 2026.\n  - **TXNM Internal Secops Ticket:** SEC-942 opened to rotate cert.\n\n## Open Tasks\n- **Jason (Crogl):** Provide updated Airbyte connector schema definitions by **August 24, 2026**.\n- **Sarah (TXNM):** Confirm IdP metadata URL once **SEC-942** resolves.\n\n## Recent Activity\n- **Meeting:** Direct customer meeting held with TXNM Energy stakeholders.\n  - **Attendees:** Jason (Crogl), John (TXNM), Sarah (TXNM).\n  - **Discussion:** Grid Modernization Phase 1 architecture signoff completed.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 1.1e-05,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "canonical_sections_present",
+              "bold_label_syntax",
+              "cites_saml_and_sec942",
+              "direct_correlation_no_speculation",
+              "preserves_task_owners"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 1.208,
+          "prompt_tokens": 271,
+          "completion_tokens": 226,
+          "actual_model": "mistralai/mistral-nemo",
+          "actual_provider": "DeepInfra",
+          "content": "# customer-accounts/txnm-energy.md\n\n## Onboarding\n- **Attendees:** Jason (Crogl), John (TXNM), Sarah (TXNM)\n- **Milestone:** Grid Modernization Phase 1 architecture signoff completed\n- **Target Go-Live Date:** September 15, 2026\n\n## Blockers\n- **SAML SSO Certificate Expiry:** Identified SAML SSO certificate expiry on staging cluster scheduled for August 28, 2026\n- **TXNM Internal Secops Ticket:** SEC-942 opened to rotate cert\n\n## Open Tasks\n- **Jason (Crogl):** Provide updated Airbyte connector schema definitions by August 24, 2026\n- **Sarah (TXNM):** Confirm IdP metadata URL once SEC-942 resolves\n\n## Recent Activity\n- Completed Grid Modernization Phase 1 architecture signoff\n- Set target go-live date for September 15, 2026\n- Identified and addressed SAML SSO certificate expiry blocker",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 1.2e-05,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "canonical_sections_present",
+              "bold_label_syntax",
+              "cites_saml_and_sec942",
+              "direct_correlation_no_speculation",
+              "preserves_task_owners"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.192,
+          "prompt_tokens": 271,
+          "completion_tokens": 217,
+          "actual_model": "mistralai/mistral-nemo",
+          "actual_provider": "DeepInfra",
+          "content": "# customer-accounts/txnm-energy.md\n\n## Onboarding\n- **Attendees:** Jason (Crogl), John (TXNM), Sarah (TXNM)\n- **Milestone:** Grid Modernization Phase 1 architecture signoff completed\n- **Target Go-Live Date:** September 15, 2026\n\n## Blockers\n- **SAML SSO Certificate Expiry:** Scheduled for August 28, 2026\n- **TXNM Internal Secops Ticket:** SEC-942 opened to rotate cert\n\n## Open tasks\n- **Jason (Crogl):** Provide updated Airbyte connector schema definitions by **August 24, 2026**\n- **Sarah (TXNM):** Confirm IdP metadata URL once SEC-942 resolves\n\n## Recent activity\n- Completed Grid Modernization Phase 1 architecture signoff\n- Set target go-live date for September 15, 2026\n- Identified and addressed SAML SSO certificate expiry blocker",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 1.2e-05,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "canonical_sections_present",
+              "bold_label_syntax",
+              "cites_saml_and_sec942",
+              "direct_correlation_no_speculation",
+              "preserves_task_owners"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B4": {
+      "probe_id": "B4",
+      "name": "Frontdoor / Slack Triage & Classification",
+      "reliability_class": "R2",
+      "avg_latency": 0.33,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 1.8e-05,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.582,
+          "prompt_tokens": 180,
+          "completion_tokens": 73,
+          "actual_model": "mistralai/mistral-nemo",
+          "actual_provider": "DeepInfra",
+          "content": "{\n  \"route\": \"cs-ops\",\n  \"urgency\": \"P1\",\n  \"is_private_channel\": false,\n  \"privacy_violation\": false,\n  \"suggested_action\": \"Investigate and resolve intermittent 502 errors on Acmedemo REST API port 8082 during peak traffic.\"\n}",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 6e-06,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "valid_json_schema",
+              "route_validity",
+              "urgency_classification",
+              "channel_privacy_assessment",
+              "suggested_action_present"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.187,
+          "prompt_tokens": 180,
+          "completion_tokens": 73,
+          "actual_model": "mistralai/mistral-nemo",
+          "actual_provider": "DeepInfra",
+          "content": "{\n  \"route\": \"cs-ops\",\n  \"urgency\": \"P1\",\n  \"is_private_channel\": false,\n  \"privacy_violation\": false,\n  \"suggested_action\": \"Investigate and resolve intermittent 502 errors on Acmedemo REST API port 8082 during peak traffic.\"\n}",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 6e-06,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "valid_json_schema",
+              "route_validity",
+              "urgency_classification",
+              "channel_privacy_assessment",
+              "suggested_action_present"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.218,
+          "prompt_tokens": 180,
+          "completion_tokens": 73,
+          "actual_model": "mistralai/mistral-nemo",
+          "actual_provider": "DeepInfra",
+          "content": "{\n  \"route\": \"cs-ops\",\n  \"urgency\": \"P1\",\n  \"is_private_channel\": false,\n  \"privacy_violation\": false,\n  \"suggested_action\": \"Investigate and resolve intermittent 502 errors on Acmedemo REST API port 8082 during peak traffic.\"\n}",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 6e-06,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "valid_json_schema",
+              "route_validity",
+              "urgency_classification",
+              "channel_privacy_assessment",
+              "suggested_action_present"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B5": {
+      "probe_id": "B5",
+      "name": "Artifact & Distribution Audit Synthesis",
+      "reliability_class": "R1",
+      "avg_latency": 0.19,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 6.3e-05,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.215,
+          "prompt_tokens": 482,
+          "completion_tokens": 411,
+          "actual_model": "mistralai/mistral-nemo",
+          "actual_provider": "DeepInfra",
+          "content": "**Audit Status for Release v2.4.0-rc3**\n\n| Region       | Artifact | SHA256 Hash | S3/GCS/Artifact Registry URL/Tag | Status           | Blockers |\n|--------------|---------|------------|-----------------------------------|-------------------|----------|\n| AWS us-east-1 | tar.gz  | e3b0c442... | https://s3.us-east-1.amazonaws.com/releases/v2.4.0-rc3.tar.gz | Verified (200 OK) | None      |\n| AWS us-gov-west-1 | tar.gz  | e3b0c442... | https://s3.us-gov-west-1.amazonaws.com/releases/v2.4.0-rc3.tar.gz | FAILED (403 SignatureDoesNotMatch) | **Presigned URL expired** |\n| GCP us-central1 | tar.gz  | e3b0c442... | https://storage.googleapis.com/releases/v2.4.0-rc3.tar.gz | Verified (200 OK) | None      |\n\n**Blockers preventing release promotion:**\n\n1. **AWS us-gov-west-1:** The presigned URL for the S3 object has expired, resulting in a 403 SignatureDoesNotMatch error. To resolve this:\n   - Regenerate a new presigned URL with an appropriate expiration time.\n   - Update the S3 URL in the distribution matrix.\n\n2. **AWS us-gov-west-1:** The ECR tag is missing in the GovCloud ECR registry. To resolve this:\n   - Push the image to the GovCloud ECR registry and create a tag for v2.4.0-rc3.\n   - Update the ECR Tag in the distribution matrix.\n\nOnce these blockers are resolved, the release v2.4.0-rc3 can be promoted to the next stage in the release pipeline.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 2.1e-05,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "generates_markdown_table",
+              "flags_us_gov_west_s3_blocker",
+              "flags_missing_govcloud_ecr_tag",
+              "confirms_healthy_regions",
+              "lists_explicit_blockers"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.184,
+          "prompt_tokens": 482,
+          "completion_tokens": 377,
+          "actual_model": "mistralai/mistral-nemo",
+          "actual_provider": "DeepInfra",
+          "content": "**Audit Status for Release v2.4.0-rc3**\n\n| Region       | Artifact | SHA256 Hash | S3/GCS URL (Status) | ECR/Artifact Registry Tag | Status   | Blockers |\n|--------------|---------|-------------|--------------------|---------------------------|----------|----------|\n| AWS us-east-1| tar.gz  | e3b0c442... | 200 OK             | v2.4.0-rc3 (Verified)       | \u2705        | None     |\n| AWS us-gov-west-1 | tar.gz | e3b0c442... | 403 SignatureDoesNotMatch | MISSING in GovCloud ECR registry | \u274c        | - Expired presign<br>- Missing ECR tag in GovCloud |\n| GCP us-central1 | tar.gz  | e3b0c442... | 200 OK             | v2.4.0-rc3 (Verified)       | \u2705        | None     |\n\n**Explicitly Listed Blockers:**\n\n1. **AWS us-gov-west-1**\n   - **Blocker 1:** Expired presign for S3 URL. The presigned URL has expired, causing a 403 SignatureDoesNotMatch error.\n   - **Blocker 2:** Missing ECR tag in GovCloud. The ECR tag for the release is missing in the GovCloud registry.\n\n**Recommendations:**\n\n- Regenerate and update the presigned URL for the S3 bucket in AWS us-gov-west-1.\n- Push the ECR tag for the release to the GovCloud registry.\n- Retry the distribution matrix audit after resolving the above blockers.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 2e-05,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "generates_markdown_table",
+              "flags_us_gov_west_s3_blocker",
+              "flags_missing_govcloud_ecr_tag",
+              "confirms_healthy_regions",
+              "lists_explicit_blockers"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.177,
+          "prompt_tokens": 482,
+          "completion_tokens": 444,
+          "actual_model": "mistralai/mistral-nemo",
+          "actual_provider": "DeepInfra",
+          "content": "**Audit Results for Release v2.4.0-rc3**\n\n| Region       | Artifact | SHA256 Hash                                 | S3/GCS URL Status | ECR/Artifact Registry Tag Status |\n|--------------|----------|----------------------------------------------|--------------------|----------------------------------|\n| AWS us-east-1| tar.gz   | e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | Verified (200 OK) | Verified (ECR)                 |\n| AWS us-gov-west-1 | tar.gz  | e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | Failed (403)     | Missing (ECR)                  |\n| GCP us-central1 | tar.gz  | e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | Verified (200 OK) | Verified (Artifact Registry) |\n\n**Blockers preventing release promotion:**\n\n1. **AWS us-gov-west-1:** The S3 URL is failing with a `403 SignatureDoesNotMatch` error due to an expired presign. This needs to be resolved by generating a new presigned URL and updating the S3 URL.\n\n2. **AWS us-gov-west-1:** The ECR tag is missing in the GovCloud ECR registry. This needs to be pushed and verified.\n\nOnce these blockers are resolved, the release v2.4.0-rc3 can be promoted to the next stage.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 2.2e-05,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "generates_markdown_table",
+              "flags_us_gov_west_s3_blocker",
+              "flags_missing_govcloud_ecr_tag",
+              "confirms_healthy_regions",
+              "lists_explicit_blockers"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B6": {
+      "probe_id": "B6",
+      "name": "Long-Context Synthesis & Needle Recall",
+      "reliability_class": "R1",
+      "avg_latency": 0.42,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.000219,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.604,
+          "prompt_tokens": 3697,
+          "completion_tokens": 84,
+          "actual_model": "mistralai/mistral-nemo",
+          "actual_provider": "DeepInfra",
+          "content": "Based on the provided context, here are the synthesized requirements:\n\n**Customer Name:** T\u00fcrk Telekom\n\n**Custom Root CA Certificate Path inside the Container:**\n```\n/etc/ssl/certs/ca-certificates.crt\n```\n\n**mTLS Requirement:** Mutual TLS 1.3 is required.\n\n**CN Validation Target:** Strict CN validation against `tt-internal-gateway.telekom.com.tr` is mandated.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 7.3e-05,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "exact_container_path_recall",
+              "correct_account_attribution",
+              "identifies_mtls_requirement",
+              "identifies_cn_target",
+              "no_cross_account_contamination"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.301,
+          "prompt_tokens": 3697,
+          "completion_tokens": 76,
+          "actual_model": "mistralai/mistral-nemo",
+          "actual_provider": "DeepInfra",
+          "content": "**Customer Name:** T\u00fcrk Telekom\n\n**Custom Root CA Certificate Path inside the Container:** /etc/ssl/certs/ca-certificates.crt\n\n**mTLS Requirement:** Mutual TLS 1.3 with custom root CA certificate is required.\n\n**CN Validation Target:** Strict CN validation against \"tt-internal-gateway.telekom.com.tr\" is mandated.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 7.3e-05,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "exact_container_path_recall",
+              "correct_account_attribution",
+              "identifies_mtls_requirement",
+              "identifies_cn_target",
+              "no_cross_account_contamination"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.341,
+          "prompt_tokens": 3697,
+          "completion_tokens": 89,
+          "actual_model": "mistralai/mistral-nemo",
+          "actual_provider": "DeepInfra",
+          "content": "Based on the provided context, here are the synthesized requirements:\n\n**Customer Name:** T\u00fcrk Telekom\n\n**Custom Root CA Certificate Path inside the Container:**\n```\n/etc/ssl/certs/ca-certificates.crt\n```\n\n**mTLS Requirement:**\n- Mutual TLS 1.3 is required.\n\n**CN Validation Target:**\n- Strict Common Name (CN) validation is mandated against `tt-internal-gateway.telekom.com.tr`.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 7.3e-05,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "exact_container_path_recall",
+              "correct_account_attribution",
+              "identifies_mtls_requirement",
+              "identifies_cn_target",
+              "no_cross_account_contamination"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B7": {
+      "probe_id": "B7",
+      "name": "Complex Ops Planning & Decomposition",
+      "reliability_class": "R1",
+      "avg_latency": 0.32,
+      "avg_score": 4.7,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.000101,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.319,
+          "prompt_tokens": 175,
+          "completion_tokens": 1070,
+          "actual_model": "mistralai/mistral-nemo",
+          "actual_provider": "DeepInfra",
+          "content": "**Phased Technical Execution Plan**\n\n**Phase 1: Preparation and Planning**\n\n1.1. **Understand the current architecture and dependencies**\n   - Review the existing internal agent backend architecture.\n   - Identify all dependencies and ensure they are compatible with EKS and Fargate.\n\n1.2. **Design the new architecture**\n   - Design the EKS cluster architecture in GovCloud, considering the use of Fargate.\n   - Plan the use of AWS Bedrock mantle endpoints and custom IAM role bindings.\n\n1.3. **Create a migration plan**\n   - Define the migration strategy (e.g., blue/green, canary, etc.).\n   - Identify the order of tasks to minimize downtime and ensure a smooth migration.\n\n**Phase 2: Environment Setup**\n\n2.1. **Create an EKS cluster in GovCloud**\n   - Use the AWS Management Console, AWS CLI, or Infrastructure as Code (IaC) tools like Terraform or AWS CDK.\n   - Ensure the cluster is configured to use Fargate.\n\n   *Verification command:*\n   ```\n   aws eks describe-cluster --name <cluster-name> --query \"cluster.status\" --output text\n   ```\n\n2.2. **Configure VPC and networking**\n   - Set up the necessary VPC, subnets, and security groups for the EKS cluster.\n   - Ensure that the VPC has an endpoint for Amazon ECR to pull container images.\n\n   *Verification command:*\n   ```\n   aws ec2 describe-vpc-endpoints --filters \"Name=vpc-endpoint-id,Values=<vpc-endpoint-id>\"\n   ```\n\n**Phase 3: IMDSv2 Configuration**\n\n3.1. **Create a custom IAM role for IMDSv2**\n   - Create an IAM role with the necessary permissions to retrieve metadata using IMDSv2.\n   - Attach the IAM role to the EKS worker nodes.\n\n   *IAM role policy:*\n   ```json\n   {\n     \"Version\": \"2012-10-17\",\n     \"Statement\": [\n       {\n         \"Effect\": \"Allow\",\n         \"Action\": [\n           \"ec2:DescribeTags\",\n           \"ec2:DescribeInstances\",\n           \"ec2:DescribeInstanceAttribute\",\n           \"ec2:DescribeInstanceCreditSpecifications\"\n         ],\n         \"Resource\": \"*\"\n       }\n     ]\n   }\n   ```\n\n   *Verification command:*\n   ```\n   aws iam get-role --role-name <role-name>\n   ```\n\n3.2. **Configure IMDSv2 token retrieval sequence**\n   - Update the application code to send a PUT request with `X-aws-ec2-metadata-token-ttl-seconds` before retrieving metadata using a GET request.\n\n   *Gotcha:* Ensure that the application can resolve the IMDS hostname. If not, configure the necessary DNS settings or use the IP address directly.\n\n**Phase 4: AWS Bedrock Mantle Endpoints**\n\n4.1. **Configure AWS Bedrock mantle endpoints**\n   - Update the application code to use the AWS Bedrock mantle endpoint format (`bedrock-mantle.<region>.api.aws/v1`).\n\n   *Gotcha:* Ensure that the application can handle the different schema formats between Bedrock mantle and the standard Bedrock runtime.\n\n   *Verification command:*\n   ```\n   curl -X GET <bedrock-mantle-endpoint>/v1/models\n   ```\n\n**Phase 5: Fargate Pods and Logging**\n\n5.1. **Deploy the application to Fargate**\n   - Create the necessary Kubernetes manifests (e.g., Deployment, Service) to run the application on Fargate.\n   - Deploy the application to the EKS cluster.\n\n   *Gotcha:* Fargate pods cannot run privileged DaemonSets for logging. Ensure that the application's logging requirements are met using other methods, such as sidecar containers or AWS CloudWatch Logs.\n\n   *Verification command:*\n   ```\n   kubectl get pods -n <namespace>\n   ```\n\n**Phase 6: Testing and Validation**\n\n6.1. **Test the migrated application**\n   - Perform thorough testing of the migrated application to ensure it works as expected.\n   - Validate that the application can retrieve metadata using IMDSv2 and interact with AWS Bedrock mantle endpoints.\n\n**Phase 7: Cutover and Monitoring**\n\n7.1. **Cutover to the new environment**\n   - Follow the migration strategy defined in Phase 1 to cutover to the new environment.\n   - Monitor the application and the EKS cluster during and after the cutover.\n\n   *Verification command:*\n   ```\n   aws cloudwatch get-metric-statistics --namespace AWS/EKS --dimensions Name=cluster-name,Value=<cluster-name> --metric-name NodeNetworkReceiveBytes --start-time <start-time> --end-time <end-time> --period 60 --statistics Sum\n   ```\n\nBy following this phased technical execution plan, you can successfully migrate the internal agent backend to GovCloud EKS Fargate using IMDSv2, AWS Bedrock mantle endpoints, and custom IAM role bindings while minimizing potential gotchas and ensuring a smooth migration process.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 4.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 4.0,
+            "token_efficiency": 5.0,
+            "overall_score": 4.7,
+            "cost": 3.5e-05,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "cites_bedrock_mantle_endpoint",
+              "includes_imdsv2_token_handling",
+              "addresses_fargate_logging_constraint",
+              "structured_phases_present",
+              "includes_verification_commands"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.331,
+          "prompt_tokens": 175,
+          "completion_tokens": 1013,
+          "actual_model": "mistralai/mistral-nemo",
+          "actual_provider": "DeepInfra",
+          "content": "**Phased Technical Execution Plan**\n\n**Phase 1: Preparation and Planning**\n\n1.1. **Understand the current infrastructure**\n   - Review the existing internal agent backend architecture, services, and dependencies.\n   - Document the current IAM roles, policies, and security groups.\n\n1.2. **Design the target architecture**\n   - Design the EKS cluster architecture in GovCloud, considering the use of Fargate for running containers.\n   - Plan the custom IAM role bindings required for the EKS cluster and the agent backend services.\n\n1.3. **Prepare the migration plan**\n   - Identify the services that need to be migrated and their dependencies.\n   - Plan the migration strategy, considering the use of AWS Bedrock mantle endpoints and IMDSv2.\n\n**Phase 2: Setup AWS GovCloud EKS Cluster**\n\n2.1. **Create an EKS cluster in GovCloud**\n   - Use AWS Management Console, AWS CLI, or Infrastructure as Code (IaC) tools like Terraform or AWS CDK to create an EKS cluster.\n   - Ensure that the cluster is created in the desired region and VPC.\n\n   *Verification command:*\n   ```\n   aws eks list-clusters --region <region>\n   ```\n\n2.2. **Configure cluster IAM role**\n   - Create a custom IAM role for the EKS cluster with the necessary permissions.\n   - Attach the IAM role to the EKS cluster.\n\n   *Verification command:*\n   ```\n   aws iam get-role --role-name <eks-cluster-role-name>\n   ```\n\n**Phase 3: Configure IMDSv2**\n\n3.1. **Enable IMDSv2 in the VPC**\n   - Enable IMDSv2 in the VPC where the EKS cluster is deployed.\n   - Update the VPC's route table to point the metadata service to the IMDSv2 endpoint.\n\n   *Verification command:*\n   ```\n   aws ec2 describe-vpcs --vpc-ids <vpc-id> --query 'Vpcs[0].InstanceTenancy' --output text\n   ```\n\n3.2. **Update the agent backend services to use IMDSv2**\n   - Update the agent backend services to use the new IMDSv2 token retrieval sequence (PUT request with X-aws-ec2-metadata-token-ttl-seconds header followed by a GET request).\n\n   *Gotcha:* Ensure that the services can resolve the IMDS hostname. If not, update the /etc/hosts file or use DNS resolution.\n\n**Phase 4: Configure AWS Bedrock Mantle Endpoints**\n\n4.1. **Update the agent backend services to use Bedrock mantle endpoints**\n   - Update the agent backend services to use the AWS Bedrock mantle endpoints in the format `bedrock-mantle.<region>.api.aws/v1`.\n\n   *Gotcha:* Ensure that the services can handle the different schema formats between the standard Bedrock runtime and the mantle endpoints.\n\n   *Verification command:*\n   ```\n   curl -X GET <bedrock-mantle-endpoint>/health\n   ```\n\n**Phase 5: Migrate Services to EKS Fargate**\n\n5.1. **Containerize the agent backend services**\n   - Containerize the agent backend services using Docker or other containerization tools.\n\n5.2. **Create Kubernetes manifests**\n   - Create Kubernetes manifests (Deployment, Service, etc.) for the containerized services.\n   - Ensure that the manifests are configured to run on Fargate.\n\n   *Gotcha:* Fargate pods cannot run privileged DaemonSets for logging. Consider using sidecar containers or other logging solutions that work with Fargate.\n\n5.3. **Deploy services to EKS Fargate**\n   - Use `kubectl` or other tools to deploy the services to the EKS cluster running on Fargate.\n\n   *Verification command:*\n   ```\n   kubectl get pods -n <namespace>\n   ```\n\n**Phase 6: Testing and Validation**\n\n6.1. **Test the migrated services**\n   - Test the migrated services to ensure they are working as expected.\n   - Verify that the services can communicate with each other and with external services.\n\n6.2. **Monitor and optimize**\n   - Set up monitoring and logging for the EKS cluster and the agent backend services.\n   - Optimize the services based on the monitoring data.\n\n**Phase 7: Documentation and Knowledge Transfer**\n\n7.1. **Document the migration process**\n   - Document the migration process, including the steps taken, the commands used, and any gotchas encountered.\n\n7.2. **Knowledge transfer**\n   - Share the migration process and the documentation with the relevant teams to ensure knowledge transfer.\n\nBy following this phased technical execution plan, you can successfully migrate the internal agent backend to GovCloud EKS Fargate using IMDSv2, AWS Bedrock mantle endpoints, and custom IAM role bindings.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 4.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 4.0,
+            "token_efficiency": 5.0,
+            "overall_score": 4.7,
+            "cost": 3.4e-05,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "cites_bedrock_mantle_endpoint",
+              "includes_imdsv2_token_handling",
+              "addresses_fargate_logging_constraint",
+              "structured_phases_present",
+              "includes_verification_commands"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.301,
+          "prompt_tokens": 175,
+          "completion_tokens": 946,
+          "actual_model": "mistralai/mistral-nemo",
+          "actual_provider": "DeepInfra",
+          "content": "**Phased Technical Execution Plan**\n\n**Phase 1: Preparation and Planning**\n\n1.1. **Understand the current infrastructure**\n   - Document the internal agent backend's architecture, dependencies, and services.\n   - Identify any custom configurations or integrations that need to be replicated in GovCloud EKS.\n\n1.2. **Design the target architecture**\n   - Plan the EKS cluster setup, including worker nodes (Fargate), networking (VPC, Subnets, Security Groups), and service discovery (CoreDNS).\n   - Design the deployment strategy for the agent backend services, considering AWS Bedrock mantle endpoints and custom IAM role bindings.\n\n1.3. **Create necessary AWS resources**\n   - Set up a new VPC and subnets in GovCloud.\n   - Create an EKS cluster with Fargate worker nodes.\n   - Set up IAM roles for EKS, Fargate, and the agent backend services.\n\n**Phase 2: Migrate Agent Backend Services**\n\n2.1. **Containerize the agent backend services**\n   - Dockerize the agent backend services, ensuring they can run in a containerized environment.\n   - Update the services to use AWS Bedrock mantle endpoints for any required functionality.\n\n2.2. **Create Kubernetes manifests**\n   - Create Kubernetes deployment, service, and ingress manifests for the agent backend services.\n   - Configure custom IAM role bindings for the services using AWS IAM roles and Kubernetes RBAC.\n\n2.3. **Migrate services to EKS Fargate**\n   - Apply the Kubernetes manifests to deploy the services on the EKS cluster's Fargate worker nodes.\n   - Verify that the services are running and accessible.\n\n**Phase 3: IMDSv2 Integration**\n\n3.1. **Update agent backend services to use IMDSv2**\n   - Modify the agent backend services to retrieve IMDSv2 tokens using the required PUT request with `X-aws-ec2-metadata-token-ttl-seconds` header.\n   - Update the services to use the retrieved token for subsequent metadata requests.\n\n3.2. **Test IMDSv2 integration**\n   - Verify that the agent backend services can successfully retrieve metadata using IMDSv2.\n   - Check that the services can function correctly with the new metadata retrieval process.\n\n**Phase 4: Logging and Monitoring**\n\n4.1. **Set up logging for Fargate pods**\n   - Since Fargate pods cannot run privileged DaemonSets for logging, use AWS CloudWatch Logs or a third-party logging service like ELK Stack or Datadog.\n   - Configure the agent backend services to send logs to the chosen logging service.\n\n4.2. **Monitor the migrated services**\n   - Set up monitoring and alerting for the agent backend services using AWS CloudWatch, Prometheus, or another monitoring tool.\n   - Configure alerts for critical services and errors.\n\n**Potential Gotchas and Verification Commands**\n\n- **IMDS hostname resolution**: Ensure that the agent backend services can resolve the IMDS hostname (`169.254.169.254`) within the VPC. Verify using the `nslookup` or `dig` command in a pod.\n\n  ```\n  nslookup 169.254.169.254\n  ```\n\n- **Bedrock tool schema formats**: Validate that the agent backend services can communicate with the AWS Bedrock mantle endpoints using the correct schema format (`bedrock-mantle.<region>.api.aws/v1`). Verify using `curl` or a similar tool.\n\n  ```\n  curl -X GET https://bedrock-mantle.<region>.api.aws/v1/endpoints\n  ```\n\n- **Fargate logging**: Ensure that logs are being sent to the chosen logging service by checking the logs in the service's interface or using a command like `kubectl logs <pod-name>`.\n\n- **Service accessibility**: Verify that the agent backend services are accessible from within the cluster and from outside the cluster using `kubectl port-forward` or `curl` respectively.\n\n  ```\n  kubectl port-forward <service-name> 8080:80\n  curl <service-public-ip>:80\n  ```\n\n- **IAM role bindings**: Validate that the custom IAM role bindings are correctly configured and that the services have the required permissions. Check IAM policies and Kubernetes RBAC rules.\n\nBy following this phased execution plan, you can successfully migrate the internal agent backend to GovCloud EKS Fargate while considering the given constraints and potential gotchas.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 4.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 4.0,
+            "token_efficiency": 5.0,
+            "overall_score": 4.7,
+            "cost": 3.2e-05,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "cites_bedrock_mantle_endpoint",
+              "includes_imdsv2_token_handling",
+              "addresses_fargate_logging_constraint",
+              "structured_phases_present",
+              "includes_verification_commands"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B8": {
+      "probe_id": "B8",
+      "name": "Agent Tool Use & Structured Execution",
+      "reliability_class": "R1",
+      "avg_latency": 0.27,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 4.1e-05,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.345,
+          "prompt_tokens": 219,
+          "completion_tokens": 357,
+          "actual_model": "mistralai/mistral-nemo",
+          "actual_provider": "DeepInfra",
+          "content": "```json\n[\n  {\n    \"function\": \"mcp__crogld__crowdstrike_falcon_query\",\n    \"arguments\": {\n      \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n    }\n  },\n  {\n    \"function\": \"mcp__crogld__create_investigation\",\n    \"arguments\": {\n      \"title\": \"SHA256 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855' Query Results\",\n      \"severity\": \"P2\",\n      \"indicators\": [\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"],\n      \"description\": \"CrowdStrike Falcon query results for SHA256 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'\"\n    }\n  }\n]\n```",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 1.5e-05,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "names_falcon_query_tool",
+              "cites_target_sha256",
+              "names_create_investigation_tool",
+              "specifies_p2_severity",
+              "valid_tool_call_structure"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.292,
+          "prompt_tokens": 219,
+          "completion_tokens": 369,
+          "actual_model": "mistralai/mistral-nemo",
+          "actual_provider": "DeepInfra",
+          "content": "```json\n[\n  {\n    \"function\": \"mcp__crogld__crowdstrike_falcon_query\",\n    \"arguments\": {\n      \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n    }\n  },\n  {\n    \"function\": \"mcp__crogld__create_investigation\",\n    \"arguments\": {\n      \"title\": \"Potential Threat - SHA256 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'\",\n      \"severity\": \"P2\",\n      \"indicators\": [\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"],\n      \"description\": \"This investigation was opened based on a query on CrowdStrike Falcon for the SHA256 hash 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'.\"\n    }\n  }\n]\n```",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 1.5e-05,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "names_falcon_query_tool",
+              "cites_target_sha256",
+              "names_create_investigation_tool",
+              "specifies_p2_severity",
+              "valid_tool_call_structure"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.175,
+          "prompt_tokens": 219,
+          "completion_tokens": 236,
+          "actual_model": "mistralai/mistral-nemo",
+          "actual_provider": "DeepInfra",
+          "content": "```json\n[\n  {\n    \"function\": \"mcp__crogld__crowdstrike_falcon_query\",\n    \"arguments\": {\n      \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n    }\n  },\n  {\n    \"function\": \"mcp__crogld__create_investigation\",\n    \"arguments\": {\n      \"title\": \"Suspicious Activity Detected\",\n      \"severity\": \"P2\",\n      \"indicators\": [\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"],\n      \"description\": \"Potential threat detected based on SHA256 hash.\"\n    }\n  }\n]\n```",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 1.1e-05,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "names_falcon_query_tool",
+              "cites_target_sha256",
+              "names_create_investigation_tool",
+              "specifies_p2_severity",
+              "valid_tool_call_structure"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    }
+  }
+}
