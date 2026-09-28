@@ -102,3 +102,7 @@ Recommendation:
 3. run ops/CS benchmark suite on both
 4. if DeepInfra still underperforms, add one more direct low-cost inference provider
 5. only then reconsider local-first experiments
+
+## 2026-09-28 routing alignment pointer
+
+Routing defaults were changed on 2026-09-28 (see the "2026-09-28 routing alignment" section in `routing-matrix.md`). Summary: DeepSeek-V3.2 retired from alternates after a live provider `Invalid request` failure; morning-brief R0 primary re-declared as `openrouter/openai/gpt-5.6-luna` to match live traffic; `minimax/minimax-m3:free` added to the R0 shadow roster; nemotron-3.5-lightning:free rejected on latency despite its harness promote verdict. Provider architecture itself is unchanged.

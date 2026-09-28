@@ -1063,13 +1063,15 @@ Use one section per meaningful run or benchmark batch.
   - R0 shadow qualification: Admitted to R0 shadow evaluation for scheduled morning briefs alongside `nemotron-3-ultra-550b:free` and `gemini-3.7-flash`, retaining hardcoded frontier fallbacks (`gpt-5.4` / `gpt-5.6-sol` / `claude-sonnet-4-6`). Not promoted to autonomous R0 primary until completing required 3 consecutive shadow cycles with zero material cleanup.
   - Routing policy check: Promoted into `routing-matrix.md` for R1 and R0 shadow lanes. Aliased in `ops` profile as `ling-flash` / `ling-3.0-flash`.
 
-
-
-
-
-
-
-
-
-
-
+## 2026-09-28 — Operator routing alignment (no new evals)
+- surface: Operator review (Hermes ops front-door session)
+- inputs: all benchmark-results/eval_*.json artifacts, routing-matrix.md, provider-expansion.md, dispatch telemetry through 2026-09-28
+- changes applied to routing-matrix.md:
+  - Morning-brief R0 primary re-declared as `openrouter/openai/gpt-5.6-luna` (matches live scheduled traffic); `nemotron-3-ultra-550b:free` and `glm-5.3-flash` recorded as shadow.
+  - `minimax/minimax-m3:free` (5.00/5.0, 1.29s, 2026-09-01 eval) added to the R0 shadow roster — was qualified but missing from the roster.
+  - `deepinfra/deepseek-ai/DeepSeek-V3.2` retired from alternates: too slow per matrix, and a live cs-ops dispatch on 2026-09-28 died mid-run with a provider `Invalid request`. Replaced by `openrouter/openai/gpt-5.6-luna`.
+  - `nvidia/nemotron-3.5-lightning:free` NOT promoted (10.19s avg latency breaks the sub-2s interactive budget) despite harness "promote to R1" verdict — latency gate should have applied.
+  - Rejections recorded: `qwen/qwen3.8-flash` (2.29), `poolside/laguna-s-2.1:free` (2.49), `poolside/laguna-xs-2.1:free` (1.8), `thinkingmachines/inkling:free` / `inkling-small:free` (HTTP 403).
+  - `z-ai/glm-5.3` (4.54) and `qwen/qwen3.8-omni-flash` (4.45) added as bounded R2 alternates (non-primary).
+- policy note: harness promotion verdicts must be gated on task-family latency budgets before landing in the routing matrix; the nemotron-3.5-lightning verdict promoted on score alone.
+- no new benchmark runs were executed in this pass.

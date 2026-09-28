@@ -18,7 +18,7 @@ Examples:
 - one-shot deliverables with low tolerance for cleanup
 
 Default Primary Models (by task family):
-- Scheduled Morning Brief / Status Synthesis: `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free`
+- Scheduled Morning Brief / Status Synthesis: `openrouter/openai/gpt-5.6-luna` (live primary; nemotron-3-ultra-550b:free and glm-5.3-flash shadow)
 - Planning / Architecture Decomposition (B7): `openrouter/google/gemini-3.8-flash` (Primary fast/low-cost) / `openrouter/openai/gpt-5.6-sol` (High-Judgment Frontier Specialist)
 - Build / Orchestration Sweeps (`sync-acmedemo`): `openrouter/meituan/longcat-2.0`
 - Account Reconciliation / Auditor: `openrouter/xiaomi/mimo-v2.5`
@@ -69,15 +69,17 @@ Default:
 - `openrouter/z-ai/glm-5.3-flash` ($0.075/$0.250 per 1M tokens — fast sub-second extraction & schema-compliant triage)
 - `openrouter/openai/gpt-5.6-luna` ($0.20/$1.20 per 1M tokens — fast, 100% extraction accuracy)
 - `openrouter/xiaomi/mimo-v2.5` / `openrouter/qwen/qwen3.7-flash` (low-cost sub-$0.25/1M)
+- `openrouter/z-ai/glm-5.3` (4.54/5, 0.30s — bounded R2 alternate)
+- `openrouter/qwen/qwen3.8-omni-flash` (4.45/5, 1.13s — R2 fast-track, bounded alternate)
 - cheapest / fastest validated open-weight option for the task family
 
 ## Task-family policy
 
 | Task family | Reliability class | First model | Alternate open-weight / low-cost | Premium fallback | Notes |
 |---|---:|---|---|---|---|
-| Scheduled status / morning brief final output | R0 | `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free` | `openrouter/z-ai/glm-5.3-flash` (shadow-gated) / `openrouter/google/gemini-3.8-flash` | `openrouter/openai/gpt-5.6-sol` | Nemotron 3 Ultra 550B ($0 cost) is primary for morning brief; GLM 5.3 Flash ($0.075/1M, 5.0/5 on B1) admitted for 3-day shadow evaluation; Gemini 3.8 Flash ($0.075/1M) is alternate fast synthesis. GPT-5.6 Sol retained as premium fallback. |
+| Scheduled status / morning brief final output | R0 | `openrouter/openai/gpt-5.6-luna` (live primary since 2026-09) | `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free` (shadow) / `openrouter/z-ai/glm-5.3-flash` (shadow-gated) / `openrouter/google/gemini-3.8-flash` | `openrouter/openai/gpt-5.6-sol` | GPT-5.6 Luna re-declared live primary 2026-09-28 to match actual scheduled traffic; Nemotron 3 Ultra 550B ($0) and GLM 5.3 Flash ($0.075/1M, 5.0/5 on B1) remain shadow candidates pending clean shadow cycles; Gemini 3.8 Flash ($0.075/1M) is alternate fast synthesis. GPT-5.6 Sol retained as premium fallback. |
 | Granola transcript to meeting note processing | R1 | `openrouter/minimax/minimax-m3` | `openrouter/openai/gpt-5.6-luna` / `openrouter/google/gemini-3.8-flash` | `openrouter/openai/gpt-5.6-sol` | MiniMax M3 achieved 4.95/5 with 100% attendee attribution at 16.8s. GPT-5.6 Luna ($0.20/$1.20) and Gemini 3.8 Flash provide secondary long-context support. |
-| Scheduled account decay & archive sweep | R1 | `openrouter/poolside/laguna-s-2.1` | `openrouter/xiaomi/mimo-v2.5` / `deepinfra/deepseek-ai/DeepSeek-V3.2` | `openrouter/google/gemini-3.8-flash` | Laguna S 2.1 demonstrated 4.96/5 with 100% bullet immutability and precise 180-day contact aging at 14.1s ($0.090/$0.200/1M). |
+| Scheduled account decay & archive sweep | R1 | `openrouter/poolside/laguna-s-2.1` | `openrouter/xiaomi/mimo-v2.5` / `openrouter/openai/gpt-5.6-luna` | `openrouter/google/gemini-3.8-flash` | Laguna S 2.1 demonstrated 4.96/5 with 100% bullet immutability and precise 180-day contact aging at 14.1s ($0.090/$0.200/1M). |
 | Scheduled end-of-day (EOD) progress sweep | R1 | `openrouter/poolside/laguna-s-2.1` | `openrouter/xiaomi/mimo-v2.5` / `openrouter/qwen/qwen3.7-flash` | `openrouter/google/gemini-3.8-flash` | Laguna S 2.1 scored 4.97/5 with 100% bullet immutability, in-place canonical updates, and clean canvas sync integration. |
 | Customer account auditor & reconciliation | R0/R1 | `openrouter/xiaomi/mimo-v2.5` | `openrouter/google/gemini-3.8-flash` | `openrouter/openai/gpt-5.6-sol` | MiMo-V2.5 validated for fast note triage and canonical vault mutations. Gemini 3.8 Flash as low-cost secondary. |
 | Internal ops status synthesis (B1) | R1 | `openrouter/nvidia/nemotron-3-super-120b-a12b:free` | `moa:fast-ops` / `openrouter/z-ai/glm-5.3-flash` / `openrouter/openai/gpt-5.6-luna` / `openrouter/google/gemini-3.8-flash` | `openrouter/openai/gpt-5.6-sol` | Nemotron 3 Super 120B provides zero API cost; MoA Fast-Ops (5.0/5, 0.45s compound latency) and GLM 5.3 Flash (5.0/5, 0.22s) provide high-accuracy low-cost lanes. GPT-5.6 Sol is frontier escalation. |
@@ -153,6 +155,7 @@ R0 tasks represent high-judgment, mutating, or executive-facing workflows where 
   - Before a promo candidate replaces an R0 primary, it must run in shadow mode for at least **3 consecutive execution cycles** alongside the active primary.
   - Shadow outputs are automatically diffed against the baseline run for grounding precision, date accuracy, bullet immutability, and formatting regressions.
   - Free-tier endpoints (`:free`) subject to HTTP 429 concurrency throttling are restricted to shadow/draft modes and barred from autonomous mutating cron jobs.
+- Current R0 shadow roster (2026-09-28): `nemotron-3-ultra-550b-a55b:free`, `z-ai/glm-5.3-flash`, `inclusionai/ling-3.0-flash`, `minimax/minimax-m3:free` (5.00/5.0 eval 2026-09-01).
 
 - **Permanent Frontier Fallback Anchors:**
   - All R0 and scheduled mutating workflows MUST retain explicit, hardcoded fallback ladders to frontier models:
@@ -175,7 +178,7 @@ Escalate immediately when any of these appear:
 - repeated provider slowness or transient failures
 
 ## Current route concerns
-- `deepinfra/deepseek-ai/DeepSeek-V3.2` is too slow for many interactive ops/CS cases
+- `deepinfra/deepseek-ai/DeepSeek-V3.2` is too slow for many interactive ops/CS cases and is retired from alternates (2026-09-28: a live cs-ops dispatch died mid-run with a provider `Invalid request` after file reads; see dispatch telemetry). Replaced in alternates by `openrouter/openai/gpt-5.6-luna` (validated in live scheduled traffic).
 - `opencode/big-pickle` is currently flaky and should remain evaluation-only
 - current Hermes fallback chain is reliability-oriented, not cost-optimized
 
@@ -270,6 +273,17 @@ Routing boundary:
 - Promoted into R1 fast-track internal ops synthesis, CS note drafting, and audit table generation lanes.
 - Not promoted to autonomous R0 primary (retains R0 shadow qualification rules and frontier fallbacks).
 - Aliased in `ops` profile as `mistral-nemo` / `nemo`.
+
+## 2026-09-28 routing alignment (operator review)
+
+Alignment pass reconciling the routing matrix with current benchmark artifacts and live dispatch telemetry:
+
+1. **MiniMax M3 :free admitted to R0 shadow lane.** `minimax/minimax-m3:free` scored 5.00/5.0 (1.29s) with verdict R2+R1+R0-shadow, but was absent from the shadow lane roster. Added alongside `nemotron-3-ultra-550b:free`, `glm-5.3-flash`, and `ling-3.0-flash`, under the same 3-consecutive-clean-shadow-cycles rule and hardcoded frontier fallbacks.
+2. **DeepSeek-V3.2 retired from alternates** (see "Current route concerns"); replaced by `openrouter/openai/gpt-5.6-luna` in the account-decay lane.
+3. **`nvidia/nemotron-3.5-lightning:free` NOT promoted** despite a harness "promote to R1" verdict: 10.19s average latency exceeds the sub-2s interactive budget. Rejected on latency gate; do not route.
+4. **Formally rejected candidates** (recorded so candidate research stops resurfacing them): `qwen/qwen3.8-flash` (2.29, reject), `poolside/laguna-s-2.1:free` (2.49) and `poolside/laguna-xs-2.1:free` (1.8) — the *paid* laguna-s-2.1 lane remains valid, `thinkingmachines/inkling:free` and `inkling-small:free` (HTTP 403).
+5. **`z-ai/glm-5.3` (4.54, 0.30s) and `qwen/qwen3.8-omni-flash` (4.45, 1.13s) added as bounded R2 alternates** behind the existing co-defaults (nemotron-3-super, mistral-nemo, glm-5.3-flash). Neither is a primary.
+6. **Morning-brief R0 primary re-declared as `openrouter/openai/gpt-5.6-luna`** to match live scheduled traffic; nemotron-3-ultra-550b:free and glm-5.3-flash move to explicit shadow status. Frontier anchors (`gpt-5.6-sol`, `claude-sonnet-4-6`) unchanged; `moa:fast-ops` remains the R1 compound default.
 
 ## Planned expansion candidates
 See `provider-expansion.md` before changing defaults.
