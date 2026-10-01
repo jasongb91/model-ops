@@ -71,6 +71,7 @@ Default:
 - `openrouter/xiaomi/mimo-v2.5` / `openrouter/qwen/qwen3.7-flash` (low-cost sub-$0.25/1M)
 - `openrouter/z-ai/glm-5.3` (4.54/5, 0.30s — bounded R2 alternate)
 - `openrouter/qwen/qwen3.8-omni-flash` (4.45/5, 1.13s — R2 fast-track, bounded alternate)
+- `openrouter/stealth/space-bunny-alpha` (4.44/5, 0.81s — R2 fast-track, bounded alternate; free preview through 2026-10-05)
 - cheapest / fastest validated open-weight option for the task family
 
 ## Task-family policy
@@ -85,7 +86,7 @@ Default:
 | Internal ops status synthesis (B1) | R1 | `openrouter/nvidia/nemotron-3-super-120b-a12b:free` | `moa:fast-ops` / `openrouter/z-ai/glm-5.3-flash` / `openrouter/openai/gpt-5.6-luna` / `openrouter/google/gemini-3.8-flash` | `openrouter/openai/gpt-5.6-sol` | Nemotron 3 Super 120B provides zero API cost; MoA Fast-Ops (5.0/5, 0.45s compound latency) and GLM 5.3 Flash (5.0/5, 0.22s) provide high-accuracy low-cost lanes. GPT-5.6 Sol is frontier escalation. |
 | CS note drafting / account update first pass (B3) | R1 | `openrouter/google/gemini-3.8-flash` | `moa:fast-ops` / `openrouter/z-ai/glm-5.3-flash` / `openrouter/openai/gpt-5.6-luna` / `openrouter/xiaomi/mimo-v2.5` | `openrouter/openai/gpt-5.6-sol` | Gemini 3.8 Flash, MoA Fast-Ops, GLM 5.3 Flash, and GPT-5.6 Luna match frontier quality at ~90% cost savings. |
 | DevOps / distribution audits (B5) | R1/R0 | `openrouter/nvidia/nemotron-3-super-120b-a12b:free` (R1) / `openrouter/openai/gpt-5.6-sol` (R0) | `moa:fast-ops` / `openrouter/z-ai/glm-5.3-flash` / `openrouter/google/gemini-3.8-flash` / `openrouter/xiaomi/mimo-v2.5` | `openrouter/openai/gpt-5.6-sol` | Nemotron 3 Super is zero-cost R1 default. MoA Fast-Ops (5.0/5 on B5) and GLM 5.3 Flash provide ultra-fast audit synthesis. GPT-5.6 Sol is R0 frontier specialist for detecting empty sha256 checksums and deep integrity audits. |
-| Slack triage / categorization / extraction (B2/B4) | R2 | `openrouter/nvidia/nemotron-3-super-120b-a12b:free` or `openrouter/z-ai/glm-5.3-flash` | `openrouter/openai/gpt-5.6-luna` / `openrouter/xiaomi/mimo-v2.5` / `openrouter/qwen/qwen3.7-flash` | `openrouter/google/gemini-3.8-flash` | Nemotron 3 Super (3.6s, $0), GLM 5.3 Flash (0.34s, 5.0/5 JSON, $0.075/1M), and GPT-5.6 Luna (0.49s, $0.20/$1.20) deliver rapid extraction and schema-compliant triage. |
+| Slack triage / categorization / extraction (B2/B4) | R2 | `openrouter/nvidia/nemotron-3-super-120b-a12b:free` or `openrouter/z-ai/glm-5.3-flash` | `openrouter/openai/gpt-5.6-luna` / `openrouter/xiaomi/mimo-v2.5` / `openrouter/qwen/qwen3.7-flash` / `openrouter/stealth/space-bunny-alpha` | `openrouter/google/gemini-3.8-flash` | Nemotron 3 Super (3.6s, $0), GLM 5.3 Flash (0.34s, 5.0/5 JSON, $0.075/1M), and GPT-5.6 Luna (0.49s, $0.20/$1.20) deliver rapid extraction and schema-compliant triage. Space Bunny Alpha (0.60s on B4, $0) serves as bounded R2 alternate. |
 | Muse Glimmer triage / extraction / bounded ops chat (B2/B4) | R2 | `openrouter/meta/muse-glimmer-30b:deepinfra/bf16` | `openrouter/nvidia/nemotron-3-super-120b-a12b:free` / `openrouter/qwen/qwen3.7-flash` | `openrouter/google/gemini-3.8-flash` | Muse Glimmer scored 5.0/5 on B2 and B4 with 100% assertion passes and 0.21–0.29s latency in a single-run evaluation; provider pricing is listed as $0.30/$1.20 per 1M, while this evaluation recorded $0.00. Keep bounded until repeated-run stability is established. |
 | Build / implementation-heavy OpenCode run | R0/R1 | `openrouter/openai/gpt-5.6-luna` (bounded default) | `openrouter/poolside/laguna-s-2.1` / `openrouter/meituan/longcat-2.0` | `openrouter/openai/gpt-5.6-sol` | GPT-5.6 Luna is the verified lower-cost OpenCode build default ($0.20/$1.20 per 1M tokens). Use only for bounded, test-backed changes; escalate to Sol for high-stakes architecture, security, customer-facing, or repeated verification failure. |
 | Planning / architecture decomposition (B7) | R0 | `openrouter/google/gemini-3.8-flash` | `openrouter/openai/gpt-5.6-sol` / `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free` | `openrouter/openai/gpt-5.6-sol` / `anthropic/claude-sonnet-4-6` | Gemini 3.8 Flash is fast standard. GPT-5.6 Sol is frontier reasoning specialist resolving Fargate/EC2 IMDS boundaries and complex IAM constraints. |
@@ -284,6 +285,23 @@ Alignment pass reconciling the routing matrix with current benchmark artifacts a
 4. **Formally rejected candidates** (recorded so candidate research stops resurfacing them): `qwen/qwen3.8-flash` (2.29, reject), `poolside/laguna-s-2.1:free` (2.49) and `poolside/laguna-xs-2.1:free` (1.8) — the *paid* laguna-s-2.1 lane remains valid, `thinkingmachines/inkling:free` and `inkling-small:free` (HTTP 403).
 5. **`z-ai/glm-5.3` (4.54, 0.30s) and `qwen/qwen3.8-omni-flash` (4.45, 1.13s) added as bounded R2 alternates** behind the existing co-defaults (nemotron-3-super, mistral-nemo, glm-5.3-flash). Neither is a primary.
 6. **Morning-brief R0 primary re-declared as `openrouter/openai/gpt-5.6-luna`** to match live scheduled traffic; nemotron-3-ultra-550b:free and glm-5.3-flash move to explicit shadow status. Frontier anchors (`gpt-5.6-sol`, `claude-sonnet-4-6`) unchanged; `moa:fast-ops` remains the R1 compound default.
+
+## Space Bunny Alpha qualification (2026-09-30)
+
+`stealth/space-bunny-alpha` (Space Bunny Alpha) evaluated via OpenRouter (Stealth endpoint) scored 4.44/5.0 overall with 0.81s average latency and 79.0% assertion pass rate across B1–B8 (24 total requests across 3 rounds; $0.00 eval cost).
+- B1 (Internal Scheduled-Status Synthesis, R1): 5.00/5.0 (100% assertions, 0.68s). Flawless cron and infrastructure synthesis.
+- B2 (Morning Brief Component Extraction, R2): 4.82/5.0 (93% assertions, 0.44s). Fast extraction; minor date format deviation in run 1.
+- B3 (CS Account-Note Drafting & Updates, R1): 4.19/5.0 (73% assertions, 1.05s). Runs 1 & 3 scored 5.00; run 2 hit 2048 token limit due to reasoning overhead.
+- B4 (Frontdoor / Slack Triage & Classification, R2): 5.00/5.0 (100% assertions, 0.60s). 100% JSON schema adherence and priority classification.
+- B5 (Artifact & Distribution Audit Synthesis, R1): 4.13/5.0 (67% assertions, 1.29s). Run 1 hit token limit; runs 2 & 3 scored 5.00.
+- B6 (Long-Context Synthesis & Needle Recall, R1): 5.00/5.0 (100% assertions, 0.83s). Perfect needle recall across context window.
+- B7 (Complex Ops Planning & Decomposition, R1): 2.38/5.0 (0% assertions, 0.68s). Failed due to mandatory reasoning exhausting default 2048 completion-token cap before content generation began.
+- B8 (Agent Tool Use & Structured Execution, R1): 5.00/5.0 (100% assertions, 0.91s). Accurate MCP tool call structuring.
+
+Routing boundary:
+- Promoted into R2 fast-track extraction and triage as a bounded alternate behind primaries (sub-second latency on B2/B4 with 100% schema compliance on triage).
+- Free preview endpoint on OpenRouter through 2026-10-05.
+- Not promoted to R1 planning or R0 autonomous execution due to reasoning token ceiling risk on long generation tasks.
 
 ## Planned expansion candidates
 See `provider-expansion.md` before changing defaults.

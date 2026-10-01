@@ -1075,3 +1075,30 @@ Use one section per meaningful run or benchmark batch.
   - `z-ai/glm-5.3` (4.54) and `qwen/qwen3.8-omni-flash` (4.45) added as bounded R2 alternates (non-primary).
 - policy note: harness promotion verdicts must be gated on task-family latency budgets before landing in the routing matrix; the nemotron-3.5-lightning verdict promoted on score alone.
 - no new benchmark runs were executed in this pass.
+
+## 2026-09-30 — Automated Eval: stealth/space-bunny-alpha via OpenRouter
+- surface: Automated Evaluation Harness (`eval_promo_candidates.py`)
+- task family: Benchmark Probes (B1, B2, B3, B4, B5, B6, B7, B8)
+- model evaluated: `stealth/space-bunny-alpha` (Space Bunny Alpha)
+- evaluated at: 2026-09-30 20:00:27 UTC
+- source artifacts:
+  - `benchmark-results/eval_stealth_space-bunny-alpha.json`
+  - `~/.hermes/telemetry/eval_results/eval_stealth_space-bunny-alpha.json`
+- execution: 8 probes × 3 rounds (24 total requests); all 24 requests routed via OpenRouter Stealth endpoint; total eval cost $0.000000 (free preview through 2026-10-05)
+- aggregate: overall score 4.44 / 5.0, 0.81s average latency, 79.0% assertion pass rate
+- per-probe breakdown:
+  - B1 (Internal Scheduled-Status Synthesis, R1): 3/3 runs passed (avg score 5.00/5.0, pass rate 100%, avg latency 0.68s). Flawless cron failure, launchd timeout, VM IP, and Cloud SQL synthesis.
+  - B2 (Morning Brief Component Extraction, R1/R2): 3/3 runs passed (avg score 4.82/5.0, pass rate 93%, avg latency 0.44s). Fast entity extraction; minor date format deviation in run 1.
+  - B3 (CS Account-Note Drafting & Updates, R1): 2/3 runs passed (avg score 4.19/5.0, pass rate 73%, avg latency 1.05s). Run 2 exhausted default 2048 token cap due to reasoning overhead; runs 1 & 3 scored 5.00/5.0.
+  - B4 (Frontdoor / Slack Triage & Classification, R2): 3/3 runs passed (avg score 5.00/5.0, pass rate 100%, avg latency 0.60s). 100% JSON schema adherence, accurate route (`cs-ops`), priority (`P2`), privacy assessment.
+  - B5 (Artifact & Distribution Audit Synthesis, R1): 2/3 runs passed (avg score 4.13/5.0, pass rate 67%, avg latency 1.29s). Run 1 hit token cap; runs 2 & 3 scored 5.00/5.0 with fast table compilation and blocker detection.
+  - B6 (Long-Context Synthesis & Needle Recall, R1): 3/3 runs passed (avg score 5.00/5.0, pass rate 100%, avg latency 0.83s). 100% needle recall across context window.
+  - B7 (Complex Ops Planning & Decomposition, R1): 0/3 runs passed (avg score 2.38/5.0, pass rate 0%, avg latency 0.68s). Mandatory reasoning at default `max` effort exhausted the harness's 2048 completion-token cap before output content generation began.
+  - B8 (Agent Tool Use & Structured Execution, R1): 3/3 runs passed (avg score 5.00/5.0, pass rate 100%, avg latency 0.91s). Accurate MCP tool call structuring and argument population.
+- qualification & routing verdict:
+  - Harness verdict: `promote to R2 (Triage / Extraction Fast-Track)`.
+  - Operator promotion verdict: **promote to bounded R2 alternate (Triage / Extraction Fast-Track)**.
+  - Eligible tiers: R2 (Triage / Extraction Fast-Track).
+  - R2 qualification: B2 and B4 scored 4.82–5.00/5.0 with sub-second latency (0.44s and 0.60s) and 100% JSON schema compliance on triage.
+  - Operational boundaries: Zero cost preview expires 2026-10-05. Barred from R1 planning (B7) or autonomous R0 without token ceiling expansion or lower reasoning effort overrides (`reasoning_effort: low`).
+  - Routing policy check: Added to `routing-matrix.md` as bounded R2 alternate behind primaries.
