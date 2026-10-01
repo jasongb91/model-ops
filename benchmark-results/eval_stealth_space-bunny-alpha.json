@@ -1,0 +1,868 @@
+{
+  "model_id": "stealth/space-bunny-alpha",
+  "label": "stealth/space-bunny-alpha",
+  "evaluated_at": "2026-09-30 23:56:27 UTC",
+  "rounds_per_probe": 3,
+  "probes_evaluated": [
+    "B1",
+    "B2",
+    "B3",
+    "B4",
+    "B5",
+    "B6",
+    "B7",
+    "B8"
+  ],
+  "overall_score": 4.44,
+  "overall_latency": 0.81,
+  "overall_pass_rate": 0.79,
+  "total_eval_cost": 0.0,
+  "promotion_verdict": {
+    "verdict": "promote to R2 (Triage / Extraction Fast-Track)",
+    "eligible_tiers": [
+      "R2 (Triage / Extraction Fast-Track)"
+    ]
+  },
+  "probe_details": {
+    "B1": {
+      "probe_id": "B1",
+      "name": "Internal Scheduled-Status Synthesis",
+      "reliability_class": "R1",
+      "avg_latency": 0.68,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.705,
+          "prompt_tokens": 310,
+          "completion_tokens": 452,
+          "actual_model": "stealth/space-bunny-alpha",
+          "actual_provider": "Stealth",
+          "content": "### Internal Ops Status\n\n- **Hermes Cron:** 2 jobs active; **1 failure**\u2014`sync-acmedemo-from-main` timed out after 180s due to a network timeout.\n- **Launchd Sweeps:** 7 agents active; **1 timeout**\u2014`health-check-sweep` on `agent-4` timed out after 300s.\n- **GCP:** `acmedemo` VM is healthy at `34.69.169.75`; Cloud SQL disk utilization is **42%**.\n- **OpenCode:** 14-day spend baseline is **$548**.\n\n### Immediate Remediation\n\n- Retry `sync-acmedemo-from-main` and investigate the network timeout.\n- Inspect and rerun the `agent-4` health-check sweep; escalate if it times out again.\n- Continue monitoring the healthy VM and Cloud SQL disk utilization.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "identifies_failing_cron",
+              "identifies_timed_out_launchd",
+              "quotes_exact_gcp_ip",
+              "quotes_cloud_sql_utilization",
+              "quotes_opencode_spend",
+              "no_hallucinated_outages",
+              "stop_discipline_check"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.63,
+          "prompt_tokens": 310,
+          "completion_tokens": 382,
+          "actual_model": "stealth/space-bunny-alpha",
+          "actual_provider": "Stealth",
+          "content": "### Internal Ops Status\n\n- **Hermes:** 2 jobs active; **1 failure**\u2014`sync-acmedemo-from-main` timed out after 180s due to a network timeout.\n- **Launchd Sweeps:** 7 agents active; **1 timeout**\u2014`health-check-sweep` on `agent-4` exceeded 300s.\n- **GCP:** `acmedemo` VM is healthy at `34.69.169.75`; Cloud SQL disk utilization is **42%**.\n- **OpenCode:** 14-day spend is **$548 baseline**.\n\n### Immediate Remediation\n\n- Check network connectivity and retry the failed Hermes sync.\n- Investigate `agent-4` and the timed-out health-check sweep; rerun after resolving the timeout.\n- Continue monitoring Cloud SQL disk utilization; no immediate capacity action indicated at 42%.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "identifies_failing_cron",
+              "identifies_timed_out_launchd",
+              "quotes_exact_gcp_ip",
+              "quotes_cloud_sql_utilization",
+              "quotes_opencode_spend",
+              "no_hallucinated_outages",
+              "stop_discipline_check"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.713,
+          "prompt_tokens": 310,
+          "completion_tokens": 338,
+          "actual_model": "stealth/space-bunny-alpha",
+          "actual_provider": "Stealth",
+          "content": "- **Hermes Cron:** 2 jobs active; **1 failure**\u2014`sync-acmedemo-from-main` timed out after 180s.\n- **Launchd Sweeps:** 7 agents active; **1 timeout**\u2014`health-check-sweep` on `agent-4` timed out after 300s.\n- **GCP:** `acmedemo` VM is healthy at `34.69.169.75`; Cloud SQL disk utilization is **42%**.\n- **OpenCode:** 14-day spend is **$548 baseline**.\n\n**Immediate actions**\n- Investigate the sync network timeout, then rerun `sync-acmedemo-from-main`.\n- Inspect `agent-4` and the timed-out health-check logs, then rerun the sweep.\n- Continue monitoring VM health, SQL disk usage, and OpenCode spend; no active GCP failure is reported.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "identifies_failing_cron",
+              "identifies_timed_out_launchd",
+              "quotes_exact_gcp_ip",
+              "quotes_cloud_sql_utilization",
+              "quotes_opencode_spend",
+              "no_hallucinated_outages",
+              "stop_discipline_check"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B2": {
+      "probe_id": "B2",
+      "name": "Morning Brief Component Extraction",
+      "reliability_class": "R1/R2",
+      "avg_latency": 0.44,
+      "avg_score": 4.82,
+      "avg_pass_rate": 0.93,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.534,
+          "prompt_tokens": 346,
+          "completion_tokens": 349,
+          "actual_model": "stealth/space-bunny-alpha",
+          "actual_provider": "Stealth",
+          "content": "- **Architecture aligned:** TXNM and Jason agreed on the Grid Modernization Phase 1 rollout architecture.\n- **Upcoming delivery:** Jason is due to provide the Airbyte connector schema by **Aug. 24, 2026**.\n- **New blocker:** Staging SAML SSO certificate expires **Aug. 28, 2026**; security ticket **SEC-942** is open. Certificate rotation is required before Sarah can confirm the IdP metadata URL.\n- **Critical milestones:** Sarah to confirm the IdP metadata URL by **Aug. 29, 2026**, ahead of the Phase 1 go-live target of **Sept. 15, 2026**.",
+          "scores": {
+            "correctness": 4.2,
+            "grounding": 4.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 4.0,
+            "token_efficiency": 5.0,
+            "overall_score": 4.45,
+            "cost": 0.0,
+            "assertion_pass_rate": 0.8,
+            "passed_assertions": [
+              "highlights_saml_cert_blocker",
+              "extracts_airbyte_or_grid_mod",
+              "word_count_bounded",
+              "bullet_format_compliance"
+            ],
+            "failed_assertions": [
+              "extracts_target_dates"
+            ]
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.432,
+          "prompt_tokens": 346,
+          "completion_tokens": 394,
+          "actual_model": "stealth/space-bunny-alpha",
+          "actual_provider": "Stealth",
+          "content": "- **Phase 1 architecture agreed:** Jason/Crogl and John/TXNM aligned on the Grid Modernization Phase 1 rollout architecture; **September 15, 2026** remains the target go-live.\n- **Security blocker:** TXNM\u2019s SAML SSO certificate on the staging cluster expires **August 28, 2026**. Internal ticket **SEC-942** is open to drive certificate rotation.\n- **Integration milestone:** Jason is due to deliver the **Airbyte connector schema by August 24**; timely validation is needed to protect the go-live plan.\n- **Upcoming dependency:** After certificate rotation, Sarah is expected to confirm the **IdP metadata URL by August 29**. Any rotation or metadata delay should be escalated given the September go-live target.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "highlights_saml_cert_blocker",
+              "extracts_target_dates",
+              "extracts_airbyte_or_grid_mod",
+              "word_count_bounded",
+              "bullet_format_compliance"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.353,
+          "prompt_tokens": 346,
+          "completion_tokens": 284,
+          "actual_model": "stealth/space-bunny-alpha",
+          "actual_provider": "Stealth",
+          "content": "- **Rollout architecture agreed:** Jason and John aligned on Grid Modernization Phase 1 architecture, with target go-live set for **September 15, 2026**.\n- **New staging blocker:** TXNM Security identified a **SAML SSO certificate expiring August 28, 2026**; internal ticket **SEC-942** is open to drive certificate rotation.\n- **Integration deliverable due:** Jason committed to provide the **Airbyte connector schema by August 24, 2026**.\n- **IdP dependency:** Sarah is expected to confirm the **IdP metadata URL by August 29, 2026**, contingent on successful certificate rotation.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "highlights_saml_cert_blocker",
+              "extracts_target_dates",
+              "extracts_airbyte_or_grid_mod",
+              "word_count_bounded",
+              "bullet_format_compliance"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B3": {
+      "probe_id": "B3",
+      "name": "CS Account-Note Drafting & Updates",
+      "reliability_class": "R1",
+      "avg_latency": 1.05,
+      "avg_score": 4.19,
+      "avg_pass_rate": 0.73,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 1.034,
+          "prompt_tokens": 397,
+          "completion_tokens": 938,
+          "actual_model": "stealth/space-bunny-alpha",
+          "actual_provider": "Stealth",
+          "content": "## Summary\n\n- **Attendees:** Jason (Crogl), John (TXNM), Sarah (TXNM).\n- **Action:** Grid Modernization Phase 1 architecture signoff completed. Target go-live date set for September 15, 2026.\n\n## Blockers\n\n- SAML SSO certificate expiry on the staging cluster is scheduled for August 28, 2026. TXNM internal secops ticket SEC-942 was opened to rotate the certificate.\n\n## Open tasks\n\n- Jason to provide updated Airbyte connector schema definitions by August 24, 2026.\n- Sarah to confirm IdP metadata URL once SEC-942 resolves.\n\n## Recent activity\n\n- Grid Modernization Phase 1 architecture signoff completed.\n- Target go-live date set for September 15, 2026.\n- TXNM internal secops ticket SEC-942 opened to rotate the staging certificate.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "canonical_sections_present",
+              "bold_label_syntax",
+              "cites_saml_and_sec942",
+              "direct_correlation_no_speculation",
+              "preserves_task_owners"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 1.251,
+          "prompt_tokens": 397,
+          "completion_tokens": 2048,
+          "actual_model": "stealth/space-bunny-alpha",
+          "actual_provider": "Stealth",
+          "content": "",
+          "scores": {
+            "correctness": 1.8,
+            "grounding": 1.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 2.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 2.5,
+            "token_efficiency": 5.0,
+            "overall_score": 2.58,
+            "cost": 0.0,
+            "assertion_pass_rate": 0.2,
+            "passed_assertions": [
+              "direct_correlation_no_speculation"
+            ],
+            "failed_assertions": [
+              "canonical_sections_present",
+              "bold_label_syntax",
+              "cites_saml_and_sec942",
+              "preserves_task_owners"
+            ]
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.855,
+          "prompt_tokens": 397,
+          "completion_tokens": 1203,
+          "actual_model": "stealth/space-bunny-alpha",
+          "actual_provider": "Stealth",
+          "content": "## Onboarding\n\n- **Attendees:** Jason (Crogl), John (TXNM), Sarah (TXNM).\n- Grid Modernization Phase 1 architecture signoff completed.\n- Target go-live date set for September 15, 2026.\n\n## Blockers\n\n- SAML SSO certificate on the staging cluster is scheduled to expire on August 28, 2026.\n- TXNM internal SecOps ticket SEC-942 was opened to rotate the certificate.\n\n## Open tasks\n\n- **Action:** Jason to provide updated Airbyte connector schema definitions by August 24, 2026.\n- **Action:** Sarah to confirm the IdP metadata URL once SEC-942 resolves.\n\n## Recent activity\n\n- Completed the Grid Modernization Phase 1 architecture signoff with TXNM stakeholders.\n- Set September 15, 2026 as the target go-live date.\n- Opened SEC-942 to address the staging certificate expiry.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "canonical_sections_present",
+              "bold_label_syntax",
+              "cites_saml_and_sec942",
+              "direct_correlation_no_speculation",
+              "preserves_task_owners"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B4": {
+      "probe_id": "B4",
+      "name": "Frontdoor / Slack Triage & Classification",
+      "reliability_class": "R2",
+      "avg_latency": 0.6,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.743,
+          "prompt_tokens": 311,
+          "completion_tokens": 148,
+          "actual_model": "stealth/space-bunny-alpha",
+          "actual_provider": "Stealth",
+          "content": "{\"route\":\"cs-ops\",\"urgency\":\"P2\",\"is_private_channel\":false,\"privacy_violation\":false,\"suggested_action\":\"Investigate crogld service logs and port 8082 health during peak traffic, correlate 502s with upstream failures or resource saturation, and mitigate or escalate if impact worsens.\"}",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "valid_json_schema",
+              "route_validity",
+              "urgency_classification",
+              "channel_privacy_assessment",
+              "suggested_action_present"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.555,
+          "prompt_tokens": 311,
+          "completion_tokens": 156,
+          "actual_model": "stealth/space-bunny-alpha",
+          "actual_provider": "Stealth",
+          "content": "{\"route\":\"cs-ops\",\"urgency\":\"P2\",\"is_private_channel\":false,\"privacy_violation\":false,\"suggested_action\":\"Investigate the crogld service and API gateway logs on port 8082 for 502 responses, correlate failures with peak traffic, and report findings in the public channel.\"}",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "valid_json_schema",
+              "route_validity",
+              "urgency_classification",
+              "channel_privacy_assessment",
+              "suggested_action_present"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.515,
+          "prompt_tokens": 311,
+          "completion_tokens": 133,
+          "actual_model": "stealth/space-bunny-alpha",
+          "actual_provider": "Stealth",
+          "content": "{\"route\":\"cs-ops\",\"urgency\":\"P2\",\"is_private_channel\":false,\"privacy_violation\":false,\"suggested_action\":\"Investigate the crogld service logs and port 8082 health, correlate failures with peak traffic, and mitigate the intermittent 502 errors.\"}",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "valid_json_schema",
+              "route_validity",
+              "urgency_classification",
+              "channel_privacy_assessment",
+              "suggested_action_present"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B5": {
+      "probe_id": "B5",
+      "name": "Artifact & Distribution Audit Synthesis",
+      "reliability_class": "R1",
+      "avg_latency": 1.29,
+      "avg_score": 4.13,
+      "avg_pass_rate": 0.67,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 1.801,
+          "prompt_tokens": 532,
+          "completion_tokens": 2048,
+          "actual_model": "stealth/space-bunny-alpha",
+          "actual_provider": "Stealth",
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 2.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 2.5,
+            "token_efficiency": 5.0,
+            "overall_score": 2.38,
+            "cost": 0.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              "generates_markdown_table",
+              "flags_us_gov_west_s3_blocker",
+              "flags_missing_govcloud_ecr_tag",
+              "confirms_healthy_regions",
+              "lists_explicit_blockers"
+            ]
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.633,
+          "prompt_tokens": 532,
+          "completion_tokens": 1463,
+          "actual_model": "stealth/space-bunny-alpha",
+          "actual_provider": "Stealth",
+          "content": "## Release promotion status: **BLOCKED \u2014 DO NOT PROMOTE**\n\n**Release:** `v2.4.0-rc3`\n\n| Region | Artifact distribution | Registry | SHA256 integrity | Region status |\n|---|---|---|---|---|\n| AWS `us-east-1` | \u2705 S3 verified (`200 OK`) | \u2705 ECR tag `v2.4.0-rc3` verified | \ud83d\udea8 `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` identifies a zero-byte file | **HOLD** |\n| AWS `us-gov-west-1` | \u274c S3 failed: `403 SignatureDoesNotMatch`; presign expired | \u274c ECR tag missing | \ud83d\udea8 Same zero-byte SHA256 | **FAIL** |\n| GCP `us-central1` | \u2705 GCS verified (`200 OK`) | \u2705 Artifact Registry tag `v2.4.0-rc3` verified | \ud83d\udea8 Same zero-byte SHA256 | **HOLD** |\n\n### Blockers preventing promotion\n\n1. **Invalid or empty artifact content in every region**\n   - The reported SHA256 is the digest of an empty file.\n   - A valid `tar.gz` release archive must have a non-zero-byte content hash.\n   - Replace the artifact with the intended build output, calculate its SHA256 from the release manifest, republish it, and revalidate all regional endpoints.\n\n2. **AWS GovCloud artifact distribution is unavailable**\n   - S3 validation failed with `403 SignatureDoesNotMatch` due to an expired presign.\n   - Generate a valid access mechanism or correct the object permissions, then repeat the download and checksum verification.\n\n3. **AWS GovCloud ECR tag is missing**\n   - Publish `v2.4.0-rc3` to the GovCloud ECR registry and verify the resulting image digest.\n\nSuccessful `200 OK` responses and verified registry tags in `us-east-1` and GCP do not override the empty-artifact integrity failure or the incomplete GovCloud distribution.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "generates_markdown_table",
+              "flags_us_gov_west_s3_blocker",
+              "flags_missing_govcloud_ecr_tag",
+              "confirms_healthy_regions",
+              "lists_explicit_blockers"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 1.436,
+          "prompt_tokens": 532,
+          "completion_tokens": 1705,
+          "actual_model": "stealth/space-bunny-alpha",
+          "actual_provider": "Stealth",
+          "content": "## Distribution Matrix \u2014 `v2.4.0-rc3`\n\n**Overall promotion status: \ud83d\udd34 BLOCKED**\n\n| Region | Artifact distribution | Registry | SHA256 integrity | Promotion status |\n|---|---|---|---|---|\n| AWS `us-east-1` | \u2705 S3 reachable, `200 OK` | \u2705 ECR tag `v2.4.0-rc3` verified | \ud83d\udd34 `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` is the SHA256 of an empty file | \u26d4 Blocked by artifact-integrity failure |\n| AWS `us-gov-west-1` | \u274c S3 failed: `403 SignatureDoesNotMatch`; presign expired | \u274c ECR tag missing | \ud83d\udd34 Same empty-file SHA256 | \u26d4 Blocked |\n| GCP `us-central1` | \u2705 GCS reachable, `200 OK` | \u2705 Artifact Registry tag `v2.4.0-rc3` verified | \ud83d\udd34 Same empty-file SHA256 | \u26d4 Blocked by artifact-integrity failure |\n\n## Release-Promotion Blockers\n\n1. **Invalid or unverified artifact content in all regions**\n   - The reported digest is the SHA256 of a zero-byte payload.\n   - A zero-byte object is not a valid `tar.gz`; even an empty gzip stream contains nonzero bytes.\n   - Republish the canonical build artifact, generate its actual SHA256, and verify the downloaded bytes against that digest in every region.\n\n2. **AWS GovCloud artifact is inaccessible**\n   - S3 validation failed with `403 SignatureDoesNotMatch` because the presigned request expired.\n   - Regenerate the presigned request or correct the signing credentials/permissions, then confirm successful retrieval and checksum validation.\n\n3. **AWS GovCloud registry image is missing**\n   - ECR tag `v2.4.0-rc3` is absent.\n   - Publish the release tag to the GovCloud ECR registry and verify that it resolves to the expected immutable digest.\n\n**Promotion decision: NO-GO until all three blockers are resolved and retested.**",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "generates_markdown_table",
+              "flags_us_gov_west_s3_blocker",
+              "flags_missing_govcloud_ecr_tag",
+              "confirms_healthy_regions",
+              "lists_explicit_blockers"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B6": {
+      "probe_id": "B6",
+      "name": "Long-Context Synthesis & Needle Recall",
+      "reliability_class": "R1",
+      "avg_latency": 0.83,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.924,
+          "prompt_tokens": 3567,
+          "completion_tokens": 212,
+          "actual_model": "stealth/space-bunny-alpha",
+          "actual_provider": "Stealth",
+          "content": "- **Customer:** T\u00fcrk Telekom  \n- **Custom root CA certificate path (inside Chainguard container):** `/etc/ssl/certs/ca-certificates.crt`  \n- **mTLS requirement:** Mutual TLS 1.3 is required.  \n- **CN validation target:** `tt-internal-gateway.telekom.com.tr`",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "exact_container_path_recall",
+              "correct_account_attribution",
+              "identifies_mtls_requirement",
+              "identifies_cn_target",
+              "no_cross_account_contamination"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.547,
+          "prompt_tokens": 3567,
+          "completion_tokens": 218,
+          "actual_model": "stealth/space-bunny-alpha",
+          "actual_provider": "Stealth",
+          "content": "- **Customer:** T\u00fcrk Telekom\n- **Custom root CA certificate path inside Chainguard container:** `/etc/ssl/certs/ca-certificates.crt`\n- **mTLS requirement:** Mutual TLS 1.3\n- **Strict CN validation target:** `tt-internal-gateway.telekom.com.tr`",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "exact_container_path_recall",
+              "correct_account_attribution",
+              "identifies_mtls_requirement",
+              "identifies_cn_target",
+              "no_cross_account_contamination"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 1.023,
+          "prompt_tokens": 3567,
+          "completion_tokens": 218,
+          "actual_model": "stealth/space-bunny-alpha",
+          "actual_provider": "Stealth",
+          "content": "| Requirement | Value |\n|---|---|\n| Customer | **T\u00fcrk Telekom** |\n| Deployment | On-premises air-gapped and self-hosted ingress gateway mesh |\n| Custom root CA path inside Chainguard container | `/etc/ssl/certs/ca-certificates.crt` |\n| mTLS requirement | **Mutual TLS 1.3**, using the customer\u2019s custom root CA |\n| Strict CN validation target | `tt-internal-gateway.telekom.com.tr` |",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "exact_container_path_recall",
+              "correct_account_attribution",
+              "identifies_mtls_requirement",
+              "identifies_cn_target",
+              "no_cross_account_contamination"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B7": {
+      "probe_id": "B7",
+      "name": "Complex Ops Planning & Decomposition",
+      "reliability_class": "R1",
+      "avg_latency": 0.68,
+      "avg_score": 2.38,
+      "avg_pass_rate": 0.0,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.403,
+          "prompt_tokens": 312,
+          "completion_tokens": 2048,
+          "actual_model": "stealth/space-bunny-alpha",
+          "actual_provider": "Stealth",
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 2.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 2.5,
+            "token_efficiency": 5.0,
+            "overall_score": 2.38,
+            "cost": 0.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              "cites_bedrock_mantle_endpoint",
+              "includes_imdsv2_token_handling",
+              "addresses_fargate_logging_constraint",
+              "structured_phases_present",
+              "includes_verification_commands"
+            ]
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 1.056,
+          "prompt_tokens": 312,
+          "completion_tokens": 2048,
+          "actual_model": "stealth/space-bunny-alpha",
+          "actual_provider": "Stealth",
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 2.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 2.5,
+            "token_efficiency": 5.0,
+            "overall_score": 2.38,
+            "cost": 0.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              "cites_bedrock_mantle_endpoint",
+              "includes_imdsv2_token_handling",
+              "addresses_fargate_logging_constraint",
+              "structured_phases_present",
+              "includes_verification_commands"
+            ]
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 0.568,
+          "prompt_tokens": 312,
+          "completion_tokens": 2048,
+          "actual_model": "stealth/space-bunny-alpha",
+          "actual_provider": "Stealth",
+          "content": "",
+          "scores": {
+            "correctness": 1.0,
+            "grounding": 1.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 2.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 2.5,
+            "token_efficiency": 5.0,
+            "overall_score": 2.38,
+            "cost": 0.0,
+            "assertion_pass_rate": 0.0,
+            "passed_assertions": [],
+            "failed_assertions": [
+              "cites_bedrock_mantle_endpoint",
+              "includes_imdsv2_token_handling",
+              "addresses_fargate_logging_constraint",
+              "structured_phases_present",
+              "includes_verification_commands"
+            ]
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B8": {
+      "probe_id": "B8",
+      "name": "Agent Tool Use & Structured Execution",
+      "reliability_class": "R1",
+      "avg_latency": 0.91,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 1.223,
+          "prompt_tokens": 332,
+          "completion_tokens": 770,
+          "actual_model": "stealth/space-bunny-alpha",
+          "actual_provider": "Stealth",
+          "content": "{\n  \"tool_calls\": [\n    {\n      \"type\": \"function\",\n      \"function\": {\n        \"name\": \"mcp__crogld__crowdstrike_falcon_query\",\n        \"arguments\": {\n          \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n        }\n      }\n    },\n    {\n      \"type\": \"function\",\n      \"function\": {\n        \"name\": \"mcp__crogld__create_investigation\",\n        \"arguments\": {\n          \"title\": \"Investigation of SHA256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\n          \"severity\": \"P2\",\n          \"indicators\": [\n            \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n          ],\n          \"description\": \"Investigate the CrowdStrike Falcon query results for the specified SHA256 hash.\"\n        }\n      }\n    }\n  ]\n}",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "names_falcon_query_tool",
+              "cites_target_sha256",
+              "names_create_investigation_tool",
+              "specifies_p2_severity",
+              "valid_tool_call_structure"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 2,
+          "latency": 0.485,
+          "prompt_tokens": 332,
+          "completion_tokens": 551,
+          "actual_model": "stealth/space-bunny-alpha",
+          "actual_provider": "Stealth",
+          "content": "[\n  {\n    \"name\": \"mcp__crogld__crowdstrike_falcon_query\",\n    \"arguments\": {\n      \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n    }\n  },\n  {\n    \"name\": \"mcp__crogld__create_investigation\",\n    \"arguments\": {\n      \"title\": \"Investigation: CrowdStrike Falcon SHA256 Query\",\n      \"severity\": \"P2\",\n      \"indicators\": [\n        \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n      ],\n      \"description\": \"Investigate CrowdStrike Falcon query results for SHA256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.\"\n    }\n  }\n]",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "names_falcon_query_tool",
+              "cites_target_sha256",
+              "names_create_investigation_tool",
+              "specifies_p2_severity",
+              "valid_tool_call_structure"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        },
+        {
+          "run": 3,
+          "latency": 1.026,
+          "prompt_tokens": 332,
+          "completion_tokens": 650,
+          "actual_model": "stealth/space-bunny-alpha",
+          "actual_provider": "Stealth",
+          "content": "{\n  \"tool_calls\": [\n    {\n      \"id\": \"call_1\",\n      \"type\": \"function\",\n      \"function\": {\n        \"name\": \"mcp__crogld__crowdstrike_falcon_query\",\n        \"arguments\": \"{\\\"sha256\\\":\\\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\\\"}\"\n      }\n    },\n    {\n      \"id\": \"call_2\",\n      \"type\": \"function\",\n      \"function\": {\n        \"name\": \"mcp__crogld__create_investigation\",\n        \"arguments\": \"{\\\"title\\\":\\\"CrowdStrike Falcon SHA256 Query Investigation\\\",\\\"severity\\\":\\\"P2\\\",\\\"indicators\\\":[\\\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\\\"],\\\"description\\\":\\\"Investigate the CrowdStrike Falcon query results for SHA256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.\\\"}\"\n      }\n    }\n  ]\n}",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "cost": 0.0,
+            "assertion_pass_rate": 1.0,
+            "passed_assertions": [
+              "names_falcon_query_tool",
+              "cites_target_sha256",
+              "names_create_investigation_tool",
+              "specifies_p2_severity",
+              "valid_tool_call_structure"
+            ],
+            "failed_assertions": []
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    }
+  }
+}
