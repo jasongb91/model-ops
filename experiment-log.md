@@ -1075,3 +1075,28 @@ Use one section per meaningful run or benchmark batch.
   - `z-ai/glm-5.3` (4.54) and `qwen/qwen3.8-omni-flash` (4.45) added as bounded R2 alternates (non-primary).
 - policy note: harness promotion verdicts must be gated on task-family latency budgets before landing in the routing matrix; the nemotron-3.5-lightning verdict promoted on score alone.
 - no new benchmark runs were executed in this pass.
+
+## 2026-09-30 — Evaluation & Constrained Routing Fit: typesafe/jev-router via OpenRouter
+- surface: Automated Evaluation Harness (`eval_promo_candidates.py`) & OpenRouter Live Telemetry Probes
+- task family: Benchmark Probes (B1, B4, B7, B8) & Routing / Escalation Analysis
+- model evaluated: `typesafe/jev-router` (TypeSafe: Jev Router)
+- evaluated at: 2026-09-30 15:30:00 UTC
+- source artifacts:
+  - `benchmark-results/eval_typesafe_jev-router.json`
+  - `benchmark-results/eval_master_index.json`
+- execution:
+  - B1 (Status Brief): 1.15s latency, routed to `openai/gpt-6-luna`, 128 prompt / 78 comp tokens ($0.00018). Output concise, 3 bullets, zero hallucination. Score: 4.80 / 5.0.
+  - B4 (Frontdoor / Slack Triage): 1.00s latency, routed to `openai/gpt-6-luna`, 55 prompt / 41 comp tokens ($0.00008). 100% JSON schema adherence (`{"route":"schedule","reason":"..."}`). Score: 5.00 / 5.0.
+  - B7 (GovCloud Partition Architecture): 10.71s latency, routed to `anthropic/claude-sonnet-5.5` with internal reasoning. Consumed full 600 token budget in reasoning, leaving content empty. Score: 3.80 / 5.0.
+  - B8 (MCP Function Calling): 0.95s latency, routed to `openai/gpt-6-luna`, 164 prompt / 32 comp tokens ($0.00014). Perfect OpenAI tool schema execution (`lookup_account_telemetry` with exact JSON arguments). Score: 5.00 / 5.0.
+- router pool discovery:
+  - Extracted 13 models comprising Jev's active candidate pool: `anthropic/claude-fable-5.1`, `anthropic/claude-opus-5.5`, `anthropic/claude-sonnet-5.5`, `deepseek/deepseek-v4.1-flash`, `google/gemini-3.8-flash`, `meta/muse-spark-1.3`, `moonshotai/kimi-k3`, `openai/gpt-6-astra`, `openai/gpt-6-luna`, `openai/gpt-6.1-sol`, `x-ai/grok-4.7`, `z-ai/glm-5.3`, `z-ai/glm-5.3-flash`.
+- escalation testing findings:
+  - Unconstrained Jev automatically escalates complex conceptual/distributed systems prompts to frontier reasoning models (`claude-sonnet-5.5`, `gpt-6.1-sol`), introducing high latency (10s+) and reasoning token consumption.
+  - In Model Ops, tasks like B7 are routinely handled by low-cost models (`gemini-3.8-flash` @ $0.075/1M). Unconstrained Jev creates unwanted budget escalation.
+  - OpenRouter `jev-router` plugin successfully enforces candidate restriction (`models`) and exclusions (`excluded_models`), preventing escalation to expensive tiers while preserving dynamic arbitration between approved low/mid models (`gemini-3.8-flash`, `gpt-6-luna`, `glm-5.3*`, `deepseek/*`).
+- promotion verdict:
+  - **promote to R2 (Triage / Interactive Fast-Track) under Mandatory Plugin Constraints**.
+  - **strict exclusions**: Disallowed in scheduled/cron jobs (deterministic pricing required), disallowed in MoA reference layers (diversity preservation), disallowed in OpenCode coding agents (pinned models required).
+  - Frontier models (`*sol*`, `*astra*`, `*opus*`, `anthropic/*`, `x-ai/*`) excluded from Jev pool to prevent unprompted budget escalation.
+  - Hermes `ops` profile alias `jev` mapped to `openrouter/typesafe/jev-router`.

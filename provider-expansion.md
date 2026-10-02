@@ -106,3 +106,7 @@ Recommendation:
 ## 2026-09-28 routing alignment pointer
 
 Routing defaults were changed on 2026-09-28 (see the "2026-09-28 routing alignment" section in `routing-matrix.md`). Summary: DeepSeek-V3.2 retired from alternates after a live provider `Invalid request` failure; morning-brief R0 primary re-declared as `openrouter/openai/gpt-5.6-luna` to match live traffic; `minimax/minimax-m3:free` added to the R0 shadow roster; nemotron-3.5-lightning:free rejected on latency despite its harness promote verdict. Provider architecture itself is unchanged.
+
+## 2026-09-30 dynamic router qualification (TypeSafe Jev Router)
+
+`typesafe/jev-router` was formally evaluated via OpenRouter (see `routing-matrix.md` and `benchmark-results/eval_typesafe_jev-router.json`). Qualified as a bounded R2 alternate for interactive triage and dynamic chat turns. Requires mandatory OpenRouter `jev-router` plugin scope constraints to exclude expensive frontier tiers (`*sol*`, `*astra*`, `*opus*`, `anthropic/*`, `x-ai/*`) and restrict candidates to approved low/mid models (`google/gemini-3.8-flash`, `openai/gpt-6-luna`, `z-ai/glm-5.3*`, `deepseek/*`). Disallowed in scheduled/cron jobs and MoA reference layers.

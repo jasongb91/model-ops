@@ -86,6 +86,7 @@ Default:
 | CS note drafting / account update first pass (B3) | R1 | `openrouter/google/gemini-3.8-flash` | `moa:fast-ops` / `openrouter/z-ai/glm-5.3-flash` / `openrouter/openai/gpt-5.6-luna` / `openrouter/xiaomi/mimo-v2.5` | `openrouter/openai/gpt-5.6-sol` | Gemini 3.8 Flash, MoA Fast-Ops, GLM 5.3 Flash, and GPT-5.6 Luna match frontier quality at ~90% cost savings. |
 | DevOps / distribution audits (B5) | R1/R0 | `openrouter/nvidia/nemotron-3-super-120b-a12b:free` (R1) / `openrouter/openai/gpt-5.6-sol` (R0) | `moa:fast-ops` / `openrouter/z-ai/glm-5.3-flash` / `openrouter/google/gemini-3.8-flash` / `openrouter/xiaomi/mimo-v2.5` | `openrouter/openai/gpt-5.6-sol` | Nemotron 3 Super is zero-cost R1 default. MoA Fast-Ops (5.0/5 on B5) and GLM 5.3 Flash provide ultra-fast audit synthesis. GPT-5.6 Sol is R0 frontier specialist for detecting empty sha256 checksums and deep integrity audits. |
 | Slack triage / categorization / extraction (B2/B4) | R2 | `openrouter/nvidia/nemotron-3-super-120b-a12b:free` or `openrouter/z-ai/glm-5.3-flash` | `openrouter/openai/gpt-5.6-luna` / `openrouter/xiaomi/mimo-v2.5` / `openrouter/qwen/qwen3.7-flash` | `openrouter/google/gemini-3.8-flash` | Nemotron 3 Super (3.6s, $0), GLM 5.3 Flash (0.34s, 5.0/5 JSON, $0.075/1M), and GPT-5.6 Luna (0.49s, $0.20/$1.20) deliver rapid extraction and schema-compliant triage. |
+| Dynamic intake / variable interactive chat triage (B4/B8) | R2 | `openrouter/google/gemini-3.8-flash` | `openrouter/typesafe/jev-router` (plugin-constrained) | `openrouter/openai/gpt-5.6-luna` | Jev Router arbitrates reasoning effort dynamically across approved low/mid pool models (Gemini 3.8 Flash, GPT-6 Luna, GLM 5.3). Must enforce plugin scope constraints (`excluded_models: ["*sol*", "*astra*", "*opus*", "anthropic/*", "x-ai/*"]`) to prevent unprompted frontier escalation. |
 | Muse Glimmer triage / extraction / bounded ops chat (B2/B4) | R2 | `openrouter/meta/muse-glimmer-30b:deepinfra/bf16` | `openrouter/nvidia/nemotron-3-super-120b-a12b:free` / `openrouter/qwen/qwen3.7-flash` | `openrouter/google/gemini-3.8-flash` | Muse Glimmer scored 5.0/5 on B2 and B4 with 100% assertion passes and 0.21–0.29s latency in a single-run evaluation; provider pricing is listed as $0.30/$1.20 per 1M, while this evaluation recorded $0.00. Keep bounded until repeated-run stability is established. |
 | Build / implementation-heavy OpenCode run | R0/R1 | `openrouter/openai/gpt-5.6-luna` (bounded default) | `openrouter/poolside/laguna-s-2.1` / `openrouter/meituan/longcat-2.0` | `openrouter/openai/gpt-5.6-sol` | GPT-5.6 Luna is the verified lower-cost OpenCode build default ($0.20/$1.20 per 1M tokens). Use only for bounded, test-backed changes; escalate to Sol for high-stakes architecture, security, customer-facing, or repeated verification failure. |
 | Planning / architecture decomposition (B7) | R0 | `openrouter/google/gemini-3.8-flash` | `openrouter/openai/gpt-5.6-sol` / `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free` | `openrouter/openai/gpt-5.6-sol` / `anthropic/claude-sonnet-4-6` | Gemini 3.8 Flash is fast standard. GPT-5.6 Sol is frontier reasoning specialist resolving Fargate/EC2 IMDS boundaries and complex IAM constraints. |
@@ -284,6 +285,45 @@ Alignment pass reconciling the routing matrix with current benchmark artifacts a
 4. **Formally rejected candidates** (recorded so candidate research stops resurfacing them): `qwen/qwen3.8-flash` (2.29, reject), `poolside/laguna-s-2.1:free` (2.49) and `poolside/laguna-xs-2.1:free` (1.8) — the *paid* laguna-s-2.1 lane remains valid, `thinkingmachines/inkling:free` and `inkling-small:free` (HTTP 403).
 5. **`z-ai/glm-5.3` (4.54, 0.30s) and `qwen/qwen3.8-omni-flash` (4.45, 1.13s) added as bounded R2 alternates** behind the existing co-defaults (nemotron-3-super, mistral-nemo, glm-5.3-flash). Neither is a primary.
 6. **Morning-brief R0 primary re-declared as `openrouter/openai/gpt-5.6-luna`** to match live scheduled traffic; nemotron-3-ultra-550b:free and glm-5.3-flash move to explicit shadow status. Frontier anchors (`gpt-5.6-sol`, `claude-sonnet-4-6`) unchanged; `moa:fast-ops` remains the R1 compound default.
+
+## TypeSafe Jev Router qualification (2026-09-30)
+
+`typesafe/jev-router` evaluated via OpenRouter scored **4.65/5.0** overall with sub-1s latency on triage and structured execution (artifact: `benchmark-results/eval_typesafe_jev-router.json`).
+- **Nature of Model:** Jev is TypeSafe's System One decision model acting as a dynamic router on OpenRouter. It reads prompt difficulty and context, selects an underlying model from a 13-model curated pool, adjusts reasoning effort, and dispatches the turn.
+- **Probe Performance:**
+  - B4 (Frontdoor / Slack Triage, R2): 5.00/5.0 (1.00s latency, routed to `openai/gpt-6-luna`). Clean, exact JSON classification.
+  - B1 (Ops Status Brief, R1): 4.80/5.0 (1.15s latency, routed to `openai/gpt-6-luna`). Grounded, 3-bullet ops summary.
+  - B8 (Agent Tool Use & Structured Execution, R1): 5.00/5.0 (0.95s latency, routed to `openai/gpt-6-luna`). Flawless JSON function parameter population (`lookup_account_telemetry`).
+  - B7 (Complex Decomposition, R0/R1): 3.80/5.0 (10.71s latency, escalated to `anthropic/claude-sonnet-5.5`). Escalation triggered internal reasoning tokens that consumed the full default token budget.
+
+### Routing Boundary & Scope Constraints
+- **Approved Scope:** Promoted to **R2 (Triage / Interactive Fast-Track) as a bounded alternate** for dynamic-complexity conversational intake and interactive triage turns.
+- **Mandatory Plugin Scope Constraints:** Jev Router MUST be constrained via the OpenRouter `jev-router` plugin to exclude expensive frontier models and restrict candidates to approved cost-effective tiers:
+  ```json
+  "plugins": [
+    {
+      "id": "jev-router",
+      "models": [
+        "google/gemini-3.8-flash",
+        "openai/gpt-6-luna",
+        "z-ai/glm-5.3*",
+        "deepseek/*"
+      ],
+      "excluded_models": [
+        "*sol*",
+        "*astra*",
+        "*opus*",
+        "anthropic/*",
+        "x-ai/*"
+      ]
+    }
+  ]
+  ```
+- **Strict Exclusions:**
+  1. **Disallowed in Scheduled/Cron Jobs:** Barred from Hermes cron jobs (`ops-morning-briefing`, `ops-scheduled-status`, `openrouter-model-auditor`) and launchd scripts. Scheduled jobs require deterministic pricing and latency; Jev's dynamic routing introduces variable cost and latency variance.
+  2. **Disallowed in MoA Presets:** Barred from reference layers in `fast-ops` or `frontier-review`. Dynamic routing collapses model diversity onto identical underlying models.
+  3. **Disallowed in OpenCode Coding Agents:** OpenCode `build` and `plan` agents require strictly pinned models (`openai/gpt-5.6-luna`, `google/gemini-2.5-pro`) with known tool syntax reliability.
+  4. **Sol and Frontier Exclusion:** Frontier reasoning models (`*sol*`, `claude*`, `*astra*`) are explicitly excluded from Jev's candidate pool to prevent automated budget escalation on conceptually dense prompts. Frontier escalation remains an explicit, operator-gated decision.
 
 ## Planned expansion candidates
 See `provider-expansion.md` before changing defaults.

@@ -1,0 +1,188 @@
+{
+  "model_id": "typesafe/jev-router",
+  "label": "TypeSafe: Jev Router",
+  "evaluated_at": "2026-09-30 15:30:00 UTC",
+  "rounds_per_probe": 1,
+  "probes_evaluated": [
+    "B1",
+    "B4",
+    "B7",
+    "B8"
+  ],
+  "overall_score": 4.65,
+  "overall_latency": 3.45,
+  "overall_pass_rate": 0.95,
+  "total_eval_cost": 0.00185,
+  "promotion_verdict": {
+    "verdict": "promote to R2 (Triage / Interactive Fast-Track) with Mandatory Plugin Scope Constraints",
+    "eligible_tiers": [
+      "R2 (Triage / Interactive Fast-Track) [Plugin-Constrained Only]"
+    ],
+    "disallowed_tiers": [
+      "R0 (Scheduled / Client-Facing Automation)",
+      "MoA Reference Layers",
+      "OpenCode Build / Architecture Execution"
+    ],
+    "notes": "Jev is a System One decision model + dynamic router. High decision fidelity on triage (B4) and MCP tool calling (B8) routing to gpt-6-luna (sub-1s). Unconstrained routing on complex prompts (B7) over-escalates to frontier reasoning models (claude-sonnet-5.5, gpt-6.1-sol) with severe latency penalty (10.7s) and potential reasoning token exhaustion. Must be constrained via jev-router plugin to exclude frontier tiers (*sol*, *astra*, *opus*, anthropic/*, x-ai/*) and include approved cost-effective tiers (gemini-3.8-flash, glm-5.3*, gpt-6-luna, deepseek/*)."
+  },
+  "curated_pool": [
+    "anthropic/claude-fable-5.1",
+    "anthropic/claude-opus-5.5",
+    "anthropic/claude-sonnet-5.5",
+    "deepseek/deepseek-v4.1-flash",
+    "google/gemini-3.8-flash",
+    "meta/muse-spark-1.3",
+    "moonshotai/kimi-k3",
+    "openai/gpt-6-astra",
+    "openai/gpt-6-luna",
+    "openai/gpt-6.1-sol",
+    "x-ai/grok-4.7",
+    "z-ai/glm-5.3",
+    "z-ai/glm-5.3-flash"
+  ],
+  "probe_details": {
+    "B1": {
+      "probe_id": "B1",
+      "name": "Internal Scheduled-Status Synthesis",
+      "reliability_class": "R1",
+      "avg_latency": 1.15,
+      "avg_score": 4.8,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.00018,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 1.15,
+          "prompt_tokens": 128,
+          "completion_tokens": 78,
+          "actual_model": "openai/gpt-6-luna",
+          "actual_provider": "OpenAI via OpenRouter",
+          "content": "- **Active:** 2 Hermes cron jobs and 7 launchd agents.\n- **Failures:** `sync-acmedemo-from-main` failed after a 180-second network timeout; `health-check-sweep` on agent-4 timed out after 300 seconds.\n- **Immediate remediation:** Check network connectivity for the failed sync job and investigate why agent-4’s health-check sweep timed out; retry both once the cause is addressed.",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 4.5,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 4.0,
+            "overall_score": 4.8,
+            "assertion_pass_rate": 1.0
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B4": {
+      "probe_id": "B4",
+      "name": "Frontdoor / Slack Triage & Classification",
+      "reliability_class": "R2",
+      "avg_latency": 1.0,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.00008,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 1.0,
+          "prompt_tokens": 55,
+          "completion_tokens": 41,
+          "actual_model": "openai/gpt-6-luna",
+          "actual_provider": "OpenAI via OpenRouter",
+          "content": "{\"route\":\"schedule\",\"reason\":\"Asks for the time of tomorrow’s weekly sync.\"}",
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "assertion_pass_rate": 1.0
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    },
+    "B7": {
+      "probe_id": "B7",
+      "name": "Complex Ops Planning & Decomposition",
+      "reliability_class": "R1/R0",
+      "avg_latency": 10.71,
+      "avg_score": 3.8,
+      "avg_pass_rate": 0.8,
+      "total_cost": 0.00145,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 10.71,
+          "prompt_tokens": 808,
+          "completion_tokens": 600,
+          "actual_model": "anthropic/claude-sonnet-5.5",
+          "actual_provider": "Anthropic via OpenRouter",
+          "reasoning": "I can answer this directly, writing a thorough but concise architectural breakdown. I'm noting GovCloud specifics: only two regions (US-East, US-West), a separate partition with no connectivity to commercial AWS, but inter-region VPC peering and Transit Gateway exist...",
+          "content": "",
+          "scores": {
+            "correctness": 4.0,
+            "grounding": 4.0,
+            "stop_discipline": 3.5,
+            "format_compliance": 3.0,
+            "latency_score": 2.5,
+            "cleanup_burden": 4.0,
+            "token_efficiency": 2.0,
+            "overall_score": 3.8,
+            "assertion_pass_rate": 0.8
+          },
+          "success": true,
+          "error": "Reasoning tokens consumed full max_tokens budget (600); required higher budget for final content delivery."
+        }
+      ]
+    },
+    "B8": {
+      "probe_id": "B8",
+      "name": "Agent Tool Use & Structured Execution",
+      "reliability_class": "R1",
+      "avg_latency": 0.95,
+      "avg_score": 5.0,
+      "avg_pass_rate": 1.0,
+      "total_cost": 0.00014,
+      "runs": [
+        {
+          "run": 1,
+          "latency": 0.95,
+          "prompt_tokens": 164,
+          "completion_tokens": 32,
+          "actual_model": "openai/gpt-6-luna",
+          "actual_provider": "OpenAI via OpenRouter",
+          "content": null,
+          "tool_calls": [
+            {
+              "type": "function",
+              "id": "call_GsUMp6WLGETgecDcHsbs8a7U",
+              "function": {
+                "name": "lookup_account_telemetry",
+                "arguments": "{\"account_slug\":\"acme-corp\",\"metric\":\"health_score\"}"
+              }
+            }
+          ],
+          "scores": {
+            "correctness": 5.0,
+            "grounding": 5.0,
+            "stop_discipline": 5.0,
+            "format_compliance": 5.0,
+            "latency_score": 5.0,
+            "cleanup_burden": 5.0,
+            "token_efficiency": 5.0,
+            "overall_score": 5.0,
+            "assertion_pass_rate": 1.0
+          },
+          "success": true,
+          "error": null
+        }
+      ]
+    }
+  }
+}
